@@ -6,12 +6,13 @@
   },
   "scripts": {
     "DEVELOPMENT": "##========================================##",
-    "dev": "lerna run dev --stream",
+    "dev": "lerna run dev --stream --parallel",
     "build": "lerna run build --stream",
     "PRODUCTION": "##========================================##",
     "build:themes-plugins": "cp .netlify/theme.toml netlify.toml",
     "build:themes-default": "yarn build:themes-plugins && lerna run build --scope=@waoadb/themes-default",
     "PACKAGES": "##========================================##",
+    "packages:build": "lerna run build --scope='{@waoadb/js-client-sdk, @waoadb/js-admin-sdk}'",
     "packages:version": "lerna version --no-private",
     "packages:publish": "lerna publish --no-private"
   },
@@ -20,12 +21,14 @@
     "tabWidth": 2
   },
   "dependencies": {
-    "@nrwl/nx-cloud": "^15.0.2"
+    "@nrwl/nx-cloud": "^15.0.2",
+    "@waoadb/contracts-client": "^0.0.5"
   },
   "devDependencies": {
     "lerna": "^4.0.0",
     "nx": "^15.5.3",
-    "run-sh": "^1.0.3"
+    "run-sh": "^1.0.3",
+    "typescript": "^5.0.4"
   },
   "workspaces": {
     "packages": [
