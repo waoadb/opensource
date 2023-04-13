@@ -1,0 +1,36 @@
+{
+  "name": "root",
+  "private": true,
+  "engines": {
+    "node": ">=14.16.0 <=16.13.0"
+  },
+  "scripts": {
+    "DEVELOPMENT": "##========================================##",
+    "dev": "lerna run dev --stream",
+    "build": "lerna run build --stream",
+    "PRODUCTION": "##========================================##",
+    "build:themes-plugins": "cp .netlify/theme.toml netlify.toml",
+    "build:themes-default": "yarn build:themes-plugins && lerna run build --scope=@waoadb/themes-default",
+    "PACKAGES": "##========================================##",
+    "packages:version": "lerna version --no-private",
+    "packages:publish": "lerna publish --no-private"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "tabWidth": 2
+  },
+  "dependencies": {
+    "@nrwl/nx-cloud": "^15.0.2"
+  },
+  "devDependencies": {
+    "lerna": "^4.0.0",
+    "nx": "^15.5.3",
+    "run-sh": "^1.0.3"
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*",
+      "apps/*"
+    ]
+  }
+}

@@ -1,0 +1,6 @@
+# General Redirect
+[[redirects]]
+  from = "/*"
+  to = "https://differentbreed.events"
+  status = 301
+  force = true
