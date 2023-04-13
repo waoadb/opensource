@@ -9,7 +9,7 @@
     "dev": "lerna run dev --parallel",
     "build": "lerna run build --stream",
     "PRODUCTION": "##========================================##",
-    "build:themes-plugins": "cp .netlify/theme.toml netlify.toml",
+    "build:themes-plugins": "cp .netlify/theme/theme.toml netlify.toml",
     "build:themes-default": "yarn build:themes-plugins && lerna run build --scope=@waoadb/themes-default",
     "PACKAGES": "##========================================##",
     "packages:build": "lerna run build --scope='{@waoadb/js-client-sdk, @waoadb/js-admin-sdk}'",
