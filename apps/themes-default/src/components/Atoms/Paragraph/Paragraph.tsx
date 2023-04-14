@@ -1,18 +1,35 @@
 /* Dependencies */
-import { FunctionComponent } from 'react';
+import { PropsWithChildren } from 'react';
+import classNames from 'classnames';
+
+// Styles
+const variants = Object.freeze({
+  xs: 'text-xs',
+  small: 'text-sm',
+  base: 'text-sm lg:text-base',
+  large: 'text-base lg:text-lg',
+});
 
 // Models
-import { getParagraphStyle, ParagraphProps } from './Paragraph.model';
+type ParagraphProps = PropsWithChildren<{
+  /**
+   * Class names to be appended
+   */
+  className?: string;
+  /**
+   * Paragraph style
+   */
+  style?: keyof typeof variants;
+}>;
 
 /**
  * Paragraph component
  * @param props - Component props.
  */
-export const Paragraph: FunctionComponent<ParagraphProps> = ({
+export const Paragraph = ({
   children,
-  variant,
   className,
-}) => {
-  const classNames = `${className || ''} ${getParagraphStyle(variant)}`;
-  return <p className={classNames}>{children}</p>;
+  style = 'base',
+}: ParagraphProps) => {
+  return <p className={classNames(className, variants[style])}>{children}</p>;
 };

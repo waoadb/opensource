@@ -3,21 +3,27 @@
 @tailwind utilities;
 
 body {
-    @apply text-gray-800
+  @apply text-gray-800;
 }
 
 .skip-to-content-link {
-    background: navy;
-    color: white;
-    min-height: 30px;
-    left: 50%;
-    padding: 8px;
-    position: absolute;
-    transform: translate3d(-50%, -100%, 0);
-    transition: transform 0.3s;
-    z-index: 11;
+  background: navy;
+  color: white;
+  min-height: 30px;
+  left: 50%;
+  padding: 8px;
+  position: absolute;
+  transform: translate3d(-50%, -100%, 0);
+  transition: transform 0.3s;
+  z-index: 11;
 }
 
 .skip-to-content-link:focus {
-    transform: translate3d(-50%, 0, 0);
+  transform: translate3d(-50%, 0, 0);
+}
+
+/* Tool Tip */
+.tool-tip[data-show] .tool-tip__message {
+  display: block;
+  margin: 8px;
 }

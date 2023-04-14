@@ -1,0 +1,222 @@
+/* Dependencies */
+import React from 'react';
+import anime from 'animejs';
+import classNames from 'classnames';
+import { decode } from 'blurhash';
+
+// Models
+export type ImageRatio = '1:1' | '16:9' | '9:10' | '4:3';
+type ImageFit =
+  | 'object-fill'
+  | 'object-cover'
+  | 'object-contain'
+  | 'object-none'
+  | 'object-scale-down';
+type ImagePosition =
+  | 'object-bottom'
+  | 'object-center'
+  | 'object-left'
+  | 'object-left-bottom'
+  | 'object-left-top'
+  | 'object-right'
+  | 'object-right-bottom'
+  | 'object-right-top'
+  | 'object-top';
+
+type ImageProps = {
+  /**
+   * Sets the outer container to position absolute.
+   */
+  absolute?: boolean;
+
+  /**
+   * Sets the accessible text applied to the image.
+   */
+  altText: string;
+
+  /**
+   * Sets the blurhash value to be used.
+   */
+  blurhash?: string;
+
+  /**
+   * Appends additional classes.
+   */
+  className?: string;
+
+  /**
+   * Sets the image source url.
+   */
+  imageSrc: string;
+
+  /**
+   * Sets the image fit style.
+   */
+  fit: ImageFit;
+
+  /**
+   * Sets the image position.
+   */
+  position: ImagePosition;
+
+  /**
+   * Sets the image as a presentation image.
+   */
+  presentation?: boolean;
+
+  /**
+   * Sets the image ratio.
+   */
+  ratio: ImageRatio;
+};
+
+/**
+ * Image Component
+ * @class
+ */
+export class Image extends React.Component<ImageProps> {
+  /**
+   * Container element.
+   */
+  container: HTMLElement | null = null;
+  /**
+   * Image element
+   */
+  imageElement: HTMLElement | null = null;
+  /**
+   * Canvas Element
+   */
+  canvas: HTMLCanvasElement | null = null;
+
+  /**
+   * Component Reference
+   */
+  private componentRef: React.RefObject<HTMLDivElement>;
+
+  constructor(props: ImageProps) {
+    super(props);
+    this.componentRef = React.createRef();
+  }
+
+  /**
+   * Return the component element.
+   */
+  get component(): HTMLElement {
+    return this.componentRef.current!;
+  }
+
+  /**
+   * Lifecycle - Component Mount
+   */
+  componentDidMount(): void {
+    this.container = this.component.querySelector('.image')!;
+    this.imageElement = this.component.querySelector('img')!;
+    this.canvas = this.component.querySelector('canvas')!;
+    this.loadImage();
+  }
+
+  /**
+   * Lifecycle - Component Prop Update
+   * @param previousProps - The previous props.
+   */
+  componentDidUpdate(previousProps: ImageProps): void {
+    if (previousProps.imageSrc !== this.props.imageSrc) {
+      this.loadImage();
+    }
+  }
+
+  /**
+   * Load the image into view.
+   */
+  loadImage(): void {
+    // Remove existing image src
+    this.imageElement!.setAttribute('src', '');
+    this.imageElement!.style.opacity = '0';
+
+    // If there is no blurhash just show the new image.
+    if (!this.props.blurhash) {
+      this.imageElement!.setAttribute('src', this.props.imageSrc);
+      anime({
+        targets: this.imageElement,
+        opacity: [0, 1],
+        duration: 200,
+        delay: 500, // Prevent image flash
+        easing: 'linear',
+      });
+      return;
+    }
+
+    // Render the blurhash
+    this.renderBlurHash(() => {
+      this.imageElement!.setAttribute('src', this.props.imageSrc);
+      anime({
+        targets: this.imageElement,
+        opacity: [0, 1],
+        duration: 200,
+        delay: 500, // Prevent image flash
+        easing: 'linear',
+      });
+    });
+  }
+
+  /**
+   * Renders a canvas blur hash to the user.
+   * @param callback - Function that fires on completion.
+   */
+  renderBlurHash(callback: Function): void {
+    if (!this.canvas) {
+      return;
+    }
+
+    // Convert the blur hash
+    const pixels = decode(this.props.blurhash!, 32, 32, 1);
+
+    // Create the canvas context
+    const ctx = this.canvas.getContext('2d')!;
+    ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+    // Insert the blurhash
+    const imageData = ctx.createImageData(32, 32);
+    imageData.data.set(pixels);
+    ctx.putImageData(imageData, 0, 0);
+
+    callback();
+  }
+
+  /**
+   * Lifecycle - Render The Template
+   */
+  render(): JSX.Element {
+    return (
+      <div
+        className={classNames(
+          'block w-full h-full',
+          {
+            absolute: this.props.absolute,
+            relative: !this.props.absolute,
+            'aspect-1': this.props.ratio === '1:1',
+            'aspect-16-9': this.props.ratio === '16:9',
+            'aspect-9-10': this.props.ratio === '9:10',
+            'aspect-4-3': this.props.ratio === '4:3',
+          },
+          this.props.className
+        )}
+        ref={this.componentRef}
+      >
+        <canvas
+          width="32"
+          height="32"
+          className="absolute w-full h-full left-0 top-0"
+        ></canvas>
+        <img
+          src="#"
+          style={{ opacity: 0 }}
+          data-src={this.props.imageSrc}
+          loading="lazy"
+          className={`absolute w-full h-full left-0 top-0 z-0 ${this.props.fit} ${this.props.position}`}
+          alt={this.props.presentation ? '' : this.props.altText}
+        />
+      </div>
+    );
+  }
+}

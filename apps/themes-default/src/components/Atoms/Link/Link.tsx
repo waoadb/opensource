@@ -1,5 +1,6 @@
 /* Dependencies */
 import { PropsWithChildren } from 'react';
+import NextLink from 'next/link';
 import classNames from 'classnames';
 
 // Styles
@@ -11,9 +12,9 @@ const variants = Object.freeze({
   hollowAlert:
     'border border-red-400 text-red-600 hover:bg-red-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700',
   hollowPrimary:
-    'shadow-sm border border-indigo-600 text-indigo-600 hover:border-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ',
+    'shadow-sm border border-indigo-600 text-indigo-600 hover:border-indigo-500 hover:bg-indigo-600 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ',
   hollowSecondary:
-    'shadow-sm border border-gray-600 hover:border-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ',
+    'shadow-sm border border-gray-600 hover:border-gray-500 hover:bg-grey-600 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ',
   plain: '',
 });
 
@@ -24,83 +25,75 @@ export const sizes = Object.freeze({
 });
 
 // Models
-type ButtonProps = PropsWithChildren<{
+type LinkProps = PropsWithChildren<{
   /**
    * Class names to be appended
    */
   className?: string;
   /**
-   * Button disabled
-   */
-  disabled?: boolean;
-  /**
    * Accessible title
    */
-  accessibleTitle: string;
+  accessibleTitle?: string;
   /**
-   * Button icon
+   * Icon to be shown
    */
   icon?: React.ReactNode;
   /**
-   * Onclick handler
-   */
-  onClick?: Function;
-  /**
-   * button Variant.
+   * Style Variant.
    */
   variant?: keyof typeof variants;
   /**
-   * button Variant.
+   * Size Variant.
    */
   size?: keyof typeof sizes;
   /**
-   * button Width
+   * Full Width
    */
   fullWidth?: boolean;
   /**
-   * Button Type
+   * Link Url
    */
-  type?: 'button' | 'submit' | 'reset';
+  href: string;
+  /**
+   * Target
+   */
+  target?: '_blank' | '_self' | '_parent' | '_top';
 }>;
 
 /**
- * Button
+ * Link
  * @param props - Component props.
  */
-export const Button = ({
+export const Link = ({
   className,
   variant,
   size,
-  disabled,
-  onClick,
   children,
   fullWidth,
-  type,
   icon,
   accessibleTitle,
-}: ButtonProps) => {
+  href,
+  target,
+}: LinkProps) => {
   return (
-    <button
-      aria-label={accessibleTitle}
-      type={type}
-      disabled={disabled}
-      onClick={onClick ? () => onClick() : undefined}
+    <NextLink
+      title={accessibleTitle}
+      {...(target && { target })}
       className={classNames(
         'rounded-md font-semibold text-center transition-colors duration-200',
         className,
-        variants[variant || 'primary'],
-        sizes[size || 'base'],
         {
           'inline-flex items-center': icon,
           'inline-block': !icon,
           'w-full': fullWidth,
-          'text-button-disabled !bg-indigo-200 hover:bg-button-disabled cursor-not-allowed':
-            disabled,
-        }
+        },
+        variants[variant || 'primary'],
+        sizes[size || 'base']
       )}
+      href={href}
     >
       {icon && <span className="mr-2">{icon}</span>}
       {children}
-    </button>
+    </NextLink>
   );
 };
