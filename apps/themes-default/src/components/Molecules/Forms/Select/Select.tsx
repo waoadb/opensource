@@ -157,11 +157,11 @@ export const Select = ({
               block: labelVisible,
               'sr-only': !labelVisible,
             },
-            'min-h-[30px]'
+            'min-h-[30px] text-base'
           )}
         >
           {label}
-          {required && <span className="text-indigo-500">*</span>}
+          {required && <span className="text-indigo-500 ml-1">*</span>}
         </span>
         {toolTip && (
           <span className="w-auto absolute top-0 right-0">
@@ -217,7 +217,7 @@ export const Select = ({
       {(error || supportText) && (
         <div className="w-full flex flex-row items-start mt-2">
           <small
-            className={classNames('w-full text-small', {
+            className={classNames('w-full text-sm', {
               'text-red-600': error,
             })}
             id={`${id}_${name}-help`}

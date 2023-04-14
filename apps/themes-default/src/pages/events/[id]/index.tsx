@@ -1,6 +1,7 @@
 /* Dependencies */
 import { useCallback, useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
+import { NextSeo } from 'next-seo';
 import {
   CalendarDaysIcon,
   TicketIcon,
@@ -9,6 +10,9 @@ import {
 
 // Services
 import { differentBreedClient } from '@/services/differentBreedClient/differentBreedClient';
+
+// Layouts
+import Layout from '@/Layouts/Layout';
 
 // Components
 import { EventBanner } from '@/components/Organisms/EventBanner/EventBanner';
@@ -33,6 +37,7 @@ type PageParams = {
 };
 type PageProps = {
   event: ClientCacheModels.CacheEvent;
+  profile: ClientCacheModels.CacheProfile;
 };
 
 /**
@@ -40,7 +45,7 @@ type PageProps = {
  * @param props - Page props.
  * @returns
  */
-const Page = ({ event }: PageProps) => {
+const Page = ({ event, profile }: PageProps) => {
   // State
   const [performances, setPerformances] = useState<
     ClientCacheModels.CachePerformance[]
@@ -106,107 +111,137 @@ const Page = ({ event }: PageProps) => {
   }, [filters]);
 
   return (
-    <main>
-      {/* Banner */}
-      <EventBanner event={event} backLink="/events" />
-      {/* / Banner */}
-
-      {/* Details */}
-      <section className="container mx-auto mt-8">
-        <div className="grid lg:grid-cols-3 gap-4 mt-4">
-          {/* Content */}
-          <article className="w-full lg:col-span-2">
-            <EventSummary
-              content="
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eaque iusto minus fugit delectus laudantium? Et odio dolor, temporibus dicta vero ipsum incidunt ducimus eligendi nam aperiam. Deleniti nihil nobis doloremque?"
-            />
-            <hr className="my-4" />
-            <EventDescription
-              content="
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eaque iusto minus fugit delectus laudantium? Et odio dolor, temporibus dicta vero ipsum incidunt ducimus eligendi nam aperiam. Deleniti nihil nobis doloremque?"
-            />
-          </article>
-          {/* / Content */}
-          {/* Side Bar */}
-          <aside className="w-full grid grid-cols-1 gap-4 lg:gap-2 mt-6 lg:mt-0">
-            {event.location && event.location.venue && (
-              <VenueCard
-                as={'div'}
-                venue={event.location.venue}
-                showDirections={true}
-              />
-            )}
-            {event.location && event.location.type === 'online' && (
-              <OnlineEventCard />
-            )}
-            {event.location && event.location.type === 'tbc' && (
-              <TBCEventCard />
-            )}
-            <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-2 mt-2">
-              <AvailableStockCard
-                title="Available Tickets"
-                total={0}
-                icon={<TicketIcon width={25} height={25} className="mx-auto" />}
-              />
-              <AvailableStockCard
-                title="Available Addons"
-                total={0}
-                icon={<TrophyIcon width={25} height={25} className="mx-auto" />}
-              />
-            </div>
-            <RefundPolicyCard refundPolicy={event.payments.refund_policy} />
-          </aside>
-          {/* / Side Bar */}
-        </div>
-      </section>
-      {/* / Details */}
-
-      {/* Performances */}
-      <section className="container mx-auto mt-12 lg:mt-4" id="performances">
-        <div className="w-full mb-2">
-          <Heading level="h2" style="h2">
-            Performances ({totalPerformances} Available)
-          </Heading>
-        </div>
-
-        <PerformanceFilters
-          view={performancesView}
-          handleViewChange={(view) => setPerformancesView(view)}
-          onSubmit={handleFiltersChange}
+    <>
+      {event.marketing.seo && (
+        <NextSeo
+          title={event.marketing.seo.title}
+          description={event.marketing.seo.description}
+          openGraph={{
+            title: event.marketing.seo.o_title,
+            description: event.marketing.seo.o_description,
+            images: [
+              {
+                url: event.marketing.seo.picture?.url || '',
+                alt: event.marketing.seo.picture?.alt_text || '',
+              },
+            ],
+          }}
+          canonical={`${process.env.NEXT_PUBLIC_SITE_URL}/events/${event.event_id}`}
         />
-        {totalPerformances > 0 && (
-          <>
-            <PerformanceCardList
-              performances={performances}
-              handleBookNow={(performance_id) =>
-                console.log('Book Now', performance_id)
-              }
-            />
-            {totalPerformances > filters.limit && (
-              <div className="w-full my-4">
-                <Pagination
-                  pageCount={Math.ceil(totalPerformances / filters.limit)}
-                  currentPage={Math.ceil(filters.skip / filters.limit)}
-                  onPageChange={handlePageChange}
+      )}
+      <Layout profile={profile}>
+        {/* Banner */}
+        <EventBanner event={event} backLink="/events" />
+        {/* / Banner */}
+
+        {/* Details */}
+        <section className="container mx-auto mt-8">
+          <div className="grid lg:grid-cols-3 gap-4 mt-4">
+            {/* Content */}
+            <article className="w-full lg:col-span-2">
+              <EventSummary
+                content="
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eaque iusto minus fugit delectus laudantium? Et odio dolor, temporibus dicta vero ipsum incidunt ducimus eligendi nam aperiam. Deleniti nihil nobis doloremque?"
+              />
+              <hr className="my-4" />
+              <EventDescription
+                content="
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eaque iusto minus fugit delectus laudantium? Et odio dolor, temporibus dicta vero ipsum incidunt ducimus eligendi nam aperiam. Deleniti nihil nobis doloremque?"
+              />
+            </article>
+            {/* / Content */}
+            {/* Side Bar */}
+            <aside className="w-full grid grid-cols-1 gap-4 lg:gap-2 mt-6 lg:mt-0">
+              {event.location && event.location.venue && (
+                <VenueCard
+                  as={'div'}
+                  venue={event.location.venue}
+                  showDirections={true}
+                />
+              )}
+              {event.location && event.location.type === 'online' && (
+                <OnlineEventCard />
+              )}
+              {event.location && event.location.type === 'tbc' && (
+                <TBCEventCard />
+              )}
+              <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-2 mt-2">
+                <AvailableStockCard
+                  title="Available Tickets"
+                  total={0}
+                  icon={
+                    <TicketIcon width={25} height={25} className="mx-auto" />
+                  }
+                />
+                <AvailableStockCard
+                  title="Available Addons"
+                  total={0}
+                  icon={
+                    <TrophyIcon width={25} height={25} className="mx-auto" />
+                  }
                 />
               </div>
-            )}
-          </>
-        )}
-        {totalPerformances === 0 && (
-          <div className="w-full my-4">
-            <Placeholder
-              title="No Performances Found"
-              content=""
-              icon={
-                <CalendarDaysIcon width={25} height={25} className="mx-auto" />
-              }
-            />
+              <RefundPolicyCard refundPolicy={event.payments.refund_policy} />
+            </aside>
+            {/* / Side Bar */}
           </div>
-        )}
-      </section>
-      {/* / Performances */}
-    </main>
+        </section>
+        {/* / Details */}
+
+        {/* Performances */}
+        <section
+          className="container mx-auto mt-12 mb-12 lg:mt-4"
+          id="performances"
+        >
+          <div className="w-full mb-2">
+            <Heading level="h2" style="h2">
+              Performances ({totalPerformances} Available)
+            </Heading>
+          </div>
+
+          <PerformanceFilters
+            view={performancesView}
+            handleViewChange={(view) => setPerformancesView(view)}
+            onSubmit={handleFiltersChange}
+          />
+          {totalPerformances > 0 && (
+            <>
+              <PerformanceCardList
+                performances={performances}
+                handleBookNow={(performance_id) =>
+                  console.log('Book Now', performance_id)
+                }
+              />
+              {totalPerformances > filters.limit && (
+                <div className="w-full my-4">
+                  <Pagination
+                    pageCount={Math.ceil(totalPerformances / filters.limit)}
+                    currentPage={Math.ceil(filters.skip / filters.limit)}
+                    onPageChange={handlePageChange}
+                  />
+                </div>
+              )}
+            </>
+          )}
+          {totalPerformances === 0 && (
+            <div className="w-full my-4">
+              <Placeholder
+                title="No Performances Found"
+                content=""
+                icon={
+                  <CalendarDaysIcon
+                    width={25}
+                    height={25}
+                    className="mx-auto"
+                  />
+                }
+              />
+            </div>
+          )}
+        </section>
+        {/* / Performances */}
+      </Layout>
+    </>
   );
 };
 
@@ -215,12 +250,23 @@ const Page = ({ event }: PageProps) => {
  * @param props - GetServerSideProps props.
  * @returns
  */
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps<PageProps> = async ({
+  params,
+}) => {
   // Extract the id
   const { id } = params as PageParams;
 
+  // Get the profile
+  const profileResponse = await differentBreedClient.profile
+    .retrieveProfile()
+    .then((response) => response.payload)
+    .catch((error) => {
+      console.log(error);
+      return null;
+    });
+
   // Get the event
-  const response = await differentBreedClient.events
+  const eventResponse = await differentBreedClient.events
     .retrieveEvent({
       event_id: id,
     })
@@ -231,16 +277,17 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     });
 
   // Handle error
-  if (!response) {
+  if (!eventResponse || !profileResponse) {
     return {
       notFound: true,
     };
   }
 
-  // Return the event
+  // Return the props
   return {
     props: {
-      event: response,
+      event: eventResponse,
+      profile: profileResponse,
     },
   };
 };

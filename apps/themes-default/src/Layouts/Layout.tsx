@@ -1,60 +1,109 @@
-import Header from '@/components/Organisms/Header/Header';
-import React, { useCallback, useEffect, useState } from 'react';
-import { Navigation } from '@/components/Organisms/Navigation/Navigation';
-import Image from 'next/image';
+/* Dependencies */
+import {
+  PropsWithChildren,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
+import classNames from 'classnames';
+import { useRouter } from 'next/router';
+
+// Components
+import { Header } from '@/components/Organisms/Header/Header';
 import { Footer } from '@/components/Organisms/Footer/Footer';
-import Link from 'next/link';
 
-export default function Layout({ children }: { children: React.ReactNode }) {
-  const mobileMenu = React.useRef<HTMLDivElement>(null);
+// Models
+import { ClientCacheModels } from '@waoadb/contracts-client';
+import { SkipToContent } from '@/components/Atoms/SkipToContent/SkipToContent';
+type Props = PropsWithChildren<{
+  profile: ClientCacheModels.CacheProfile;
+}>;
+
+/**
+ * Layout
+ * @param props - Component props.
+ * @returns
+ */
+export default function Layout({ children, profile }: Props) {
+  // Hooks
+  const { pathname } = useRouter();
+
+  // State
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
+  const menuOffset = useMemo(() => {
+    return ['/', '/events/'].some((path) => pathname.includes(path));
+  }, [pathname]);
 
+  // Effects
   useEffect(() => {
-    // Watch resize toggle menu on medium screens
-
+    // Close Menu on resize
+    let timeout: NodeJS.Timeout;
     const handleResize = () => {
-      if (window.innerWidth > 768) {
-        setMenuOpen(false);
-      }
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        if (window.innerWidth >= 1024 && menuOpen) {
+          closeMenu();
+        }
+      }, 50);
     };
 
+    // Add event listener
     window.addEventListener('resize', handleResize);
 
+    // Remove event listener on cleanup
     return () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
 
-  const toggleMenu = useCallback(() => {
-    document?.body.classList.toggle('overflow-hidden');
-    setMenuOpen(!menuOpen);
-  }, [menuOpen]);
+  useEffect(() => {
+    closeMenu();
+  }, [pathname]);
 
-  const menuClasses = (isOpen: boolean) => isOpen ? '-translate-x-full opacity-1' : 'translate-x-0 opacity-0';
+  // Callbacks
+  const closeMenu = useCallback(() => {
+    setMenuOpen(false);
+    document?.body.classList.remove('overflow-hidden');
+  }, []);
+  const openMenu = useCallback(() => {
+    setMenuOpen(true);
+    document?.body.classList.add('overflow-hidden');
+  }, []);
+  const toggleMenu = useCallback(() => {
+    if (menuOpen) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  }, [menuOpen]);
 
   return (
     <>
-      <Link className="skip-to-content-link" href="#main">
-        Skip to content
-      </Link>
-      <Header toggleMenu={toggleMenu} menuOpen={menuOpen} />
-      <div className='relative overflow-hidden flex flex-col min-h-screen'>
-        <div
-          className={`fixed z-[9] top-0 w-full left-full flex flex-col bottom-0 overflow-y-auto bg-white transition-all ${menuClasses(menuOpen)}`}
-          ref={mobileMenu}>
-          <div className='py-20 flex-1 flex flex-col items-center justify-center'>
-            <Navigation />
-          </div>
-          <div className='text-center text-sm mb-4'>
-          <span className='inline-flex items-center gap-2'>
-            <span>
-              <Image src='/assets/differentBreedLogo.svg' alt='' width='24' height='24' /></span> Powered by Different Breed &reg;</span>
-          </div>
-        </div>
-        <main className='flex-1 w-full block box-border' id="main">{children}</main>
-        <Footer />
-      </div>
+      {/* Header */}
+      <header className="w-full">
+        <SkipToContent />
+        <Header
+          toggleMenu={toggleMenu}
+          menuOpen={menuOpen}
+          transparent={menuOffset}
+          profile={profile}
+        />
+      </header>
+      {/* / Header */}
+      {/* Main */}
+      <main
+        className={classNames('flex-1 w-full block', {
+          '-mt-[72px]': menuOffset,
+        })}
+        id="main"
+      >
+        {children}
+      </main>
+      {/* Main */}
+      {/* Footer */}
+      <Footer profile={profile} />
+      {/* / Footer */}
     </>
-
   );
 }

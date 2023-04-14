@@ -40,7 +40,7 @@ export const Pagination = ({ currentPage, pageCount, onPageChange }: Props) => {
       pageClassName="block overflow-hidden rounded-md border border-indigo-500"
       pageLinkClassName="block py-1 px-3 hover:bg-indigo-500 hover:text-white transition-colors duration-200"
       activeClassName="bg-indigo-500 text-white"
-      className="w-full flex flex-row flex-wrap gap-2 justify-center"
+      className="w-full flex flex-row flex-wrap gap-2 justify-center lg:justify-end"
     />
   );
 };

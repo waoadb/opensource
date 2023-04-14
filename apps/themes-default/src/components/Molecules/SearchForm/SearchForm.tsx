@@ -1,18 +1,80 @@
-import React, { useRef } from 'react';
-import { SearchFormProps } from '@/components/Molecules/SearchForm/SearchForm.model';
-export default function SearchForm({
-  labelOn = true,
-}: SearchFormProps) {
-  const searchInput = useRef<HTMLInputElement>(null);
-  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(searchInput.current?.value);
-  }
+/* Dependencies */
+import React from 'react';
+import { useRouter } from 'next/router';
+import * as Yup from 'yup';
+import { Formik } from 'formik';
+import classNames from 'classnames';
+
+// Helpers
+import { handleFieldError } from '@/helpers/handleFieldError/handleFieldError';
+
+// Components
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { Input } from '../Forms/Input/Input';
+import { Button } from '@/components/Atoms/Button/Button';
+
+// Validation
+const validation = Yup.object().shape({
+  query: Yup.string().required('Required'),
+});
+
+/**
+ * Search Form
+ * @returns
+ */
+export const SearchForm = () => {
+  // Hooks
+  const router = useRouter();
+
   return (
-    <form onSubmit={submitHandler}>
-      <label htmlFor="search" className={`text-sm mb-2 ${labelOn ? 'block' : 'sr-only'}`}>Search</label>
-      <input ref={searchInput} type="text" name="search" id="search" className="w-full border border-gray-300 rounded-md p-2" placeholder="Query" />
-      <button type="submit" className="sr-only">Submit search</button>
-    </form>
-  )
-}
+    <Formik
+      initialValues={{ query: '' }}
+      onSubmit={(values) => {
+        router.push(`/search?q=${encodeURIComponent(values.query.trim())}`);
+      }}
+      validationSchema={validation}
+    >
+      {({
+        values,
+        handleChange,
+        handleBlur,
+        errors,
+        touched,
+        handleSubmit,
+      }) => (
+        <form
+          onSubmit={handleSubmit}
+          className={classNames(
+            'flex flex-row flex-wrap',
+            handleFieldError(errors, touched, 'query')
+              ? 'items-center'
+              : 'items-end'
+          )}
+        >
+          <div className="w-full max-w-[calc(100%-80px)] mr-2">
+            <Input
+              label="Query"
+              name="query"
+              id="search_query"
+              value={values.query}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={handleFieldError(errors, touched, 'query')}
+              required={true}
+              inputMode="search"
+              type="search"
+              labelVisible={true}
+            />
+          </div>
+          <Button
+            accessibleTitle="Search"
+            type="submit"
+            variant="primary"
+            icon={<MagnifyingGlassIcon width={24} height={24} />}
+            iconOnly={true}
+          ></Button>
+        </form>
+      )}
+    </Formik>
+  );
+};
