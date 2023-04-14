@@ -1,9 +1,10 @@
+/* Dependencies */
 // Components
 import { AddonCard } from '@/components/Molecules/AddonCard/AddonCard';
 
 // Models
 import { ClientCacheModels, ClientCartModels } from '@waoadb/contracts-client';
-type AddonCardListProps = {
+type Props = {
   /**
    * Addons to render.
    */
@@ -32,20 +33,18 @@ export const AddonCardList = ({
   performance_id,
   addons,
   handleSubmit,
-}: AddonCardListProps) => {
+}: Props) => {
   return (
-    <div className="container mx-auto">
-      <ul className="grid grid-cols-1 divide-y divide-gray-500">
-        {addons.map((addon) => (
-          <AddonCard
-            key={addon.addon_id}
-            event_id={event_id}
-            performance_id={performance_id}
-            addon={addon}
-            onSubmit={handleSubmit}
-          />
-        ))}
-      </ul>
-    </div>
+    <ul className="grid grid-cols-1 divide-y divide-gray-500">
+      {addons.map((addon) => (
+        <AddonCard
+          key={addon.addon_id}
+          event_id={event_id}
+          performance_id={performance_id}
+          addon={addon}
+          onSubmit={handleSubmit}
+        />
+      ))}
+    </ul>
   );
 };

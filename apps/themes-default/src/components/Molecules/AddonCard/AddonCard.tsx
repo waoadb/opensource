@@ -3,21 +3,22 @@ import { ChangeEvent, useMemo, useState } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
+// Helpers
+import { addUrlParams } from '@/helpers/addUrlPrarms/addUrlParams';
+import { handleFieldError } from '@/helpers/handleFieldError/handleFieldError';
+
 // Components
 import { Heading } from '@/components/Atoms/Heading/Heading';
 import { Paragraph } from '@/components/Atoms/Paragraph/Paragraph';
 import { Image } from '@/components/Atoms/Image/Image';
+import { Button } from '@/components/Atoms/Button/Button';
+import { Input } from '../Forms/Input/Input';
+import { Select } from '../Forms/Select/Select';
 
 // Models
 import { ClientCacheModels, ClientCartModels } from '@waoadb/contracts-client';
-import { addUrlParams } from '@/helpers/addUrlPrarms/addUrlParams';
-import { Select } from '../Forms/Select/Select';
-import { handleFieldError } from '@/helpers/handleFieldError/handleFieldError';
-import { Button } from '@/components/Atoms/Button/Button';
-import { Input } from '../Forms/Input/Input';
-import classNames from 'classnames';
 
-type AddonCardProps = {
+type Props = {
   /**
    * Addon
    */
@@ -46,7 +47,7 @@ export const AddonCard = ({
   event_id,
   performance_id,
   onSubmit,
-}: AddonCardProps) => {
+}: Props) => {
   // State
   const [selectedVariant, setSelectedVariant] = useState(addon.variants[0]);
 

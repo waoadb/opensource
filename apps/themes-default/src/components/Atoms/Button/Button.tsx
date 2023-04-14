@@ -5,15 +5,15 @@ import classNames from 'classnames';
 // Styles
 const variants = Object.freeze({
   primary:
-    'shadow-sm bg-indigo-600 text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ',
+    'shadow-sm bg-indigo-600 text-white disabled:bg-indigo-200 hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ',
   secondary:
-    'shadow-sm bg-gray-600 text-white hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ',
+    'shadow-sm bg-gray-600 text-white disabled:bg-gray-200 hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ',
   hollowAlert:
     'border border-red-400 text-red-600 hover:bg-red-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700',
   hollowPrimary:
     'shadow-sm border border-indigo-600 text-indigo-600 hover:border-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ',
   hollowSecondary:
-    'shadow-sm border border-gray-600 hover:border-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ',
+    'shadow-sm border border-gray-600 disabled:bg-gray-200 hover:border-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ',
   plain: '',
 });
 
@@ -94,7 +94,7 @@ export const Button = ({
           'inline-flex items-center': icon,
           'inline-block': !icon,
           'w-full': fullWidth,
-          'text-button-disabled !bg-indigo-200 hover:bg-button-disabled cursor-not-allowed':
+          'text-button-disabled hover:bg-button-disabled cursor-not-allowed':
             disabled,
         }
       )}
