@@ -39,6 +39,11 @@ type Props = {
   onSubmit: (addon: ClientCartModels.RemoveAddonFromCartRequest) => void;
 };
 
+/**
+ * Cart Addon Card
+ * @param props - Component props.
+ * @returns
+ */
 export const CartAddonCard = ({ addon, entry_id, onSubmit }: Props) => {
   return (
     <li className="w-full py-4">

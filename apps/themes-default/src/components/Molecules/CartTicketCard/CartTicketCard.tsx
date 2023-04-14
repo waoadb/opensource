@@ -1,39 +1,95 @@
+/* Dependencies */
+import { Formik } from 'formik';
+
+// Components
 import { Heading } from '@/components/Atoms/Heading/Heading';
-import { Select } from '@/components/Molecules/Forms/Select/Select';
+import { Paragraph } from '@/components/Atoms/Paragraph/Paragraph';
 import { Button } from '@/components/Atoms/Button/Button';
 
-type CartTicketCardProps = {
-  title: string,
-  className?: string;
-}
-export const CartTicketCard = ({ title, className }: CartTicketCardProps) => {
-  const numberFormat = (number: number) => {
-    return number.toLocaleString('en-GB', {
-      style: 'currency',
-      currency: 'GBP'
-    });
-  };
+// Models
+import { ClientCartModels } from '@waoadb/contracts-client';
 
+type Props = {
+  /**
+   * Ticket
+   */
+  ticket: ClientCartModels.CartEntryTicket;
+  /**
+   * Cart entry id
+   */
+  entry_id: string;
+  /**
+   * Handle Submit
+   */
+  onSubmit: (ticket: ClientCartModels.RemoveTicketFromCartRequest) => void;
+};
+
+/**
+ * Cart Ticket Card
+ * @param param props - Component props.
+ * @returns
+ */
+
+export const CartTicketCard = ({ ticket, entry_id, onSubmit }: Props) => {
   return (
-    <li className={`py-4 ${className ?? ''}`}>
-      <Heading level='h3' className='mb-4'>{title}</Heading>
-      <div className='flex flex-row flex-wrap gap-4 justify-between items-center'>
-        <div className='w-full lg:w-auto md:min-w-60'><Select
-            id='choseAccess'
-            selectClassName='min-w-20'
-            labelVisible={true}
-            label='Access requirements'
-            options={[{ value: '1', text: 'Wheelchair seats' }, { value: '2', text: 'Wheelchair seats' }]}
-          />
-        </div>
-        <div className='w-full lg:w-auto'>
-          <div className='flex flex-col items-end justify-end'>
-            <div className='text-xl mb-2'>{numberFormat(18.50)}</div>
-            <Button variant="hollowAlert" className="w-full lg:w-auto">Remove</Button>
-          </div>
-        </div>
+    <li className="w-full py-4">
+      <Heading level="h3" className="mb-2">
+        {ticket.name}
+      </Heading>
+
+      {ticket.description && (
+        <Paragraph className="mt-0">{ticket.description}</Paragraph>
+      )}
+
+      <Paragraph className="mt-1">
+        <span aria-atomic={true} aria-live="polite">
+          <span className="sr-only">Price:</span>£{ticket.price.toFixed(2)}
+        </span>
+      </Paragraph>
+
+      <div className="w-full mt-2">
+        <Formik
+          initialValues={{
+            ticket_entry_id: ticket.ticket_entry_id,
+            entry_id,
+          }}
+          validationSchema={null}
+          onSubmit={(values) => {
+            onSubmit({
+              ticket_entry_id: values.ticket_entry_id,
+              entry_id,
+            });
+          }}
+          isInitialValid={true}
+        >
+          {({ handleSubmit, isSubmitting, isValid }) => (
+            <form
+              onSubmit={handleSubmit}
+              className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 items-center"
+            >
+              <div className="w-full p-1 h-full flex flex-row items-center bg-gray-100">
+                <p>Accessibility Options Soon!</p>
+              </div>
+              <div className="w-full grid grid-cols-1 md:grid-cols-3 items-end gap-2">
+                <div className="w-full md:col-span-2 lg:col-span-2"></div>
+                <Button
+                  className="w-full mt-2 md:mt-0"
+                  type="submit"
+                  variant="hollowAlert"
+                  accessibleTitle={`Remove single ${
+                    ticket.name
+                  } ticket, priced at £${ticket.price.toFixed(
+                    2
+                  )} from your cart.`}
+                  disabled={!isValid || isSubmitting}
+                >
+                  Remove
+                </Button>
+              </div>
+            </form>
+          )}
+        </Formik>
       </div>
     </li>
   );
 };
-

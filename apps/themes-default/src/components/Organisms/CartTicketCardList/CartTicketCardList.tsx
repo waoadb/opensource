@@ -1,11 +1,44 @@
+/* Dependencies */
+// Components
 import { CartTicketCard } from '@/components/Molecules/CartTicketCard/CartTicketCard';
 
-export const CartTicketCardList = () => {
+// Models
+import { ClientCartModels } from '@waoadb/contracts-client';
+type Props = {
+  /**
+   * Tickets to render.
+   */
+  tickets: ClientCartModels.CartEntryTicket[];
+  /**
+   * Cart entry id.
+   */
+  entry_id: string;
+  /**
+   * Handle Submit
+   */
+  handleSubmit: (payload: ClientCartModels.RemoveTicketFromCartRequest) => void;
+};
+
+/**
+ * Cart Ticket Card List
+ * @param props - Component props.
+ * @returns
+ */
+export const CartTicketCardList = ({
+  tickets,
+  entry_id,
+  handleSubmit,
+}: Props) => {
   return (
-    <ul className="block divide-y divide-gray-500">
-      <CartTicketCard title={'General Admission'} className="block" />
-      <CartTicketCard title={'General Admission'} className="block" />
-      <CartTicketCard title={'General Admission'} className="block" />
+    <ul className="grid grid-cols-1 divide-y divide-gray-500">
+      {tickets.map((ticket) => (
+        <CartTicketCard
+          key={ticket.ticket_id}
+          entry_id={entry_id}
+          ticket={ticket}
+          onSubmit={handleSubmit}
+        />
+      ))}
     </ul>
   );
 };
