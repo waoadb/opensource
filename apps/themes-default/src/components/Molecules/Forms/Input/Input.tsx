@@ -16,7 +16,8 @@ export type InputType =
   | 'tel'
   | 'search'
   | 'password'
-  | 'url';
+  | 'url'
+  | 'date';
 
 export type InputMode =
   | 'none'
@@ -209,7 +210,7 @@ export const Input = ({
   id,
   inputMode,
   label,
-  labelVisible,
+  labelVisible = true,
   max,
   maxLength,
   min,

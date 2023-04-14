@@ -172,45 +172,47 @@ export const Select = ({
             ></ToolTip>
           </span>
         )}
-        <select
-          id={id}
-          name={name}
-          onChange={onChange.bind(this)}
-          onBlur={onBlur.bind(this)}
-          aria-invalid={error ? true : false}
-          aria-describedby={describedBy}
-          required={required}
-          placeholder={placeholder}
-          disabled={disabled}
-          autoComplete={autoComplete}
-          autoFocus={autoFocus}
-          value={value ? value : ''}
-          className={classNames('block w-full box-border rounded-md', {
-            'pl-10': icon,
-            'pl-4': !icon,
-          })}
-        >
-          {placeholder && (
-            <option disabled value="">
-              {placeholder}
-            </option>
+        <span className="w-full relative">
+          <select
+            id={id}
+            name={name}
+            onChange={onChange.bind(this)}
+            onBlur={onBlur.bind(this)}
+            aria-invalid={error ? true : false}
+            aria-describedby={describedBy}
+            required={required}
+            placeholder={placeholder}
+            disabled={disabled}
+            autoComplete={autoComplete}
+            autoFocus={autoFocus}
+            value={value ? value : ''}
+            className={classNames('block w-full box-border rounded-md', {
+              'pl-10': icon,
+              'pl-4': !icon,
+            })}
+          >
+            {placeholder && (
+              <option disabled value="">
+                {placeholder}
+              </option>
+            )}
+            {options.map((option) => (
+              <option
+                key={`${id}_${option.value}`}
+                defaultChecked={option.selected}
+                value={option.value}
+                disabled={readOnly}
+              >
+                {option.key}
+              </option>
+            ))}
+          </select>
+          {icon && (
+            <span className="absolute left-2 top-1/2 -translate-y-1/2 h-full flex flex-col items-center justify-center overflow-hidden w-8 opacity-70 pointer-events-none select-none">
+              {icon}
+            </span>
           )}
-          {options.map((option) => (
-            <option
-              key={`${id}_${option.value}`}
-              defaultChecked={option.selected}
-              value={option.value}
-              disabled={readOnly}
-            >
-              {option.key}
-            </option>
-          ))}
-        </select>
-        {icon && (
-          <span className="absolute left-2 top-0 h-full flex flex-col items-center justify-center overflow-hidden w-8 opacity-70 pointer-events-none select-none">
-            {icon}
-          </span>
-        )}
+        </span>
       </label>
       {(error || supportText) && (
         <div className="w-full flex flex-row items-start mt-2">

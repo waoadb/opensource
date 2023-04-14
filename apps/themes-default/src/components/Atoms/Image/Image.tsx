@@ -195,7 +195,7 @@ export class Image extends React.Component<ImageProps> {
             absolute: this.props.absolute,
             relative: !this.props.absolute,
             'aspect-1': this.props.ratio === '1:1',
-            'aspect-16-9': this.props.ratio === '16:9',
+            'aspect-w-16 aspect-h-9': this.props.ratio === '16:9',
             'aspect-9-10': this.props.ratio === '9:10',
             'aspect-4-3': this.props.ratio === '4:3',
           },

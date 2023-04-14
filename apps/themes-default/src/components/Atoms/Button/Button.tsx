@@ -42,6 +42,14 @@ type ButtonProps = PropsWithChildren<{
    */
   icon?: React.ReactNode;
   /**
+   * Icon only
+   */
+  iconOnly?: boolean;
+  /**
+   * Filters Icon
+   */
+  filtersIcon?: boolean;
+  /**
    * Onclick handler
    */
   onClick?: Function;
@@ -77,6 +85,8 @@ export const Button = ({
   fullWidth,
   type,
   icon,
+  iconOnly,
+  filtersIcon,
   accessibleTitle,
 }: ButtonProps) => {
   return (
@@ -99,7 +109,17 @@ export const Button = ({
         }
       )}
     >
-      {icon && <span className="mr-2">{icon}</span>}
+      {icon && (
+        <span
+          className={classNames({
+            'mr-2': !filtersIcon && icon && !iconOnly,
+            'mx-auto': iconOnly,
+            'lg:mx-auto xl:mx-none': filtersIcon,
+          })}
+        >
+          {icon}
+        </span>
+      )}
       {children}
     </button>
   );

@@ -109,7 +109,7 @@ export const EventBanner = ({ event }: Props) => {
             )}
 
             <Link
-              className="w-full lg:w-auto"
+              className="w-full md:w-auto"
               variant="primary"
               href={'#performances'}
             >

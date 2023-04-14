@@ -1,28 +1,62 @@
+/* Dependencies */
+import { useMemo } from 'react';
+
+// Helpers
+import { formatDateRange } from '@/helpers/formatDateRange/formatDateRange';
+
+// Components
 import { Heading } from '@/components/Atoms/Heading/Heading';
 import { IconList } from '@/components/Molecules/IconList/IconList';
 import { Button } from '@/components/Atoms/Button/Button';
-import { className } from 'postcss-selector-parser';
+import { Paragraph } from '@/components/Atoms/Paragraph/Paragraph';
 
-type PerformanceCardProps = {
-  className?: string;
-  soldOut?: boolean;
-}
+// Models
+import { ClientCacheModels } from '@waoadb/contracts-client';
+type Props = {
+  /**
+   * Performance to be rendered.
+   */
+  performance: ClientCacheModels.CachePerformance;
+  /**
+   * Handles clicking the book now button.
+   */
+  handleBookNow: (performance_id: string) => void;
+};
 
-export const PerformanceCard = ({
-                                  soldOut = false
-                                }: PerformanceCardProps) => {
+/**
+ * Performance Card
+ * @param props - Component props.
+ * @returns
+ */
+export const PerformanceCard = ({ performance, handleBookNow }: Props) => {
+  const performanceDateRange = useMemo(
+    () =>
+      formatDateRange(
+        performance.details.start_date,
+        performance.details.start_time,
+        performance.details.end_date,
+        performance.details.end_time
+      ),
+    [performance]
+  );
   return (
-    <li className={`pb-4 pt-8 ${className ?? ''}`}>
-      <div className='flex flex-row flex-wrap items-center justify-between gap-4'>
-        <div className='w-full lg:w-auto lg:grow space-y-1'>
-          <Heading level='h5' style='h4'>TItle</Heading>
-          <div>Date: 22nd January 2024</div>
-          <div>Time: 19:00 pm - 01:00 am</div>
+    <li className="pb-4 pt-8 w-full">
+      <div className="flex flex-row flex-wrap items-center justify-between gap-4">
+        <div className="w-full lg:w-auto lg:grow space-y-1">
+          <Heading level="h5" style="h4">
+            {performance.details.title}
+          </Heading>
+          <Paragraph>{performanceDateRange}</Paragraph>
         </div>
-        <div className='w-full lg:w-auto lg:shrink lg:text-right'>
-          <IconList className='mb-4' />
-          <Button className='w-full xl:w-auto' variant={soldOut ? 'secondary' : 'primary'}
-                  disabled={soldOut}>{soldOut ? 'Sold out' : 'Book now'}</Button>
+        <div className="w-full lg:w-auto lg:shrink lg:text-right">
+          {/* <IconList className="mb-4" /> */}
+          <Button
+            accessibleTitle={`Open booking modal for performance: ${performanceDateRange}`}
+            className="w-full xl:w-auto"
+            variant="primary"
+          >
+            Book now
+          </Button>
         </div>
       </div>
     </li>

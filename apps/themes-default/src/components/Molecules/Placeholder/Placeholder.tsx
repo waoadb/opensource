@@ -2,22 +2,37 @@
 // Components
 import { Heading } from '@/components/Atoms/Heading/Heading';
 import { Paragraph } from '@/components/Atoms/Paragraph/Paragraph';
-import { MapPinIcon } from '@heroicons/react/24/outline';
+
+// Models
+type Props = {
+  /**
+   * Title
+   */
+  title: string;
+  /**
+   * Content
+   */
+  content: string;
+  /**
+   * Icon
+   */
+  icon: React.ReactNode;
+};
 
 /**
- * TBC Event Card
+ * Placeholder
  * @param props - Component props.
  */
-export const TBCEventCard = () => {
+export const Placeholder = ({ title, content, icon }: Props) => {
   return (
-    <div className="text-center flex flex-col items-center justify-center py-4 px-2 border border-gray-200 border-solid rounded-lg">
+    <div className="text-center flex flex-col items-center justify-center py-12 px-2 border border-gray-200 border-solid rounded-lg">
       <div className="w-full">
-        <MapPinIcon width="25" height="25" className="mx-auto" />
+        {icon}
         <Heading level="h2" style="h4" className="mt-2">
-          Location Coming Soon
+          {title}
         </Heading>
         <Paragraph style="base" className="mt-1">
-          The location of this event will be posted soon!{' '}
+          {content}
         </Paragraph>
       </div>
     </div>

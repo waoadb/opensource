@@ -1,14 +1,27 @@
+/* Dependencies */
+// Components
 import { Heading } from '@/components/Atoms/Heading/Heading';
+import { Paragraph } from '@/components/Atoms/Paragraph/Paragraph';
 
+// Models
 type EventDescriptionProps = {
-  title: string;
-  description: string;
-}
-export const EventDescription = ({ title, description, }: EventDescriptionProps) => {
+  content: string;
+};
+
+/**
+ * Event Description
+ * @param props - Component props.
+ * @returns
+ */
+export const EventDescription = ({ content }: EventDescriptionProps) => {
   return (
     <div className="space-y-4">
-      <Heading level="h3" className="text-indigo-700"><span className="inline-block border-b-2 border-b-current">{title}</span></Heading>
-      <div className="text-lg space-y-4 mb-4" dangerouslySetInnerHTML={{ __html: description }}/>
+      <Heading level="h2" style="h3">
+        <span className="text-indigo-700 inline-block border-b-2 border-b-current">
+          Event Description
+        </span>
+      </Heading>
+      <Paragraph style="large">{content}</Paragraph>
     </div>
   );
 };

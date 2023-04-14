@@ -29,7 +29,7 @@ import { OnlineEventCard } from '@/components/Molecules/OnlineEventCard/OnlineEv
 import { TBCEventCard } from '@/components/Molecules/TBCEventCard/TBCEventCard';
 import { AvailableStockCard } from '@/components/Molecules/AvailableStockCard/AvailableStockCard';
 import { RefundPolicyCard } from '@/components/Molecules/RefundPolicyCard/RefundPolicyCard';
-import { PerformancesSoldOut } from '@/components/Molecules/PerformancesSoldOut/PerformancesSoldOut';
+import { PerformancesSoldOut } from '@/components/Molecules/PerformancesPlaceholder/PerformancesSoldOut';
 import { Checkbox } from '@/components/Molecules/Forms/Checkbox/Checkbox';
 import { Radio } from '@/components/Molecules/Forms/Radio/Radio';
 import { ToastNotification } from '@/components/Molecules/ToastNotification/ToastNotification';

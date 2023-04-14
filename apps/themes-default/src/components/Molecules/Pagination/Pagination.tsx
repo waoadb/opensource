@@ -1,16 +1,46 @@
-import { Button } from '@/components/Atoms/Button/Button';
+/* Dependencies */
+import ReactPaginate from 'react-paginate';
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 
-export const Pagination = () => {
+// Models
+type Props = {
+  /**
+   * Current page
+   */
+  currentPage: number;
+  /**
+   * Total number of pages
+   */
+  pageCount: number;
+  /**
+   * Handle page change
+   */
+  onPageChange: (page: number) => void;
+};
+
+/**
+ * Pagination Component
+ * @param props - Component props.
+ * @returns
+ */
+export const Pagination = ({ currentPage, pageCount, onPageChange }: Props) => {
   return (
-    <div className="container mx-auto">
-      <nav aria-label="pagination">
-        <ul className="text-center mb-6 space-x-1">
-          <li className="inline-block"><Button ariaLabel="page 1" variant="hollowPrimary">1</Button></li>
-          <li className="inline-block"><Button ariaLabel="page 2" variant="primary"><span className='sr-only'>You are on page:</span>2</Button></li>
-          <li className="inline-block"><Button ariaLabel="page 3" variant="hollowPrimary">3</Button></li>
-          <li className="inline-block"><Button ariaLabel="page 4" variant="hollowPrimary">4</Button></li>
-        </ul>
-      </nav>
-    </div>
+    <ReactPaginate
+      previousLabel={<ChevronLeftIcon width={24} height={24} />}
+      breakLabel="..."
+      nextLabel={<ChevronRightIcon width={24} height={24} />}
+      pageCount={pageCount}
+      renderOnZeroPageCount={null}
+      forcePage={currentPage}
+      onPageChange={({ selected }) => onPageChange(selected)}
+      nextClassName="block overflow-hidden rounded-md border border-indigo-500"
+      nextLinkClassName="block py-1 px-1 hover:bg-indigo-500 hover:text-white transition-colors duration-200"
+      previousClassName="block overflow-hidden rounded-md border border-indigo-500"
+      previousLinkClassName="block py-1 px-1 hover:bg-indigo-500 hover:text-white transition-colors duration-200"
+      pageClassName="block overflow-hidden rounded-md border border-indigo-500"
+      pageLinkClassName="block py-1 px-3 hover:bg-indigo-500 hover:text-white transition-colors duration-200"
+      activeClassName="bg-indigo-500 text-white"
+      className="w-full flex flex-row flex-wrap gap-2 justify-center"
+    />
   );
 };
