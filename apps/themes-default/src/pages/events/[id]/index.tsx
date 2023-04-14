@@ -246,7 +246,7 @@ const Page = ({ event, profile }: PageProps) => {
 };
 
 /**
- * Get the event.
+ * Get the page props.
  * @param props - GetServerSideProps props.
  * @returns
  */
