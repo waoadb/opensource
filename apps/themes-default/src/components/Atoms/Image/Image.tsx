@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { decode } from 'blurhash';
 
 // Models
-export type ImageRatio = '1:1' | '16:9' | '9:10' | '4:3';
+export type ImageRatio = '1:1' | '16:9' | '9:10' | '4:3' | 'auto';
 type ImageFit =
   | 'object-fill'
   | 'object-cover'

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import classNames from 'classnames';
 
 // Components
-import { Icon } from '@/components/Atoms/DemoIcons/DemoIcons';
+import { ChevronLeftIcon } from '@heroicons/react/24/outline';
 
 // Models
 type BackButtonProps = {
@@ -44,7 +44,7 @@ export const BackButton = ({
       href={href}
       title={accessibleTitle}
     >
-      <Icon name={'ArrowFullLeft'} width={24} height={24} ariaVisible={false} />
+      <ChevronLeftIcon width={24} height={24} />
       <span className="underline underline-offset-4">{title}</span>
     </Link>
   );
