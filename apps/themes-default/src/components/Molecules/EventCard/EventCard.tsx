@@ -15,6 +15,7 @@ import { Image } from '@/components/Atoms/Image/Image';
 
 // Models
 import { ClientCacheModels } from '@waoadb/contracts-client';
+import { AccessibilityList } from '../AccessibilityList/AccessibilityList';
 type Props = {
   /**
    * Event to render
@@ -77,11 +78,17 @@ export const EventCard = ({ event, as: El = 'li' }: Props) => {
         <Paragraph style="small" className="mb-2">
           {dateRange}
         </Paragraph>
-        <IconList />
+
+        {event.accessibility.enabled && (
+          <AccessibilityList
+            accessibility={event.accessibility.items.map((item) => item.id)}
+            color="black"
+            size="small"
+          />
+        )}
+
         {truncatedSummary && (
-          <Paragraph style="small" className="text-gray-500">
-            {event.details.summary}
-          </Paragraph>
+          <Paragraph style="small">{event.details.summary}</Paragraph>
         )}
         <Link
           href={`/events/${event.event_id}`}

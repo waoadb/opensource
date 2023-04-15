@@ -14,6 +14,7 @@ import { Link } from '@/components/Atoms/Link/Link';
 
 // Models
 import { ClientCacheModels } from '@waoadb/contracts-client';
+import { AccessibilityList } from '@/components/Molecules/AccessibilityList/AccessibilityList';
 type Props = {
   event: ClientCacheModels.CacheEvent;
 };
@@ -60,18 +61,25 @@ export const FeaturedEventBanner = ({ event }: Props) => {
       {/* Content */}
       <div className="relative mt-auto w-full text-white">
         <div className="container mx-auto">
-          <div className="space-y-2 md:space-y-4 pb-8">
-            <Heading level="h1" className="... block truncate leading-tight">
+          <div className="pb-8">
+            <Heading level="h1" style="h1" className="block">
               <span>Featured title here</span>
             </Heading>
-            <Paragraph style="large">{dateRange}</Paragraph>
-            <div>
-              <span className="sr-only">Facilities available</span>
-              <IconList />
-            </div>
+
+            <Paragraph style="base" className="my-2">
+              {dateRange}
+            </Paragraph>
+
+            {event.accessibility.enabled && (
+              <AccessibilityList
+                accessibility={event.accessibility.items.map((item) => item.id)}
+                color="white"
+              />
+            )}
+
             <Link
               href={`/events/${event.event_id}`}
-              className="w-full md:w-auto"
+              className="w-full md:w-auto mt-2"
               variant="primary"
               accessibleTitle={`View event page for ${event.details.name}`}
             >

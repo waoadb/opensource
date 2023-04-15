@@ -8,10 +8,14 @@ import classNames from 'classnames';
 import { useDifferentBreedCart } from '@/context/DifferentBreedCart/hooks/useDifferentBreedCart';
 
 // Components
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import {
+  Bars3Icon,
+  MagnifyingGlassIcon,
+  ShoppingCartIcon,
+  XMarkIcon,
+} from '@heroicons/react/24/outline';
 import { Popover, Transition } from '@headlessui/react';
 import { SearchForm } from '@/components/Molecules/SearchForm/SearchForm';
-import { Icon } from '@/components/Atoms/Icon/Icon';
 import { Navigation } from '@/components/Molecules/Navigation/Navigation';
 import { Button } from '@/components/Atoms/Button/Button';
 
@@ -48,7 +52,10 @@ export const Header = ({ toggleMenu, menuOpen, transparent }: Props) => {
     const scrollHandler = () => {
       clearTimeout(timeout);
       timeout = setTimeout(() => {
-        if (window.scrollY > 0) {
+        if (
+          window.scrollY > 0 ||
+          document.documentElement.style.overflow === 'hidden'
+        ) {
           setHasScrolled(true);
         } else {
           setHasScrolled(false);
@@ -92,12 +99,11 @@ export const Header = ({ toggleMenu, menuOpen, transparent }: Props) => {
                     className="inline-flex flex-row items-center group gap-2 text-sm"
                   >
                     <span className="w-8 h-8 lg:bg-gray-300 group-hover:bg-indigo-600 lg:group-hover:text-white transition-colors rounded-full p-1.5 text-current lg:text-gray-800">
-                      <Icon
+                      <ShoppingCartIcon
                         name="ShoppingCart"
                         title="ShoppingCart"
                         width={20}
                         height={20}
-                        ariaVisible={false}
                       />
                     </span>
                     <span className="sr-only">Toggle cart</span>
@@ -110,12 +116,11 @@ export const Header = ({ toggleMenu, menuOpen, transparent }: Props) => {
                       <>
                         <Popover.Button className="inline-flex flex-row items-center group gap-2 text-sm">
                           <span className="w-8 h-8 lg:bg-gray-300 group-hover:bg-indigo-600 lg:group-hover:text-white transition-colors rounded-full p-1.5 text-current lg:text-gray-800">
-                            <Icon
+                            <MagnifyingGlassIcon
                               name="Search"
                               title="Search"
                               width={20}
                               height={20}
-                              ariaVisible={false}
                             />
                           </span>
                           <span className="sr-only">Toggle search</span>

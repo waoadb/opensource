@@ -14,7 +14,7 @@
     "singleQuote": true
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.13",
+    "@headlessui/react": "^1.7.14",
     "@heroicons/react": "^2.0.17",
     "@popperjs/core": "^2.11.7",
     "animejs": "^3.2.1",

@@ -1,5 +1,5 @@
+import { XMarkIcon } from '@heroicons/react/24/outline';
 import React from 'react';
-import { Icon } from '@/components/Atoms/Icons/DemoIcons';
 
 type ToastNotificationProps = {
   className?: string;
@@ -38,7 +38,7 @@ export const ToastNotification = ({
 
         <button className="p-2 bg-white rounded-md border-2 border-inherit absolute text-inherit opacity-50 hover:opacity-100 right-0 top-1/2 -translate-y-1/2">
           <span className="sr-only">Close notification</span>
-          <Icon
+          <XMarkIcon
             name="Close"
             width="16"
             height="16"
