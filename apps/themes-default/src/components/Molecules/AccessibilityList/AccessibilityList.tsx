@@ -76,7 +76,6 @@ export const AccessibilityList = ({
         isOpen={showModal}
         onClose={() => {
           setShowModal(false);
-          setSelectedType(undefined);
         }}
       >
         {selectedType && <AccessibilityDetails type={selectedType} />}

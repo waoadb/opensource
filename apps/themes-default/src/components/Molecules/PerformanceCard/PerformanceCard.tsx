@@ -55,6 +55,7 @@ export const PerformanceCard = ({ performance, handleBookNow }: Props) => {
                 (item) => item.id
               )}
               align="right"
+              size="small"
             />
           )}
           <Button

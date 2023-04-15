@@ -1,5 +1,6 @@
 /* Dependencies */
 import { useState } from 'react';
+import dayjs from 'dayjs';
 import classNames from 'classnames';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
@@ -27,11 +28,19 @@ const validationSchema = Yup.object().shape({
 
 // Models
 import { ClientCacheModels } from '@waoadb/contracts-client';
-import dayjs from 'dayjs';
 type View = 'list' | 'calendar';
 type Props = {
-  view: 'list' | 'calendar';
+  /**
+   * The current view.
+   */
+  view: View;
+  /**
+   * Handle the view change.
+   */
   handleViewChange: (view: View) => void;
+  /**
+   * Handle the form submission.
+   */
   onSubmit(
     payload: Omit<
       ClientCacheModels.RetrievePerformancesRequest,

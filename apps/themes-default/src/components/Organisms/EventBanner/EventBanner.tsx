@@ -69,7 +69,7 @@ export const EventBanner = ({ event }: Props) => {
             <BackButton
               title="What's on"
               accessibleTitle="Return to the what's on page"
-              href="/"
+              href="/events"
             />
           </div>
         </div>

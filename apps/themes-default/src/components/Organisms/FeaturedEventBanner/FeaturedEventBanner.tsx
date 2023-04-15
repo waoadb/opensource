@@ -73,6 +73,7 @@ export const FeaturedEventBanner = ({ event }: Props) => {
               <AccessibilityList
                 accessibility={event.accessibility.items.map((item) => item.id)}
                 color="white"
+                size="small"
               />
             )}
 

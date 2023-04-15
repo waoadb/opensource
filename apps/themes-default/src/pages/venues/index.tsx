@@ -26,7 +26,7 @@ type PageProps = {
 };
 
 /**
- * Page: Event
+ * Page: Venues
  * @param props - Page props.
  * @returns
  */
