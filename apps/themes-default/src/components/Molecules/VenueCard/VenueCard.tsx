@@ -37,7 +37,7 @@ type Props = {
 export const VenueCard = ({ as: El = 'li', venue, showDirections }: Props) => {
   const venueAddress = useMemo(() => formatVenueAddress(venue), [venue]);
   return (
-    <El className="w-full rounded-lg overflow-hidden border border-gray-200 borde-solid">
+    <El className="w-full rounded-lg overflow-hidden border border-gray-200 border-solid">
       {venue.picture && (
         <div className="w-full">
           <Image

@@ -1,6 +1,7 @@
 /* Dependencies */
 import { GetServerSideProps } from 'next';
 import { NextSeo } from 'next-seo';
+import { useMemo } from 'react';
 
 // Services
 import { differentBreedClient } from '@/services/differentBreedClient/differentBreedClient';
@@ -9,11 +10,11 @@ import { differentBreedClient } from '@/services/differentBreedClient/differentB
 import Layout from '@/Layouts/Layout';
 
 // Components
+import { FeaturedEventBanner } from '@/components/Organisms/FeaturedEventBanner/FeaturedEventBanner';
+import { EventCardList } from '@/components/Organisms/EventCardList/EventCardList';
 
 // Models
 import { ClientCacheModels } from '@waoadb/contracts-client';
-import { FeaturedEventBanner } from '@/components/Organisms/FeaturedEventBanner/FeaturedEventBanner';
-import { EventCardList } from '@/components/Organisms/EventCardList/EventCardList';
 type PageProps = {
   events: ClientCacheModels.CacheEvent[];
   profile: ClientCacheModels.CacheProfile;
@@ -25,6 +26,12 @@ type PageProps = {
  * @returns
  */
 const Page = ({ events, profile }: PageProps) => {
+  const featuredEvent = useMemo(() => {
+    return events[0];
+  }, [events]);
+  const otherEvents = useMemo(() => {
+    return events.slice(1);
+  }, [events]);
   return (
     <>
       <NextSeo
@@ -43,8 +50,16 @@ const Page = ({ events, profile }: PageProps) => {
         canonical={`${process.env.NEXT_PUBLIC_SITE_URL}`}
       />
       <Layout profile={profile}>
-        <FeaturedEventBanner />
-        <EventCardList title="What's On" />
+        <FeaturedEventBanner event={featuredEvent} />
+        <EventCardList
+          title="What's On"
+          link={{
+            accessibleTitle: "View all events on the what's on page",
+            href: '/events',
+            children: 'View all events',
+          }}
+          events={otherEvents}
+        />
       </Layout>
     </>
   );

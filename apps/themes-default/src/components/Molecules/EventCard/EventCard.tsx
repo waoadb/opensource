@@ -1,49 +1,96 @@
 /* Dependencies */
-import Image from 'next/image';
-import NextLink from 'next/link';
+import { useMemo } from 'react';
+
+// Helpers
+import { addUrlParams } from '@/helpers/addUrlPrarms/addUrlParams';
+import { formatDateRange } from '@/helpers/formatDateRange/formatDateRange';
+import { truncateString } from '@/helpers/truncateString/truncateString';
 
 // Components
 import { Heading } from '@/components/Atoms/Heading/Heading';
 import { Paragraph } from '@/components/Atoms/Paragraph/Paragraph';
 import { Link } from '@/components/Atoms/Link/Link';
 import { IconList } from '@/components/Molecules/IconList/IconList';
+import { Image } from '@/components/Atoms/Image/Image';
 
 // Models
-type EventCardProps = {
-  className?: string;
+import { ClientCacheModels } from '@waoadb/contracts-client';
+type Props = {
+  /**
+   * Event to render
+   */
+  event: ClientCacheModels.CacheEvent;
+  /**
+   * Attribute to be used.
+   */
+  as?: 'div' | 'li';
 };
 
-export const EventCard = ({ className }: EventCardProps) => {
+/**
+ * Event Card
+ * @param props - Component props.
+ * @returns
+ */
+export const EventCard = ({ event, as: El = 'li' }: Props) => {
+  // state
+  const dateRange = useMemo(() => {
+    if (
+      !event.performance_summary.first_performance ||
+      !event.performance_summary.last_performance
+    ) {
+      return 'Coming Soon!';
+    }
+
+    return formatDateRange(
+      event.performance_summary.first_performance.start_date,
+      event.performance_summary.first_performance.start_time,
+      event.performance_summary.last_performance.end_date,
+      event.performance_summary.last_performance.end_time,
+      false
+    );
+  }, [event]);
+  const truncatedSummary = useMemo(() => {
+    if (event.details.summary) {
+      return truncateString(event.details.summary, 100);
+    }
+    return null;
+  }, [event]);
+
   return (
-    <li className={`group ${className}`}>
-      <NextLink
-        href={'/'}
-        className="aspect-w-16 aspect-h-9 overflow-hidden block relative"
-      >
-        <Image
-          src="https://picsum.photos/640/480/"
-          alt="Event"
-          fill={true}
-          className="absolute w-full h-full object-center object-cover transition-transform duration-700 group-hover:scale-105"
-        />
-      </NextLink>
-      <div className="py-2">
+    <El className="w-full rounded-lg overflow-hidden border border-gray-200 border-solid">
+      {event.details.picture && (
+        <div className="w-full">
+          <Image
+            imageSrc={addUrlParams(event.details.picture.url, 'w=300&q=80')}
+            altText={event.details.picture.alt_text || ''}
+            blurhash={event.details.picture.blurhash}
+            position="object-center"
+            fit="object-cover"
+            ratio="16:9"
+          />
+        </div>
+      )}
+      <div className="py-4 px-4">
         <Heading level="h3" style="h4" className="font-semibold">
-          Event title
+          {event.details.name}
         </Heading>
-        <Paragraph variant="small" className="mb-2">
-          Date: Mon 01 May 2023 - 21:00pm
+        <Paragraph style="small" className="mb-2">
+          {dateRange}
         </Paragraph>
         <IconList />
-        <Paragraph variant="small" className="text-gray-500">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod,
-          nunc sit amet aliquam lacinia, nunc nisl aliquet nisl, nec aliquam
-          nisl nisl sit amet lorem.
-        </Paragraph>
-        <Link href={'/'} accessibleTitle={'Book now'} className="mt-4">
+        {truncatedSummary && (
+          <Paragraph style="small" className="text-gray-500">
+            {event.details.summary}
+          </Paragraph>
+        )}
+        <Link
+          href={`/events/${event.event_id}`}
+          accessibleTitle={`View event page for ${event.details.name}`}
+          className="mt-4"
+        >
           Book now
         </Link>
       </div>
-    </li>
+    </El>
   );
 };
