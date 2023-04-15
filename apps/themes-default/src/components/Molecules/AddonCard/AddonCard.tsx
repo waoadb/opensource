@@ -144,7 +144,6 @@ export const AddonCard = ({
                     placeholder="Select a variant"
                     name="variant_id"
                     onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-                      console.log(e.target.value);
                       setSelectedVariant(
                         addon.variants.find(
                           (variant) => variant.variant_id === e.target.value

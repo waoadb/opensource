@@ -66,6 +66,9 @@ export const Header = ({ toggleMenu, menuOpen, transparent }: Props) => {
 
     // Load the initial cart
     retrieveCart(undefined);
+
+    // Run Once Only
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

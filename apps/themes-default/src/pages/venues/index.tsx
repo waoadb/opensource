@@ -47,8 +47,7 @@ const Page = ({ profile, initialVenues }: PageProps) => {
       .retrieveVenues({
         ...filters,
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
         return null;
       });
 
@@ -60,7 +59,6 @@ const Page = ({ profile, initialVenues }: PageProps) => {
   }, [filters]);
 
   const handlePageChange = useCallback((page: number) => {
-    console.log(page);
     setFilters((filters) => ({
       ...filters,
       skip: page * filters.limit,
@@ -71,7 +69,6 @@ const Page = ({ profile, initialVenues }: PageProps) => {
     (
       payload: Omit<ClientCacheModels.RetrieveVenuesRequest, 'skip' | 'limit'>
     ) => {
-      console.log(filters);
       setFilters((filters) => ({
         ...filters,
         ...payload,
@@ -173,8 +170,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async ({}) => {
   const profileResponse = await differentBreedClient.profile
     .retrieveProfile()
     .then((response) => response.payload)
-    .catch((error) => {
-      console.log(error);
+    .catch(() => {
       return null;
     });
 
@@ -185,8 +181,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async ({}) => {
       skip: 0,
     })
     .then((response) => response.payload)
-    .catch((error) => {
-      console.log(error);
+    .catch(() => {
       return null;
     });
 

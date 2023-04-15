@@ -170,8 +170,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
   const profileResponse = await differentBreedClient.profile
     .retrieveProfile()
     .then((response) => response.payload)
-    .catch((error) => {
-      console.log(error);
+    .catch(() => {
       return null;
     });
 

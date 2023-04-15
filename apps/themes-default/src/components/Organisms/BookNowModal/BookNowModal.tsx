@@ -91,7 +91,7 @@ export const BookNowModal = ({
 
     // Remove loading
     setIsLoading(false);
-  }, [performance_id]);
+  }, [performance_id, event_id]);
 
   // Effects
   useEffect(() => {
@@ -101,7 +101,7 @@ export const BookNowModal = ({
 
     // Load the performance
     retrievePerformance();
-  }, [performance_id]);
+  }, [performance_id, retrievePerformance]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="large">

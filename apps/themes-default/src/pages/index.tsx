@@ -110,8 +110,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
   const profileResponse = await differentBreedClient.profile
     .retrieveProfile()
     .then((response) => response.payload)
-    .catch((error) => {
-      console.log(error);
+    .catch(() => {
       return null;
     });
 
@@ -123,8 +122,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
       date_from: dayjs().format('YYYY-MM-DD'),
     })
     .then((response) => response.payload)
-    .catch((error) => {
-      console.log(error);
+    .catch(() => {
       return null;
     });
 

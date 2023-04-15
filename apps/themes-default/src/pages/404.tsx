@@ -32,8 +32,7 @@ const Page = () => {
     const profileResponse = await differentBreedClient.profile
       .retrieveProfile()
       .then((response) => response.payload)
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
         return null;
       });
 
@@ -43,12 +42,13 @@ const Page = () => {
     }
 
     setProfile(profileResponse);
-  }, []);
+  }, [router]);
 
   // Effects
   useEffect(() => {
     getProfile();
-    // eslint-disable-exhaustive-deps
+    // Run Once Only
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Handle No Profile

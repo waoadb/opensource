@@ -68,8 +68,7 @@ const Page = ({ event, profile }: PageProps) => {
   const retrievePerformances = useCallback(async () => {
     const response = await differentBreedClient.performances
       .retrievePerformances(filters)
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
         return null;
       });
 
@@ -80,7 +79,6 @@ const Page = ({ event, profile }: PageProps) => {
   }, [filters]);
 
   const handlePageChange = useCallback((page: number) => {
-    console.log(page);
     setFilters((filters) => ({
       ...filters,
       skip: page * filters.limit,
@@ -212,7 +210,6 @@ const Page = ({ event, profile }: PageProps) => {
               <PerformanceCardList
                 performances={performances}
                 handleBookNow={(performance_id) => {
-                  console.log('Book Now');
                   setSelectedPerformanceId(performance_id);
                   setShowBookNowModal(true);
                 }}
@@ -247,7 +244,6 @@ const Page = ({ event, profile }: PageProps) => {
         {/* / Performances */}
 
         {/* Book Now Modal */}
-        {showBookNowModal ? 'true' : 'false'}
         <BookNowModal
           isOpen={showBookNowModal}
           onClose={() => setShowBookNowModal(false)}
@@ -277,7 +273,6 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async ({
     .retrieveProfile()
     .then((response) => response.payload)
     .catch((error) => {
-      console.log(error);
       return null;
     });
 
@@ -287,8 +282,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async ({
       event_id: id,
     })
     .then((response) => response.payload)
-    .catch((error) => {
-      console.log(error);
+    .catch(() => {
       return null;
     });
 
