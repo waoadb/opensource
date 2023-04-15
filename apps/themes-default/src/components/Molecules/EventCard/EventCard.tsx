@@ -10,12 +10,11 @@ import { truncateString } from '@/helpers/truncateString/truncateString';
 import { Heading } from '@/components/Atoms/Heading/Heading';
 import { Paragraph } from '@/components/Atoms/Paragraph/Paragraph';
 import { Link } from '@/components/Atoms/Link/Link';
-import { IconList } from '@/components/Molecules/IconList/IconList';
 import { Image } from '@/components/Atoms/Image/Image';
+import { AccessibilityList } from '../AccessibilityList/AccessibilityList';
 
 // Models
 import { ClientCacheModels } from '@waoadb/contracts-client';
-import { AccessibilityList } from '../AccessibilityList/AccessibilityList';
 type Props = {
   /**
    * Event to render
@@ -62,7 +61,7 @@ export const EventCard = ({ event, as: El = 'li' }: Props) => {
       {event.details.picture && (
         <div className="w-full">
           <Image
-            imageSrc={addUrlParams(event.details.picture.url, 'w=300&q=80')}
+            imageSrc={addUrlParams(event.details.picture.url, 'w=600&q=80')}
             altText={event.details.picture.alt_text || ''}
             blurhash={event.details.picture.blurhash}
             position="object-center"

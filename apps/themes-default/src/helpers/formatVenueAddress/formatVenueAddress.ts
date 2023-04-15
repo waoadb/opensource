@@ -6,7 +6,7 @@ import { ClientCacheModels } from '@waoadb/contracts-client';
  * @param venue - Venue to format.
  */
 export const formatVenueAddress = (
-  venue: ClientCacheModels.CacheVenue
+  venue: ClientCacheModels.CacheVenue | ClientCacheModels.CacheSupportDetails
 ): string => {
   let formattedAddress = '';
   if (venue.address_line_1) {

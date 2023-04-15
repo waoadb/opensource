@@ -1,8 +1,8 @@
 import { Input } from '@/components/Molecules/Forms/Input/Input';
-import { Icon } from '@/components/Atoms/Icons/DemoIcons';
 import React, { useState } from 'react';
 import { Select } from '@/components/Molecules/Forms/Select/Select';
 import { Button } from '@/components/Atoms/Button/Button';
+import { FunnelIcon } from '@heroicons/react/24/outline';
 
 type WhatsOnFilterProps = {
   view: 'list' | 'calendar';
@@ -52,36 +52,33 @@ export const WhatsOnFilters = ({ view, setView }: WhatsOnFilterProps) => {
     <div className="container mx-auto my-10 lg:my-20">
       <div className="flex flex-row flex-wrap justify-between items-center gap-4">
         <div className="w-full lg:w-auto lg:basis-3/4">
-          <Button
+          {/* <Button
             onClick={() => setMobileFilters(!mobileFilters)}
             className="w-full lg:hidden"
             variant="hollowPrimary"
-            icon={<Icon name="Filter" width="18" height="18" />}
+            icon={<FunnelIcon name="Filter" width="18" height="18" />}
           >
             Filter
-          </Button>
+          </Button> */}
           <div className={` ${filtersOnMobile(mobileFilters)}`}>
             <div className="grid lg:grid-cols-4 gap-4 mt-4 lg:mt-0">
-              <Input
+              {/* <Input
                 id="searchTerm"
-                labelClassName="col-span-1"
                 onChange={handleOnChange}
                 value={filters.searchTerm}
                 placeholder="Search"
-                icon={<Icon name="Search" width="18" height="18" />}
+                // icon={<Icon name="Search" width="18" height="18" />}
               />
               <Input
                 id="dateFrom"
-                labelClassName="col-span-1"
                 onChange={handleOnChange}
                 value={filters.dateFrom}
                 placeholder="Date From"
                 type="date"
-                icon={<Icon name="Calendar" width="18" height="18" />}
+                // icon={<Icon name="Calendar" width="18" height="18" />}
               />
               <Input
                 id="dateTo"
-                labelClassName="col-span-1"
                 onChange={handleOnChange}
                 value={filters.dateTo}
                 placeholder="Date to"
@@ -98,12 +95,12 @@ export const WhatsOnFilters = ({ view, setView }: WhatsOnFilterProps) => {
                 ]}
                 placeholder="Access"
                 icon={<Icon name="Person" width="18" height="18" />}
-              />
+              /> */}
             </div>
           </div>
         </div>
         <div className="flex flex-row flex-wrap gap-4 w-full lg:w-auto">
-          <Button
+          {/* <Button
             size="base"
             onClick={() => setView('list')}
             className="w-auto flex-auto justify-center"
@@ -122,7 +119,7 @@ export const WhatsOnFilters = ({ view, setView }: WhatsOnFilterProps) => {
             icon={<Icon name="Calendar" width="18" height="18" />}
           >
             <span className="block lg:hidden xl:block">Calendar</span>
-          </Button>
+          </Button> */}
         </div>
       </div>
     </div>

@@ -32,7 +32,7 @@ export const EventCardList = ({ title, link, events }: EventCardListProps) => {
   return (
     <section className="container mx-auto my-10 lg:my-20">
       {title && (
-        <div className="flex flex-col gap-4 mb-4 md:flex-row items-center justify-between">
+        <div className="flex flex-col gap-4 mb-4 md:flex-row md:items-center justify-between">
           <Heading level="h2" style="h4" className="text-2xl lg:text-3xl">
             {title}
           </Heading>

@@ -12,6 +12,7 @@ import { Link } from '@/components/Atoms/Link/Link';
 import { Heading } from '@/components/Atoms/Heading/Heading';
 import { Paragraph } from '@/components/Atoms/Paragraph/Paragraph';
 import { Image } from '@/components/Atoms/Image/Image';
+import { AccessibilityList } from '@/components/Molecules/AccessibilityList/AccessibilityList';
 
 // Models
 import { ClientCacheModels } from '@waoadb/contracts-client';
@@ -80,7 +81,7 @@ export const EventBanner = ({ event }: Props) => {
       {/* Content */}
       <div className="relative mt-auto w-full text-white py-8">
         <div className="container mx-auto">
-          <div className="space-y-2 md:space-y-4 pb-8">
+          <div className="pb-8">
             <Heading
               level="h1"
               style="h1"
@@ -88,30 +89,22 @@ export const EventBanner = ({ event }: Props) => {
             >
               {event.details.name}
             </Heading>
-            <Paragraph style="large">Date: {dateRange}</Paragraph>
+            <Paragraph style="large" className="my-2">
+              Date: {dateRange}
+            </Paragraph>
+
             {event.accessibility.enabled && (
-              <>
-                <span className="sr-only">Facilities available</span>
-                <ul className="flex flex-row items-center gap-2">
-                  {event.accessibility.items.map((item) => (
-                    <li key={item.id}>
-                      <span className="sr-only">{item.title}</span>
-                      <LockClosedIcon
-                        name="Captions"
-                        width={36}
-                        height={36}
-                        title={item.title}
-                      />
-                    </li>
-                  ))}
-                </ul>
-              </>
+              <AccessibilityList
+                accessibility={event.accessibility.items.map((item) => item.id)}
+                color="white"
+              />
             )}
 
             <Link
-              className="w-full md:w-auto"
+              className="w-full md:w-auto mt-2"
               variant="primary"
               href={'#performances'}
+              accessibleTitle='Scroll to the "Performances" section'
             >
               View performances
             </Link>

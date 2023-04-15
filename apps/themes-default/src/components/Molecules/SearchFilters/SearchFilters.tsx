@@ -1,7 +1,7 @@
 import { Heading } from '@/components/Atoms/Heading/Heading';
 import { Input } from '@/components/Molecules/Forms/Input/Input';
-import { Icon } from '@/components/Atoms/Icons/DemoIcons';
 import React, { useState } from 'react';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 export const SearchFilters = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -22,9 +22,7 @@ export const SearchFilters = () => {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Query"
-          icon={
-            <Icon name="Search" width="18" height="18" ariaVisible={false} />
-          }
+          icon={<MagnifyingGlassIcon name="Search" width="18" height="18" />}
         />
         <button type="submit" className="sr-only">
           Submit search

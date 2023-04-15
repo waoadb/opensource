@@ -78,7 +78,7 @@ export const Link = ({
   return (
     <NextLink
       title={accessibleTitle}
-      {...(target && { target })}
+      {...(target && { target, referrerPolicy: 'no-referrer' })}
       className={classNames(
         'rounded-md font-semibold text-center transition-colors duration-200',
         className,

@@ -43,7 +43,9 @@ export default function Layout({
   // State
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const menuOffset = useMemo(() => {
-    return ['/', '/events/'].some((path) => pathname.includes(path));
+    return (
+      ['/events/'].some((path) => pathname.includes(path)) || pathname === '/'
+    );
   }, [pathname]);
 
   // Effects

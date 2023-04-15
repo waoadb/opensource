@@ -36,7 +36,7 @@ export const Navigation = () => {
         {menuItems.map((item) => (
           <li className="lg:mr-4 w-full lg:w-auto" key={item.title}>
             <Link
-              href={'/whats-on'}
+              href={item.href}
               className={classNames(
                 'font-semibold text-4xl lg:text-lg transition-opacity hover:opacity-100 block p-2 text-center lg:text-left',
                 {

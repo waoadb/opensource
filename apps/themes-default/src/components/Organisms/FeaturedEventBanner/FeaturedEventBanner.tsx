@@ -8,13 +8,12 @@ import { addUrlParams } from '@/helpers/addUrlPrarms/addUrlParams';
 // Components
 import { Heading } from '@/components/Atoms/Heading/Heading';
 import { Paragraph } from '@/components/Atoms/Paragraph/Paragraph';
-import { IconList } from '@/components/Molecules/IconList/IconList';
 import { Image } from '@/components/Atoms/Image/Image';
 import { Link } from '@/components/Atoms/Link/Link';
+import { AccessibilityList } from '@/components/Molecules/AccessibilityList/AccessibilityList';
 
 // Models
 import { ClientCacheModels } from '@waoadb/contracts-client';
-import { AccessibilityList } from '@/components/Molecules/AccessibilityList/AccessibilityList';
 type Props = {
   event: ClientCacheModels.CacheEvent;
 };

@@ -85,6 +85,7 @@ const Page = ({ events, profile }: PageProps) => {
               children: 'View all events',
               variant: 'hollowPrimary',
               size: 'base',
+              className: 'w-full md:w-auto',
             }}
             events={otherEvents}
           />
