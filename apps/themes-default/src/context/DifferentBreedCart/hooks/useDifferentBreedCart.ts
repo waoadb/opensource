@@ -23,7 +23,7 @@ export const useDifferentBreedCart = () => {
    * Retrieves or creates a new cart.
    * @param cust_id? - Customer ID.
    */
-  const retrieveCart = async (cust_id: string) => {
+  const retrieveCart = async (cust_id?: string) => {
     // Get the cart ID from local storage.
     const cartId = localStorage.getItem('cart_id');
 
@@ -51,7 +51,7 @@ export const useDifferentBreedCart = () => {
    * Create a new cart.
    * @param cust_id? - Customer ID.
    */
-  const createCart = async (cust_id: string) => {
+  const createCart = async (cust_id?: string) => {
     // Create a new cart.
     await differentBreedClient.cart
       .createCart({ cust_id, expiry: 604800 })

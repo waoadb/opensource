@@ -1,6 +1,7 @@
 /* Dependencies */
 import { Fragment, PropsWithChildren } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
+import classNames from 'classnames';
 
 // Models
 type Props = PropsWithChildren<{
@@ -12,6 +13,10 @@ type Props = PropsWithChildren<{
    * Callback on close.
    */
   onClose: () => void;
+  /**
+   * Size
+   */
+  size?: 'base' | 'large';
 }>;
 
 /**
@@ -19,7 +24,7 @@ type Props = PropsWithChildren<{
  * @param props - Component props.
  * @returns
  */
-export const Modal = ({ isOpen, onClose, children }: Props) => {
+export const Modal = ({ isOpen, onClose, children, size = 'base' }: Props) => {
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10 w-full" onClose={onClose}>
@@ -46,7 +51,15 @@ export const Modal = ({ isOpen, onClose, children }: Props) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+              <Dialog.Panel
+                className={classNames(
+                  'w-full transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all first-letter:first-line',
+                  {
+                    'w-full max-w-md': size === 'base',
+                    'w-full max-w-5xl': size === 'large',
+                  }
+                )}
+              >
                 {children}
               </Dialog.Panel>
             </Transition.Child>

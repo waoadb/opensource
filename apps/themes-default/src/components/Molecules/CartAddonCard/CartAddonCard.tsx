@@ -36,7 +36,10 @@ type Props = {
   /**
    * Handle Submit
    */
-  onSubmit: (addon: ClientCartModels.RemoveAddonFromCartRequest) => void;
+  onSubmit: (
+    addon: ClientCartModels.RemoveAddonFromCartRequest,
+    callback: () => void
+  ) => void;
 };
 
 /**
@@ -63,7 +66,7 @@ export const CartAddonCard = ({ addon, entry_id, onSubmit }: Props) => {
         {/* Content */}
         <div className="w-full md:col-span-2 h-full flex flex-col flex-wrap justify-center">
           <div className="w-full">
-            <Heading level="h3" className="mb-2">
+            <Heading level="h3" style="h4" className="mb-2">
               {addon.name}
             </Heading>
 
@@ -84,11 +87,17 @@ export const CartAddonCard = ({ addon, entry_id, onSubmit }: Props) => {
               }}
               isInitialValid={true}
               validationSchema={validationSchema}
-              onSubmit={(values) => {
-                onSubmit({
-                  addon_entry_id: values.addon_entry_id,
-                  entry_id: values.entry_id,
-                });
+              onSubmit={(values, { setSubmitting, resetForm }) => {
+                onSubmit(
+                  {
+                    addon_entry_id: values.addon_entry_id,
+                    entry_id: values.entry_id,
+                  },
+                  () => {
+                    setSubmitting(false);
+                    resetForm();
+                  }
+                );
               }}
             >
               {({

@@ -31,7 +31,10 @@ type Props = {
   /**
    * Handle Submit
    */
-  onSubmit: (addon: ClientCartModels.AddTicketToCartRequest) => void;
+  onSubmit: (
+    addon: ClientCartModels.AddTicketToCartRequest,
+    callback: () => void
+  ) => void;
 };
 
 /**
@@ -65,7 +68,7 @@ export const TicketCard = ({
 
   return (
     <li className="w-full py-4">
-      <Heading level="h3" className="mb-2">
+      <Heading level="h3" style="h4" className="mb-2">
         {ticket.name}
       </Heading>
 
@@ -87,14 +90,20 @@ export const TicketCard = ({
             accessibility: [],
           }}
           validationSchema={validationSchema}
-          onSubmit={(values) => {
-            onSubmit({
-              event_id,
-              performance_id,
-              ticket_id: ticket.ticket_id,
-              quantity: values.quantity,
-              accessibility: values.accessibility,
-            });
+          onSubmit={(values, { setSubmitting, resetForm }) => {
+            onSubmit(
+              {
+                event_id,
+                performance_id,
+                ticket_id: ticket.ticket_id,
+                quantity: values.quantity,
+                accessibility: values.accessibility,
+              },
+              () => {
+                setSubmitting(false);
+                resetForm();
+              }
+            );
           }}
           isInitialValid={false}
         >
@@ -112,8 +121,8 @@ export const TicketCard = ({
               onSubmit={handleSubmit}
               className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 items-center"
             >
-              <div className="w-full p-1 h-full flex flex-row items-center bg-gray-100">
-                <p>Accessibility Options Soon!</p>
+              <div className="w-full p-1 h-full flex flex-row items-center bg-gray-50 px-3">
+                <p>Accessibility Options Coming Soon!</p>
               </div>
               <div className="w-full grid grid-cols-1 md:grid-cols-4 lg:grid-cols-3 items-end gap-2">
                 <div className="w-full md:col-span-2 lg:col-span-2">
@@ -147,49 +156,6 @@ export const TicketCard = ({
           )}
         </Formik>
       </div>
-
-      {/* <div className="flex flex-row flex-wrap gap-4 justify-between items-center">
-        <div className="w-full lg:w-auto md:min-w-60">
-          <div className="text-xl mb-2">{numberFormat(18.5)}</div>
-          {!student && (
-            <Select
-              id="choseAccess"
-              selectClassName="min-w-20"
-              labelVisible={true}
-              label="Access requirements"
-              options={[
-                { value: '1', text: 'Wheelchair seats' },
-                { value: '2', text: 'Wheelchair seats' },
-              ]}
-            />
-          )}
-        </div>
-        <div className="w-full lg:w-auto">
-          {!student ? (
-            <div className="flex flex-col">
-              <div className="w-full text-left lg:text-right">
-                <IconList />
-              </div>
-              <div className="flex flex-wrap gap-4 items-end">
-                <Input
-                  id={'ticketQuantity'}
-                  type="number"
-                  labelClassName="w-full lg:w-auto"
-                  labelVisible={true}
-                  name={'ticketQuantity'}
-                  placeholder="Quantity"
-                  onChange={() => {}}
-                />
-                <Button className="w-full lg:w-auto">Add To Cart</Button>
-              </div>
-            </div>
-          ) : (
-            <Button className="w-full lg:w-auto" variant="secondary" disabled>
-              Sold out
-            </Button>
-          )}
-        </div>
-      </div> */}
     </li>
   );
 };

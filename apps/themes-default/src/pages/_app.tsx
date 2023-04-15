@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 
 // Styles
 import '@/styles/globals.css';
+import { DifferentBreedCartProvider } from '@/context/DifferentBreedCart';
 
 // Models
 const inter = Inter({ subsets: ['latin'] });
@@ -21,7 +22,10 @@ function App({ Component, pageProps }: AppProps) {
           --Inter: ${inter.style.fontFamily};
         }
       `}</style>
-      <Component {...pageProps} />
+      <DifferentBreedCartProvider>
+        {' '}
+        <Component {...pageProps} />
+      </DifferentBreedCartProvider>
     </>
   );
 }

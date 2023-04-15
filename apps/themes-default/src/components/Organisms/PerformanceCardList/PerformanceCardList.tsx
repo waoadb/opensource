@@ -23,6 +23,9 @@ type Props = {
  * @returns
  */
 export const PerformanceCardList = ({ performances, handleBookNow }: Props) => {
+  // State
+
+  // Accessible read out
   const accessibleReadOut = useMemo(() => {
     return `Render Updated: Now showing ${performances.length} new performances for this event.`;
   }, [performances]);

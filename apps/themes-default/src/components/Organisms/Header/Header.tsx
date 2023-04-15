@@ -1,5 +1,5 @@
 /* Dependencies */
-import { Fragment, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import classNames from 'classnames';
@@ -14,7 +14,6 @@ import {
   ShoppingCartIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
-import { Popover, Transition } from '@headlessui/react';
 import { Navigation } from '@/components/Molecules/Navigation/Navigation';
 import { Button } from '@/components/Atoms/Button/Button';
 
@@ -36,6 +35,7 @@ export const Header = ({ toggleMenu, menuOpen, transparent }: Props) => {
   // Hooks
   const {
     cartState: { itemCount },
+    retrieveCart,
   } = useDifferentBreedCart();
 
   // State
@@ -46,8 +46,8 @@ export const Header = ({ toggleMenu, menuOpen, transparent }: Props) => {
 
   // Effects
   useEffect(() => {
+    // Scroll Handler
     let timeout: NodeJS.Timeout;
-
     const scrollHandler = () => {
       clearTimeout(timeout);
       timeout = setTimeout(() => {
@@ -61,9 +61,11 @@ export const Header = ({ toggleMenu, menuOpen, transparent }: Props) => {
         }
       }, 10);
     };
-
     window.addEventListener('scroll', scrollHandler);
     scrollHandler();
+
+    // Load the initial cart
+    retrieveCart(undefined);
   }, []);
 
   return (

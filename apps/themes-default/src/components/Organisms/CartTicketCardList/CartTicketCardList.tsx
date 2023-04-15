@@ -16,7 +16,10 @@ type Props = {
   /**
    * Handle Submit
    */
-  handleSubmit: (payload: ClientCartModels.RemoveTicketFromCartRequest) => void;
+  handleSubmit: (
+    payload: ClientCartModels.RemoveTicketFromCartRequest,
+    callback: () => void
+  ) => void;
 };
 
 /**

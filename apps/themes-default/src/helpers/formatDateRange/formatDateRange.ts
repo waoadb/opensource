@@ -24,11 +24,11 @@ export const formatDateRange = (
   const formattedStartTime = dayjs()
     .set('hour', +startTimeParts[0])
     .set('minute', +startTimeParts[1])
-    .format('HH:mm a');
+    .format('HH:mma');
   const formattedEndTime = dayjs()
     .set('hour', +endTimeParts[0])
     .set('minute', +endTimeParts[1])
-    .format('HH:mm a');
+    .format('HH:mma');
 
   if (dayjs(start_date).isSame(end_date, 'day')) {
     if (showTime) {

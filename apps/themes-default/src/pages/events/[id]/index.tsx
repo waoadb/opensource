@@ -32,6 +32,7 @@ import { Placeholder } from '@/components/Molecules/Placeholder/Placeholder';
 
 // Models
 import { ClientCacheModels } from '@waoadb/contracts-client';
+import { BookNowModal } from '@/components/Organisms/BookNowModal/BookNowModal';
 type View = 'list' | 'calendar';
 type PageParams = {
   id: string;
@@ -60,6 +61,8 @@ const Page = ({ event, profile }: PageProps) => {
       limit: 6,
       skip: 0,
     });
+  const [selectedPerformanceId, setSelectedPerformanceId] = useState<string>();
+  const [showBookNowModal, setShowBookNowModal] = useState<boolean>(false);
 
   // Callbacks
   const retrievePerformances = useCallback(async () => {
@@ -101,10 +104,6 @@ const Page = ({ event, profile }: PageProps) => {
   );
 
   // Effects
-  useEffect(() => {
-    retrievePerformances();
-  }, [retrievePerformances]);
-
   useEffect(() => {
     retrievePerformances();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -212,9 +211,11 @@ const Page = ({ event, profile }: PageProps) => {
             <>
               <PerformanceCardList
                 performances={performances}
-                handleBookNow={(performance_id) =>
-                  console.log('Book Now', performance_id)
-                }
+                handleBookNow={(performance_id) => {
+                  console.log('Book Now');
+                  setSelectedPerformanceId(performance_id);
+                  setShowBookNowModal(true);
+                }}
               />
               {totalPerformances > filters.limit && (
                 <div className="w-full my-4">
@@ -244,6 +245,16 @@ const Page = ({ event, profile }: PageProps) => {
           )}
         </section>
         {/* / Performances */}
+
+        {/* Book Now Modal */}
+        {showBookNowModal ? 'true' : 'false'}
+        <BookNowModal
+          isOpen={showBookNowModal}
+          onClose={() => setShowBookNowModal(false)}
+          performance_id={selectedPerformanceId}
+          event_id={event.event_id}
+        />
+        {/* / Book Now Modal */}
       </Layout>
       {/* / Main */}
     </>

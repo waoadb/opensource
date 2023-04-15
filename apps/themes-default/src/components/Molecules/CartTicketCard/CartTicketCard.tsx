@@ -21,7 +21,10 @@ type Props = {
   /**
    * Handle Submit
    */
-  onSubmit: (ticket: ClientCartModels.RemoveTicketFromCartRequest) => void;
+  onSubmit: (
+    ticket: ClientCartModels.RemoveTicketFromCartRequest,
+    callback: () => void
+  ) => void;
 };
 
 /**
@@ -33,7 +36,7 @@ type Props = {
 export const CartTicketCard = ({ ticket, entry_id, onSubmit }: Props) => {
   return (
     <li className="w-full py-4">
-      <Heading level="h3" className="mb-2">
+      <Heading level="h3" style="h4" className="mb-2">
         {ticket.name}
       </Heading>
 
@@ -54,11 +57,17 @@ export const CartTicketCard = ({ ticket, entry_id, onSubmit }: Props) => {
             entry_id,
           }}
           validationSchema={null}
-          onSubmit={(values) => {
-            onSubmit({
-              ticket_entry_id: values.ticket_entry_id,
-              entry_id,
-            });
+          onSubmit={(values, { setSubmitting, resetForm }) => {
+            onSubmit(
+              {
+                ticket_entry_id: values.ticket_entry_id,
+                entry_id,
+              },
+              () => {
+                setSubmitting(false);
+                resetForm();
+              }
+            );
           }}
           isInitialValid={true}
         >

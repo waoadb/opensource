@@ -20,7 +20,10 @@ type Props = {
   /**
    * Handle Submit
    */
-  handleSubmit: (payload: ClientCartModels.AddTicketToCartRequest) => void;
+  handleSubmit: (
+    payload: ClientCartModels.AddTicketToCartRequest,
+    callback: () => void
+  ) => void;
 };
 
 /**

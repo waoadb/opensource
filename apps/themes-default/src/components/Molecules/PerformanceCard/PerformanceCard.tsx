@@ -62,6 +62,7 @@ export const PerformanceCard = ({ performance, handleBookNow }: Props) => {
             accessibleTitle={`Open booking modal for performance: ${performanceDateRange}`}
             className="w-full xl:w-auto"
             variant="primary"
+            onClick={() => handleBookNow(performance.performance_id)}
           >
             Book now
           </Button>
