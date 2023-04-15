@@ -25,7 +25,7 @@ type Props = {
  */
 export const Placeholder = ({ title, content, icon }: Props) => {
   return (
-    <div className="text-center flex flex-col items-center justify-center py-12 px-2 border border-gray-200 border-solid rounded-lg">
+    <div className="w-full text-center flex flex-col items-center justify-center py-12 px-2 border border-gray-200 border-solid rounded-lg">
       <div className="w-full">
         {icon}
         <Heading level="h2" style="h4" className="mt-2">

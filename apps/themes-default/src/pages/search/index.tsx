@@ -89,10 +89,7 @@ const Page = ({ profile }: PageProps) => {
 
       {/* Main */}
       <Layout profile={profile}>
-        <section
-          className="container mx-auto my-12 lg:mt-4 py-10"
-          id="performances"
-        >
+        <section className="container mx-auto my-12 lg:mt-4 py-10">
           <Heading level="h1" style="h1" className="mb-2">
             Search
           </Heading>

@@ -1,6 +1,6 @@
 import { Paragraph } from '@/components/Atoms/Paragraph/Paragraph';
 import { Button } from '@/components/Atoms/Button/Button';
-import Cta from '@/components/Atoms/Cta/Cta';
+import { Link } from '@/components/Atoms/Link/Link';
 
 export const CartSummary = () => {
   const numberFormat = (number: number) => {
@@ -8,7 +8,7 @@ export const CartSummary = () => {
       style: 'currency',
       currency: 'GBP',
     });
-  }
+  };
   return (
     <div className="bg-indigo-100 p-4 rounded-md">
       <div className="divide-y divide-gray-500">
@@ -19,7 +19,9 @@ export const CartSummary = () => {
               <span className="block font-semibold">Event Name</span>
               <span className="block">Date: Tuesday, 22nd April</span>
             </div>
-            <div><span className="font-medium">{numberFormat(48)}</span></div>
+            <div>
+              <span className="font-medium">{numberFormat(48)}</span>
+            </div>
           </div>
           {/*As a row*/}
           <div className="w-full flex flex-row flex-wrap justify-between gap-4">
@@ -27,7 +29,9 @@ export const CartSummary = () => {
               <span className="block font-semibold">Event Name</span>
               <span className="block">Date: Tuesday, 22nd April</span>
             </div>
-            <div><span className="font-medium">{numberFormat(55.99)}</span></div>
+            <div>
+              <span className="font-medium">{numberFormat(55.99)}</span>
+            </div>
           </div>
         </div>
 
@@ -37,10 +41,13 @@ export const CartSummary = () => {
             <div>
               <span className="block font-semibold">Processing fees</span>
             </div>
-            <div>+ <span className="font-medium">{numberFormat(55.99)}</span></div>
-            <Paragraph variant="small" className="block w-full">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt praesentium quasi
-              repudiandae? Aliquam blanditiis commodi cumque dolorum.
+            <div>
+              + <span className="font-medium">{numberFormat(55.99)}</span>
+            </div>
+            <Paragraph style="small" className="block w-full">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt
+              praesentium quasi repudiandae? Aliquam blanditiis commodi cumque
+              dolorum.
             </Paragraph>
           </div>
           {/*As a row*/}
@@ -48,10 +55,13 @@ export const CartSummary = () => {
             <div>
               <span className="block font-semibold">Student discount</span>
             </div>
-            <div>- <span className="font-medium">{numberFormat(12.99)}</span></div>
-            <Paragraph variant="small" className="block w-full">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt praesentium quasi
-              repudiandae? Aliquam blanditiis commodi cumque dolorum.
+            <div>
+              - <span className="font-medium">{numberFormat(12.99)}</span>
+            </div>
+            <Paragraph style="small" className="block w-full">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt
+              praesentium quasi repudiandae? Aliquam blanditiis commodi cumque
+              dolorum.
             </Paragraph>
           </div>
         </div>
@@ -61,8 +71,21 @@ export const CartSummary = () => {
             <span className="font-semibold">{numberFormat(55.99)}</span>
           </div>
           <div className="flex flex-col gap-2">
-            <Button variant="primary" className="text-lg" fullWidth={true}>Checkout</Button>
-            <Cta href="/" text="Continue Shopping" variant="hollow" className="w-full block bg-white text-lg" />
+            <Button
+              accessibleTitle="Checkout"
+              variant="primary"
+              className="text-lg"
+              fullWidth={true}
+            >
+              Checkout
+            </Button>
+            <Link
+              href="/"
+              variant="hollowPrimary"
+              className="w-full block bg-white text-lg"
+            >
+              Continue Shopping
+            </Link>
           </div>
         </div>
       </div>
