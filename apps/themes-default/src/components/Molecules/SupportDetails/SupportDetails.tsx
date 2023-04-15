@@ -22,7 +22,7 @@ type Props = {
 export const SupportDetails = ({ supportDetails }: Props) => {
   return (
     <div>
-      <Heading level="h2" style="h4" className="mb-2">
+      <Heading level="h2" style="h3" className="mb-2">
         Support details
       </Heading>
       <address
