@@ -17,7 +17,14 @@ import { Footer } from '@/components/Organisms/Footer/Footer';
 import { ClientCacheModels } from '@waoadb/contracts-client';
 import { SkipToContent } from '@/components/Atoms/SkipToContent/SkipToContent';
 type Props = PropsWithChildren<{
+  /**
+   * The profile of the organisation.
+   */
   profile: ClientCacheModels.CacheProfile;
+  /**
+   * Overrides the default behaviour of the layout to prevent transparency.
+   */
+  preventTransparency?: boolean;
 }>;
 
 /**
@@ -25,7 +32,11 @@ type Props = PropsWithChildren<{
  * @param props - Component props.
  * @returns
  */
-export default function Layout({ children, profile }: Props) {
+export default function Layout({
+  children,
+  profile,
+  preventTransparency = false,
+}: Props) {
   // Hooks
   const { pathname } = useRouter();
 
@@ -86,7 +97,7 @@ export default function Layout({ children, profile }: Props) {
         <Header
           toggleMenu={toggleMenu}
           menuOpen={menuOpen}
-          transparent={menuOffset}
+          transparent={!preventTransparency && menuOffset}
           profile={profile}
         />
       </header>
@@ -94,7 +105,8 @@ export default function Layout({ children, profile }: Props) {
       {/* Main */}
       <main
         className={classNames('flex-1 w-full block', {
-          '-mt-[72px]': menuOffset,
+          '-mt-[72px]': menuOffset && !preventTransparency,
+          'mt-[72px]': !menuOffset || preventTransparency,
         })}
         id="main"
       >

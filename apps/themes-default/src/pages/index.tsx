@@ -10,13 +10,21 @@ import { differentBreedClient } from '@/services/differentBreedClient/differentB
 import Layout from '@/Layouts/Layout';
 
 // Components
+import { CalendarIcon } from '@heroicons/react/24/outline';
 import { FeaturedEventBanner } from '@/components/Organisms/FeaturedEventBanner/FeaturedEventBanner';
 import { EventCardList } from '@/components/Organisms/EventCardList/EventCardList';
+import { Placeholder } from '@/components/Molecules/Placeholder/Placeholder';
 
 // Models
 import { ClientCacheModels } from '@waoadb/contracts-client';
 type PageProps = {
+  /**
+   * The events to display.
+   */
   events: ClientCacheModels.CacheEvent[];
+  /**
+   * The profile of the organisation.
+   */
   profile: ClientCacheModels.CacheProfile;
 };
 
@@ -26,12 +34,14 @@ type PageProps = {
  * @returns
  */
 const Page = ({ events, profile }: PageProps) => {
+  // State
   const featuredEvent = useMemo(() => {
-    return events[0];
+    return events.length === 0 ? null : events[0];
   }, [events]);
   const otherEvents = useMemo(() => {
-    return events.slice(1);
+    return events.length === 0 ? null : events.slice(1);
   }, [events]);
+
   return (
     <>
       <NextSeo
@@ -49,17 +59,37 @@ const Page = ({ events, profile }: PageProps) => {
         }}
         canonical={`${process.env.NEXT_PUBLIC_SITE_URL}`}
       />
-      <Layout profile={profile}>
-        <FeaturedEventBanner event={featuredEvent} />
-        <EventCardList
-          title="What's On"
-          link={{
-            accessibleTitle: "View all events on the what's on page",
-            href: '/events',
-            children: 'View all events',
-          }}
-          events={otherEvents}
-        />
+
+      <Layout profile={profile} preventTransparency={events.length === 0}>
+        {events.length === 0 && (
+          <div className="w-full mt-4">
+            <Placeholder
+              icon={<CalendarIcon width={25} height={25} className="mx-auto" />}
+              title="No events found"
+              content="There are no events to show at the moment."
+            />
+          </div>
+        )}
+
+        {/* Featured Event */}
+        {featuredEvent && <FeaturedEventBanner event={featuredEvent} />}
+        {/* / Featured Event */}
+
+        {/* Other Events */}
+        {otherEvents && otherEvents.length > 0 && (
+          <EventCardList
+            title="What's On"
+            link={{
+              accessibleTitle: "View all events on the what's on page",
+              href: '/events',
+              children: 'View all events',
+              variant: 'hollowPrimary',
+              size: 'base',
+            }}
+            events={otherEvents}
+          />
+        )}
+        {/* / Other Events */}
       </Layout>
     </>
   );

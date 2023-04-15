@@ -41,7 +41,7 @@ export const FeaturedEventBanner = ({ event }: Props) => {
     );
   }, [event]);
   return (
-    <section className="relative flex h-[65vh] w-full flex-col overflow-hidden md:min-h-[800px]">
+    <section className="relative flex h-[70vh] w-full flex-col overflow-hidden md:min-h-[800px]">
       {/* Image */}
       <div className="absolute inset-0 after:absolute after:inset-0 after:bg-black/40">
         {event.details.picture && (
@@ -71,7 +71,7 @@ export const FeaturedEventBanner = ({ event }: Props) => {
             </div>
             <Link
               href={`/events/${event.event_id}`}
-              className="w-full lg:w-auto"
+              className="w-full md:w-auto"
               variant="primary"
               accessibleTitle={`View event page for ${event.details.name}`}
             >
