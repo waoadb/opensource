@@ -14,11 +14,14 @@ import { Paragraph } from '@/components/Atoms/Paragraph/Paragraph';
 
 // Models
 import { ClientCacheModels } from '@waoadb/contracts-client';
+type JoinedAccessibilityTypes =
+  | ClientCacheModels.AvailabilityTicketAccessibilityTypes
+  | keyof ClientCacheModels.CacheVenue['accessibility'];
 type Props = {
   /**
    * Type of accessibility to render.
    */
-  type: ClientCacheModels.AvailabilityTicketAccessibilityTypes;
+  type: JoinedAccessibilityTypes;
 };
 
 /**
@@ -30,8 +33,8 @@ export const AccessibilityDetails = ({ type }: Props) => {
   const content = useMemo(() => getAccessibilityDetails(type), [type]);
   return (
     <div className="w-full">
-      <AccessibilityIcon type={type} className="w-20 -ml-[15px]" />
-      <Heading level="h2" style="h3">
+      <AccessibilityIcon type={type} className="w-20 -ml-[10px]" />
+      <Heading level="h2" style="h3" className="mt-4">
         {content.title}
       </Heading>
       <Paragraph style="base" className="mt-2">

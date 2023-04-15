@@ -36,11 +36,12 @@ type PageProps = {
 const Page = ({ profile }: PageProps) => {
   return (
     <>
+      {/* SEO */}
       <NextSeo
-        title={profile.title}
+        title={`${profile.title} | About Us`}
         description={`Find out more about ${profile.title}.`}
         openGraph={{
-          title: profile.title,
+          title: `${profile.title} | About Us`,
           description: `Find out more about ${profile.title}.`,
           images: [
             {
@@ -51,7 +52,9 @@ const Page = ({ profile }: PageProps) => {
         }}
         canonical={`${process.env.NEXT_PUBLIC_SITE_URL}`}
       />
+      {/* / SEO */}
 
+      {/* Main */}
       <Layout profile={profile}>
         <section className="w-full max-w-xl mx-auto py-10 lg:py-20 px-4 lg:px-0">
           <div className="w-full max-w-sm">
@@ -71,6 +74,7 @@ const Page = ({ profile }: PageProps) => {
           )}
         </section>
       </Layout>
+      {/* / Main */}
     </>
   );
 };

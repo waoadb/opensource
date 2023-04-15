@@ -1,19 +1,26 @@
 /* Dependencies */
+import { useEffect, useState } from 'react';
+import classNames from 'classnames';
+
+// Helpers
+import { accessibleTitles } from '@/helpers/getAccessibilityDetails/getAccessibilityDetails';
 
 // Components
-
-// Models
 import { AccessibilityIcon } from '@/components/Atoms/AccessibilityIcon/AccessibilityIcon';
 import { Modal } from '@/components/Organisms/Modal/Modal';
-import { accessibleTitles } from '@/helpers/getAccessibilityDetails/getAccessibilityDetails';
+import { AccessibilityDetails } from '@/components/Molecules/AccessibilityDetails/AccessibilityDetails';
+
+// Models
 import { ClientCacheModels } from '@waoadb/contracts-client';
-import { useEffect, useState } from 'react';
-import { AccessibilityDetails } from '../AccessibilityDetails/AccessibilityDetails';
-import classNames from 'classnames';
+type JoinedAccessibilityTypes =
+  | ClientCacheModels.AvailabilityTicketAccessibilityTypes
+  | keyof ClientCacheModels.CacheVenue['accessibility'];
+
 type Props = {
-  accessibility: ClientCacheModels.AvailabilityTicketAccessibilityTypes[];
+  accessibility: JoinedAccessibilityTypes[];
   color?: 'white' | 'black';
   size?: 'base' | 'small';
+  align?: 'left' | 'right';
 };
 
 /**
@@ -24,11 +31,11 @@ export const AccessibilityList = ({
   accessibility,
   color = 'black',
   size = 'base',
+  align = 'left',
 }: Props) => {
   // State
   const [showModal, setShowModal] = useState(false);
-  const [selectedType, setSelectedType] =
-    useState<ClientCacheModels.AvailabilityTicketAccessibilityTypes>();
+  const [selectedType, setSelectedType] = useState<JoinedAccessibilityTypes>();
 
   // Effects
   useEffect(() => {
@@ -39,7 +46,12 @@ export const AccessibilityList = ({
 
   return (
     <>
-      <ul className="flex flex-row flex-wrap gap-1">
+      <ul
+        className={classNames('flex flex-row flex-wrap gap-1', {
+          'justify-start': align === 'left',
+          'justify-start lg:justify-end': align === 'right',
+        })}
+      >
         {accessibility.map((type) => (
           <li key={type}>
             <button

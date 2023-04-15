@@ -15,7 +15,6 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import { Popover, Transition } from '@headlessui/react';
-import { SearchForm } from '@/components/Molecules/SearchForm/SearchForm';
 import { Navigation } from '@/components/Molecules/Navigation/Navigation';
 import { Button } from '@/components/Atoms/Button/Button';
 
@@ -97,6 +96,7 @@ export const Header = ({ toggleMenu, menuOpen, transparent }: Props) => {
                   <Link
                     href={'/cart'}
                     className="inline-flex flex-row items-center group gap-2 text-sm"
+                    title={`View your cart, Current item count: ${itemCount}`}
                   >
                     <span className="w-8 h-8 lg:bg-gray-300 group-hover:bg-indigo-600 lg:group-hover:text-white transition-colors rounded-full p-1.5 text-current lg:text-gray-800">
                       <ShoppingCartIcon
@@ -106,49 +106,27 @@ export const Header = ({ toggleMenu, menuOpen, transparent }: Props) => {
                         height={20}
                       />
                     </span>
-                    <span className="sr-only">Toggle cart</span>
                     <span className="hidden lg:block">Cart ({itemCount})</span>
                   </Link>
                 </li>
                 <li>
-                  <Popover as={Fragment}>
-                    {({ open }) => (
-                      <>
-                        <Popover.Button className="inline-flex flex-row items-center group gap-2 text-sm">
-                          <span className="w-8 h-8 lg:bg-gray-300 group-hover:bg-indigo-600 lg:group-hover:text-white transition-colors rounded-full p-1.5 text-current lg:text-gray-800">
-                            <MagnifyingGlassIcon
-                              name="Search"
-                              title="Search"
-                              width={20}
-                              height={20}
-                            />
-                          </span>
-                          <span className="sr-only">Toggle search</span>
-                          <span className="hidden lg:block">Search</span>
-                        </Popover.Button>
-                        <Transition
-                          show={open}
-                          as={Fragment}
-                          enter="transition duration-100 ease-out"
-                          enterFrom="transform scale-95 opacity-0"
-                          enterTo="transform scale-100 opacity-100"
-                          leave="transition duration-75 ease-out"
-                          leaveFrom="transform scale-100 opacity-100"
-                          leaveTo="transform scale-95 opacity-0"
-                        >
-                          <Popover.Panel
-                            className="absolute z-10 top-full left-0 w-full bg-white shadow-lg pt-4 pb-6 text-gray-800"
-                            focus={true}
-                          >
-                            <div className="container mx-auto">
-                              <SearchForm />
-                            </div>
-                          </Popover.Panel>
-                        </Transition>
-                      </>
-                    )}
-                  </Popover>
+                  <Link
+                    href={'/search'}
+                    className="inline-flex flex-row items-center group gap-2 text-sm"
+                    title="Access search page"
+                  >
+                    <span className="w-8 h-8 lg:bg-gray-300 group-hover:bg-indigo-600 lg:group-hover:text-white transition-colors rounded-full p-1.5 text-current lg:text-gray-800">
+                      <MagnifyingGlassIcon
+                        name="SearchIcon"
+                        title="Search Icon"
+                        width={20}
+                        height={20}
+                      />
+                    </span>
+                    <span className="hidden lg:block">Search</span>
+                  </Link>
                 </li>
+
                 <li className="block lg:hidden">
                   <Button
                     size="slim"

@@ -24,9 +24,12 @@ export const Footer = ({ profile }: Props) => {
     <footer className="bg-gray-200 block w-full">
       <div className="container mx-auto py-10">
         {/* Profile Details */}
-        <div className="flex flex-col gap-4 mb-4 lg:flex-row items-center justify-between">
-          <div className="w-full">
-            <Link href={'/'} className="mb-4 block">
+        <div className="w-full flex flex-col gap-4 mb-4 lg:flex-row items-center justify-center lg:justify-between">
+          <div className="w-full flex flex-row flex-wrap justify-center lg:justify-start">
+            <Link
+              href={'/'}
+              className="mb-4 flex flex-row justify-center lg:justify-start w-full "
+            >
               <Image src="/demoLogo.svg" alt="" width={202} height={40} />
             </Link>
             <div className="flex flex-col flex-wrap items-center justify-center lg:items-start gap-2">
@@ -64,7 +67,7 @@ export const Footer = ({ profile }: Props) => {
           </Link>
 
           <nav className="order-1" title="Legal Links Navigation">
-            <ul className="flex flex-row flex-wrap items-center gap-4">
+            <ul className="flex flex-row flex-wrap items-center gap-4 justify-center lg:justify-normal">
               <li>
                 <Link
                   href={'https://differentbreed.events/legal/terms-of-service'}

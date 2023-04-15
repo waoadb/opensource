@@ -8,7 +8,7 @@ import Link from 'next/link';
 export const FooterNavigation = () => {
   return (
     <nav className="w-full" title="Footer Navigation">
-      <ul className="flex flex-row flex-wrap items-center gap-4 mb-8 w-full justify-end">
+      <ul className="flex flex-row flex-wrap items-center gap-4 mb-8 w-full justify-center lg:justify-end">
         <li>
           <Link
             href={'/whats-on'}

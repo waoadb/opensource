@@ -2,6 +2,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { NextSeo } from 'next-seo';
+import dayjs from 'dayjs';
 import {
   CalendarDaysIcon,
   TicketIcon,
@@ -55,6 +56,7 @@ const Page = ({ event, profile }: PageProps) => {
   const [filters, setFilters] =
     useState<ClientCacheModels.RetrievePerformancesRequest>({
       event_id: event.event_id,
+      date_from: dayjs().format('YYYY-MM-DD'),
       limit: 6,
       skip: 0,
     });
@@ -74,16 +76,13 @@ const Page = ({ event, profile }: PageProps) => {
     }
   }, [filters]);
 
-  const handlePageChange = useCallback(
-    (page: number) => {
-      console.log(page);
-      setFilters((filters) => ({
-        ...filters,
-        skip: page * filters.limit,
-      }));
-    },
-    [filters]
-  );
+  const handlePageChange = useCallback((page: number) => {
+    console.log(page);
+    setFilters((filters) => ({
+      ...filters,
+      skip: page * filters.limit,
+    }));
+  }, []);
 
   const handleFiltersChange = useCallback(
     (
@@ -92,26 +91,28 @@ const Page = ({ event, profile }: PageProps) => {
         'event_id' | 'skip' | 'limit'
       >
     ) => {
-      setFilters({
+      setFilters((filters) => ({
         ...filters,
         ...payload,
         skip: 0,
-      });
+      }));
     },
-    [filters]
+    []
   );
 
   // Effects
   useEffect(() => {
     retrievePerformances();
-  }, []);
+  }, [retrievePerformances]);
 
   useEffect(() => {
     retrievePerformances();
-  }, [filters]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filters, retrievePerformances]);
 
   return (
     <>
+      {/* SEO */}
       {event.marketing.seo && (
         <NextSeo
           title={event.marketing.seo.title}
@@ -129,6 +130,9 @@ const Page = ({ event, profile }: PageProps) => {
           canonical={`${process.env.NEXT_PUBLIC_SITE_URL}/events/${event.event_id}`}
         />
       )}
+      {/* / SEO */}
+
+      {/* Main */}
       <Layout profile={profile}>
         {/* Banner */}
         <EventBanner event={event} backLink="/events" />
@@ -241,6 +245,7 @@ const Page = ({ event, profile }: PageProps) => {
         </section>
         {/* / Performances */}
       </Layout>
+      {/* / Main */}
     </>
   );
 };

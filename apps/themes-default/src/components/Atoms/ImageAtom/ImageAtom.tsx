@@ -74,7 +74,7 @@ type ImageProps = {
  * Image Component
  * @class
  */
-export class Image extends React.Component<ImageProps> {
+export class ImageAtom extends React.Component<ImageProps> {
   /**
    * Container element.
    */

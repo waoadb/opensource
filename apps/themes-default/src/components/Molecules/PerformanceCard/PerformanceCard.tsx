@@ -6,12 +6,12 @@ import { formatDateRange } from '@/helpers/formatDateRange/formatDateRange';
 
 // Components
 import { Heading } from '@/components/Atoms/Heading/Heading';
-import { IconList } from '@/components/Molecules/IconList/IconList';
 import { Button } from '@/components/Atoms/Button/Button';
 import { Paragraph } from '@/components/Atoms/Paragraph/Paragraph';
 
 // Models
 import { ClientCacheModels } from '@waoadb/contracts-client';
+import { AccessibilityList } from '../AccessibilityList/AccessibilityList';
 type Props = {
   /**
    * Performance to be rendered.
@@ -48,8 +48,15 @@ export const PerformanceCard = ({ performance, handleBookNow }: Props) => {
           </Heading>
           <Paragraph>{performanceDateRange}</Paragraph>
         </div>
-        <div className="w-full lg:w-auto lg:shrink lg:text-right">
-          {/* <IconList className="mb-4" /> */}
+        <div className="w-full lg:w-auto lg:shrink text-right">
+          {performance.accessibility?.enabled && (
+            <AccessibilityList
+              accessibility={performance.accessibility.items.map(
+                (item) => item.id
+              )}
+              align="right"
+            />
+          )}
           <Button
             accessibleTitle={`Open booking modal for performance: ${performanceDateRange}`}
             className="w-full xl:w-auto"

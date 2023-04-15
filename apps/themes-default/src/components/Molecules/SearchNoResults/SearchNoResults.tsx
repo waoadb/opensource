@@ -1,12 +1,22 @@
-import { Heading } from '@/components/Atoms/Heading/Heading';
-import React from 'react';
+/* Dependencies */
+// Components
+import { Placeholder } from '../Placeholder/Placeholder';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
+/**
+ * Search No Results
+ * @returns
+ */
 export const SearchNoResults = () => {
   return (
-    <div className="rounded-xl bg-gray-100 p-8 flex flex-col justify-center min-h-30vh">
-      <div className="w-full mx-auto max-w-lg text-center">
-        <Heading level="h1" style="h2" className="mb-4">No results found</Heading>
-      </div>
+    <div className="w-full my-4">
+      <Placeholder
+        title="No Results Found"
+        content=""
+        icon={
+          <MagnifyingGlassIcon width={25} height={25} className="mx-auto" />
+        }
+      />
     </div>
   );
 };

@@ -10,7 +10,7 @@ import { truncateString } from '@/helpers/truncateString/truncateString';
 import { Heading } from '@/components/Atoms/Heading/Heading';
 import { Paragraph } from '@/components/Atoms/Paragraph/Paragraph';
 import { Link } from '@/components/Atoms/Link/Link';
-import { Image } from '@/components/Atoms/Image/Image';
+import { ImageAtom } from '@/components/Atoms/ImageAtom/ImageAtom';
 import { AccessibilityList } from '../AccessibilityList/AccessibilityList';
 
 // Models
@@ -60,7 +60,7 @@ export const EventCard = ({ event, as: El = 'li' }: Props) => {
     <El className="w-full rounded-lg overflow-hidden border border-gray-200 border-solid">
       {event.details.picture && (
         <div className="w-full">
-          <Image
+          <ImageAtom
             imageSrc={addUrlParams(event.details.picture.url, 'w=600&q=80')}
             altText={event.details.picture.alt_text || ''}
             blurhash={event.details.picture.blurhash}
@@ -78,7 +78,7 @@ export const EventCard = ({ event, as: El = 'li' }: Props) => {
           {dateRange}
         </Paragraph>
 
-        {event.accessibility.enabled && (
+        {event.accessibility?.enabled && (
           <AccessibilityList
             accessibility={event.accessibility.items.map((item) => item.id)}
             color="black"

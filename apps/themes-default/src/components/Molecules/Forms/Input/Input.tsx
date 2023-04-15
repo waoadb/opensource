@@ -229,7 +229,7 @@ export const Input = ({
   // Set the Tool tip on ID Change
   const describedBy = useMemo(
     () => getDescribedBy({ error, id, name, supportText, toolTip }),
-    [id]
+    [id, error, name, supportText, toolTip]
   );
 
   return (

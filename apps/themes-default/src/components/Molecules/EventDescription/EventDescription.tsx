@@ -5,6 +5,9 @@ import { Paragraph } from '@/components/Atoms/Paragraph/Paragraph';
 
 // Models
 type EventDescriptionProps = {
+  /**
+   * Content to render.
+   */
   content: string;
 };
 

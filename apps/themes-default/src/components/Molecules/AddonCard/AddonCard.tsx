@@ -10,7 +10,7 @@ import { handleFieldError } from '@/helpers/handleFieldError/handleFieldError';
 // Components
 import { Heading } from '@/components/Atoms/Heading/Heading';
 import { Paragraph } from '@/components/Atoms/Paragraph/Paragraph';
-import { Image } from '@/components/Atoms/Image/Image';
+import { ImageAtom } from '@/components/Atoms/ImageAtom/ImageAtom';
 import { Button } from '@/components/Atoms/Button/Button';
 import { Input } from '../Forms/Input/Input';
 import { Select } from '../Forms/Select/Select';
@@ -65,14 +65,14 @@ export const AddonCard = ({
         .max(max_quantity, `Max Allowed: ${max_quantity}`)
         .required('Please enter a quantity'),
     });
-  }, [addon, selectedVariant]);
+  }, [selectedVariant]);
 
   return (
     <li className="w-full py-4">
       <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
         {/* Image */}
         <div className="relative overflow-hidden w-full rounded-lg">
-          <Image
+          <ImageAtom
             imageSrc={addUrlParams(addon.picture?.url || '', 'w=300&q=80')}
             altText={addon.picture?.alt_text || ''}
             blurhash={addon.picture?.blurhash}

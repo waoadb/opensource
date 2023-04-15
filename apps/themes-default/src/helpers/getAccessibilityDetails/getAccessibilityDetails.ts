@@ -11,6 +11,8 @@ export const accessibleTitles = {
   signed: 'Signed Performance',
   touch_tour: 'Touch Tour',
   wheelchair: 'Wheelchair Access',
+  accessible_toilets: 'Accessible Toilets',
+  orientation_familiarisation_visits: 'Orientation & Familiarisation Visits',
 };
 
 export const accessibleDescriptions = {
@@ -30,6 +32,10 @@ export const accessibleDescriptions = {
     'A touch tour will be available prior to the performance for those who are blind or visually impaired. This tour provides an opportunity to explore the set, props, and costumes through touch.',
   wheelchair:
     'The venue is wheelchair accessible, and we offer wheelchair seating. Please let us know if you require wheelchair seating when you purchase your tickets.',
+  accessible_toilets:
+    'We will ensure that there are accessible toilets at the event that are easy to locate and use for people with disabilities or mobility issues.',
+  orientation_familiarisation_visits:
+    'We offer orientation and familiarisation visits for attendees who require them. These visits will provide attendees with an opportunity to familiarise themselves with the event space and ask any questions they may have in advance of the event.',
 };
 
 type AccessibilityContent = {
@@ -43,13 +49,17 @@ type AccessibilityContent = {
   description: string;
 };
 
+type JoinedAccessibilityTypes =
+  | ClientCacheModels.AvailabilityTicketAccessibilityTypes
+  | keyof ClientCacheModels.CacheVenue['accessibility'];
+
 /**
  * Get accessibility details
  * @param type - Accessibility type
  * @returns
  */
 export const getAccessibilityDetails = (
-  type: ClientCacheModels.AvailabilityTicketAccessibilityTypes
+  type: JoinedAccessibilityTypes
 ): AccessibilityContent => {
   return {
     title: accessibleTitles[type],

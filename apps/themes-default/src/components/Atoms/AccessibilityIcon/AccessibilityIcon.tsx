@@ -5,7 +5,9 @@ type Props = {
   /**
    * Type of icon.
    */
-  type: ClientCacheModels.AvailabilityTicketAccessibilityTypes;
+  type:
+    | ClientCacheModels.AvailabilityTicketAccessibilityTypes
+    | keyof ClientCacheModels.CacheVenue['accessibility'];
   /**
    * Colour
    */
@@ -30,6 +32,8 @@ export const AccessibilityIcon = ({
     <img
       src={`/assets/icons/access/${color}-${type.replaceAll('_', '-')}.svg`}
       aria-hidden="true"
+      alt=""
+      role="presentation"
       loading="lazy"
       className={className}
     />

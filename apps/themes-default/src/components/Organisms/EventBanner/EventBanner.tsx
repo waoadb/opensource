@@ -1,6 +1,5 @@
 /* Dependencies */
 import { useMemo } from 'react';
-import { LockClosedIcon } from '@heroicons/react/24/outline';
 
 // Helpers
 import { formatDateRange } from '@/helpers/formatDateRange/formatDateRange';
@@ -11,12 +10,11 @@ import { BackButton } from '@/components/Atoms/BackButton/BackButton';
 import { Link } from '@/components/Atoms/Link/Link';
 import { Heading } from '@/components/Atoms/Heading/Heading';
 import { Paragraph } from '@/components/Atoms/Paragraph/Paragraph';
-import { Image } from '@/components/Atoms/Image/Image';
+import { ImageAtom } from '@/components/Atoms/ImageAtom/ImageAtom';
 import { AccessibilityList } from '@/components/Molecules/AccessibilityList/AccessibilityList';
 
 // Models
 import { ClientCacheModels } from '@waoadb/contracts-client';
-
 type Props = {
   /**
    * Event to render.
@@ -55,7 +53,7 @@ export const EventBanner = ({ event }: Props) => {
       {/* Image */}
       <div className="absolute inset-0 after:absolute after:inset-0 after:bg-black/40">
         {event.details.picture && (
-          <Image
+          <ImageAtom
             imageSrc={addUrlParams(event.details.picture.url, 'w=1200&q=80')}
             altText={event.details.picture.alt_text}
             blurhash={event.details.picture.blurhash}
@@ -93,7 +91,7 @@ export const EventBanner = ({ event }: Props) => {
               Date: {dateRange}
             </Paragraph>
 
-            {event.accessibility.enabled && (
+            {event.accessibility?.enabled && (
               <AccessibilityList
                 accessibility={event.accessibility.items.map((item) => item.id)}
                 color="white"

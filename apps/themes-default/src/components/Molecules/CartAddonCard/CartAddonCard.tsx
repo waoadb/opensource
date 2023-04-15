@@ -9,7 +9,7 @@ import { handleFieldError } from '@/helpers/handleFieldError/handleFieldError';
 // Components
 import { Heading } from '@/components/Atoms/Heading/Heading';
 import { Paragraph } from '@/components/Atoms/Paragraph/Paragraph';
-import { Image } from '@/components/Atoms/Image/Image';
+import { ImageAtom } from '@/components/Atoms/ImageAtom/ImageAtom';
 import { Button } from '@/components/Atoms/Button/Button';
 import { Select } from '../Forms/Select/Select';
 
@@ -50,7 +50,7 @@ export const CartAddonCard = ({ addon, entry_id, onSubmit }: Props) => {
       <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
         {/* Image */}
         <div className="relative overflow-hidden w-full rounded-lg">
-          <Image
+          <ImageAtom
             imageSrc={addUrlParams(addon.picture?.src || '', 'w=300&q=80')}
             altText={addon.picture?.alt || ''}
             blurhash={addon.picture?.blurhash}

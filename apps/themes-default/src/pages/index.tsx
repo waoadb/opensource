@@ -1,5 +1,6 @@
 /* Dependencies */
 import { GetServerSideProps } from 'next';
+import dayjs from 'dayjs';
 import { NextSeo } from 'next-seo';
 import { useMemo } from 'react';
 
@@ -77,19 +78,22 @@ const Page = ({ events, profile }: PageProps) => {
 
         {/* Other Events */}
         {otherEvents && otherEvents.length > 0 && (
-          <EventCardList
-            title="What's On"
-            link={{
-              accessibleTitle: "View all events on the what's on page",
-              href: '/events',
-              children: 'View all events',
-              variant: 'hollowPrimary',
-              size: 'base',
-              className: 'w-full md:w-auto',
-            }}
-            events={otherEvents}
-          />
+          <section className="w-full my-10 lg:my-20 container mx-auto">
+            <EventCardList
+              title="What's On"
+              link={{
+                accessibleTitle: "View all events on the what's on page",
+                href: '/events',
+                children: 'View all events',
+                variant: 'hollowPrimary',
+                size: 'base',
+                className: 'w-full md:w-auto',
+              }}
+              events={otherEvents}
+            />
+          </section>
         )}
+
         {/* / Other Events */}
       </Layout>
     </>
@@ -116,6 +120,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
     .retrieveEvents({
       limit: 7,
       skip: 0,
+      date_from: dayjs().format('YYYY-MM-DD'),
     })
     .then((response) => response.payload)
     .catch((error) => {

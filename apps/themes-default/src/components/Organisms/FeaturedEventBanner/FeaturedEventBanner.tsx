@@ -8,7 +8,7 @@ import { addUrlParams } from '@/helpers/addUrlPrarms/addUrlParams';
 // Components
 import { Heading } from '@/components/Atoms/Heading/Heading';
 import { Paragraph } from '@/components/Atoms/Paragraph/Paragraph';
-import { Image } from '@/components/Atoms/Image/Image';
+import { ImageAtom } from '@/components/Atoms/ImageAtom/ImageAtom';
 import { Link } from '@/components/Atoms/Link/Link';
 import { AccessibilityList } from '@/components/Molecules/AccessibilityList/AccessibilityList';
 
@@ -45,7 +45,7 @@ export const FeaturedEventBanner = ({ event }: Props) => {
       {/* Image */}
       <div className="absolute inset-0 after:absolute after:inset-0 after:bg-black/40">
         {event.details.picture && (
-          <Image
+          <ImageAtom
             imageSrc={addUrlParams(event.details.picture.url, 'w=1200&q=80')}
             altText={event.details.picture.alt_text}
             blurhash={event.details.picture.blurhash}
@@ -69,7 +69,7 @@ export const FeaturedEventBanner = ({ event }: Props) => {
               {dateRange}
             </Paragraph>
 
-            {event.accessibility.enabled && (
+            {event.accessibility?.enabled && (
               <AccessibilityList
                 accessibility={event.accessibility.items.map((item) => item.id)}
                 color="white"

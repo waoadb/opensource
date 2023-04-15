@@ -27,6 +27,7 @@ const validationSchema = Yup.object().shape({
 
 // Models
 import { ClientCacheModels } from '@waoadb/contracts-client';
+import dayjs from 'dayjs';
 type View = 'list' | 'calendar';
 type Props = {
   view: 'list' | 'calendar';
@@ -73,7 +74,7 @@ export const PerformanceFilters = ({
         >
           <Formik
             initialValues={{
-              date_from: '',
+              date_from: dayjs().format('YYYY-MM-DD'),
               date_to: '',
               query: '',
             }}
@@ -97,7 +98,7 @@ export const PerformanceFilters = ({
               submitForm,
             }) => (
               <form
-                className="grid lg:grid-cols-4 gap-4 mt-4 lg:mt-0"
+                className="grid grid-cols-1 lg:grid-cols-4 gap-4 lg:gap-2 mt-4 lg:mt-0"
                 onSubmit={handleSubmit}
               >
                 <div className="col-span-1">
@@ -145,7 +146,7 @@ export const PerformanceFilters = ({
                       ]}
                     />
                   </div> */}
-                <div className="w-full self-end grid grid-cols-2 lg:max-w-[168px] border-b md:border-none border-gray-500 border-solid pb-8 md:pb-0">
+                <div className="w-full self-end grid grid-cols-2 gap-2 md:gap-4 lg:gap-1 lg:max-w-[168px] border-b md:border-none border-gray-500 border-solid pb-8 md:pb-0">
                   <Button
                     accessibleTitle="Apply filters to available performances"
                     type="submit"
@@ -180,7 +181,6 @@ export const PerformanceFilters = ({
                       resetForm();
                       submitForm();
                     }}
-                    className="ml-2"
                   >
                     <span className="sr-only">Reset Filters</span>
                   </Button>
@@ -190,7 +190,7 @@ export const PerformanceFilters = ({
           </Formik>
         </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-row lg:flex-wrap gap-4 w-full lg:w-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-row lg:flex-wrap gap-4 lg:gap-2 w-full lg:w-auto">
         <Button
           size="base"
           onClick={() => handleViewChange('list')}

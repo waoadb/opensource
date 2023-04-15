@@ -1,7 +1,9 @@
 /* Dependencies */
-// Components
-import { Image } from '@/components/Atoms/Image/Image';
+// Helpers
 import { addUrlParams } from '@/helpers/addUrlPrarms/addUrlParams';
+
+// Components
+import { ImageAtom } from '@/components/Atoms/ImageAtom/ImageAtom';
 
 // Models
 import { ClientCacheModels } from '@waoadb/contracts-client';
@@ -22,7 +24,7 @@ export const CircleImage = ({ profile: { image } }: Props) => {
 
   return (
     <div className="w-full rounded-full overflow-hidden">
-      <Image
+      <ImageAtom
         imageSrc={addUrlParams(image.url, 'w=600&q=80')}
         altText={image.alt_text}
         blurhash={image.blurhash}

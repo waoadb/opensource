@@ -4,16 +4,18 @@ import classNames from 'classnames';
 
 // Helpers
 import { formatVenueAddress } from '@/helpers/formatVenueAddress/formatVenueAddress';
+import { getVenueAccessibility } from '@/helpers/getVenueAccessibility/getVenueAccessibility';
+import { addUrlParams } from '@/helpers/addUrlPrarms/addUrlParams';
 
 // Components
 import { Heading } from '@/components/Atoms/Heading/Heading';
 import { Link } from '@/components/Atoms/Link/Link';
-import { Image } from '@/components/Atoms/Image/Image';
+import { ImageAtom } from '@/components/Atoms/ImageAtom/ImageAtom';
 import { Paragraph } from '@/components/Atoms/Paragraph/Paragraph';
+import { AccessibilityList } from '../AccessibilityList/AccessibilityList';
 
 // Models
 import { ClientCacheModels } from '@waoadb/contracts-client';
-import { addUrlParams } from '@/helpers/addUrlPrarms/addUrlParams';
 type Props = {
   /**
    * Venue To Render
@@ -36,11 +38,15 @@ type Props = {
  */
 export const VenueCard = ({ as: El = 'li', venue, showDirections }: Props) => {
   const venueAddress = useMemo(() => formatVenueAddress(venue), [venue]);
+  const venueAccessibility = useMemo(
+    () => getVenueAccessibility(venue),
+    [venue]
+  );
   return (
     <El className="w-full rounded-lg overflow-hidden border border-gray-200 border-solid">
       {venue.picture && (
         <div className="w-full">
-          <Image
+          <ImageAtom
             imageSrc={addUrlParams(venue.picture.url, 'w=300&q=80')}
             altText={venue.picture.alt_text || ''}
             blurhash={venue.picture.blurhash}
@@ -51,9 +57,10 @@ export const VenueCard = ({ as: El = 'li', venue, showDirections }: Props) => {
         </div>
       )}
       <div className="py-4 px-4">
-        <Heading level="h3" style="h4" className="font-semibold">
+        <Heading level="h2" style="h4" className="font-semibold">
           {venue.name}
         </Heading>
+        <AccessibilityList accessibility={venueAccessibility} size="small" />
         <Paragraph style="base" className="mt-2">
           <span dangerouslySetInnerHTML={{ __html: venueAddress }}></span>
         </Paragraph>

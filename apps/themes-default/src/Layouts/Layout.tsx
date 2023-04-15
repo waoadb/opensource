@@ -48,6 +48,23 @@ export default function Layout({
     );
   }, [pathname]);
 
+  // Callbacks
+  const closeMenu = useCallback(() => {
+    setMenuOpen(false);
+    document?.body.classList.remove('overflow-hidden');
+  }, []);
+  const openMenu = useCallback(() => {
+    setMenuOpen(true);
+    document?.body.classList.add('overflow-hidden');
+  }, []);
+  const toggleMenu = useCallback(() => {
+    if (menuOpen) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  }, [menuOpen, closeMenu, openMenu]);
+
   // Effects
   useEffect(() => {
     // Close Menu on resize
@@ -68,28 +85,13 @@ export default function Layout({
     return () => {
       window.removeEventListener('resize', handleResize);
     };
+    // Runs on mount only
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     closeMenu();
-  }, [pathname]);
-
-  // Callbacks
-  const closeMenu = useCallback(() => {
-    setMenuOpen(false);
-    document?.body.classList.remove('overflow-hidden');
-  }, []);
-  const openMenu = useCallback(() => {
-    setMenuOpen(true);
-    document?.body.classList.add('overflow-hidden');
-  }, []);
-  const toggleMenu = useCallback(() => {
-    if (menuOpen) {
-      closeMenu();
-    } else {
-      openMenu();
-    }
-  }, [menuOpen]);
+  }, [pathname, closeMenu]);
 
   return (
     <>
@@ -108,7 +110,7 @@ export default function Layout({
       <main
         className={classNames('flex-1 w-full block', {
           '-mt-[72px]': menuOffset && !preventTransparency,
-          'mt-[72px]': !menuOffset || preventTransparency,
+          'pt-[72px]': !menuOffset || preventTransparency,
         })}
         id="main"
       >
