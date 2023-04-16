@@ -86,8 +86,8 @@ const Page = ({ profile }: PageProps) => {
               Your Cart
             </Heading>
 
-            <div className="w-full grid grid-cols-3 gap-4 mt-10">
-              <section className="w-full col-span-2">
+            <div className="w-full grid grid-cols-1 lg:grid-cols-3 gap-4 mt-10">
+              <section className="w-full lg:col-span-2">
                 <Heading level="h2" style="h2" className="mb-4">
                   Items
                 </Heading>
@@ -96,7 +96,7 @@ const Page = ({ profile }: PageProps) => {
                 <Heading level="h2" style="h2" className="mb-4">
                   Summary
                 </Heading>
-                <CartSummary />
+                <CartSummary cart={cart} />
               </section>
             </div>
           </section>
