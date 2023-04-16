@@ -127,7 +127,6 @@ export const TicketCard = ({
               <div className="w-full grid grid-cols-1 md:grid-cols-4 lg:grid-cols-3 items-end gap-2">
                 <div className="w-full md:col-span-2 lg:col-span-2">
                   <Input
-                    id={`${ticket.ticket_id}_quantity`}
                     type="number"
                     label="Quantity"
                     labelVisible={true}

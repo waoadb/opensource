@@ -39,7 +39,7 @@ class HTTPClient {
   async markCartAsSold(
     cart_id: string,
     payload: ClientCartModels.ValidateCartRequest
-  ) {
+  ): Promise<ClientCartModels.MarkCartAsSoldResponse> {
     const response = await fetch(`/api/mark-cart-sold`, {
       method: 'POST',
       headers: {

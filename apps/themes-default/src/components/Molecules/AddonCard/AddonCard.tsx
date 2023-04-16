@@ -138,7 +138,6 @@ export const AddonCard = ({
               }) => (
                 <form onSubmit={handleSubmit} className="mt-2">
                   <Select
-                    id={`${addon.addon_id}_variant`}
                     labelVisible={true}
                     label="Variant"
                     placeholder="Select a variant"
@@ -165,7 +164,6 @@ export const AddonCard = ({
                   <div className="w-full grid grid-cols-1 md:grid-cols-3 items-end gap-2 mt-2">
                     <div className="w-full md:col-span-2">
                       <Input
-                        id={`${addon.addon_id}_quantity`}
                         type="number"
                         label="Quantity"
                         labelVisible={true}

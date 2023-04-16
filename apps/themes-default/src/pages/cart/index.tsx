@@ -58,7 +58,7 @@ const Page = ({ profile }: PageProps) => {
     else {
       setShowCreateCustomer(true);
     }
-  }, [showCreateCustomer]);
+  }, [router, cart]);
 
   const handleCustomerCreate = useCallback(
     async (
@@ -69,6 +69,9 @@ const Page = ({ profile }: PageProps) => {
       try {
         // Attach customer to cart
         await httpClient.attachCustomer(cart_id!, payload);
+
+        // Fire callback
+        callback();
         // Navigate to checkout
         router.push('/checkout');
       } catch (error) {
@@ -76,7 +79,7 @@ const Page = ({ profile }: PageProps) => {
         console.error(error);
       }
     },
-    []
+    [cart_id, router]
   );
 
   return (

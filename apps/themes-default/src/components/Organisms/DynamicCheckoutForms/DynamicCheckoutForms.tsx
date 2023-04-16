@@ -3,7 +3,6 @@ import { forwardRef, useCallback, useImperativeHandle, useRef } from 'react';
 import { v4 as uuid } from 'uuid';
 
 // Helpers
-import { addUrlParams } from '../../../helpers/addUrlPrarms/addUrlParams';
 import { cleanObjects } from './helpers/cleanObjects/cleanObjects';
 
 // Components
@@ -188,7 +187,7 @@ export const DynamicCheckoutForms = forwardRef<
     });
 
     onSubmit(entries);
-  }, [cart, checkoutConfig]);
+  }, [cart, checkoutConfig, onSubmit]);
 
   // Imperative Methods
   useImperativeHandle<any, DynamicCheckoutFormsImperativeMethods>(
@@ -369,3 +368,6 @@ export const DynamicCheckoutForms = forwardRef<
     </>
   );
 });
+
+// Set the display name
+DynamicCheckoutForms.displayName = 'DynamicCheckoutForms';

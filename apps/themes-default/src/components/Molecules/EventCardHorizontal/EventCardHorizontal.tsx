@@ -1,10 +1,8 @@
-import Link from 'next/link';
 import Image from 'next/image';
 import { Heading } from '@/components/Atoms/Heading/Heading';
 import { Paragraph } from '@/components/Atoms/Paragraph/Paragraph';
-import Cta from '@/components/Atoms/Cta/Cta';
 import { EventCardHorizontalProps } from '@/components/Molecules/EventCardHorizontal/EventCardHorizontal.model';
-import { IconList } from '@/components/Molecules/IconList/IconList';
+import { Link } from '@/components/Atoms/Link/Link';
 
 export const EventCardHorizontal = ({
   className,
@@ -30,16 +28,17 @@ export const EventCardHorizontal = ({
         <Heading level="h3" style="h4" className="font-semibold">
           Event title
         </Heading>
-        <Paragraph variant="small" className="mb-2">
+        <Paragraph style="small" className="mb-2">
           Date: Mon 01 May 2023 - 21:00pm
         </Paragraph>
-        <IconList />
-        <Paragraph variant="small" className="text-gray-500">
+        <Paragraph style="small" className="text-gray-500">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod,
           nunc sit amet aliquam lacinia, nunc nisl aliquet nisl, nec aliquam
           nisl nisl sit amet lorem.
         </Paragraph>
-        <Cta href={'/'} text={'Book now'} className="mt-4" />
+        <Link href={'/'} accessibleTitle={'Book now'} className="mt-4">
+          Book Now
+        </Link>
       </div>
     </div>
   );

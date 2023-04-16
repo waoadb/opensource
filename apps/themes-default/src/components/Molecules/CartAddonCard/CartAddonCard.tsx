@@ -114,7 +114,6 @@ export const CartAddonCard = ({ addon, entry_id, onSubmit }: Props) => {
                   <div className="w-full grid grid-cols-1 md:grid-cols-3 items-end gap-2 mt-2">
                     <div className="w-full md:col-span-2">
                       <Select
-                        id={`${addon.addon_id}_variant`}
                         labelVisible={true}
                         label="Variant"
                         placeholder="Select a variant"

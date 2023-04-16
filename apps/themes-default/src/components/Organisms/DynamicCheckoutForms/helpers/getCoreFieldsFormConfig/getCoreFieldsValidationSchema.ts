@@ -201,23 +201,27 @@ export const getCoreFieldsFormConfig = (
   };
 
   const errorsBillingAddressPropMatch = {
-    name: 'Name',
-    address_line_1: 'Address Line 1',
-    address_line_2: 'Address Line 2',
-    address_line_3: 'Address Line 3',
-    city: 'City',
-    postcode: 'Postcode',
-    country: 'Country',
+    billing_address: {
+      name: 'Name',
+      address_line_1: 'Address Line 1',
+      address_line_2: 'Address Line 2',
+      address_line_3: 'Address Line 3',
+      city: 'City',
+      postcode: 'Postcode',
+      country: 'Country',
+    },
   };
 
   const errorsShippingAddressPropMatch = {
-    name: 'Name',
-    address_line_1: 'Address Line 1',
-    address_line_2: 'Address Line 2',
-    address_line_3: 'Address Line 3',
-    city: 'City',
-    postcode: 'Postcode',
-    country: 'Country',
+    shipping_address: {
+      name: 'Name',
+      address_line_1: 'Address Line 1',
+      address_line_2: 'Address Line 2',
+      address_line_3: 'Address Line 3',
+      city: 'City',
+      postcode: 'Postcode',
+      country: 'Country',
+    },
   };
 
   // Return the config.

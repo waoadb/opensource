@@ -45,8 +45,6 @@ export const getCustomFieldsFormConfig = (
     custom_details: "Field's highlighted below",
   };
 
-  // console.log('errorsPropMatch', errorsPropMatch);
-
   // Return the form config.
   return {
     schema,

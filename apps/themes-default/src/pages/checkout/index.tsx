@@ -22,6 +22,8 @@ import {
 // Models
 import { ClientCacheModels, ClientCartModels } from '@waoadb/contracts-client';
 import { CheckoutSummary } from '@/components/Molecules/CheckoutSummary/CheckoutSummary';
+import { Placeholder } from '@/components/Molecules/Placeholder/Placeholder';
+import { ShoppingCartIcon } from '@heroicons/react/24/outline';
 type PageProps = {
   profile: ClientCacheModels.CacheProfile;
 };
@@ -38,7 +40,6 @@ const Page = ({ profile }: PageProps) => {
 
   // State
   const [renderForm, setRenderForm] = useState(false);
-  const [showCreateCustomer, setShowCreateCustomer] = useState(false);
 
   // Different Breed
   const {
@@ -50,29 +51,27 @@ const Page = ({ profile }: PageProps) => {
   const handleSubmit = useCallback(
     async (payload: ClientCartModels.ValidateCartRequest) => {
       try {
-        // Attach Customer
-
+        //  Validate the cart
         await differentBreedClient.cart
           .validateCart(cart_id!, {
             ...payload,
           })
           .catch((error) => {
-            console.log(error);
             throw error;
           });
 
+        // Finalise the cart
         await httpClient.markCartAsSold(cart_id!, payload).catch((error) => {
-          console.log(error);
           throw error;
         });
 
-        alert('Cart has been marked as sold.');
-        router.push('/');
+        // Set the orders
+        router.push('/checkout/complete');
       } catch (error) {
         console.log(error);
       }
     },
-    [cart_id]
+    [cart_id, router]
   );
 
   // UseEffects
@@ -81,7 +80,7 @@ const Page = ({ profile }: PageProps) => {
       retrieveCheckoutConfig(cart.cart_id);
       setRenderForm(true);
     }
-  }, [cart]);
+  }, [cart, retrieveCheckoutConfig]);
 
   return (
     <>
@@ -148,6 +147,19 @@ const Page = ({ profile }: PageProps) => {
           </section>
         )}
         {/* / Checkout */}
+        {/* Placeholder */}
+        {(!cart || !cart.entries.length) && (
+          <section className="w-full min-h-70vh flex flex-row flex-wrap">
+            <Placeholder
+              title="Your cart is empty"
+              content="Add some items to your cart to view them here."
+              icon={
+                <ShoppingCartIcon width={24} height={24} className="mx-auto" />
+              }
+            />
+          </section>
+        )}
+        {/* / Placeholder */}
       </Layout>
       {/* / Main */}
     </>
