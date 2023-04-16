@@ -1,14 +1,13 @@
 /* Dependencies */
 import { useCallback, useState } from 'react';
 import { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
-
-// Helpers
-import { formatDateRange } from '@/helpers/formatDateRange/formatDateRange';
 
 // Services
 import { differentBreedClient } from '@/services/differentBreedClient/differentBreedClient';
 import { useDifferentBreedCart } from '@/context/DifferentBreedCart/hooks/useDifferentBreedCart';
+import { httpClient } from '@/services/httpClient/httpClient';
 
 // Layouts
 import Layout from '@/Layouts/Layout';
@@ -18,13 +17,14 @@ import { Heading } from '@/components/Atoms/Heading/Heading';
 import { Placeholder } from '@/components/Molecules/Placeholder/Placeholder';
 import { ShoppingCartIcon } from '@heroicons/react/24/outline';
 import { CartSummary } from '@/components/Molecules/CartSummary/CartSummary';
-import { CartAddonCardList } from '@/components/Organisms/CartAddonCardList/CartAddonCardList';
-import { Paragraph } from '@/components/Atoms/Paragraph/Paragraph';
-import { CartTicketCardList } from '@/components/Organisms/CartTicketCardList/CartTicketCardList';
+import { CartEntries } from '@/components/Organisms/CartEntries/CartEntries';
+import { CreateCustomerModal } from '@/components/Organisms/CreateCustomerModal/CreateCustomerModal';
 
 // Models
-import { ClientCacheModels } from '@waoadb/contracts-client';
-import { Accordion } from '@/components/Organisms/Accordion/Accordion';
+import {
+  ClientCacheModels,
+  ClientCustomerModels,
+} from '@waoadb/contracts-client';
 type PageProps = {
   profile: ClientCacheModels.CacheProfile;
 };
@@ -35,12 +35,49 @@ type PageProps = {
  * @returns
  */
 const Page = ({ profile }: PageProps) => {
+  // Hooks
+  const router = useRouter();
+
+  // State
+  const [showCreateCustomer, setShowCreateCustomer] = useState(false);
+
   // Different Breed
   const {
-    removeAddonFromCart,
-    removeTicketFromCart,
     cartState: { cart, cart_id },
   } = useDifferentBreedCart();
+
+  // Callbacks
+  const handleCheckoutClick = useCallback(() => {
+    if (!cart) return null;
+
+    // If the customer is attached to the cart, go to checkout.
+    if (cart.cust_id) {
+      router.push('/checkout');
+    }
+    // If the customer is not attached to the cart, show the create customer form.
+    else {
+      setShowCreateCustomer(true);
+    }
+  }, [showCreateCustomer]);
+
+  const handleCustomerCreate = useCallback(
+    async (
+      payload: ClientCustomerModels.CreateCustomerRequest,
+      callback: Function
+    ) => {
+      // Create customer
+      try {
+        // Attach customer to cart
+        await httpClient.attachCustomer(cart_id!, payload);
+        // Navigate to checkout
+        router.push('/checkout');
+      } catch (error) {
+        // Show error
+        console.error(error);
+      }
+    },
+    []
+  );
 
   return (
     <>
@@ -88,74 +125,38 @@ const Page = ({ profile }: PageProps) => {
             </Heading>
 
             <div className="w-full grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-4 mt-10">
+              {/* Cart Entries */}
               <section className="w-full lg:col-span-2">
                 <Heading level="h2" style="h2" className="mb-4">
                   Entries
                 </Heading>
-                <ul className="w-full space-y-4">
-                  {cart.entries.map((entry, index) => (
-                    <Accordion
-                      title={entry.event.name}
-                      key={entry.entry_id}
-                      defaultOpen={index === 0}
-                    >
-                      <Paragraph className="w-full">
-                        {formatDateRange(
-                          entry.performance.start_date,
-                          entry.performance.start_time,
-                          entry.performance.end_date,
-                          entry.performance.end_time,
-                          true
-                        )}
-                      </Paragraph>
-
-                      <section className="w-full mt-4">
-                        <Heading level="h4" style="h4">
-                          <span className="text-indigo-700 inline-block border-b-2 border-b-current">
-                            Tickets
-                          </span>
-                        </Heading>
-                        <CartTicketCardList
-                          entry_id={entry.entry_id}
-                          tickets={entry.tickets}
-                          handleSubmit={(payload, callback) => {
-                            removeTicketFromCart(cart_id!, payload);
-                            callback();
-                          }}
-                        />
-                      </section>
-
-                      {entry.addons.length > 0 && (
-                        <section>
-                          <Heading level="h4" style="h4">
-                            <span className="text-indigo-700 inline-block border-b-2 border-b-current">
-                              Addons
-                            </span>
-                          </Heading>
-                          <CartAddonCardList
-                            entry_id={entry.entry_id}
-                            addons={entry.addons}
-                            handleSubmit={(payload, callback) => {
-                              removeAddonFromCart(cart_id!, payload);
-                              callback();
-                            }}
-                          />
-                        </section>
-                      )}
-                    </Accordion>
-                  ))}
-                </ul>
+                <CartEntries />
               </section>
-              <section className="w-full sticky">
+              {/* / Cart Entries */}
+
+              {/* Summary */}
+              <section className="w-full">
                 <Heading level="h2" style="h2" className="mb-4">
                   Summary
                 </Heading>
-                <CartSummary cart={cart} />
+                <CartSummary
+                  cart={cart}
+                  handleCheckoutClick={handleCheckoutClick}
+                />
               </section>
+              {/* / Summary */}
             </div>
           </section>
         )}
         {/* / Cart */}
+
+        {/* Create Customer */}
+        <CreateCustomerModal
+          isOpen={showCreateCustomer}
+          onClose={() => setShowCreateCustomer(false)}
+          onSubmit={handleCustomerCreate}
+        />
+        {/* Create Customer */}
       </Layout>
       {/* / Main */}
     </>

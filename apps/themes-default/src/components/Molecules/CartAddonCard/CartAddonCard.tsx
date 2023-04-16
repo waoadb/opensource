@@ -23,7 +23,6 @@ const validationSchema = Yup.object().shape({
 
 // Models
 import { ClientCartModels } from '@waoadb/contracts-client';
-
 type Props = {
   /**
    * Addon

@@ -8,7 +8,6 @@ import { Button } from '@/components/Atoms/Button/Button';
 
 // Models
 import { ClientCartModels } from '@waoadb/contracts-client';
-
 type Props = {
   /**
    * Ticket
@@ -32,7 +31,6 @@ type Props = {
  * @param param props - Component props.
  * @returns
  */
-
 export const CartTicketCard = ({ ticket, entry_id, onSubmit }: Props) => {
   return (
     <li className="w-full py-4">

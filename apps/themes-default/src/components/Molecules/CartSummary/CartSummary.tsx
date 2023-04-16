@@ -8,6 +8,7 @@ import { formatDateRange } from '@/helpers/formatDateRange/formatDateRange';
 import { Paragraph } from '@/components/Atoms/Paragraph/Paragraph';
 import { Link } from '@/components/Atoms/Link/Link';
 import { Heading } from '@/components/Atoms/Heading/Heading';
+import { Button } from '@/components/Atoms/Button/Button';
 
 // Models
 import { ClientCartModels } from '@waoadb/contracts-client';
@@ -16,6 +17,10 @@ type Props = {
    * Cart
    */
   cart: ClientCartModels.Cart;
+  /**
+   * Handle checkout click.
+   */
+  handleCheckoutClick: () => void;
 };
 
 /**
@@ -23,7 +28,7 @@ type Props = {
  * @param props - Component props.
  * @returns
  */
-export const CartSummary = ({ cart }: Props) => {
+export const CartSummary = ({ cart, handleCheckoutClick }: Props) => {
   // Memo
   const cartTotal = useMemo(() => {
     return cart.entries.reduce((prev, next) => prev + next.entry_total, 0);
@@ -53,7 +58,7 @@ export const CartSummary = ({ cart }: Props) => {
                   )}
                 </Paragraph>
 
-                {entry.tickets.length > 0 && (
+                {entry.tickets?.length > 0 && (
                   <>
                     <Heading level="h4" style="h4">
                       Tickets
@@ -216,17 +221,23 @@ export const CartSummary = ({ cart }: Props) => {
         </Paragraph>
 
         <div className="grid grid-cols-1 gap-2">
-          <Link
-            href="/checkout"
-            accessibleTitle={`Continue to checkout with cart total of £${cartTotal.toFixed(
-              2
-            )}`}
+          <Button
+            accessibleTitle={
+              cart.cust_id
+                ? `Continue to checkout with cart total of £${cartTotal.toFixed(
+                    2
+                  )}`
+                : `Login to checkout with cart total of £${cartTotal.toFixed(
+                    2
+                  )}`
+            }
             variant="primary"
             className="text-lg"
             fullWidth={true}
+            onClick={handleCheckoutClick}
           >
             Checkout
-          </Link>
+          </Button>
           <Link
             href="/"
             accessibleTitle="Return to what's on to continue shopping"

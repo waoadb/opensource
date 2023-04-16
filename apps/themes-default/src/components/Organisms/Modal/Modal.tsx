@@ -16,7 +16,7 @@ type Props = PropsWithChildren<{
   /**
    * Size
    */
-  size?: 'base' | 'large';
+  size?: 'base' | 'medium' | 'large';
 }>;
 
 /**
@@ -56,6 +56,7 @@ export const Modal = ({ isOpen, onClose, children, size = 'base' }: Props) => {
                   'w-full transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all first-letter:first-line',
                   {
                     'w-full max-w-md': size === 'base',
+                    'w-full max-w-lg': size === 'medium',
                     'w-full max-w-5xl': size === 'large',
                   }
                 )}
