@@ -33,10 +33,10 @@ export const CartTicketCardList = ({
   handleSubmit,
 }: Props) => {
   return (
-    <ul className="grid grid-cols-1 divide-y divide-gray-500">
+    <ul className="grid grid-cols-1 divide-y divide-gray-200">
       {tickets.map((ticket) => (
         <CartTicketCard
-          key={ticket.ticket_id}
+          key={ticket.ticket_entry_id}
           entry_id={entry_id}
           ticket={ticket}
           onSubmit={handleSubmit}

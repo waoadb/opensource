@@ -57,7 +57,7 @@ export const VenueCard = ({ as: El = 'li', venue, showDirections }: Props) => {
         </div>
       )}
       <div className="py-4 px-4">
-        <Heading level="h2" style="h4" className="font-semibold">
+        <Heading level="h2" style="h4" className="font-semibold mb-1">
           {venue.name}
         </Heading>
         <AccessibilityList accessibility={venueAccessibility} size="small" />

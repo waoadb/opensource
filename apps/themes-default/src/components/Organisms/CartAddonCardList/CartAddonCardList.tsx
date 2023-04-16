@@ -36,7 +36,7 @@ export const CartAddonCardList = ({
     <ul className="grid grid-cols-1 divide-y divide-gray-500">
       {addons.map((addon) => (
         <CartAddonCard
-          key={addon.addon_id}
+          key={addon.addon_entry_id}
           entry_id={entry_id}
           addon={addon}
           onSubmit={handleSubmit}

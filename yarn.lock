@@ -1742,10 +1742,10 @@
     "@typescript-eslint/types" "5.58.0"
     eslint-visitor-keys "^3.3.0"
 
-"@waoadb/contracts-client@^0.0.7":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@waoadb/contracts-client/-/contracts-client-0.0.7.tgz#bd5d31c16f8c0015aa575a3322f6e9d980435a3b"
-  integrity sha512-PuSkxYTe+b2xYP3+bC3rzJacV4ZKHiAuOzDWJks4+r/wmDU4jmarFBSVxme2MKHwFNtUWK281r8fXDY7RJNjbg==
+"@waoadb/contracts-client@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@waoadb/contracts-client/-/contracts-client-0.0.9.tgz#818f9af447a545ff9422c01be96f461a8d58df10"
+  integrity sha512-MnZq3L5ZKFkkZZvZW2tzyIOMYOrIExhTUGFOhIxuNF7U5POzgsfpbldAXokSlSWoSADlQHuaRqSORhjEqSXqNA==
 
 "@yarnpkg/lockfile@^1.1.0":
   version "1.1.0"

@@ -36,7 +36,10 @@ export const CartSummary = ({ cart }: Props) => {
         <ul className="space-y-2">
           {cart.entries.map((entry) => {
             return (
-              <li key={entry.entry_id} className="w-full py-4 px-4 bg-gray-100">
+              <li
+                key={entry.entry_id}
+                className="w-full py-4 px-4 bg-gray-100/70"
+              >
                 <Heading level="h3" style="h3">
                   {entry.event.name}
                 </Heading>

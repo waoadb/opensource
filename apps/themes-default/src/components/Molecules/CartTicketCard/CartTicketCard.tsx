@@ -76,7 +76,7 @@ export const CartTicketCard = ({ ticket, entry_id, onSubmit }: Props) => {
               onSubmit={handleSubmit}
               className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 items-center"
             >
-              <div className="w-full p-1 h-full flex flex-row items-center bg-gray-100">
+              <div className="w-full py-1 px-2 h-full flex flex-row items-center bg-gray-100">
                 <p>Accessibility Options Soon!</p>
               </div>
               <div className="w-full grid grid-cols-1 md:grid-cols-3 items-end gap-2">

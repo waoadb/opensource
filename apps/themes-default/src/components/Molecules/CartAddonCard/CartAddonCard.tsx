@@ -52,16 +52,18 @@ export const CartAddonCard = ({ addon, entry_id, onSubmit }: Props) => {
     <li className="w-full py-4">
       <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
         {/* Image */}
-        <div className="relative overflow-hidden w-full rounded-lg">
-          <ImageAtom
-            imageSrc={addUrlParams(addon.picture?.src || '', 'w=300&q=80')}
-            altText={addon.picture?.alt || ''}
-            blurhash={addon.picture?.blurhash}
-            ratio="1:1"
-            fit="object-cover"
-            position="object-center"
-          />
-        </div>
+        {addon.picture && (
+          <div className="relative overflow-hidden w-full rounded-lg">
+            <ImageAtom
+              imageSrc={addUrlParams(addon.picture.url, 'w=300&q=80')}
+              altText={addon.picture.alt_text}
+              blurhash={addon.picture.blurhash}
+              ratio="1:1"
+              fit="object-cover"
+              position="object-center"
+            />
+          </div>
+        )}
         {/* / Image */}
         {/* Content */}
         <div className="w-full md:col-span-2 h-full flex flex-col flex-wrap justify-center">
@@ -125,7 +127,7 @@ export const CartAddonCard = ({ addon, entry_id, onSubmit }: Props) => {
                         options={[
                           {
                             value: addon.variant_id,
-                            key: addon.name,
+                            key: addon.variant_name,
                           },
                         ]}
                         error={handleFieldError(errors, touched, 'variant_id')}

@@ -3,27 +3,28 @@ import { useCallback, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { NextSeo } from 'next-seo';
 
+// Helpers
+import { formatDateRange } from '@/helpers/formatDateRange/formatDateRange';
+
 // Services
 import { differentBreedClient } from '@/services/differentBreedClient/differentBreedClient';
+import { useDifferentBreedCart } from '@/context/DifferentBreedCart/hooks/useDifferentBreedCart';
 
 // Layouts
 import Layout from '@/Layouts/Layout';
 
 // Components
 import { Heading } from '@/components/Atoms/Heading/Heading';
-import { SearchFilters } from '@/components/Molecules/SearchFilters/SearchFilters';
-import { SearchNoResults } from '@/components/Molecules/SearchNoResults/SearchNoResults';
-import { SearchPlaceholder } from '@/components/Molecules/SearchPlaceholder/SearchPlaceholder';
-import { EventCardList } from '@/components/Organisms/EventCardList/EventCardList';
-
-// Models
-import { ClientCacheModels } from '@waoadb/contracts-client';
-import { VenueCardList } from '@/components/Organisms/VenueCardList/VenueCardList';
-import { useDifferentBreedCart } from '@/context/DifferentBreedCart/hooks/useDifferentBreedCart';
 import { Placeholder } from '@/components/Molecules/Placeholder/Placeholder';
 import { ShoppingCartIcon } from '@heroicons/react/24/outline';
 import { CartSummary } from '@/components/Molecules/CartSummary/CartSummary';
+import { CartAddonCardList } from '@/components/Organisms/CartAddonCardList/CartAddonCardList';
+import { Paragraph } from '@/components/Atoms/Paragraph/Paragraph';
+import { CartTicketCardList } from '@/components/Organisms/CartTicketCardList/CartTicketCardList';
 
+// Models
+import { ClientCacheModels } from '@waoadb/contracts-client';
+import { Accordion } from '@/components/Organisms/Accordion/Accordion';
 type PageProps = {
   profile: ClientCacheModels.CacheProfile;
 };
@@ -81,16 +82,69 @@ const Page = ({ profile }: PageProps) => {
 
         {/* Cart */}
         {cart && cart.entries.length > 0 && (
-          <section className="container mx-auto my-12 lg:mt-4 py-10 min-h-70vh">
+          <section className="container mx-auto my-12 lg:mt-4 lg:py-10 min-h-70vh">
             <Heading level="h1" style="h1">
               Your Cart
             </Heading>
 
-            <div className="w-full grid grid-cols-1 lg:grid-cols-3 gap-4 mt-10">
+            <div className="w-full grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-4 mt-10">
               <section className="w-full lg:col-span-2">
                 <Heading level="h2" style="h2" className="mb-4">
-                  Items
+                  Entries
                 </Heading>
+                <ul className="w-full space-y-4">
+                  {cart.entries.map((entry, index) => (
+                    <Accordion
+                      title={entry.event.name}
+                      key={entry.entry_id}
+                      defaultOpen={index === 0}
+                    >
+                      <Paragraph className="w-full">
+                        {formatDateRange(
+                          entry.performance.start_date,
+                          entry.performance.start_time,
+                          entry.performance.end_date,
+                          entry.performance.end_time,
+                          true
+                        )}
+                      </Paragraph>
+
+                      <section className="w-full mt-4">
+                        <Heading level="h4" style="h4">
+                          <span className="text-indigo-700 inline-block border-b-2 border-b-current">
+                            Tickets
+                          </span>
+                        </Heading>
+                        <CartTicketCardList
+                          entry_id={entry.entry_id}
+                          tickets={entry.tickets}
+                          handleSubmit={(payload, callback) => {
+                            removeTicketFromCart(cart_id!, payload);
+                            callback();
+                          }}
+                        />
+                      </section>
+
+                      {entry.addons.length > 0 && (
+                        <section>
+                          <Heading level="h4" style="h4">
+                            <span className="text-indigo-700 inline-block border-b-2 border-b-current">
+                              Addons
+                            </span>
+                          </Heading>
+                          <CartAddonCardList
+                            entry_id={entry.entry_id}
+                            addons={entry.addons}
+                            handleSubmit={(payload, callback) => {
+                              removeAddonFromCart(cart_id!, payload);
+                              callback();
+                            }}
+                          />
+                        </section>
+                      )}
+                    </Accordion>
+                  ))}
+                </ul>
               </section>
               <section className="w-full sticky">
                 <Heading level="h2" style="h2" className="mb-4">
