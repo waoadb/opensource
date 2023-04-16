@@ -1,6 +1,7 @@
 /* Dependencies */
 import { useCallback, useState } from 'react';
 import { GetServerSideProps } from 'next';
+import dynamic from 'next/dynamic';
 import { NextSeo } from 'next-seo';
 
 // Services
@@ -11,10 +12,20 @@ import Layout from '@/Layouts/Layout';
 
 // Components
 import { Heading } from '@/components/Atoms/Heading/Heading';
-import { SearchFilters } from '@/components/Molecules/SearchFilters/SearchFilters';
 import { SearchNoResults } from '@/components/Molecules/SearchNoResults/SearchNoResults';
 import { SearchPlaceholder } from '@/components/Molecules/SearchPlaceholder/SearchPlaceholder';
 import { EventCardList } from '@/components/Organisms/EventCardList/EventCardList';
+
+// Client Side Only Components
+const SearchFilters = dynamic(
+  () =>
+    import('@/components/Molecules/SearchFilters/SearchFilters').then(
+      (component) => component.SearchFilters
+    ),
+  {
+    ssr: false,
+  }
+);
 
 // Models
 import { ClientCacheModels } from '@waoadb/contracts-client';

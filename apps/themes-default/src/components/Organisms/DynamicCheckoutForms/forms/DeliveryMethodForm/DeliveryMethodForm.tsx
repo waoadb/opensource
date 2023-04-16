@@ -12,7 +12,6 @@ import { FormErrorMessage } from '@/components/Molecules/Forms/FormErrorMessage/
 
 // Models
 import { ClientCartModels } from '@waoadb/contracts-client';
-import { uniqueId } from '@/helpers/uniqueId/uniqueId';
 
 export type DeliveryMethodFormImperativeMethods = {
   isValid: boolean;
@@ -51,6 +50,7 @@ export const DeliveryMethodForm = forwardRef<
     schema,
     enabledAddonDeliveryMethods,
     enabledTicketDeliveryMethods,
+    errorsPropMatch,
   } = getDeliveryMethodsFormConfig(config, showAddonDeliveryMethods);
 
   const formik = useFormik({
@@ -83,16 +83,13 @@ export const DeliveryMethodForm = forwardRef<
   return (
     <div className="w-full">
       <form onSubmit={formik.handleSubmit}>
-        <h3 className="text-xl">Delivery Methods</h3>
+        <h3 className="text-xl mb-2">Delivery Methods</h3>
 
         {/* Error Messages */}
         <FormErrorMessage
           errors={formik.errors}
           touched={formik.touched}
-          propMatch={{
-            ticket_delivery_method: 'Ticket Delivery Method',
-            addon_delivery_method: 'Addon Delivery Method',
-          }}
+          propMatch={errorsPropMatch}
         />
         {/* / Error Messages */}
 
@@ -102,7 +99,6 @@ export const DeliveryMethodForm = forwardRef<
             title="Ticket Delivery Method"
             items={enabledTicketDeliveryMethods.map((method) => {
               return {
-                id: uniqueId(),
                 name: 'ticket_delivery_method',
                 value: method,
                 label: method,
@@ -123,12 +119,11 @@ export const DeliveryMethodForm = forwardRef<
 
         {/* Addon Delivery Options */}
         {showAddonDeliveryMethods && (
-          <div className="w-full">
+          <div className="w-full mt-4">
             <RadioList
               title="Addon Delivery Method"
               items={enabledAddonDeliveryMethods.map((method) => {
                 return {
-                  id: uniqueId(),
                   name: 'addon_delivery_method',
                   value: method,
                   label: method,

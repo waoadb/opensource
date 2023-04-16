@@ -1,5 +1,5 @@
 /* Dependencies */
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
@@ -14,10 +14,14 @@ import Layout from '@/Layouts/Layout';
 
 // Components
 import { Heading } from '@/components/Atoms/Heading/Heading';
-import { DynamicCheckoutForms } from '@/components/Organisms/DynamicCheckoutForms/DynamicCheckoutForms';
+import {
+  DynamicCheckoutForms,
+  DynamicCheckoutFormsImperativeMethods,
+} from '@/components/Organisms/DynamicCheckoutForms/DynamicCheckoutForms';
 
 // Models
 import { ClientCacheModels, ClientCartModels } from '@waoadb/contracts-client';
+import { CheckoutSummary } from '@/components/Molecules/CheckoutSummary/CheckoutSummary';
 type PageProps = {
   profile: ClientCacheModels.CacheProfile;
 };
@@ -30,6 +34,7 @@ type PageProps = {
 const Page = ({ profile }: PageProps) => {
   // Hooks
   const router = useRouter();
+  const dynamicFormsRef = useRef<DynamicCheckoutFormsImperativeMethods>(null);
 
   // State
   const [renderForm, setRenderForm] = useState(false);
@@ -113,13 +118,14 @@ const Page = ({ profile }: PageProps) => {
               {/* Cart Entries */}
               <section className="w-full lg:col-span-2">
                 <Heading level="h2" style="h2" className="mb-4">
-                  Entries
+                  Required Details
                 </Heading>
                 {renderForm && checkoutConfig && (
                   <DynamicCheckoutForms
                     cart={cart}
                     checkoutConfig={checkoutConfig}
                     onSubmit={handleSubmit}
+                    ref={dynamicFormsRef}
                   />
                 )}
               </section>
@@ -130,10 +136,12 @@ const Page = ({ profile }: PageProps) => {
                 <Heading level="h2" style="h2" className="mb-4">
                   Summary
                 </Heading>
-                {/* <CheckoutSummary
+                <CheckoutSummary
                   cart={cart}
-                  handleCheckoutClick={handleCheckoutClick}
-                /> */}
+                  handleFinalise={() =>
+                    dynamicFormsRef.current?.triggerSubmit()
+                  }
+                />
               </section>
               {/* / Summary */}
             </div>

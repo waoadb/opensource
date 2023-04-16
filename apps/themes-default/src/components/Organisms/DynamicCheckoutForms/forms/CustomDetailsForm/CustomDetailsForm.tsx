@@ -46,7 +46,7 @@ export const CustomDetailsForm = forwardRef<
     .filter((field) => field.field_enabled === true)
     .reverse();
 
-  const { initialValues, schema } =
+  const { initialValues, schema, errorsPropMatch } =
     getCustomFieldsFormConfig(enabledCustomFields);
 
   const formik = useFormik({
@@ -85,32 +85,32 @@ export const CustomDetailsForm = forwardRef<
         <FormErrorMessage
           errors={formik.errors}
           touched={formik.touched}
-          propMatch={{
-            custom_details: 'Additional Details',
-          }}
+          propMatch={errorsPropMatch}
         />
         {/* / Error Messages */}
 
         <FormikProvider value={formik}>
-          <FieldArray
-            name="custom_details"
-            render={(arrayHelpers) => (
-              <>
-                {enabledCustomFields.map((field, customIndex) => (
-                  <DynamicFormCustomField
-                    field={field}
-                    index={customIndex}
-                    values={formik.values}
-                    errors={formik.errors}
-                    touched={formik.touched}
-                    handleChange={formik.handleChange}
-                    handleBlur={formik.handleBlur}
-                    key={field.field_id}
-                  />
-                ))}
-              </>
-            )}
-          ></FieldArray>
+          <div className="w-full space-y-2">
+            <FieldArray
+              name="custom_details"
+              render={(arrayHelpers) => (
+                <>
+                  {enabledCustomFields.map((field, customIndex) => (
+                    <DynamicFormCustomField
+                      field={field}
+                      index={customIndex}
+                      values={formik.values}
+                      errors={formik.errors}
+                      touched={formik.touched}
+                      handleChange={formik.handleChange}
+                      handleBlur={formik.handleBlur}
+                      key={field.field_id}
+                    />
+                  ))}
+                </>
+              )}
+            ></FieldArray>
+          </div>
         </FormikProvider>
       </form>
     </div>

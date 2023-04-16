@@ -1,6 +1,7 @@
 /* Dependencies */
 import { useCallback, useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
+import dynamic from 'next/dynamic';
 import { NextSeo } from 'next-seo';
 import dayjs from 'dayjs';
 import {
@@ -22,13 +23,23 @@ import { AvailableStockCard } from '@/components/Molecules/AvailableStockCard/Av
 import { RefundPolicyCard } from '@/components/Molecules/RefundPolicyCard/RefundPolicyCard';
 import { EventDescription } from '@/components/Molecules/EventDescription/EventDescription';
 import { EventSummary } from '@/components/Molecules/EventSummary/EventSummary';
-import { PerformanceFilters } from '@/components/Molecules/PerformanceFilters/PerformanceFilters';
 import { PerformanceCardList } from '@/components/Organisms/PerformanceCardList/PerformanceCardList';
 import { Pagination } from '@/components/Molecules/Pagination/Pagination';
 import { VenueCard } from '@/components/Molecules/VenueCard/VenueCard';
 import { TBCEventCard } from '@/components/Molecules/TBCEventCard/TBCEventCard';
 import { Heading } from '@/components/Atoms/Heading/Heading';
 import { Placeholder } from '@/components/Molecules/Placeholder/Placeholder';
+
+// Client Side Only Components
+const PerformanceFilters = dynamic(
+  () =>
+    import('@/components/Molecules/PerformanceFilters/PerformanceFilters').then(
+      (component) => component.PerformanceFilters
+    ),
+  {
+    ssr: false,
+  }
+);
 
 // Models
 import { ClientCacheModels } from '@waoadb/contracts-client';

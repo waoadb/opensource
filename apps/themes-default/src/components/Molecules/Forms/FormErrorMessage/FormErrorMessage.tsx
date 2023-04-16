@@ -1,21 +1,33 @@
 /* Dependencies */
 import React, { useState, useEffect } from 'react';
-import { useFormikContext } from 'formik';
-
-// Component
+import { FormikErrors, FormikTouched } from 'formik';
 
 // Models
-import { FormErrorMessageProps } from './FormErrorMessage.model';
+type PropMatch = {
+  [key: string]: any | { [key: string]: any };
+};
+
+type Props = {
+  /**
+   * A Key to value map for name and display text values.
+   * Key is the field name and value is the display name.
+   */
+  propMatch: PropMatch;
+  /**
+   * The formik errors object.
+   */
+  errors: FormikErrors<any>;
+  /**
+   * The formik touched object.
+   */
+  touched: FormikTouched<any>;
+};
 
 /**
  * Handles errors on the form and shows a related message.
  * @returns
  */
-export const FormErrorMessage: React.FC<FormErrorMessageProps> = ({
-  propMatch,
-  errors,
-  touched,
-}) => {
+export const FormErrorMessage = ({ propMatch, errors, touched }: Props) => {
   const [errorMessage, setError] = useState<string | null>(null);
 
   /**
@@ -24,12 +36,37 @@ export const FormErrorMessage: React.FC<FormErrorMessageProps> = ({
   useEffect(() => {
     const fieldsToFix: string[] = [];
 
-    // Form the fields to fix.
-    Object.keys(errors).forEach((key) => {
-      if (key && touched[key]) {
-        fieldsToFix.push(propMatch[key] || key);
+    // Loop through the errors.
+    for (const key in errors) {
+      // Array
+      if (Array.isArray(errors[key])) {
+        if (key && touched[key]) {
+          fieldsToFix.push(propMatch[key] || key);
+        }
       }
-    });
+      // Nested object
+      else if (typeof errors[key] === 'object') {
+        // Loop through the nested object.
+        for (const nestedKey in errors[key] as Object) {
+          // Check if the field is touched.
+          if (
+            touched[key] &&
+            // @ts-ignore
+            touched[key][nestedKey] &&
+            propMatch[key] &&
+            propMatch[key][nestedKey]
+          ) {
+            fieldsToFix.push(propMatch[key][nestedKey] || nestedKey);
+          }
+        }
+      }
+      // Normal field
+      else {
+        if (key && touched[key]) {
+          fieldsToFix.push(propMatch[key] || key);
+        }
+      }
+    }
 
     // Form the error messages.
     if (fieldsToFix.length) {

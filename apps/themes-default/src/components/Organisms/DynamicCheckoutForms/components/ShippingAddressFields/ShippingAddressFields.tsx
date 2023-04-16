@@ -3,7 +3,6 @@ import { FormikErrors, FormikTouched } from 'formik';
 
 // Helpers
 import { handleFieldError } from '@/helpers/handleFieldError/handleFieldError';
-import { uniqueId } from '@/helpers/uniqueId/uniqueId';
 
 // Components
 import { FieldSet } from '@/components/Molecules/Forms/FieldSet/FieldSet';

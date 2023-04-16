@@ -61,10 +61,17 @@ export const getDeliveryMethodsFormConfig = (
     }),
   });
 
+  // Error Messages
+  const errorsPropMatch = {
+    ticket_delivery_method: 'Ticket Delivery Method',
+    addon_delivery_method: 'Addon Delivery Method',
+  };
+
   // Return the form config.
   return {
     schema,
     initialValues,
+    errorsPropMatch,
     enabledTicketDeliveryMethods,
     enabledAddonDeliveryMethods,
   };

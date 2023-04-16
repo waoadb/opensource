@@ -1,5 +1,5 @@
 /* Dependencies */
-import { useCallback, useRef } from 'react';
+import { forwardRef, useCallback, useImperativeHandle, useRef } from 'react';
 import { v4 as uuid } from 'uuid';
 
 // Helpers
@@ -23,11 +23,16 @@ import {
 
 // Models
 import { ClientCartModels } from '@waoadb/contracts-client';
+import { Heading } from '@/components/Atoms/Heading/Heading';
 
-type DynamicCheckourFormsProps = {
+type Props = {
   cart: ClientCartModels.Cart;
   checkoutConfig: ClientCartModels.CheckoutConfigItem[];
   onSubmit: (payload: ClientCartModels.ValidateCartRequest) => void;
+};
+
+export type DynamicCheckoutFormsImperativeMethods = {
+  triggerSubmit: () => Promise<void>;
 };
 
 type EntryFormRef = {
@@ -43,13 +48,14 @@ type EntryFormRef = {
   delivery: DeliveryMethodFormImperativeMethods;
 };
 
-export const DynamicCheckoutForms = ({
-  cart,
-  checkoutConfig,
-  onSubmit,
-}: DynamicCheckourFormsProps) => {
+export const DynamicCheckoutForms = forwardRef<
+  DynamicCheckoutFormsImperativeMethods,
+  Props
+>(({ cart, checkoutConfig, onSubmit }, forwardedRef) => {
+  // Reference
   const entryFormData = useRef<EntryFormRef[]>([]);
 
+  // Calbacks
   const handleSubmit = useCallback(async () => {
     // Fire Validation
     const validationStatus: boolean[] = [];
@@ -184,9 +190,20 @@ export const DynamicCheckoutForms = ({
     onSubmit(entries);
   }, [cart, checkoutConfig]);
 
+  // Imperative Methods
+  useImperativeHandle<any, DynamicCheckoutFormsImperativeMethods>(
+    forwardedRef,
+    () => {
+      return {
+        triggerSubmit: handleSubmit,
+      };
+    },
+    [handleSubmit]
+  );
+
   return (
     <>
-      <ul className="w-full mt-10 grid grid-cols-1 gap-5">
+      <ul className="w-full grid grid-cols-1 divide-y divide-gray-100">
         {cart.entries.map((entry, entryIndex) => {
           // Get the checkout config for the event
           const configEntry = checkoutConfig.find(
@@ -215,41 +232,11 @@ export const DynamicCheckoutForms = ({
             !coreAttendees || (!customAttendees && customFieldsHasLength);
 
           return (
-            <li className="w-full" key={entry.entry_id}>
+            <li className="w-full py-5" key={entry.entry_id}>
               {/* Event Details */}
-              <div className="mx-auto shadow px-4 py-6 bg-white rounded-md">
-                <div className="flex bg-pink-600 rounded-md relative">
-                  <div className="flex">
-                    <div className="px-4 py-6 border-r border-pink-500">
-                      <div className="h-10 w-10">
-                        {entry.event.picture?.url && (
-                          <img
-                            src={addUrlParams(
-                              entry.event.picture.url,
-                              'w=80&q=80'
-                            )}
-                            alt={entry.event.picture.alt_text}
-                            className="h-full w-full rounded-full overflow-hidden shadow object-cover"
-                          />
-                        )}
-                      </div>
-                    </div>
-                    <div className="flex flex-col justify-center pl-3 py-2 sm:py-0">
-                      <h3 className="text-2xl font-bold text-white pb-1">
-                        {entry.event.name}
-                      </h3>
-                      <div className="flex flex-col sm:flex-row items-start sm:items-center">
-                        <p className="text-md text-white leading-5">
-                          Tickets: {entry.tickets.length}
-                        </p>
-                        <p className="text-md text-white leading-5 ml-2">
-                          Addons: {entry.addons.length}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <Heading level="h3" style="h3">
+                {entry.event.name}
+              </Heading>
               {/* / Event Details */}
 
               {/* Collection Method: Customer */}
@@ -303,6 +290,7 @@ export const DynamicCheckoutForms = ({
                           title={`${ticket.name}`}
                           unmountOnClose={false}
                           el="div"
+                          defaultOpen={true}
                         >
                           <div className="w-full py-2">
                             {coreAttendees && (
@@ -328,25 +316,27 @@ export const DynamicCheckoutForms = ({
                             )}
 
                             {customAttendees && (
-                              <CustomDetailsForm
-                                config={configEntry}
-                                ref={(el) => {
-                                  const currentAttendees =
-                                    entryFormData.current[entryIndex]
-                                      ?.attendees || [];
+                              <div className="w-full mt-4">
+                                <CustomDetailsForm
+                                  config={configEntry}
+                                  ref={(el) => {
+                                    const currentAttendees =
+                                      entryFormData.current[entryIndex]
+                                        ?.attendees || [];
 
-                                  currentAttendees[ticketIndex] = {
-                                    ...currentAttendees[ticketIndex],
-                                    custom: el!,
-                                  };
+                                    currentAttendees[ticketIndex] = {
+                                      ...currentAttendees[ticketIndex],
+                                      custom: el!,
+                                    };
 
-                                  entryFormData.current[entryIndex] = {
-                                    ...entryFormData.current[entryIndex],
-                                    entry_id: entry.entry_id,
-                                    attendees: currentAttendees,
-                                  };
-                                }}
-                              />
+                                    entryFormData.current[entryIndex] = {
+                                      ...entryFormData.current[entryIndex],
+                                      entry_id: entry.entry_id,
+                                      attendees: currentAttendees,
+                                    };
+                                  }}
+                                />
+                              </div>
                             )}
                           </div>
                         </Accordion>
@@ -358,31 +348,24 @@ export const DynamicCheckoutForms = ({
               {/* / Collection Method: Attendees */}
 
               {/* Delivery Methods */}
-              <DeliveryMethodForm
-                config={configEntry}
-                showAddonDeliveryMethods={entry.addons.length > 0}
-                ref={(el) => {
-                  entryFormData.current[entryIndex] = {
-                    ...entryFormData.current[entryIndex],
-                    entry_id: entry.entry_id,
-                    delivery: el!,
-                  };
-                }}
-              />
+              <div className="w-full mt-4">
+                <DeliveryMethodForm
+                  config={configEntry}
+                  showAddonDeliveryMethods={entry.addons.length > 0}
+                  ref={(el) => {
+                    entryFormData.current[entryIndex] = {
+                      ...entryFormData.current[entryIndex],
+                      entry_id: entry.entry_id,
+                      delivery: el!,
+                    };
+                  }}
+                />
+              </div>
               {/* / Delivery Methods */}
             </li>
           );
         })}
       </ul>
-      <div className="w-full mt-10">
-        <button
-          className="text-base block font-normal leading-none bg-pink-600 text-white rounded-full px-4 py-4 hover:no-underline hover:opacity-90 focus:opacity-90 mx-auto"
-          aria-label={`Make Payment & Finalise Order`}
-          onClick={handleSubmit}
-        >
-          Complete Order
-        </button>
-      </div>
     </>
   );
-};
+});

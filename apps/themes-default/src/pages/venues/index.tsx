@@ -1,9 +1,9 @@
 /* Dependencies */
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
+import dynamic from 'next/dynamic';
 import { NextSeo } from 'next-seo';
 import { BuildingOfficeIcon } from '@heroicons/react/24/outline';
-import { useRouter } from 'next/router';
 
 // Services
 import { differentBreedClient } from '@/services/differentBreedClient/differentBreedClient';
@@ -15,8 +15,18 @@ import Layout from '@/Layouts/Layout';
 import { Pagination } from '@/components/Molecules/Pagination/Pagination';
 import { Heading } from '@/components/Atoms/Heading/Heading';
 import { Placeholder } from '@/components/Molecules/Placeholder/Placeholder';
-import { VenueFilters } from '@/components/Molecules/VenueFilters/VenueFilters';
 import { VenueCardList } from '@/components/Organisms/VenueCardList/VenueCardList';
+
+// Client Side Only Components
+const VenueFilters = dynamic(
+  () =>
+    import('@/components/Molecules/VenueFilters/VenueFilters').then(
+      (component) => component.VenueFilters
+    ),
+  {
+    ssr: false,
+  }
+);
 
 // Models
 import { ClientCacheModels } from '@waoadb/contracts-client';
@@ -198,4 +208,5 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async ({}) => {
   };
 };
 
+// Export the page
 export default Page;

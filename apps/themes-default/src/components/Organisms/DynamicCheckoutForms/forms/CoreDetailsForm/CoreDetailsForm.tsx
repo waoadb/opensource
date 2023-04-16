@@ -52,9 +52,13 @@ export const CoreDetailsForm = forwardRef<
       config.collected_core.fields[key as CoreDetailsFormFieldKeys] === true
   ) as CoreDetailsFormFieldKeys[];
 
-  const { initialValues, schema } = getCoreFieldsFormConfig(
-    config.collected_core.fields
-  );
+  const {
+    initialValues,
+    schema,
+    errorsPropMatch,
+    errorsBillingAddressPropMatch,
+    errorsShippingAddressPropMatch,
+  } = getCoreFieldsFormConfig(config.collected_core.fields);
 
   const formik = useFormik({
     initialValues: defaultValues || initialValues,
@@ -95,17 +99,13 @@ export const CoreDetailsForm = forwardRef<
   return (
     <div className="w-full">
       <form onSubmit={formik.handleSubmit}>
-        <h3 className="text-xl">Core Details</h3>
+        <h3 className="text-xl mb-2">Core Details</h3>
 
         {/* Error Message */}
         <FormErrorMessage
           errors={formik.errors}
           touched={formik.touched}
-          propMatch={{
-            core_details: 'Core Details',
-            billing_address: 'Billing Address',
-            shipping_address: 'Shipping Address',
-          }}
+          propMatch={errorsPropMatch}
         />
         {/* / Error Message */}
 
@@ -166,13 +166,21 @@ export const CoreDetailsForm = forwardRef<
 
           {/* Billing Address */}
           {enabledFields.includes('billing_address_enabled') && (
-            <BillingAddressFields
-              values={formik.values}
-              errors={formik.errors}
-              touched={formik.touched}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-            />
+            <>
+              <FormErrorMessage
+                errors={formik.errors}
+                touched={formik.touched}
+                propMatch={errorsBillingAddressPropMatch}
+              />
+
+              <BillingAddressFields
+                values={formik.values}
+                errors={formik.errors}
+                touched={formik.touched}
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+              />
+            </>
           )}
           {/* / Billing Address */}
 
@@ -180,13 +188,20 @@ export const CoreDetailsForm = forwardRef<
 
           {/* Shipping Address */}
           {enabledFields.includes('shipping_address_enabled') && (
-            <ShippingAddressFields
-              values={formik.values}
-              errors={formik.errors}
-              touched={formik.touched}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-            />
+            <>
+              <FormErrorMessage
+                errors={formik.errors}
+                touched={formik.touched}
+                propMatch={errorsShippingAddressPropMatch}
+              />
+              <ShippingAddressFields
+                values={formik.values}
+                errors={formik.errors}
+                touched={formik.touched}
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+              />
+            </>
           )}
           {/* / Shipping Address */}
         </div>

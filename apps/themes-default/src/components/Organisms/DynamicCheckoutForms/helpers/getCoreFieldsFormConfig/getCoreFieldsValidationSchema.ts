@@ -184,9 +184,48 @@ export const getCoreFieldsFormConfig = (
     })
     .required();
 
+  // Error Messages
+  const errorsPropMatch = {
+    core_details: {
+      title: 'Title',
+      first_name: 'First Name',
+      surname: 'Surname',
+      email_address: 'Email Address',
+      mobile_phone: 'Mobile Phone',
+      work_phone: 'Work Phone',
+      job_title: 'Job Title',
+      company_name: 'Company Name',
+      gender: 'Gender',
+      website_url: 'Website URL',
+    },
+  };
+
+  const errorsBillingAddressPropMatch = {
+    name: 'Name',
+    address_line_1: 'Address Line 1',
+    address_line_2: 'Address Line 2',
+    address_line_3: 'Address Line 3',
+    city: 'City',
+    postcode: 'Postcode',
+    country: 'Country',
+  };
+
+  const errorsShippingAddressPropMatch = {
+    name: 'Name',
+    address_line_1: 'Address Line 1',
+    address_line_2: 'Address Line 2',
+    address_line_3: 'Address Line 3',
+    city: 'City',
+    postcode: 'Postcode',
+    country: 'Country',
+  };
+
   // Return the config.
   return {
     schema,
     initialValues,
+    errorsPropMatch,
+    errorsBillingAddressPropMatch,
+    errorsShippingAddressPropMatch,
   };
 };

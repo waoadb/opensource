@@ -1,6 +1,7 @@
 /* Dependencies */
 import { useCallback, useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
+import dynamic from 'next/dynamic';
 import dayjs from 'dayjs';
 import { NextSeo } from 'next-seo';
 import { CalendarIcon } from '@heroicons/react/24/outline';
@@ -15,8 +16,18 @@ import Layout from '@/Layouts/Layout';
 import { Pagination } from '@/components/Molecules/Pagination/Pagination';
 import { Heading } from '@/components/Atoms/Heading/Heading';
 import { Placeholder } from '@/components/Molecules/Placeholder/Placeholder';
-import { WhatsOnFilters } from '@/components/Molecules/WhatsOnFilters/WhatsOnFilters';
 import { EventCardList } from '@/components/Organisms/EventCardList/EventCardList';
+
+// Client Side Only Components
+const WhatsOnFilters = dynamic(
+  () =>
+    import('@/components/Molecules/WhatsOnFilters/WhatsOnFilters').then(
+      (component) => component.WhatsOnFilters
+    ),
+  {
+    ssr: false,
+  }
+);
 
 // Models
 import { ClientCacheModels } from '@waoadb/contracts-client';

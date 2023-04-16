@@ -1,70 +1,238 @@
+/* Dependencies */
+import { useMemo } from 'react';
+
+// Helpers
+import { formatDateRange } from '@/helpers/formatDateRange/formatDateRange';
+
+// Components
 import { Paragraph } from '@/components/Atoms/Paragraph/Paragraph';
+import { Link } from '@/components/Atoms/Link/Link';
+import { Heading } from '@/components/Atoms/Heading/Heading';
 import { Button } from '@/components/Atoms/Button/Button';
 
-export const CheckoutSummary = () => {
-  const numberFormat = (number: number) => {
-    return number.toLocaleString('en-GB', {
-      style: 'currency',
-      currency: 'GBP',
-    });
-  }
-  return (
-    <div className="bg-indigo-100 p-4 rounded-md">
-      <div className="divide-y divide-gray-500">
-        <div className="block space-y-4 py-2">
-          {/*As a row*/}
-          <div className="w-full flex flex-row flex-wrap justify-between gap-4">
-            <div>
-              <span className="block font-semibold">Event Name</span>
-              <span className="block">Date: Tuesday, 22nd April</span>
-            </div>
-            <div><span className="font-medium">{numberFormat(48)}</span></div>
-          </div>
-          {/*As a row*/}
-          <div className="w-full flex flex-row flex-wrap justify-between gap-4">
-            <div>
-              <span className="block font-semibold">Event Name</span>
-              <span className="block">Date: Tuesday, 22nd April</span>
-            </div>
-            <div><span className="font-medium">{numberFormat(55.99)}</span></div>
-          </div>
-        </div>
+// Models
+import { ClientCartModels } from '@waoadb/contracts-client';
+type Props = {
+  /**
+   * Cart
+   */
+  cart: ClientCartModels.Cart;
+  /**
+   * Handle finalise click.
+   */
+  handleFinalise: () => void;
+};
 
-        <div className="block space-y-4 py-2">
-          {/*As a row*/}
-          <div className="w-full flex flex-row flex-wrap justify-between gap-2">
-            <div>
-              <span className="block font-semibold">Processing fees</span>
-            </div>
-            <div>+ <span className="font-medium">{numberFormat(55.99)}</span></div>
-            <Paragraph variant="small" className="block w-full">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt praesentium quasi
-              repudiandae? Aliquam blanditiis commodi cumque dolorum.
-            </Paragraph>
-          </div>
-          {/*As a row*/}
-          <div className="w-full flex flex-row flex-wrap justify-between gap-2">
-            <div>
-              <span className="block font-semibold">Student discount</span>
-            </div>
-            <div>- <span className="font-medium">{numberFormat(12.99)}</span></div>
-            <Paragraph variant="small" className="block w-full">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt praesentium quasi
-              repudiandae? Aliquam blanditiis commodi cumque dolorum.
-            </Paragraph>
-          </div>
+/**
+ * Checkout Summary
+ * @param props - Component props.
+ * @returns
+ */
+export const CheckoutSummary = ({ cart, handleFinalise }: Props) => {
+  // Memo
+  const cartTotal = useMemo(() => {
+    return cart.entries.reduce((prev, next) => prev + next.entry_total, 0);
+  }, [cart]);
+
+  return (
+    <div className="px-2 rounded-md border border-gray-100 border-solid">
+      {/* Cart Entries */}
+      <section className="w-full space-y-4 py-2">
+        <ul className="space-y-2">
+          {cart.entries.map((entry) => {
+            return (
+              <li
+                key={entry.entry_id}
+                className="w-full py-4 px-4 bg-gray-100/70"
+              >
+                <Heading level="h3" style="h3">
+                  {entry.event.name}
+                </Heading>
+                <Paragraph style="small" className="block w-full mt-1 mb-4">
+                  {formatDateRange(
+                    entry.performance.start_date,
+                    entry.performance.start_time,
+                    entry.performance.end_date,
+                    entry.performance.end_time,
+                    true
+                  )}
+                </Paragraph>
+
+                {entry.tickets?.length > 0 && (
+                  <>
+                    <Heading level="h4" style="h4">
+                      Tickets
+                    </Heading>
+                    <ul className="w-full mt-1 grid grid-cols-1 gap-1">
+                      {entry.tickets.map((ticket) => {
+                        return (
+                          <li
+                            key={ticket.ticket_entry_id}
+                            className="w-full py-1 flex flex-row flex-wrap justify-between"
+                          >
+                            <Paragraph
+                              style="small"
+                              className="w-full max-w-[calc(100%-100px)]"
+                            >
+                              {ticket.name}
+                            </Paragraph>
+                            <Paragraph
+                              style="small"
+                              className="w-auto font-semibold"
+                            >
+                              £{ticket.price.toFixed(2)}
+                            </Paragraph>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </>
+                )}
+
+                {entry.addons.length > 0 && (
+                  <>
+                    <hr className="h-[2px] bg-gray-50 w-full my-2" />
+
+                    <Heading level="h4" style="h4">
+                      Addons
+                    </Heading>
+                    <ul className="w-full mt-1 grid grid-cols-1 gap-1">
+                      {entry.addons.map((addon) => {
+                        return (
+                          <li
+                            key={addon.addon_entry_id}
+                            className="w-full py-1 flex flex-row flex-wrap justify-between"
+                          >
+                            <Paragraph
+                              style="small"
+                              className="w-full max-w-[calc(100%-100px)]"
+                            >
+                              {addon.name}
+                            </Paragraph>
+                            <Paragraph
+                              style="small"
+                              className="w-auto font-semibold"
+                            >
+                              £{addon.price.toFixed(2)}
+                            </Paragraph>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </>
+                )}
+
+                {entry.fees.length > 0 && (
+                  <>
+                    <hr className="h-[2px] bg-gray-50 w-full my-2" />
+
+                    <Heading level="h4" style="h4">
+                      Fees
+                    </Heading>
+                    <ul className="w-full mt-1 grid grid-cols-1 gap-1">
+                      {entry.fees.map((fee) => {
+                        return (
+                          <li key={fee.fee_entry_id} className="w-full py-1 ">
+                            <div className="w-full flex flex-row flex-wrap justify-between">
+                              <Paragraph
+                                style="small"
+                                className="w-full max-w-[calc(100%-100px)]"
+                              >
+                                {fee.title}
+                              </Paragraph>
+                              <Paragraph
+                                style="small"
+                                className="w-auto font-semibold"
+                              >
+                                + £{fee.total.toFixed(2)}
+                              </Paragraph>
+                            </div>
+                            {fee.description && (
+                              <Paragraph
+                                style="small"
+                                className="block w-full mt-1"
+                              >
+                                {fee.description}
+                              </Paragraph>
+                            )}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </>
+                )}
+
+                {entry.discounts.length > 0 && (
+                  <>
+                    <hr className="h-[2px] bg-gray-50 w-full my-2" />
+
+                    <Heading level="h4" style="h4">
+                      Discount&apos;s
+                    </Heading>
+                    <ul className="w-full mt-1 grid grid-cols-1 gap-1">
+                      {entry.discounts.map((discount) => {
+                        return (
+                          <li
+                            key={discount.discount_entry_id}
+                            className="w-full py-1 "
+                          >
+                            <div className="w-full flex flex-row flex-wrap justify-between">
+                              <Paragraph
+                                style="small"
+                                className="w-full max-w-[calc(100%-100px)]"
+                              >
+                                {discount.title}
+                              </Paragraph>
+                              <Paragraph
+                                style="small"
+                                className="w-auto font-semibold"
+                              >
+                                - £{discount.total.toFixed(2)}
+                              </Paragraph>
+                            </div>
+                            {discount.description && (
+                              <Paragraph
+                                style="small"
+                                className="block w-full mt-1"
+                              >
+                                {discount.description}
+                              </Paragraph>
+                            )}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+      {/* Cart Entries */}
+
+      {/* Cart Total */}
+      <section className="block space-y-4 py-2">
+        <Paragraph style="base" className="w-full flex flex-row flex-wrap">
+          <span className="w-full max-w-[calc(100%-150px)]">Order Total</span>
+          <span className="font-semibold ml-auto text-right">
+            £{cartTotal.toFixed(2)}
+          </span>
+        </Paragraph>
+
+        <div className="grid grid-cols-1 gap-2">
+          <Button
+            accessibleTitle={`Complete your order of £${cartTotal.toFixed(2)}`}
+            variant="primary"
+            className="text-lg"
+            fullWidth={true}
+            onClick={handleFinalise}
+          >
+            Complete Order
+          </Button>
         </div>
-        <div className="block space-y-4 py-2">
-          <div className="text-right w-full">
-            <span>Order Total: </span>
-            <span className="font-semibold">{numberFormat(55.99)}</span>
-          </div>
-          <div className="flex flex-col gap-2">
-            <Button variant="secondary" className="text-lg" fullWidth={true}>Complete Checkout</Button>
-          </div>
-        </div>
-      </div>
+      </section>
+      {/* /Cart Total */}
     </div>
   );
 };
-
