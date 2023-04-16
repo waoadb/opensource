@@ -4,6 +4,7 @@ import classNames from 'classnames';
 
 // Helpers
 import { getDescribedBy } from '@/helpers/getDescribedBy/getDescribedBy';
+import { uniqueId } from '@/helpers/uniqueId/uniqueId';
 
 // Components
 import { ToolTip } from '../../ToolTip/ToolTip';
@@ -30,11 +31,6 @@ type SelectProps = {
    * Sets the error state on the field.
    */
   error?: string;
-
-  /**
-   * ID to be used
-   */
-  id: string;
 
   /**
    * Icon
@@ -127,7 +123,6 @@ export const Select = ({
   disabled,
   error,
   icon,
-  id,
   label,
   labelVisible = true,
   name,
@@ -141,6 +136,9 @@ export const Select = ({
   value,
   readOnly = false,
 }: SelectProps) => {
+  // State
+  const id = useMemo(() => uniqueId(), []);
+
   // Set the Tool tip on ID Change
   const describedBy = useMemo(
     () => getDescribedBy({ error, id, name, supportText, toolTip }),

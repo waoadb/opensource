@@ -68,7 +68,6 @@ export const SearchFilters = ({ onSubmit, query = '' }: Props) => {
               <div className="w-full max-w-[calc(100%-74px)]">
                 <Input
                   label="Enter Query"
-                  id="query"
                   name="query"
                   onChange={handleChange}
                   onBlur={handleBlur}

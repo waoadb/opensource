@@ -38,7 +38,7 @@ class HTTPClient {
    */
   async markCartAsSold(
     cart_id: string,
-    payload: ClientCartModels.MarkCartAsSoldRequest
+    payload: ClientCartModels.ValidateCartRequest
   ) {
     const response = await fetch(`/api/mark-cart-sold`, {
       method: 'POST',

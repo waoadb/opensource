@@ -106,7 +106,6 @@ export const WhatsOnFilters = ({ onSubmit, view, handleViewChange }: Props) => {
                 <div className="col-span-1">
                   <Input
                     label="Event Name"
-                    id="query"
                     name="query"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -120,7 +119,6 @@ export const WhatsOnFilters = ({ onSubmit, view, handleViewChange }: Props) => {
                 <div className="col-span-1">
                   <Input
                     label="Date From"
-                    id="date_from"
                     name="date_from"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -134,7 +132,6 @@ export const WhatsOnFilters = ({ onSubmit, view, handleViewChange }: Props) => {
                 <div className="col-span-1">
                   <Input
                     label="Date To"
-                    id="date_to"
                     name="date_to"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -148,7 +145,6 @@ export const WhatsOnFilters = ({ onSubmit, view, handleViewChange }: Props) => {
                 {/* <div className="col-span-1">
                   <Select
                     label="Accessibility"
-                    id="access"
                     name="access"
                     onChange={handleChange}
                     onBlur={handleBlur}

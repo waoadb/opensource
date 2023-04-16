@@ -1,5 +1,5 @@
 /* Dependencies */
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
@@ -14,23 +14,16 @@ import Layout from '@/Layouts/Layout';
 
 // Components
 import { Heading } from '@/components/Atoms/Heading/Heading';
-import { Placeholder } from '@/components/Molecules/Placeholder/Placeholder';
-import { ShoppingCartIcon } from '@heroicons/react/24/outline';
-import { CartSummary } from '@/components/Molecules/CartSummary/CartSummary';
-import { CartEntries } from '@/components/Organisms/CartEntries/CartEntries';
-import { CreateCustomerModal } from '@/components/Organisms/CreateCustomerModal/CreateCustomerModal';
+import { DynamicCheckoutForms } from '@/components/Organisms/DynamicCheckoutForms/DynamicCheckoutForms';
 
 // Models
-import {
-  ClientCacheModels,
-  ClientCustomerModels,
-} from '@waoadb/contracts-client';
+import { ClientCacheModels, ClientCartModels } from '@waoadb/contracts-client';
 type PageProps = {
   profile: ClientCacheModels.CacheProfile;
 };
 
 /**
- * Page: Cart
+ * Page: Checkout
  * @param props - Page props.
  * @returns
  */
@@ -39,45 +32,51 @@ const Page = ({ profile }: PageProps) => {
   const router = useRouter();
 
   // State
+  const [renderForm, setRenderForm] = useState(false);
   const [showCreateCustomer, setShowCreateCustomer] = useState(false);
 
   // Different Breed
   const {
-    cartState: { cart, cart_id },
+    retrieveCheckoutConfig,
+    cartState: { cart, cart_id, checkoutConfig },
   } = useDifferentBreedCart();
 
   // Callbacks
-  const handleCheckoutClick = useCallback(() => {
-    if (!cart) return null;
-
-    // If the customer is attached to the cart, go to checkout.
-    if (cart.cust_id) {
-      router.push('/checkout');
-    }
-    // If the customer is not attached to the cart, show the create customer form.
-    else {
-      setShowCreateCustomer(true);
-    }
-  }, [showCreateCustomer]);
-
-  const handleCustomerCreate = useCallback(
-    async (
-      payload: ClientCustomerModels.CreateCustomerRequest,
-      callback: Function
-    ) => {
-      // Create customer
+  const handleSubmit = useCallback(
+    async (payload: ClientCartModels.ValidateCartRequest) => {
       try {
-        // Attach customer to cart
-        await httpClient.attachCustomer(cart_id!, payload);
-        // Navigate to checkout
-        router.push('/checkout');
+        // Attach Customer
+
+        await differentBreedClient.cart
+          .validateCart(cart_id!, {
+            ...payload,
+          })
+          .catch((error) => {
+            console.log(error);
+            throw error;
+          });
+
+        await httpClient.markCartAsSold(cart_id!, payload).catch((error) => {
+          console.log(error);
+          throw error;
+        });
+
+        alert('Cart has been marked as sold.');
+        router.push('/');
       } catch (error) {
-        // Show error
-        console.error(error);
+        console.log(error);
       }
     },
-    []
+    [cart_id]
   );
+
+  // UseEffects
+  useEffect(() => {
+    if (cart) {
+      retrieveCheckoutConfig(cart.cart_id);
+      setRenderForm(true);
+    }
+  }, [cart]);
 
   return (
     <>
@@ -86,10 +85,10 @@ const Page = ({ profile }: PageProps) => {
         title={`${profile.title} | Cart`}
         noindex={true}
         nofollow={true}
-        description={`View the active items in your cart.`}
+        description={`Proceed to purchase the active items in your cart.`}
         openGraph={{
-          title: `${profile.title} | Cart`,
-          description: `View the active items in your cart.`,
+          title: `${profile.title} | Checkout`,
+          description: `Proceed to purchase the active items in your cart.`,
           images: [
             {
               url: profile.image?.url || '',
@@ -97,27 +96,13 @@ const Page = ({ profile }: PageProps) => {
             },
           ],
         }}
-        canonical={`${process.env.NEXT_PUBLIC_SITE_URL}/cart`}
+        canonical={`${process.env.NEXT_PUBLIC_SITE_URL}/checkout`}
       />
       {/* / SEO */}
 
       {/* Main */}
       <Layout profile={profile}>
-        {/* Placeholder */}
-        {(!cart || !cart.entries.length) && (
-          <section className="w-full min-h-70vh flex flex-row flex-wrap">
-            <Placeholder
-              title="Your cart is empty"
-              content="Add some items to your cart to view them here."
-              icon={
-                <ShoppingCartIcon width={24} height={24} className="mx-auto" />
-              }
-            />
-          </section>
-        )}
-        {/* / Placeholder */}
-
-        {/* Cart */}
+        {/* Checkout */}
         {cart && cart.entries.length > 0 && (
           <section className="container mx-auto my-12 lg:mt-4 lg:py-10 min-h-70vh">
             <Heading level="h1" style="h1">
@@ -130,7 +115,13 @@ const Page = ({ profile }: PageProps) => {
                 <Heading level="h2" style="h2" className="mb-4">
                   Entries
                 </Heading>
-                <CartEntries />
+                {renderForm && checkoutConfig && (
+                  <DynamicCheckoutForms
+                    cart={cart}
+                    checkoutConfig={checkoutConfig}
+                    onSubmit={handleSubmit}
+                  />
+                )}
               </section>
               {/* / Cart Entries */}
 
@@ -139,24 +130,16 @@ const Page = ({ profile }: PageProps) => {
                 <Heading level="h2" style="h2" className="mb-4">
                   Summary
                 </Heading>
-                <CartSummary
+                {/* <CheckoutSummary
                   cart={cart}
                   handleCheckoutClick={handleCheckoutClick}
-                />
+                /> */}
               </section>
               {/* / Summary */}
             </div>
           </section>
         )}
-        {/* / Cart */}
-
-        {/* Create Customer */}
-        <CreateCustomerModal
-          isOpen={showCreateCustomer}
-          onClose={() => setShowCreateCustomer(false)}
-          onSubmit={handleCustomerCreate}
-        />
-        {/* Create Customer */}
+        {/* / Checkout */}
       </Layout>
       {/* / Main */}
     </>

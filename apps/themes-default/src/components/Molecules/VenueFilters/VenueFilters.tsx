@@ -88,7 +88,6 @@ export const VenueFilters = ({ onSubmit }: Props) => {
                 <div className="lg:col-span-2">
                   <Input
                     label="Enter Query"
-                    id="query"
                     name="query"
                     onChange={handleChange}
                     onBlur={handleBlur}

@@ -87,7 +87,6 @@ export const CreateCustomerModal = ({ isOpen, onClose, onSubmit }: Props) => {
             <div className="w-full grid grid-cols-2 gap-2">
               <div className="w-full">
                 <Input
-                  id="forename"
                   label="First Name"
                   name="forename"
                   onChange={handleChange}
@@ -102,7 +101,6 @@ export const CreateCustomerModal = ({ isOpen, onClose, onSubmit }: Props) => {
               </div>
               <div className="w-full">
                 <Input
-                  id="surname"
                   label="Surname"
                   name="surname"
                   onChange={handleChange}
@@ -118,7 +116,6 @@ export const CreateCustomerModal = ({ isOpen, onClose, onSubmit }: Props) => {
             </div>
             <div className="w-full mt-2">
               <Input
-                id="email"
                 label="Email Address"
                 name="email"
                 onChange={handleChange}
