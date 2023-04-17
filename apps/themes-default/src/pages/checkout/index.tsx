@@ -80,6 +80,7 @@ const Page = ({ profile }: PageProps) => {
       retrieveCheckoutConfig(cart.cart_id);
       setRenderForm(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cart]);
 
   return (

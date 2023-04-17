@@ -89,7 +89,7 @@ export const AccessibilityIcon = ({
     else {
       return widthValue;
     }
-  }, [size, widthValue]);
+  }, [size, type, widthValue]);
 
   return (
     <img
