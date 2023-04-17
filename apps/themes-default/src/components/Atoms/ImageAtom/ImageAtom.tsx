@@ -10,7 +10,7 @@ import { generateSrcSet } from '@/helpers/generateSrcSet/generateSrcSet';
 
 // Sizes
 const restrictedSize = {
-  card: `(max-width: 400px) 300px, 600px`,
+  card: `(max-width: 400px) 300px, (max-width: 500px) 475px, 600px`,
 };
 
 // Models
