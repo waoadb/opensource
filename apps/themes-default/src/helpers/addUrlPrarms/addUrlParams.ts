@@ -5,5 +5,5 @@
  * @returns
  */
 export const addUrlParams = (url: string, params: string): string => {
-  return `${url}${url.includes('?') ? '&' : '?'}${'format=webp&'}${params}`;
+  return `${url}${url.includes('?') ? '&' : '?'}${'fm=webp&'}${params}`;
 };
