@@ -20,6 +20,10 @@ type ParagraphProps = PropsWithChildren<{
    * Paragraph style
    */
   style?: keyof typeof variants;
+  /**
+   * Suppress hydration warning
+   */
+  suppressHydrationWarning?: boolean;
 }>;
 
 /**
@@ -30,6 +34,14 @@ export const Paragraph = ({
   children,
   className,
   style = 'base',
+  suppressHydrationWarning = false,
 }: ParagraphProps) => {
-  return <p className={classNames(className, variants[style])}>{children}</p>;
+  return (
+    <p
+      className={classNames(className, variants[style])}
+      {...(suppressHydrationWarning ? { suppressHydrationWarning: true } : {})}
+    >
+      {children}
+    </p>
+  );
 };

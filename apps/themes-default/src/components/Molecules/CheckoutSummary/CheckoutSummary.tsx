@@ -48,7 +48,11 @@ export const CheckoutSummary = ({ cart, handleFinalise }: Props) => {
                 <Heading level="h3" style="h3">
                   {entry.event.name}
                 </Heading>
-                <Paragraph style="small" className="block w-full mt-1 mb-4">
+                <Paragraph
+                  style="small"
+                  className="block w-full mt-1 mb-4"
+                  suppressHydrationWarning={true}
+                >
                   {formatDateRange(
                     entry.performance.start_date,
                     entry.performance.start_time,

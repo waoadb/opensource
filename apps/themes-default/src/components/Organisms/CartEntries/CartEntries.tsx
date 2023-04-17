@@ -40,7 +40,7 @@ export const CartEntries = () => {
           key={entry.entry_id}
           defaultOpen={index === 0}
         >
-          <Paragraph className="w-full">
+          <Paragraph className="w-full" suppressHydrationWarning={true}>
             {formatDateRange(
               entry.performance.start_date,
               entry.performance.start_time,

@@ -1,5 +1,5 @@
 /* Dependencies */
-import { createElement, FunctionComponent, PropsWithChildren } from 'react';
+import { FunctionComponent, PropsWithChildren } from 'react';
 import classNames from 'classnames';
 
 // Styles
@@ -27,6 +27,10 @@ type HeadingProps = PropsWithChildren<{
    * Heading style
    */
   style?: keyof typeof variants;
+  /**
+   * Suppress hydration warning
+   */
+  suppressHydrationWarning?: boolean;
 }>;
 
 /**
@@ -35,13 +39,17 @@ type HeadingProps = PropsWithChildren<{
  */
 export const Heading: FunctionComponent<HeadingProps> = ({
   children,
-  level = 'h2',
+  level: El = 'h2',
   style = 'h2',
   className,
+  suppressHydrationWarning = false,
 }) => {
-  return createElement(
-    level,
-    { className: classNames('font-semibold', className, variants[style]) },
-    children
+  return (
+    <El
+      className={classNames('font-semibold', className, variants[style])}
+      {...(suppressHydrationWarning ? { suppressHydrationWarning: true } : {})}
+    >
+      {children}
+    </El>
   );
 };

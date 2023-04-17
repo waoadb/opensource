@@ -2,7 +2,7 @@
 import { useMemo } from 'react';
 
 // Helpers
-// import { formatDateRange } from '@/helpers/formatDateRange/formatDateRange';
+import { formatDateRange } from '@/helpers/formatDateRange/formatDateRange';
 import { truncateString } from '@/helpers/truncateString/truncateString';
 
 // Components
@@ -32,22 +32,22 @@ type Props = {
  */
 export const EventCard = ({ event, as: El = 'li' }: Props) => {
   // state
-  // const dateRange = useMemo(() => {
-  //   if (
-  //     !event.performance_summary.first_performance ||
-  //     !event.performance_summary.last_performance
-  //   ) {
-  //     return 'Coming Soon!';
-  //   }
+  const dateRange = useMemo(() => {
+    if (
+      !event.performance_summary.first_performance ||
+      !event.performance_summary.last_performance
+    ) {
+      return 'Coming Soon!';
+    }
 
-  //   return formatDateRange(
-  //     event.performance_summary.first_performance.start_date,
-  //     event.performance_summary.first_performance.start_time,
-  //     event.performance_summary.last_performance.end_date,
-  //     event.performance_summary.last_performance.end_time,
-  //     false
-  //   );
-  // }, [event]);
+    return formatDateRange(
+      event.performance_summary.first_performance.start_date,
+      event.performance_summary.first_performance.start_time,
+      event.performance_summary.last_performance.end_date,
+      event.performance_summary.last_performance.end_time,
+      false
+    );
+  }, [event]);
   const truncatedSummary = useMemo(() => {
     if (event.details.summary) {
       return truncateString(event.details.summary, 100);
@@ -73,9 +73,13 @@ export const EventCard = ({ event, as: El = 'li' }: Props) => {
         <Heading level="h3" style="h4" className="font-semibold">
           {event.details.name}
         </Heading>
-        {/* <Paragraph style="small" className="mb-2">
+        <Paragraph
+          style="small"
+          className="mb-2"
+          suppressHydrationWarning={true}
+        >
           {dateRange}
-        </Paragraph> */}
+        </Paragraph>
 
         {event.accessibility?.enabled && (
           <AccessibilityList

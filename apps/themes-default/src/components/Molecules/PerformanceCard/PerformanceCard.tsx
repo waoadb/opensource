@@ -46,7 +46,9 @@ export const PerformanceCard = ({ performance, handleBookNow }: Props) => {
           <Heading level="h5" style="h4">
             {performance.details.title}
           </Heading>
-          <Paragraph>{performanceDateRange}</Paragraph>
+          <Paragraph style="base" suppressHydrationWarning={true}>
+            {performanceDateRange}
+          </Paragraph>
         </div>
         <div className="w-full lg:w-auto lg:shrink text-right">
           {performance.accessibility?.enabled && (

@@ -145,7 +145,12 @@ export const BookNowModal = ({
         {!isLoading && performanceData && (
           <div className="w-full">
             {/* Title */}
-            <Heading level="h2" style="h3" className="pr-10">
+            <Heading
+              level="h2"
+              style="h3"
+              className="pr-10"
+              suppressHydrationWarning={true}
+            >
               {performanceDate}
             </Heading>
             {/* / Title */}

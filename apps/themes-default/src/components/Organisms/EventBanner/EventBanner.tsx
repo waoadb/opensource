@@ -87,7 +87,11 @@ export const EventBanner = ({ event }: Props) => {
             >
               {event.details.name}
             </Heading>
-            <Paragraph style="large" className="my-2">
+            <Paragraph
+              style="large"
+              className="my-2"
+              suppressHydrationWarning={true}
+            >
               Date: {dateRange}
             </Paragraph>
 
