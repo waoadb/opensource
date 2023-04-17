@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Shared javascript package used to streamline admin level api interactions with the platform.",
   "main": "build/index.js",
+  "types": "build/index.d.ts",
   "private": false,
   "publishConfig": {
     "access": "public"
