@@ -62,7 +62,7 @@ export const FeaturedEventBanner = ({ event }: Props) => {
         <div className="container mx-auto">
           <div className="pb-8">
             <Heading level="h1" style="h1" className="block">
-              <span>Featured title here</span>
+              <span>{event.details.name}</span>
             </Heading>
 
             <Paragraph

@@ -51,7 +51,20 @@ export const EventBanner = ({ event }: Props) => {
     <section className="relative flex h-[90vh] w-full flex-col overflow-hidden md:min-h-[800px] pt-20">
       {/* Image */}
       <div className="absolute inset-0 after:absolute after:inset-0 after:bg-black/40">
-        {event.details.picture && (
+        {event.customise?.banner && (
+          <ImageAtom
+            imageSrc={event.customise.banner.url}
+            altText={event.customise.banner.alt_text}
+            blurhash={event.customise.banner.blurhash}
+            position="object-center"
+            fit="object-cover"
+            ratio="auto"
+            absolute={true}
+            lazyload={false}
+          />
+        )}
+
+        {!event.customise?.banner && event.details.picture && (
           <ImageAtom
             imageSrc={event.details.picture.url}
             altText={event.details.picture.alt_text}

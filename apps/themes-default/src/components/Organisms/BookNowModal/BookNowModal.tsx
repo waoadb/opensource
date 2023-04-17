@@ -52,6 +52,7 @@ export const BookNowModal = ({
   const [performanceData, setPerformanceData] =
     useState<ClientCacheModels.CachePerformance | null>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [hasNoStock, setHasNoStock] = useState<boolean>(false);
 
   // Cart Provider
   const {
@@ -88,6 +89,10 @@ export const BookNowModal = ({
         .catch((error) => {
           throw error;
         });
+
+      if (!response?.stock?.tickets?.length) {
+        setHasNoStock(true);
+      }
 
       // Set the performance data
       setPerformanceData(response);
@@ -134,7 +139,7 @@ export const BookNowModal = ({
           />
         )}
 
-        {!isLoading && !performanceData && (
+        {!isLoading && (!performanceData || hasNoStock) && (
           <Placeholder
             title="No Stock Found"
             content="We could not find any stock for this performance."
@@ -142,7 +147,7 @@ export const BookNowModal = ({
           />
         )}
 
-        {!isLoading && performanceData && (
+        {!hasNoStock && !isLoading && performanceData && (
           <div className="w-full">
             {/* Title */}
             <Heading

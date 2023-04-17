@@ -121,7 +121,7 @@ const Page = ({ event, profile }: PageProps) => {
   return (
     <>
       {/* SEO */}
-      {event.marketing.seo && (
+      {event.marketing?.seo && (
         <NextSeo
           title={event.marketing.seo.title}
           description={event.marketing.seo.description}
@@ -151,15 +151,15 @@ const Page = ({ event, profile }: PageProps) => {
           <div className="grid lg:grid-cols-3 gap-4 mt-4">
             {/* Content */}
             <article className="w-full lg:col-span-2">
-              <EventSummary
-                content="
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eaque iusto minus fugit delectus laudantium? Et odio dolor, temporibus dicta vero ipsum incidunt ducimus eligendi nam aperiam. Deleniti nihil nobis doloremque?"
-              />
-              <hr className="my-4" />
-              <EventDescription
-                content="
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eaque iusto minus fugit delectus laudantium? Et odio dolor, temporibus dicta vero ipsum incidunt ducimus eligendi nam aperiam. Deleniti nihil nobis doloremque?"
-              />
+              {event.details.summary && (
+                <EventSummary content={event.details.summary} />
+              )}
+              {event.details.summary && event.details.description && (
+                <hr className="my-4" />
+              )}
+              {event.details.description && (
+                <EventDescription content={event.details.description} />
+              )}
             </article>
             {/* / Content */}
             {/* Side Bar */}
