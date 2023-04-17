@@ -11,7 +11,7 @@ import { useRouter } from 'next/router';
 
 // Components
 import { Header } from '@/components/Organisms/Header/Header';
-// import { Footer } from '@/components/Organisms/Footer/Footer';
+import { Footer } from '@/components/Organisms/Footer/Footer';
 
 // Models
 import { ClientCacheModels } from '@waoadb/contracts-client';
@@ -118,7 +118,7 @@ export default function Layout({
       </main>
       {/* Main */}
       {/* Footer */}
-      {/* <Footer profile={profile} /> */}
+      <Footer profile={profile} />
       {/* / Footer */}
     </>
   );
