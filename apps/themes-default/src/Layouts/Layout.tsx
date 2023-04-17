@@ -10,7 +10,7 @@ import classNames from 'classnames';
 import { useRouter } from 'next/router';
 
 // Components
-import { Header } from '@/components/Organisms/Header/Header';
+// import { Header } from '@/components/Organisms/Header/Header';
 import { Footer } from '@/components/Organisms/Footer/Footer';
 
 // Models
@@ -98,12 +98,12 @@ export default function Layout({
       {/* Header */}
       <header className="w-full">
         <SkipToContent />
-        <Header
+        {/* <Header
           toggleMenu={toggleMenu}
           menuOpen={menuOpen}
           transparent={!preventTransparency && menuOffset}
           profile={profile}
-        />
+        /> */}
       </header>
       {/* / Header */}
       {/* Main */}
