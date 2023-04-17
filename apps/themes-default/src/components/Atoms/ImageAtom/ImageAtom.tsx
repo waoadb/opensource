@@ -9,7 +9,7 @@ import { decode } from 'blurhash';
 import { generateSrcSet } from '@/helpers/generateSrcSet/generateSrcSet';
 
 // Sizes
-const sizes = {
+const restrictedSize = {
   card: `(max-width: 400px) 300px, 600px`,
 };
 
@@ -86,7 +86,7 @@ type ImageProps = {
   /**
    * Restrict src set to a specific size.
    */
-  restrictSize?: keyof typeof sizes;
+  restrictSize?: keyof typeof restrictedSize;
 };
 
 /**
@@ -248,7 +248,7 @@ export class ImageAtom extends React.Component<ImageProps> {
             style={{ opacity: 0 }}
             data-src={this.imageSrcSet}
             {...(this.props.restrictSize && {
-              sizes: sizes[this.props.restrictSize],
+              sizes: restrictedSize[this.props.restrictSize],
             })}
             loading={
               this.props.lazyload === undefined || this.props.lazyload
