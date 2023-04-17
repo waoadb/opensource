@@ -65,7 +65,11 @@ export const FeaturedEventBanner = ({ event }: Props) => {
               <span>Featured title here</span>
             </Heading>
 
-            <Paragraph style="base" className="my-2">
+            <Paragraph
+              style="base"
+              className="my-2"
+              suppressHydrationWarning={true}
+            >
               {dateRange}
             </Paragraph>
 
