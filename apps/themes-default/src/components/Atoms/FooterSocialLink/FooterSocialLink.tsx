@@ -109,13 +109,15 @@ export const SocialIcons = {
  */
 export const FooterSocialLink = ({ socialLink }: Props) => {
   return (
-    <Link
-      href={socialLink.url}
-      title={SocialAccessibleTitle[socialLink.type]}
-      className="inline-flex items-center border text-indigo-600 border-indigo-600 fill-indigo-600 border-solid justify-center bg-transparent rounded-full w-8 h-8 hover:bg-indigo-600 hover:text-white hover:fill-white focus:bg-indigo-600 focus:text-white focus:fill-white transition-colors duration-200"
-      target="_blank"
-    >
-      {SocialIcons[socialLink.type]}
-    </Link>
+    <li>
+      <Link
+        href={socialLink.url}
+        title={SocialAccessibleTitle[socialLink.type]}
+        className="inline-flex items-center border text-indigo-600 border-indigo-600 fill-indigo-600 border-solid justify-center bg-transparent rounded-full w-8 h-8 hover:bg-indigo-600 hover:text-white hover:fill-white focus:bg-indigo-600 focus:text-white focus:fill-white transition-colors duration-200"
+        target="_blank"
+      >
+        {SocialIcons[socialLink.type]}
+      </Link>
+    </li>
   );
 };

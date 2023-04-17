@@ -31,6 +31,7 @@ export const Footer = ({ profile }: Props) => {
               className="mb-4 flex flex-row justify-center lg:justify-start w-full "
             >
               <Image src="/demoLogo.svg" alt="" width={202} height={40} />
+              <span className="sr-only">Return to home page.</span>
             </Link>
             <div className="flex flex-col flex-wrap items-center justify-center lg:items-start gap-2">
               <Paragraph className="font-semibold flex-0 text-center">
