@@ -65,10 +65,12 @@ export const DynamicCheckoutForms = forwardRef<
         validationStatus.push(coreStatus, customStatus);
       }
 
-      for (const attendee of entry.attendees) {
-        const coreStatus = await attendee.core?.validate();
-        const customStatus = await attendee.custom?.validate();
-        validationStatus.push(coreStatus, customStatus);
+      if (entry.attendees && entry.attendees.length > 0) {
+        for (const attendee of entry.attendees) {
+          const coreStatus = await attendee.core?.validate();
+          const customStatus = await attendee.custom?.validate();
+          validationStatus.push(coreStatus, customStatus);
+        }
       }
 
       const deliveryStatus = await entry.delivery.validate();
