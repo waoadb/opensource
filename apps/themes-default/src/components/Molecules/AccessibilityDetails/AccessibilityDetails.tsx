@@ -33,7 +33,7 @@ export const AccessibilityDetails = ({ type }: Props) => {
   const content = useMemo(() => getAccessibilityDetails(type), [type]);
   return (
     <div className="w-full">
-      <AccessibilityIcon type={type} className="w-20 -ml-[10px]" />
+      <AccessibilityIcon type={type} size="lg" className="-ml-[10px]" />
       <Heading level="h2" style="h3" className="mt-4">
         {content.title}
       </Heading>

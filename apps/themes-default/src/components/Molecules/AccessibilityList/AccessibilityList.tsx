@@ -1,5 +1,5 @@
 /* Dependencies */
-import { useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import classNames from 'classnames';
 
 // Helpers
@@ -37,12 +37,11 @@ export const AccessibilityList = ({
   const [showModal, setShowModal] = useState(false);
   const [selectedType, setSelectedType] = useState<JoinedAccessibilityTypes>();
 
-  // Effects
-  useEffect(() => {
-    if (selectedType) {
-      setShowModal(true);
-    }
-  }, [selectedType]);
+  // Callbacks
+  const handleSelection = useCallback((type: JoinedAccessibilityTypes) => {
+    setSelectedType(type);
+    setShowModal(true);
+  }, []);
 
   return (
     <>
@@ -56,16 +55,13 @@ export const AccessibilityList = ({
           <li key={type}>
             <button
               type="button"
-              onClick={() => setSelectedType(type)}
+              onClick={() => handleSelection(type)}
               title={`Event caters for ${accessibleTitles[type]}, click for more information`}
             >
               <AccessibilityIcon
                 type={type}
                 color={color}
-                className={classNames('h-auto', {
-                  'w-12': size === 'base',
-                  'w-8': size === 'small',
-                })}
+                size={size === 'base' ? 'md' : 'sm'}
               />
             </button>
           </li>

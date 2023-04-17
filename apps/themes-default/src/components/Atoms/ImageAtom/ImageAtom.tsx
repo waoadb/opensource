@@ -3,6 +3,7 @@ import React from 'react';
 import anime from 'animejs';
 import classNames from 'classnames';
 import { decode } from 'blurhash';
+import { generateSrcSet } from '@/helpers/generateSrcSet/generateSrcSet';
 
 // Models
 export type ImageRatio = '1:1' | '16:9' | '9:10' | '4:3' | 'auto';
@@ -50,6 +51,11 @@ type ImageProps = {
   imageSrc: string;
 
   /**
+   * Lazyload
+   */
+  lazyload?: boolean;
+
+  /**
    * Sets the image fit style.
    */
   fit: ImageFit;
@@ -87,6 +93,10 @@ export class ImageAtom extends React.Component<ImageProps> {
    * Canvas Element
    */
   canvas: HTMLCanvasElement | null = null;
+  /**
+   * Generated image src.
+   */
+  imageSrcSet: string = '';
 
   /**
    * Component Reference
@@ -96,6 +106,7 @@ export class ImageAtom extends React.Component<ImageProps> {
   constructor(props: ImageProps) {
     super(props);
     this.componentRef = React.createRef();
+    this.imageSrcSet = generateSrcSet(this.props.imageSrc);
   }
 
   /**
@@ -135,7 +146,7 @@ export class ImageAtom extends React.Component<ImageProps> {
 
     // If there is no blurhash just show the new image.
     if (!this.props.blurhash) {
-      this.imageElement!.setAttribute('src', this.props.imageSrc);
+      this.imageElement!.setAttribute('srcSet', this.imageSrcSet);
       anime({
         targets: this.imageElement,
         opacity: [0, 1],
@@ -148,7 +159,7 @@ export class ImageAtom extends React.Component<ImageProps> {
 
     // Render the blurhash
     this.renderBlurHash(() => {
-      this.imageElement!.setAttribute('src', this.props.imageSrc);
+      this.imageElement!.setAttribute('srcSet', this.imageSrcSet);
       anime({
         targets: this.imageElement,
         opacity: [0, 1],
@@ -209,10 +220,10 @@ export class ImageAtom extends React.Component<ImageProps> {
           className="absolute w-full h-full left-0 top-0"
         ></canvas>
         <img
-          src="#"
+          srcSet="#"
           style={{ opacity: 0 }}
-          data-src={this.props.imageSrc}
-          loading="lazy"
+          data-src={this.imageSrcSet}
+          loading={this.props.lazyload ? 'lazy' : 'eager'}
           className={`absolute w-full h-full left-0 top-0 z-0 ${this.props.fit} ${this.props.position}`}
           alt={this.props.presentation ? '' : this.props.altText}
         />

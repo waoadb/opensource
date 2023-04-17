@@ -5,7 +5,6 @@ import classNames from 'classnames';
 // Helpers
 import { formatVenueAddress } from '@/helpers/formatVenueAddress/formatVenueAddress';
 import { getVenueAccessibility } from '@/helpers/getVenueAccessibility/getVenueAccessibility';
-import { addUrlParams } from '@/helpers/addUrlPrarms/addUrlParams';
 
 // Components
 import { Heading } from '@/components/Atoms/Heading/Heading';
@@ -47,7 +46,7 @@ export const VenueCard = ({ as: El = 'li', venue, showDirections }: Props) => {
       {venue.picture && (
         <div className="w-full">
           <ImageAtom
-            imageSrc={addUrlParams(venue.picture.url, 'w=300&q=80')}
+            imageSrc={venue.picture.url}
             altText={venue.picture.alt_text || ''}
             blurhash={venue.picture.blurhash}
             position="object-center"

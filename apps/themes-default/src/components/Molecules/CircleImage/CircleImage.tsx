@@ -1,6 +1,4 @@
 /* Dependencies */
-// Helpers
-import { addUrlParams } from '@/helpers/addUrlPrarms/addUrlParams';
 
 // Components
 import { ImageAtom } from '@/components/Atoms/ImageAtom/ImageAtom';
@@ -25,7 +23,7 @@ export const CircleImage = ({ profile: { image } }: Props) => {
   return (
     <div className="w-full rounded-full overflow-hidden">
       <ImageAtom
-        imageSrc={addUrlParams(image.url, 'w=600&q=80')}
+        imageSrc={image.url}
         altText={image.alt_text}
         blurhash={image.blurhash}
         position="object-center"

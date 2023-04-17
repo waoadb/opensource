@@ -4,7 +4,6 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 // Helpers
-import { addUrlParams } from '@/helpers/addUrlPrarms/addUrlParams';
 import { handleFieldError } from '@/helpers/handleFieldError/handleFieldError';
 
 // Components
@@ -76,7 +75,7 @@ export const AddonCard = ({
         {/* Image */}
         <div className="relative overflow-hidden w-full rounded-lg">
           <ImageAtom
-            imageSrc={addUrlParams(addon.picture?.url || '', 'w=300&q=80')}
+            imageSrc={addon.picture?.url || ''}
             altText={addon.picture?.alt_text || ''}
             blurhash={addon.picture?.blurhash}
             ratio="1:1"

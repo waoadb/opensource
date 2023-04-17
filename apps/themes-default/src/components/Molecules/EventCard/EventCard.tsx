@@ -2,7 +2,6 @@
 import { useMemo } from 'react';
 
 // Helpers
-import { addUrlParams } from '@/helpers/addUrlPrarms/addUrlParams';
 import { formatDateRange } from '@/helpers/formatDateRange/formatDateRange';
 import { truncateString } from '@/helpers/truncateString/truncateString';
 
@@ -61,7 +60,7 @@ export const EventCard = ({ event, as: El = 'li' }: Props) => {
       {event.details.picture && (
         <div className="w-full">
           <ImageAtom
-            imageSrc={addUrlParams(event.details.picture.url, 'w=600&q=80')}
+            imageSrc={event.details.picture.url}
             altText={event.details.picture.alt_text || ''}
             blurhash={event.details.picture.blurhash}
             position="object-center"

@@ -3,7 +3,6 @@ import { useMemo } from 'react';
 
 // Helpers
 import { formatDateRange } from '@/helpers/formatDateRange/formatDateRange';
-import { addUrlParams } from '@/helpers/addUrlPrarms/addUrlParams';
 
 // Components
 import { Heading } from '@/components/Atoms/Heading/Heading';
@@ -46,13 +45,14 @@ export const FeaturedEventBanner = ({ event }: Props) => {
       <div className="absolute inset-0 after:absolute after:inset-0 after:bg-black/40">
         {event.details.picture && (
           <ImageAtom
-            imageSrc={addUrlParams(event.details.picture.url, 'w=1200&q=80')}
+            imageSrc={event.details.picture.url}
             altText={event.details.picture.alt_text}
             blurhash={event.details.picture.blurhash}
             position="object-center"
             fit="object-cover"
             ratio="auto"
             absolute={true}
+            lazyload={false}
           />
         )}
       </div>
