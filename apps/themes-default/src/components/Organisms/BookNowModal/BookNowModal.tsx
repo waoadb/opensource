@@ -77,20 +77,26 @@ export const BookNowModal = ({
   const retrievePerformance = useCallback(async () => {
     if (!performance_id) return;
 
-    // Retrieve the performance
-    const response = await differentBreedClient.performances
-      .retrievePerformance({
-        event_id,
-        performance_id,
-      })
-      .then((response) => response.payload)
-      .catch(() => null);
+    try {
+      // Retrieve the performance
+      const response = await differentBreedClient.performances
+        .retrievePerformance({
+          event_id,
+          performance_id,
+        })
+        .then((response) => response.payload)
+        .catch((error) => {
+          throw error;
+        });
 
-    // Set the performance data
-    setPerformanceData(response);
+      // Set the performance data
+      setPerformanceData(response);
 
-    // Remove loading
-    setIsLoading(false);
+      // Remove loading
+      setIsLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
   }, [performance_id, event_id]);
 
   // Effects
