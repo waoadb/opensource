@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 
 // Helpers
 import { formatDateRange } from '@/helpers/formatDateRange/formatDateRange';
-import { truncateString } from '@/helpers/truncateString/truncateString';
+// import { truncateString } from '@/helpers/truncateString/truncateString';
 
 // Components
 import { Heading } from '@/components/Atoms/Heading/Heading';
@@ -48,12 +48,12 @@ export const EventCard = ({ event, as: El = 'li' }: Props) => {
       false
     );
   }, [event]);
-  const truncatedSummary = useMemo(() => {
-    if (event.details.summary) {
-      return truncateString(event.details.summary, 100);
-    }
-    return null;
-  }, [event]);
+  // const truncatedSummary = useMemo(() => {
+  //   if (event.details.summary) {
+  //     return truncateString(event.details.summary, 100);
+  //   }
+  //   return null;
+  // }, [event]);
 
   return (
     <El className="w-full rounded-lg overflow-hidden border border-gray-200 border-solid">
@@ -85,9 +85,9 @@ export const EventCard = ({ event, as: El = 'li' }: Props) => {
           />
         )}
 
-        {truncatedSummary && (
+        {/* {truncatedSummary && (
           <Paragraph style="small">{event.details.summary}</Paragraph>
-        )}
+        )} */}
         <Link
           href={`/events/${event.event_id}`}
           accessibleTitle={`View event page for ${event.details.name}`}
