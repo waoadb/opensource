@@ -80,7 +80,7 @@ const Page = ({ profile }: PageProps) => {
       retrieveCheckoutConfig(cart.cart_id);
       setRenderForm(true);
     }
-  }, [cart, retrieveCheckoutConfig]);
+  }, [cart]);
 
   return (
     <>
@@ -148,7 +148,7 @@ const Page = ({ profile }: PageProps) => {
         )}
         {/* / Checkout */}
         {/* Placeholder */}
-        {(!cart || !cart.entries.length) && (
+        {cart && !cart.entries.length && (
           <section className="w-full min-h-70vh flex flex-row flex-wrap">
             <Placeholder
               title="Your cart is empty"
