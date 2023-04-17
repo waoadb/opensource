@@ -199,7 +199,6 @@ export class ImageAtom extends React.Component<ImageProps> {
    * Lifecycle - Render The Template
    */
   render(): JSX.Element {
-    console.log(this.props.lazyload);
     return (
       <>
         {!this.props.lazyload && this.props.lazyload !== undefined && (
