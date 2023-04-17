@@ -172,27 +172,28 @@ const Page = ({ profile }: PageProps) => {
  * @returns
  */
 export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
-  // Get the profile
-  const profileResponse = await differentBreedClient.profile
-    .retrieveProfile()
-    .then((response) => response.payload)
-    .catch(() => {
-      return null;
+  try {
+    // Get the profile and events
+    const response = await Promise.all([
+      differentBreedClient.profile.retrieveProfile(),
+    ]).catch((error) => {
+      throw error;
     });
 
-  // Handle error
-  if (!profileResponse) {
+    // Extract responses
+    const [profileResponse] = response;
+
+    // Return the props
+    return {
+      props: {
+        profile: profileResponse.payload,
+      },
+    };
+  } catch (error) {
     return {
       notFound: true,
     };
   }
-
-  // Return the props
-  return {
-    props: {
-      profile: profileResponse,
-    },
-  };
 };
 
 export default Page;

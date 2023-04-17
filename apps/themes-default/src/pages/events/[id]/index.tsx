@@ -279,38 +279,32 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async ({
   // Extract the id
   const { id } = params as PageParams;
 
-  // Get the profile
-  const profileResponse = await differentBreedClient.profile
-    .retrieveProfile()
-    .then((response) => response.payload)
-    .catch((error) => {
-      return null;
+  try {
+    // Get the profile and events
+    const response = await Promise.all([
+      differentBreedClient.profile.retrieveProfile(),
+      differentBreedClient.events.retrieveEvent({
+        event_id: id,
+      }),
+    ]).catch((error) => {
+      throw error;
     });
 
-  // Get the event
-  const eventResponse = await differentBreedClient.events
-    .retrieveEvent({
-      event_id: id,
-    })
-    .then((response) => response.payload)
-    .catch(() => {
-      return null;
-    });
+    // Extract responses
+    const [profileResponse, eventResponse] = response;
 
-  // Handle error
-  if (!eventResponse || !profileResponse) {
+    // Return the props
+    return {
+      props: {
+        profile: profileResponse.payload,
+        event: eventResponse.payload,
+      },
+    };
+  } catch (error) {
     return {
       notFound: true,
     };
   }
-
-  // Return the props
-  return {
-    props: {
-      event: eventResponse,
-      profile: profileResponse,
-    },
-  };
 };
 
 export default Page;

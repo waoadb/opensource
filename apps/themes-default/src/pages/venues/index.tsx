@@ -173,39 +173,33 @@ const Page = ({ profile, initialVenues }: PageProps) => {
  * @returns
  */
 export const getServerSideProps: GetServerSideProps<PageProps> = async ({}) => {
-  // Get the profile
-  const profileResponse = await differentBreedClient.profile
-    .retrieveProfile()
-    .then((response) => response.payload)
-    .catch(() => {
-      return null;
+  try {
+    // Get the profile and events
+    const response = await Promise.all([
+      differentBreedClient.profile.retrieveProfile(),
+      differentBreedClient.venues.retrieveVenues({
+        limit: 6,
+        skip: 0,
+      }),
+    ]).catch((error) => {
+      throw error;
     });
 
-  // Get the venues
-  const venuesResponse = await differentBreedClient.venues
-    .retrieveVenues({
-      limit: 6,
-      skip: 0,
-    })
-    .then((response) => response.payload)
-    .catch(() => {
-      return null;
-    });
+    // Extract responses
+    const [profileResponse, venuesRepsonse] = response;
 
-  // Handle error
-  if (!profileResponse || !venuesResponse) {
+    // Return the props
+    return {
+      props: {
+        profile: profileResponse.payload,
+        initialVenues: venuesRepsonse.payload,
+      },
+    };
+  } catch (error) {
     return {
       notFound: true,
     };
   }
-
-  // Return the props
-  return {
-    props: {
-      profile: profileResponse,
-      initialVenues: venuesResponse,
-    },
-  };
 };
 
 // Export the page
