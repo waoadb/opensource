@@ -21,8 +21,7 @@
     "tabWidth": 2
   },
   "dependencies": {
-    "@nrwl/nx-cloud": "^15.0.2",
-    "@waoadb/contracts-client": "^0.0.10"
+    "@nrwl/nx-cloud": "^15.0.2"
   },
   "devDependencies": {
     "lerna": "^4.0.0",
