@@ -6,11 +6,11 @@ import {
   useMemo,
   useState,
 } from 'react';
-import classNames from 'classnames';
+// import classNames from 'classnames';
 import { useRouter } from 'next/router';
 
 // Components
-// import { Header } from '@/components/Organisms/Header/Header';
+import { Header } from '@/components/Organisms/Header/Header';
 import { Footer } from '@/components/Organisms/Footer/Footer';
 
 // Models
@@ -98,16 +98,16 @@ export default function Layout({
       {/* Header */}
       <header className="w-full">
         <SkipToContent />
-        {/* <Header
+        <Header
           toggleMenu={toggleMenu}
           menuOpen={menuOpen}
           transparent={!preventTransparency && menuOffset}
           profile={profile}
-        /> */}
+        />
       </header>
       {/* / Header */}
       {/* Main */}
-      <main
+      {/* <main
         className={classNames('flex-1 w-full block', {
           '-mt-[72px]': menuOffset && !preventTransparency,
           'pt-[72px]': !menuOffset || preventTransparency,
@@ -115,7 +115,7 @@ export default function Layout({
         id="main"
       >
         {children}
-      </main>
+      </main> */}
       {/* Main */}
       {/* Footer */}
       <Footer profile={profile} />
