@@ -81,6 +81,7 @@ export const AddonCard = ({
             ratio="1:1"
             fit="object-cover"
             position="object-center"
+            restrictSize="card"
           />
         </div>
         {/* / Image */}

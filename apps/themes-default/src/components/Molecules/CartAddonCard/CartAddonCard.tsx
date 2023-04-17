@@ -59,6 +59,7 @@ export const CartAddonCard = ({ addon, entry_id, onSubmit }: Props) => {
               ratio="1:1"
               fit="object-cover"
               position="object-center"
+              restrictSize="card"
             />
           </div>
         )}

@@ -66,6 +66,7 @@ export const EventCard = ({ event, as: El = 'li' }: Props) => {
             position="object-center"
             fit="object-cover"
             ratio="16:9"
+            restrictSize="card"
           />
         </div>
       )}

@@ -1,10 +1,17 @@
 /* Dependencies */
 import React from 'react';
+import Head from 'next/head';
 import anime from 'animejs';
 import classNames from 'classnames';
 import { decode } from 'blurhash';
+
+// Helpers
 import { generateSrcSet } from '@/helpers/generateSrcSet/generateSrcSet';
-import Head from 'next/head';
+
+// Sizes
+const sizes = {
+  card: `(max-width: 400px) 300px, 600px`,
+};
 
 // Models
 export type ImageRatio = '1:1' | '16:9' | '9:10' | '4:3' | 'auto';
@@ -75,6 +82,11 @@ type ImageProps = {
    * Sets the image ratio.
    */
   ratio: ImageRatio;
+
+  /**
+   * Restrict src set to a specific size.
+   */
+  restrictSize?: keyof typeof sizes;
 };
 
 /**
@@ -235,6 +247,9 @@ export class ImageAtom extends React.Component<ImageProps> {
             srcSet="#"
             style={{ opacity: 0 }}
             data-src={this.imageSrcSet}
+            {...(this.props.restrictSize && {
+              sizes: sizes[this.props.restrictSize],
+            })}
             loading={
               this.props.lazyload === undefined || this.props.lazyload
                 ? 'lazy'

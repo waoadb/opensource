@@ -52,6 +52,7 @@ export const VenueCard = ({ as: El = 'li', venue, showDirections }: Props) => {
             position="object-center"
             fit="object-cover"
             ratio="16:9"
+            restrictSize="card"
           />
         </div>
       )}

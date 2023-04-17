@@ -29,6 +29,7 @@ export const CircleImage = ({ profile: { image } }: Props) => {
         position="object-center"
         fit="object-cover"
         ratio="1:1"
+        restrictSize="card"
       />
     </div>
   );
