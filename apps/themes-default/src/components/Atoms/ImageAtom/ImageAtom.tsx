@@ -4,6 +4,7 @@ import anime from 'animejs';
 import classNames from 'classnames';
 import { decode } from 'blurhash';
 import { generateSrcSet } from '@/helpers/generateSrcSet/generateSrcSet';
+import Head from 'next/head';
 
 // Models
 export type ImageRatio = '1:1' | '16:9' | '9:10' | '4:3' | 'auto';
@@ -198,36 +199,53 @@ export class ImageAtom extends React.Component<ImageProps> {
    * Lifecycle - Render The Template
    */
   render(): JSX.Element {
+    console.log(this.props.lazyload);
     return (
-      <div
-        className={classNames(
-          'block w-full h-full',
-          {
-            absolute: this.props.absolute,
-            relative: !this.props.absolute,
-            'aspect-1': this.props.ratio === '1:1',
-            'aspect-w-16 aspect-h-9': this.props.ratio === '16:9',
-            'aspect-9-10': this.props.ratio === '9:10',
-            'aspect-4-3': this.props.ratio === '4:3',
-          },
-          this.props.className
+      <>
+        {!this.props.lazyload && this.props.lazyload !== undefined && (
+          <Head>
+            <link
+              rel="preload"
+              imageSrcSet={this.imageSrcSet}
+              href={this.props.imageSrc}
+              as="image"
+            />
+          </Head>
         )}
-        ref={this.componentRef}
-      >
-        <canvas
-          width="32"
-          height="32"
-          className="absolute w-full h-full left-0 top-0"
-        ></canvas>
-        <img
-          srcSet="#"
-          style={{ opacity: 0 }}
-          data-src={this.imageSrcSet}
-          loading={this.props.lazyload ? 'lazy' : 'eager'}
-          className={`absolute w-full h-full left-0 top-0 z-0 ${this.props.fit} ${this.props.position}`}
-          alt={this.props.presentation ? '' : this.props.altText}
-        />
-      </div>
+        <div
+          className={classNames(
+            'block w-full h-full',
+            {
+              absolute: this.props.absolute,
+              relative: !this.props.absolute,
+              'aspect-1': this.props.ratio === '1:1',
+              'aspect-w-16 aspect-h-9': this.props.ratio === '16:9',
+              'aspect-9-10': this.props.ratio === '9:10',
+              'aspect-4-3': this.props.ratio === '4:3',
+            },
+            this.props.className
+          )}
+          ref={this.componentRef}
+        >
+          <canvas
+            width="32"
+            height="32"
+            className="absolute w-full h-full left-0 top-0"
+          ></canvas>
+          <img
+            srcSet="#"
+            style={{ opacity: 0 }}
+            data-src={this.imageSrcSet}
+            loading={
+              this.props.lazyload === undefined || this.props.lazyload
+                ? 'lazy'
+                : 'eager'
+            }
+            className={`absolute w-full h-full left-0 top-0 z-0 ${this.props.fit} ${this.props.position}`}
+            alt={this.props.presentation ? '' : this.props.altText}
+          />
+        </div>
+      </>
     );
   }
 }
