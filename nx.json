@@ -15,7 +15,8 @@
       "outputs": [
         "{projectRoot}/dist",
         "{projectRoot}/build",
-        "{projectRoot}/storybook-static"
+        "{projectRoot}/storybook-static",
+        "{projectRoot}/.next"
       ]
     }
   }
