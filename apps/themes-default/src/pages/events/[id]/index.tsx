@@ -121,12 +121,31 @@ const Page = ({ event, profile }: PageProps) => {
   return (
     <>
       {/* SEO */}
+      {/* Fallback to Event when SEO is not provided. */}
+      {!event.marketing?.seo && (
+        <NextSeo
+          title={`${profile.title} | What's On | ${event.details.name}`}
+          description={event.details.description}
+          openGraph={{
+            title: `${profile.title} | What's On | ${event.details.name}`,
+            description: event.details.description,
+            images: [
+              {
+                url: event.details.picture?.url || '',
+                alt: event.details.picture?.alt_text || '',
+              },
+            ],
+          }}
+          canonical={`${process.env.NEXT_PUBLIC_SITE_URL}/events/${event.event_id}`}
+        />
+      )}
+      {/* Render Event SEO */}
       {event.marketing?.seo && (
         <NextSeo
-          title={event.marketing.seo.title}
+          title={`${profile.title} | What's On | ${event.marketing.seo.title}`}
           description={event.marketing.seo.description}
           openGraph={{
-            title: event.marketing.seo.o_title,
+            title: `${profile.title} | What's On | ${event.marketing.seo.o_title}`,
             description: event.marketing.seo.o_description,
             images: [
               {
