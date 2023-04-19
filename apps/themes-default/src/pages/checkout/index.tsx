@@ -28,6 +28,9 @@ type PageProps = {
   profile: ClientCacheModels.CacheProfile;
 };
 
+// Styles
+import '@waoadb/react-sdk/build/index.css';
+
 /**
  * Page: Checkout
  * @param props - Page props.
