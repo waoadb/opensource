@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply text-gray-800;
+}
+
+/* Tool Tip */
+.tool-tip[data-show] .tool-tip__message {
+  display: block;
+  margin: 8px;
+}

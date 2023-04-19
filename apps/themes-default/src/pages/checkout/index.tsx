@@ -17,7 +17,7 @@ import { Heading } from '@/components/Atoms/Heading/Heading';
 import {
   DynamicCheckoutForms,
   DynamicCheckoutFormsImperativeMethods,
-} from '@/components/Organisms/DynamicCheckoutForms/DynamicCheckoutForms';
+} from '@waoadb/react-sdk';
 
 // Models
 import { ClientCacheModels, ClientCartModels } from '@waoadb/contracts-client';
