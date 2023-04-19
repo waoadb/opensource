@@ -22,6 +22,11 @@ export const Toast = forwardRef<ToastImperativeMethods, Props>(
     // State
     const [items, setItems] = React.useState<ToastItemProps[]>([]);
 
+    // Callbacks
+    const removeItem = useCallback((id: string) => {
+      setItems((items) => items.filter((item) => item.id !== id));
+    }, []);
+
     // Imperative methods
     useImperativeHandle(
       forwardedRef,
@@ -36,15 +41,7 @@ export const Toast = forwardRef<ToastImperativeMethods, Props>(
           ]);
         },
       }),
-      [items]
-    );
-
-    // Callbacks
-    const removeItem = useCallback(
-      (id: string) => {
-        setItems((items) => items.filter((item) => item.id !== id));
-      },
-      [items]
+      [removeItem]
     );
 
     return (
@@ -70,3 +67,6 @@ export const Toast = forwardRef<ToastImperativeMethods, Props>(
     );
   }
 );
+
+// Display name
+Toast.displayName = 'Toast';

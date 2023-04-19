@@ -53,6 +53,9 @@ export const ToastItem = ({
 
   // Effects
   useEffect(() => {
+    // Cache reference
+    const toastItem = toastItemRef.current;
+
     // Animate the toast item into view.
     anime({
       targets: toastItemRef.current,
@@ -83,8 +86,8 @@ export const ToastItem = ({
     };
 
     // Add event listeners.
-    toastItemRef.current?.addEventListener('mouseover', handleMouseOver);
-    toastItemRef.current?.addEventListener('mouseout', handleMouseOut);
+    toastItem?.addEventListener('mouseover', handleMouseOver);
+    toastItem?.addEventListener('mouseout', handleMouseOut);
 
     // Allow user to use escape key to dismiss toast.
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -92,21 +95,25 @@ export const ToastItem = ({
         onDismiss(id);
       }
     };
+
     // Add event listener.
     document.addEventListener('keydown', handleKeyDown);
 
     return () => {
       clearTimeout(timeout);
-      toastItemRef.current?.removeEventListener('mouseover', handleMouseOver);
-      toastItemRef.current?.removeEventListener('mouseout', handleMouseOut);
+      toastItem?.removeEventListener('mouseover', handleMouseOver);
+      toastItem?.removeEventListener('mouseout', handleMouseOut);
       document.removeEventListener('keydown', handleKeyDown);
     };
+
+    // Runs only on mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Callbacks
   const handleDismiss = useCallback(() => {
     onDismiss(id);
-  }, []);
+  }, [id, onDismiss]);
 
   return (
     <li

@@ -45,6 +45,8 @@ function App({ Component, pageProps }: AppProps) {
       // Unlisten for toast events
       notifications.unlisten(listener);
     };
+    // Runs once on mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

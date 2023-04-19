@@ -10,6 +10,7 @@
     "dev-packages": "lerna run dev --parallel",
     "build": "lerna run build --stream",
     "PRODUCTION": "##========================================##",
+    "build:all": "yarn packages:build && lerna run build-theme --parallel",
     "build:themes-plugins": "cp .netlify/theme/theme.toml netlify.toml",
     "build:themes-default": "yarn build:themes-plugins && lerna run build-theme --scope=@waoadb/themes-default",
     "PACKAGES": "##========================================##",
