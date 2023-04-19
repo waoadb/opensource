@@ -31,7 +31,7 @@ const toastCloseClasses = {
 };
 
 // Models
-import { NotificationItem } from '@/context/DifferentBreedCart/utils/Notifications/Notifications';
+import { NotificationItem } from '@waoadb/react-sdk';
 export type ToastItemProps = NotificationItem & {
   onDismiss: (id: string) => void;
 };
