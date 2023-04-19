@@ -8,7 +8,7 @@ import {
 } from 'formik';
 
 // Helpers
-import { getCustomFieldsFormConfig } from '../../../../../helpers/getCustomFieldsFormConfig/getCustomFieldsFormConfig';
+import { getCustomFieldsFormConfig } from '../../helpers/getCustomFieldsFormConfig/getCustomFieldsFormConfig';
 
 // Components
 import { DynamicFormCustomField } from '../../fields/DynamicCustomFields/DynamicCustomFields';

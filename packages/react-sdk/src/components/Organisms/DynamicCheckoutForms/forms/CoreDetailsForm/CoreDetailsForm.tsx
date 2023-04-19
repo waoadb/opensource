@@ -3,7 +3,7 @@ import { forwardRef, useImperativeHandle } from 'react';
 import { setNestedObjectValues, useFormik } from 'formik';
 
 // Helpers
-import { getCoreFieldsFormConfig } from '../../../../../helpers/getCoreFieldsFormConfig/getCoreFieldsValidationSchema';
+import { getCoreFieldsFormConfig } from '../../helpers/getCoreFieldsFormConfig/getCoreFieldsValidationSchema';
 
 // Components
 import { BillingAddressFields } from '../../fields/BillingAddressFields/BillingAddressField';

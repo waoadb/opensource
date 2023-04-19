@@ -7,6 +7,9 @@ import { cleanObjects } from '../../../helpers/cleanObjects/cleanObjects';
 
 // Components
 import { Accordion } from '../../Molecules/Accordion/Accordion';
+import { Heading } from '../../Atoms/Heading/Heading';
+import { PerformanceInformation } from '../../Molecules/PerformanceInformation/PerformanceInformation';
+
 import {
   CoreDetailsForm,
   CoreDetailsFormImperativeMethods,
@@ -22,7 +25,6 @@ import {
 
 // Models
 import { ClientCartModels } from '@waoadb/contracts-client';
-import { Heading } from '../../Atoms/Heading/Heading';
 
 type Props = {
   cart: ClientCartModels.Cart;
@@ -237,6 +239,9 @@ export const DynamicCheckoutForms = forwardRef<
             <Heading level="h3" style="h3">
               {entry.event.name}
             </Heading>
+            <div className="db-w-full db-my-2">
+              <PerformanceInformation performance={entry.performance} />
+            </div>
             {/* / Event Details */}
 
             {/* Collection Method: Customer */}

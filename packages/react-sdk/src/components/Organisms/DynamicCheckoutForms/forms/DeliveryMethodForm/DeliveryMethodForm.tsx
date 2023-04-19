@@ -4,7 +4,7 @@ import { setNestedObjectValues, useFormik } from 'formik';
 
 // Helpers
 import { handleFieldError } from '../../../../../helpers/handleFieldError/handleFieldError';
-import { getDeliveryMethodsFormConfig } from '../../../../../helpers/getDeliveryMethodFormConfig/getDeliveryMethodFormConfig';
+import { getDeliveryMethodsFormConfig } from '../../helpers/getDeliveryMethodFormConfig/getDeliveryMethodFormConfig';
 
 // Components
 import { RadioList } from '../../../../Molecules/Forms/RadioList/RadioList';

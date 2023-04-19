@@ -6,7 +6,7 @@ import { formatDateRange } from '@/helpers/formatDateRange/formatDateRange';
 
 // Different Breed
 import { differentBreedClient } from '@/services/differentBreedClient/differentBreedClient';
-import { useDifferentBreedCart } from '@/context/DifferentBreedCart/hooks/useDifferentBreedCart';
+import { useDifferentBreedCart } from '@waoadb/react-sdk';
 
 // Components
 import { Modal } from '../Modal/Modal';
@@ -59,7 +59,7 @@ export const BookNowModal = ({
     addTicketToCart,
     addAddonToCart,
     cartState: { cart_id },
-  } = useDifferentBreedCart();
+  } = useDifferentBreedCart(differentBreedClient);
 
   // Memory
   const performanceDate = useMemo(() => {

@@ -1,5 +1,6 @@
 /* Dependencies */
 import { useContext } from 'react';
+import { DifferentBreedClient } from '@waoadb/js-client-sdk';
 
 // Utils
 import { notifications } from '../utils/Notifications/Notifications';
@@ -8,7 +9,6 @@ import { notifications } from '../utils/Notifications/Notifications';
 import { DifferentBreedCartContext } from '..';
 
 // Services
-import { differentBreedClient } from '../../../services/differentBreedClient/differentBreedClient';
 
 // Models
 import { ClientCartModels } from '@waoadb/contracts-client';
@@ -16,9 +16,12 @@ import { ClientCartModels } from '@waoadb/contracts-client';
 /**
  * Use Different Breed Cart.
  * Methods for interacting with and consuming the cart.
+ * @param differentBreedClient - Different Breed Javascript Client.
  * @returns
  */
-export const useDifferentBreedCart = () => {
+export const useDifferentBreedCart = (
+  differentBreedClient: DifferentBreedClient
+) => {
   // Get the cart context.
   const { cartState, cartDispatch } = useContext(DifferentBreedCartContext);
 

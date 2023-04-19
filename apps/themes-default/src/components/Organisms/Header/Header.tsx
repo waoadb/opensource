@@ -4,8 +4,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import classNames from 'classnames';
 
-// Context
-import { useDifferentBreedCart } from '@/context/DifferentBreedCart/hooks/useDifferentBreedCart';
+// Different Breed
+import { differentBreedClient } from '@/services/differentBreedClient/differentBreedClient';
+import { useDifferentBreedCart } from '@waoadb/react-sdk';
 
 // Components
 import {
@@ -36,7 +37,7 @@ export const Header = ({ toggleMenu, menuOpen, transparent }: Props) => {
   const {
     cartState: { itemCount },
     retrieveCart,
-  } = useDifferentBreedCart();
+  } = useDifferentBreedCart(differentBreedClient);
 
   // State
   const [hasScrolled, setHasScrolled] = useState(false);

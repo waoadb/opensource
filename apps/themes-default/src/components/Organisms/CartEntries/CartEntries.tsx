@@ -2,8 +2,9 @@
 // Helpers
 import { formatDateRange } from '@/helpers/formatDateRange/formatDateRange';
 
-// Services
-import { useDifferentBreedCart } from '@/context/DifferentBreedCart/hooks/useDifferentBreedCart';
+// Different Breed
+import { useDifferentBreedCart } from '@waoadb/react-sdk';
+import { differentBreedClient } from '@/services/differentBreedClient/differentBreedClient';
 
 // Components
 import { Heading } from '@/components/Atoms/Heading/Heading';
@@ -22,7 +23,7 @@ export const CartEntries = () => {
     removeAddonFromCart,
     removeTicketFromCart,
     cartState: { cart, cart_id },
-  } = useDifferentBreedCart();
+  } = useDifferentBreedCart(differentBreedClient);
 
   // Handle no cart
   if (!cart) return null;
