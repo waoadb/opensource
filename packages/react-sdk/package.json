@@ -1,7 +1,10 @@
 {
   "name": "@waoadb/react-sdk",
   "version": "0.0.1",
-  "private": true,
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "clean": "rimraf build",
     "dev": "yarn run clean && tsc-watch --noEmit --onSuccess \"tsup --watch\"",
