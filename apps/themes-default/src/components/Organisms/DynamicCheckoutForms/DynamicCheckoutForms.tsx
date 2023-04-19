@@ -203,99 +203,121 @@ export const DynamicCheckoutForms = forwardRef<
   );
 
   return (
-    <>
-      <ul className="w-full grid grid-cols-1 divide-y divide-gray-100">
-        {cart.entries.map((entry, entryIndex) => {
-          // Get the checkout config for the event
-          const configEntry = checkoutConfig.find(
-            (configEntry) => configEntry.event_id === entry.event_id
-          );
+    <ul className="w-full grid grid-cols-1 divide-y divide-gray-100">
+      {cart.entries.map((entry, entryIndex) => {
+        // Get the checkout config for the event
+        const configEntry = checkoutConfig.find(
+          (configEntry) => configEntry.event_id === entry.event_id
+        );
 
-          // If no config entry is found, return null.
-          if (!configEntry) return null;
+        // If no config entry is found, return null.
+        if (!configEntry) return null;
 
-          // Spread the checkout config
-          const { collected_core, collected_custom } = configEntry;
+        // Spread the checkout config
+        const { collected_core, collected_custom } = configEntry;
 
-          // Check if custom fields has length
-          // [] is sent if no custom fields are defined.
-          const customFieldsHasLength = collected_custom.fields.length > 0;
+        // Check if custom fields has length
+        // [] is sent if no custom fields are defined.
+        const customFieldsHasLength = collected_custom.fields.length > 0;
 
-          // Check methods for attendees
-          const coreAttendees = collected_core.collection_method === 'attendee';
-          const customAttendees =
-            collected_custom.collection_method === 'attendee' &&
-            customFieldsHasLength;
+        // Check methods for attendees
+        const coreAttendees = collected_core.collection_method === 'attendee';
+        const customAttendees =
+          collected_custom.collection_method === 'attendee' &&
+          customFieldsHasLength;
 
-          // Determine render types
-          const renderAttendees = coreAttendees || customAttendees;
-          const renderCustomer =
-            !coreAttendees || (!customAttendees && customFieldsHasLength);
+        // Determine render types
+        const renderAttendees = coreAttendees || customAttendees;
+        const renderCustomer =
+          !coreAttendees || (!customAttendees && customFieldsHasLength);
 
-          return (
-            <li className="w-full py-5" key={entry.entry_id}>
-              {/* Event Details */}
-              <Heading level="h3" style="h3">
-                {entry.event.name}
-              </Heading>
-              {/* / Event Details */}
+        return (
+          <li className="w-full py-5" key={entry.entry_id}>
+            {/* Event Details */}
+            <Heading level="h3" style="h3">
+              {entry.event.name}
+            </Heading>
+            {/* / Event Details */}
 
-              {/* Collection Method: Customer */}
-              {renderCustomer && (
-                <div className="w-full my-2">
-                  <div className="w-full py-2">
-                    {!coreAttendees && (
-                      <CoreDetailsForm
-                        config={configEntry}
-                        ref={(el) => {
-                          entryFormData.current[entryIndex] = {
-                            ...entryFormData.current[entryIndex],
-                            entry_id: entry.entry_id,
-                            customer: {
-                              ...entryFormData.current[entryIndex]?.customer!,
-                              core: el!,
-                            },
-                          };
-                        }}
-                      />
-                    )}
+            {/* Collection Method: Customer */}
+            {renderCustomer && (
+              <div className="w-full my-2">
+                <div className="w-full py-2">
+                  {!coreAttendees && (
+                    <CoreDetailsForm
+                      config={configEntry}
+                      ref={(el) => {
+                        entryFormData.current[entryIndex] = {
+                          ...entryFormData.current[entryIndex],
+                          entry_id: entry.entry_id,
+                          customer: {
+                            ...entryFormData.current[entryIndex]?.customer!,
+                            core: el!,
+                          },
+                        };
+                      }}
+                    />
+                  )}
 
-                    {!customAttendees && (
-                      <CustomDetailsForm
-                        config={configEntry}
-                        ref={(el) => {
-                          // Update the current entry
-                          entryFormData.current[entryIndex] = {
-                            ...entryFormData.current[entryIndex],
-                            entry_id: entry.entry_id,
-                            customer: {
-                              ...entryFormData.current[entryIndex]?.customer!,
-                              custom: el!,
-                            },
-                          };
-                        }}
-                      />
-                    )}
-                  </div>
+                  {!customAttendees && (
+                    <CustomDetailsForm
+                      config={configEntry}
+                      ref={(el) => {
+                        // Update the current entry
+                        entryFormData.current[entryIndex] = {
+                          ...entryFormData.current[entryIndex],
+                          entry_id: entry.entry_id,
+                          customer: {
+                            ...entryFormData.current[entryIndex]?.customer!,
+                            custom: el!,
+                          },
+                        };
+                      }}
+                    />
+                  )}
                 </div>
-              )}
-              {/* / Collection Method: Customer */}
+              </div>
+            )}
+            {/* / Collection Method: Customer */}
 
-              {/* Collection Method: Attendees */}
-              {renderAttendees && (
-                <>
-                  {entry.tickets.map((ticket, ticketIndex) => {
-                    return (
-                      <div className="w-full my-2" key={ticket.ticket_entry_id}>
-                        <Accordion
-                          title={`${ticket.name}`}
-                          unmountOnClose={false}
-                          el="div"
-                          defaultOpen={true}
-                        >
-                          <div className="w-full py-2">
-                            {coreAttendees && (
-                              <CoreDetailsForm
+            {/* Collection Method: Attendees */}
+            {renderAttendees && (
+              <>
+                {entry.tickets.map((ticket, ticketIndex) => {
+                  return (
+                    <div className="w-full my-2" key={ticket.ticket_entry_id}>
+                      <Accordion
+                        title={`${ticket.name}`}
+                        unmountOnClose={false}
+                        el="div"
+                        defaultOpen={true}
+                      >
+                        <div className="w-full py-2">
+                          {coreAttendees && (
+                            <CoreDetailsForm
+                              config={configEntry}
+                              ref={(el) => {
+                                const currentAttendees =
+                                  entryFormData.current[entryIndex]
+                                    ?.attendees || [];
+
+                                currentAttendees[ticketIndex] = {
+                                  ...currentAttendees[ticketIndex],
+                                  core: el!,
+                                };
+
+                                entryFormData.current[entryIndex] = {
+                                  ...entryFormData.current[entryIndex],
+                                  entry_id: entry.entry_id,
+                                  attendees: currentAttendees,
+                                };
+                              }}
+                            />
+                          )}
+
+                          {customAttendees && (
+                            <div className="w-full mt-4">
+                              <CustomDetailsForm
                                 config={configEntry}
                                 ref={(el) => {
                                   const currentAttendees =
@@ -304,7 +326,7 @@ export const DynamicCheckoutForms = forwardRef<
 
                                   currentAttendees[ticketIndex] = {
                                     ...currentAttendees[ticketIndex],
-                                    core: el!,
+                                    custom: el!,
                                   };
 
                                   entryFormData.current[entryIndex] = {
@@ -314,60 +336,36 @@ export const DynamicCheckoutForms = forwardRef<
                                   };
                                 }}
                               />
-                            )}
+                            </div>
+                          )}
+                        </div>
+                      </Accordion>
+                    </div>
+                  );
+                })}
+              </>
+            )}
+            {/* / Collection Method: Attendees */}
 
-                            {customAttendees && (
-                              <div className="w-full mt-4">
-                                <CustomDetailsForm
-                                  config={configEntry}
-                                  ref={(el) => {
-                                    const currentAttendees =
-                                      entryFormData.current[entryIndex]
-                                        ?.attendees || [];
-
-                                    currentAttendees[ticketIndex] = {
-                                      ...currentAttendees[ticketIndex],
-                                      custom: el!,
-                                    };
-
-                                    entryFormData.current[entryIndex] = {
-                                      ...entryFormData.current[entryIndex],
-                                      entry_id: entry.entry_id,
-                                      attendees: currentAttendees,
-                                    };
-                                  }}
-                                />
-                              </div>
-                            )}
-                          </div>
-                        </Accordion>
-                      </div>
-                    );
-                  })}
-                </>
-              )}
-              {/* / Collection Method: Attendees */}
-
-              {/* Delivery Methods */}
-              <div className="w-full mt-4">
-                <DeliveryMethodForm
-                  config={configEntry}
-                  showAddonDeliveryMethods={entry.addons.length > 0}
-                  ref={(el) => {
-                    entryFormData.current[entryIndex] = {
-                      ...entryFormData.current[entryIndex],
-                      entry_id: entry.entry_id,
-                      delivery: el!,
-                    };
-                  }}
-                />
-              </div>
-              {/* / Delivery Methods */}
-            </li>
-          );
-        })}
-      </ul>
-    </>
+            {/* Delivery Methods */}
+            <div className="w-full mt-4">
+              <DeliveryMethodForm
+                config={configEntry}
+                showAddonDeliveryMethods={entry.addons.length > 0}
+                ref={(el) => {
+                  entryFormData.current[entryIndex] = {
+                    ...entryFormData.current[entryIndex],
+                    entry_id: entry.entry_id,
+                    delivery: el!,
+                  };
+                }}
+              />
+            </div>
+            {/* / Delivery Methods */}
+          </li>
+        );
+      })}
+    </ul>
   );
 });
 

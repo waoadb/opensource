@@ -17,12 +17,12 @@
     "singleQuote": true
   },
   "dependencies": {
-    "@waoadb/js-client-sdk": "*",
-    "@waoadb/js-admin-sdk": "*",
-    "@waoadb/contracts-client": "^0.0.10",
     "@headlessui/react": "^1.7.14",
     "@heroicons/react": "^2.0.17",
     "@popperjs/core": "^2.11.7",
+    "@waoadb/contracts-client": "^0.0.10",
+    "@waoadb/js-admin-sdk": "*",
+    "@waoadb/js-client-sdk": "*",
     "animejs": "^3.2.1",
     "blurhash": "^2.0.5",
     "classnames": "^2.3.2",
