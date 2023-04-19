@@ -1,0 +1,11 @@
+@tailwind utilities;
+
+body {
+  @apply db-text-gray-800;
+}
+
+/* Tool Tip */
+.tool-tip[data-show] .tool-tip__message {
+  display: block;
+  margin: 8px;
+}

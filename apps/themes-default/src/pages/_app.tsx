@@ -2,9 +2,13 @@
 import type { AppProps } from 'next/app';
 import { useEffect, useRef } from 'react';
 
-// Services
-import { DifferentBreedCartProvider } from '@/context/DifferentBreedCart';
-import { useDifferentBreedCart } from '@/context/DifferentBreedCart/hooks/useDifferentBreedCart';
+// Different Breed
+import { differentBreedClient } from '@/services/differentBreedClient/differentBreedClient';
+import {
+  DifferentBreedCartProvider,
+  useDifferentBreedCart,
+  NotificationItem,
+} from '@waoadb/react-sdk';
 
 // Components
 import {
@@ -19,9 +23,6 @@ const inter = Inter({ subsets: ['latin'] });
 // Styles
 import '@/styles/globals.css';
 
-// Models
-import { NotificationItem } from '@/context/DifferentBreedCart/utils/Notifications/Notifications';
-
 /**
  * App
  * @param props - Component props.
@@ -32,7 +33,7 @@ function App({ Component, pageProps }: AppProps) {
   const toastRef = useRef<ToastImperativeMethods>(null);
 
   // Hooks
-  const { notifications } = useDifferentBreedCart();
+  const { notifications } = useDifferentBreedCart(differentBreedClient);
 
   // Effects
   useEffect(() => {

@@ -5,9 +5,11 @@ import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 
 // Services
-import { differentBreedClient } from '@/services/differentBreedClient/differentBreedClient';
-import { useDifferentBreedCart } from '@/context/DifferentBreedCart/hooks/useDifferentBreedCart';
 import { httpClient } from '@/services/httpClient/httpClient';
+
+// Different Breed
+import { differentBreedClient } from '@/services/differentBreedClient/differentBreedClient';
+import { useDifferentBreedCart } from '@waoadb/react-sdk';
 
 // Layouts
 import Layout from '@/Layouts/Layout';
@@ -44,7 +46,7 @@ const Page = ({ profile }: PageProps) => {
   // Different Breed
   const {
     cartState: { cart, cart_id },
-  } = useDifferentBreedCart();
+  } = useDifferentBreedCart(differentBreedClient);
 
   // Callbacks
   const handleCheckoutClick = useCallback(() => {

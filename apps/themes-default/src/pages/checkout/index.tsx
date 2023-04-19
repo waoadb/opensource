@@ -3,11 +3,15 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
+import dynamic from 'next/dynamic';
 
 // Services
-import { differentBreedClient } from '@/services/differentBreedClient/differentBreedClient';
-import { useDifferentBreedCart } from '@/context/DifferentBreedCart/hooks/useDifferentBreedCart';
 import { httpClient } from '@/services/httpClient/httpClient';
+
+// Different Breed
+import { differentBreedClient } from '@/services/differentBreedClient/differentBreedClient';
+import { useDifferentBreedCart } from '@waoadb/react-sdk';
+import '@waoadb/react-sdk/build/index.css';
 
 // Layouts
 import Layout from '@/Layouts/Layout';
@@ -17,7 +21,7 @@ import { Heading } from '@/components/Atoms/Heading/Heading';
 import {
   DynamicCheckoutForms,
   DynamicCheckoutFormsImperativeMethods,
-} from '@/components/Organisms/DynamicCheckoutForms/DynamicCheckoutForms';
+} from '@waoadb/react-sdk';
 
 // Models
 import { ClientCacheModels, ClientCartModels } from '@waoadb/contracts-client';
@@ -45,7 +49,7 @@ const Page = ({ profile }: PageProps) => {
   const {
     retrieveCheckoutConfig,
     cartState: { cart, cart_id, checkoutConfig },
-  } = useDifferentBreedCart();
+  } = useDifferentBreedCart(differentBreedClient);
 
   // Callbacks
   const handleSubmit = useCallback(
