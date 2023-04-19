@@ -22,6 +22,7 @@ type Props = {
    */
   handleSubmit: (
     payload: ClientCartModels.AddAddonToCartRequest,
+    title: string,
     callback: () => void
   ) => void;
 };

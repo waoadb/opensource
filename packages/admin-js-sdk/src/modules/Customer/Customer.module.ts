@@ -1,6 +1,4 @@
 /* Dependencies */
-import { AxiosError } from 'axios';
-
 // Modules
 import { BaseModule } from '../Base/Base.module';
 
@@ -25,7 +23,7 @@ export class CustomerModule extends BaseModule {
    */
   async retrieveCustomer(
     cust_id: string
-  ): Promise<ClientCustomerModels.RetrieveCustomerRequest> {
+  ): Promise<ClientCustomerModels.RetrieveCustomerResponse> {
     return this.makeGetRequest<ClientCustomerModels.RetrieveCustomerResponse>(
       'client',
       '/customer',
@@ -33,10 +31,7 @@ export class CustomerModule extends BaseModule {
       {
         customer: cust_id,
       }
-    ).catch((error: AxiosError) => {
-      console.log(error.response.data);
-      return null;
-    });
+    );
   }
 
   /**
@@ -53,10 +48,7 @@ export class CustomerModule extends BaseModule {
       'client',
       '/customer/create',
       payload
-    ).catch((error: AxiosError) => {
-      console.log(error.response.data);
-      return null;
-    });
+    );
   }
 
   /**
@@ -78,10 +70,7 @@ export class CustomerModule extends BaseModule {
       {
         customer: cust_id,
       }
-    ).catch((error: AxiosError) => {
-      console.log(error.response.data);
-      return null;
-    });
+    );
   }
 
   /**
@@ -98,9 +87,6 @@ export class CustomerModule extends BaseModule {
       {
         customer: cust_id,
       }
-    ).catch((error: AxiosError) => {
-      console.log(error.response.data);
-      return null;
-    });
+    );
   }
 }

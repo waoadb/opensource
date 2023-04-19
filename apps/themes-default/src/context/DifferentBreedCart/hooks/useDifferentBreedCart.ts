@@ -1,6 +1,9 @@
 /* Dependencies */
 import { useContext } from 'react';
 
+// Utils
+import { notifications } from '../utils/Notifications/Notifications';
+
 // Store
 import { DifferentBreedCartContext } from '..';
 
@@ -71,9 +74,7 @@ export const useDifferentBreedCart = () => {
     await differentBreedClient.cart
       .attachCustomer(cartState.cart!.cart_id, { cust_id })
       .then((response) => {
-        if (response.success) {
-          cartDispatch({ type: 'SET_CART', value: response.payload });
-        }
+        cartDispatch({ type: 'SET_CART', value: response.payload });
       });
   };
 
@@ -93,7 +94,7 @@ export const useDifferentBreedCart = () => {
     );
 
     // Return the validation status.
-    return response.success;
+    return response.success || false;
   };
 
   /**
@@ -119,15 +120,13 @@ export const useDifferentBreedCart = () => {
     cartDispatch({ type: 'SET_CHECKOUT_CONFIG', value: null });
 
     // Retrieve the checkout config.
-    differentBreedClient.cart.checkout
+    await differentBreedClient.cart.checkout
       .retrieveCheckoutConfig(cart_id)
       .then((response) => {
-        if (response.success) {
-          cartDispatch({
-            type: 'SET_CHECKOUT_CONFIG',
-            value: response.payload,
-          });
-        }
+        cartDispatch({
+          type: 'SET_CHECKOUT_CONFIG',
+          value: response.payload,
+        });
       });
   };
 
@@ -135,18 +134,24 @@ export const useDifferentBreedCart = () => {
    * Add Ticket To Cart.
    * @param cart_id - Cart ID.
    * @param payload - The data to be sent.
+   * @param ticket_title - The title of the ticket.
    */
   const addTicketToCart = async (
     cart_id: string,
-    payload: ClientCartModels.AddTicketToCartRequest
+    payload: ClientCartModels.AddTicketToCartRequest,
+    ticket_title: string
   ) => {
     // Add ticket to cart.
     differentBreedClient.cart.stock
       .addTicketToCart(cart_id, payload)
       .then((response) => {
-        if (response.success) {
-          cartDispatch({ type: 'SET_CART', value: response.payload });
-        }
+        cartDispatch({ type: 'SET_CART', value: response.payload });
+        notifications.showSuccessToast(
+          'Cart updated',
+          `${payload.quantity} ${ticket_title} ticket${
+            payload.quantity > 1 ? 's' : ''
+          } added to the cart.`
+        );
       });
   };
 
@@ -154,10 +159,12 @@ export const useDifferentBreedCart = () => {
    * Remove Ticket From Cart.
    * @param cart_id - Cart ID.
    * @param payload - The data to be sent.
+   * @param ticket_title - The title of the ticket.
    */
   const removeTicketFromCart = async (
     cart_id: string,
-    payload: ClientCartModels.RemoveTicketFromCartRequest
+    payload: ClientCartModels.RemoveTicketFromCartRequest,
+    ticket_title: string
   ) => {
     // Remove ticket from cart.
     differentBreedClient.cart.stock
@@ -165,6 +172,10 @@ export const useDifferentBreedCart = () => {
       .then((response) => {
         if (response.success) {
           cartDispatch({ type: 'SET_CART', value: response.payload });
+          notifications.showSuccessToast(
+            'Cart updated',
+            `${ticket_title} ticket removed from the cart.`
+          );
         }
       });
   };
@@ -173,10 +184,12 @@ export const useDifferentBreedCart = () => {
    * Add Addon To Cart.
    * @param cart_id - Cart ID.
    * @param payload - The data to be sent.
+   * @param addon_title - The title of the addon.
    */
   const addAddonToCart = async (
     cart_id: string,
-    payload: ClientCartModels.AddAddonToCartRequest
+    payload: ClientCartModels.AddAddonToCartRequest,
+    addon_title: string
   ) => {
     // Add addon to cart.
     differentBreedClient.cart.stock
@@ -184,6 +197,10 @@ export const useDifferentBreedCart = () => {
       .then((response) => {
         if (response.success) {
           cartDispatch({ type: 'SET_CART', value: response.payload });
+          notifications.showSuccessToast(
+            'Cart updated',
+            `${payload.quantity} ${addon_title} added to the cart.`
+          );
         }
       });
   };
@@ -192,10 +209,12 @@ export const useDifferentBreedCart = () => {
    * Remove Addon From Cart.
    * @param cart_id - Cart ID.
    * @param payload - The data to be sent.
+   * @param addon_title - The title of the addon.
    */
   const removeAddonFromCart = async (
     cart_id: string,
-    payload: ClientCartModels.RemoveAddonFromCartRequest
+    payload: ClientCartModels.RemoveAddonFromCartRequest,
+    addon_title: string
   ) => {
     // Remove addon from cart.
     differentBreedClient.cart.stock
@@ -203,6 +222,10 @@ export const useDifferentBreedCart = () => {
       .then((response) => {
         if (response.success) {
           cartDispatch({ type: 'SET_CART', value: response.payload });
+          notifications.showSuccessToast(
+            'Cart updated',
+            `${addon_title} removed from the cart.`
+          );
         }
       });
   };
@@ -220,5 +243,6 @@ export const useDifferentBreedCart = () => {
     addAddonToCart,
     removeAddonFromCart,
     retrieveCheckoutConfig,
+    notifications,
   };
 };

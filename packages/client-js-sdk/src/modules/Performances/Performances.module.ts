@@ -1,7 +1,5 @@
 /* Dependencies */
-
 // Modules
-import { AxiosError } from 'axios';
 import { BaseModule } from '../Base/Base.module';
 
 // Models
@@ -31,10 +29,7 @@ export class PerformancesModule extends BaseModule {
       'client',
       '/performances',
       params
-    ).catch((error: AxiosError) => {
-      console.log(error.response.data);
-      return null;
-    });
+    );
   }
 
   /**
@@ -51,9 +46,6 @@ export class PerformancesModule extends BaseModule {
       'client',
       '/performances/performance',
       params
-    ).catch((error: AxiosError) => {
-      console.log(error.response.data);
-      return null;
-    });
+    );
   }
 }

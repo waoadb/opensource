@@ -172,8 +172,8 @@ export const BookNowModal = ({
                 tickets={performanceData.stock.tickets}
                 event_id={event_id}
                 performance_id={performanceData.performance_id}
-                handleSubmit={async (payload, callback) => {
-                  await addTicketToCart(cart_id!, payload);
+                handleSubmit={async (payload, title, callback) => {
+                  await addTicketToCart(cart_id!, payload, title);
                   callback();
                 }}
               />
@@ -196,8 +196,8 @@ export const BookNowModal = ({
                     addons={performanceData.stock.addons}
                     event_id={event_id}
                     performance_id={performanceData.performance_id}
-                    handleSubmit={async (payload, callback) => {
-                      await addAddonToCart(cart_id!, payload);
+                    handleSubmit={async (payload, title, callback) => {
+                      await addAddonToCart(cart_id!, payload, title);
                       callback();
                     }}
                   />

@@ -22,6 +22,7 @@ type Props = {
    */
   onSubmit: (
     ticket: ClientCartModels.RemoveTicketFromCartRequest,
+    title: string,
     callback: () => void
   ) => void;
 };
@@ -61,13 +62,13 @@ export const CartTicketCard = ({ ticket, entry_id, onSubmit }: Props) => {
                 ticket_entry_id: values.ticket_entry_id,
                 entry_id,
               },
+              ticket.name,
               () => {
                 setSubmitting(false);
                 resetForm();
               }
             );
           }}
-          isInitialValid={true}
         >
           {({ handleSubmit, isSubmitting, isValid }) => (
             <form

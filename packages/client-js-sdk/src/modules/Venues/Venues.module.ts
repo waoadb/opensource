@@ -1,7 +1,5 @@
 /* Dependencies */
-
 // Modules
-import { AxiosError } from 'axios';
 import { BaseModule } from '../Base/Base.module';
 
 // Models
@@ -28,10 +26,7 @@ export class VenuesModule extends BaseModule {
       'client',
       '/venues/minimal',
       params
-    ).catch((error: AxiosError) => {
-      console.log(error.response.data);
-      return null;
-    });
+    );
   }
 
   /**
@@ -49,10 +44,7 @@ export class VenuesModule extends BaseModule {
       'client',
       '/venues',
       params
-    ).catch((error: AxiosError) => {
-      console.log(error.response.data);
-      return null;
-    });
+    );
   }
 
   /**
@@ -68,9 +60,6 @@ export class VenuesModule extends BaseModule {
       'client',
       '/venues/venue',
       params
-    ).catch((error: AxiosError) => {
-      console.log(error.response.data);
-      return null;
-    });
+    );
   }
 }

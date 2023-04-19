@@ -1,6 +1,4 @@
 /* Dependencies */
-import { AxiosError } from 'axios';
-
 // Modules
 import { BaseModule } from '../Base/Base.module';
 import { StockModule } from './modules/Stock/Stock.module';
@@ -33,10 +31,7 @@ export class CartModule extends BaseModule {
       {
         cart: cart_id,
       }
-    ).catch((error: AxiosError) => {
-      console.log(error.response.data);
-      return null;
-    });
+    );
   }
 
   /**
@@ -52,10 +47,7 @@ export class CartModule extends BaseModule {
       'cart',
       '/cart/create',
       payload
-    ).catch((error: AxiosError) => {
-      console.log(error.response.data);
-      return null;
-    });
+    );
   }
 
   /**
@@ -75,10 +67,7 @@ export class CartModule extends BaseModule {
       {
         cart: cart_id,
       }
-    ).catch((error: AxiosError) => {
-      console.log(error.response.data);
-      return null;
-    });
+    );
   }
 
   /**
@@ -99,10 +88,7 @@ export class CartModule extends BaseModule {
       {
         cart: cart_id,
       }
-    ).catch((error: AxiosError) => {
-      console.log(error.response.data);
-      return null;
-    });
+    );
   }
 
   /**
@@ -119,9 +105,6 @@ export class CartModule extends BaseModule {
       {
         cart: cart_id,
       }
-    ).catch((error: AxiosError) => {
-      console.log(error.response.data);
-      return null;
-    });
+    );
   }
 }

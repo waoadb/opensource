@@ -6,7 +6,8 @@
   },
   "scripts": {
     "DEVELOPMENT": "##========================================##",
-    "dev": "lerna run dev --parallel",
+    "dev-theme": "lerna run dev-theme --parallel",
+    "dev-packages": "lerna run dev --parallel",
     "build": "lerna run build --stream",
     "PRODUCTION": "##========================================##",
     "build:themes-plugins": "cp .netlify/theme/theme.toml netlify.toml",

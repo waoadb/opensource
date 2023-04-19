@@ -1,7 +1,5 @@
 /* Dependencies */
-
 // Modules
-import { AxiosError } from 'axios';
 import { BaseModule } from '../Base/Base.module';
 
 // Models
@@ -20,9 +18,6 @@ export class ProfileModule extends BaseModule {
     return this.makeGetRequest<ClientCacheModels.RetrieveProfileResponse>(
       'client',
       '/profile'
-    ).catch((error: AxiosError) => {
-      console.log(error.response.data);
-      return null;
-    });
+    );
   }
 }

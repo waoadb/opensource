@@ -2,6 +2,7 @@
 import { ChangeEvent, useMemo, useState } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import classNames from 'classnames';
 
 // Helpers
 import { handleFieldError } from '@/helpers/handleFieldError/handleFieldError';
@@ -35,6 +36,7 @@ type Props = {
    */
   onSubmit: (
     addon: ClientCartModels.AddAddonToCartRequest,
+    title: string,
     callback: () => void
   ) => void;
 };
@@ -108,7 +110,6 @@ export const AddonCard = ({
                 quantity: 0,
                 variant_id: addon.variants[0].variant_id,
               }}
-              isInitialValid={false}
               validationSchema={validationSchema}
               onSubmit={(values, { setSubmitting, resetForm }) => {
                 onSubmit(
@@ -119,6 +120,7 @@ export const AddonCard = ({
                     quantity: values.quantity,
                     variant_id: values.variant_id,
                   },
+                  addon.name,
                   () => {
                     setSubmitting(false);
                     resetForm();
@@ -161,7 +163,14 @@ export const AddonCard = ({
                     })}
                     error={handleFieldError(errors, touched, 'variant_id')}
                   />
-                  <div className="w-full grid grid-cols-1 md:grid-cols-3 items-end gap-2 mt-2">
+                  <div
+                    className={classNames(
+                      'w-full grid grid-cols-1 md:grid-cols-3 gap-2 mt-2',
+                      handleFieldError(errors, touched, 'quantity')
+                        ? 'items-center'
+                        : 'items-end'
+                    )}
+                  >
                     <div className="w-full md:col-span-2">
                       <Input
                         type="number"

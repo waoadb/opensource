@@ -1,6 +1,4 @@
 /* Dependencies */
-import { AxiosError } from 'axios';
-
 // Modules
 import { BaseModule } from '../../../Base/Base.module';
 
@@ -34,10 +32,7 @@ export class CustomerOrdersModule extends BaseModule {
       {
         customer: cust_id,
       }
-    ).catch((error: AxiosError) => {
-      console.log(error.response.data);
-      return null;
-    });
+    );
   }
 
   /**
@@ -57,9 +52,6 @@ export class CustomerOrdersModule extends BaseModule {
       {
         customer: cust_id,
       }
-    ).catch((error: AxiosError) => {
-      console.log(error.response.data);
-      return null;
-    });
+    );
   }
 }

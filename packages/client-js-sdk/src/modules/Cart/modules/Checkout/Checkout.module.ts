@@ -1,6 +1,4 @@
 /* Dependencies */
-import { AxiosError } from 'axios';
-
 // Modules
 import { BaseModule } from '../../../Base/Base.module';
 
@@ -27,9 +25,6 @@ export class CheckoutModule extends BaseModule {
       {
         cart: cart_id,
       }
-    ).catch((error: AxiosError) => {
-      console.log(error.response.data);
-      return null;
-    });
+    );
   }
 }

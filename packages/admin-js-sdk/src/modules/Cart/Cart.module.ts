@@ -1,6 +1,4 @@
 /* Dependencies */
-import { AxiosError } from 'axios';
-
 // Modules
 import { BaseModule } from '../Base/Base.module';
 import { AlterationsModule } from './modules/Alterations/Alterations.module';
@@ -37,10 +35,7 @@ export class CartModule extends BaseModule {
       {
         cart: cart_id,
       }
-    ).catch((error: AxiosError) => {
-      console.log(error.response.data);
-      return null;
-    });
+    );
   }
 
   /**
@@ -60,9 +55,6 @@ export class CartModule extends BaseModule {
       {
         cart: cart_id,
       }
-    ).catch((error: AxiosError) => {
-      console.log(error.response.data);
-      return null;
-    });
+    );
   }
 }

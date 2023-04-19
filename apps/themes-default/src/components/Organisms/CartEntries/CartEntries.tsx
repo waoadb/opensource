@@ -1,9 +1,4 @@
 /* Dependencies */
-import { useCallback, useState } from 'react';
-import { GetServerSideProps } from 'next';
-import { useRouter } from 'next/router';
-import { NextSeo } from 'next-seo';
-
 // Helpers
 import { formatDateRange } from '@/helpers/formatDateRange/formatDateRange';
 
@@ -59,8 +54,8 @@ export const CartEntries = () => {
             <CartTicketCardList
               entry_id={entry.entry_id}
               tickets={entry.tickets}
-              handleSubmit={(payload, callback) => {
-                removeTicketFromCart(cart_id!, payload);
+              handleSubmit={(payload, title, callback) => {
+                removeTicketFromCart(cart_id!, payload, title);
                 callback();
               }}
             />
@@ -76,8 +71,8 @@ export const CartEntries = () => {
               <CartAddonCardList
                 entry_id={entry.entry_id}
                 addons={entry.addons}
-                handleSubmit={(payload, callback) => {
-                  removeAddonFromCart(cart_id!, payload);
+                handleSubmit={(payload, title, callback) => {
+                  removeAddonFromCart(cart_id!, payload, title);
                   callback();
                 }}
               />

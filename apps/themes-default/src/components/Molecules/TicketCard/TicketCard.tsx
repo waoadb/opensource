@@ -2,6 +2,7 @@
 import { useMemo } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import classNames from 'classnames';
 
 // Helpers
 import { handleFieldError } from '@/helpers/handleFieldError/handleFieldError';
@@ -33,6 +34,7 @@ type Props = {
    */
   onSubmit: (
     addon: ClientCartModels.AddTicketToCartRequest,
+    title: string,
     callback: () => void
   ) => void;
 };
@@ -99,13 +101,13 @@ export const TicketCard = ({
                 quantity: values.quantity,
                 accessibility: values.accessibility,
               },
+              ticket.name,
               () => {
                 setSubmitting(false);
                 resetForm();
               }
             );
           }}
-          isInitialValid={false}
         >
           {({
             values,
@@ -124,7 +126,14 @@ export const TicketCard = ({
               <div className="w-full p-1 h-full flex flex-row items-center bg-gray-50 px-3">
                 <p>Accessibility Options Coming Soon!</p>
               </div>
-              <div className="w-full grid grid-cols-1 md:grid-cols-4 lg:grid-cols-3 items-end gap-2">
+              <div
+                className={classNames(
+                  'w-full grid grid-cols-1 md:grid-cols-4 lg:grid-cols-3 gap-2',
+                  handleFieldError(errors, touched, 'quantity')
+                    ? 'items-center'
+                    : 'items-end'
+                )}
+              >
                 <div className="w-full md:col-span-2 lg:col-span-2">
                   <Input
                     type="number"

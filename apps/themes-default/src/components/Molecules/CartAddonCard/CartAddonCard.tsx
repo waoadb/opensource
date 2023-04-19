@@ -36,6 +36,7 @@ type Props = {
    */
   onSubmit: (
     addon: ClientCartModels.RemoveAddonFromCartRequest,
+    title: string,
     callback: () => void
   ) => void;
 };
@@ -86,7 +87,6 @@ export const CartAddonCard = ({ addon, entry_id, onSubmit }: Props) => {
                 addon_entry_id: addon.addon_entry_id,
                 entry_id,
               }}
-              isInitialValid={true}
               validationSchema={validationSchema}
               onSubmit={(values, { setSubmitting, resetForm }) => {
                 onSubmit(
@@ -94,6 +94,7 @@ export const CartAddonCard = ({ addon, entry_id, onSubmit }: Props) => {
                     addon_entry_id: values.addon_entry_id,
                     entry_id: values.entry_id,
                   },
+                  addon.name,
                   () => {
                     setSubmitting(false);
                     resetForm();

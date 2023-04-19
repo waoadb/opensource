@@ -124,10 +124,10 @@ const Page = ({ event, profile }: PageProps) => {
       {/* Fallback to Event when SEO is not provided. */}
       {!event.marketing?.seo && (
         <NextSeo
-          title={`${profile.title} | What's On | ${event.details.name}`}
+          title={`${profile.title} | ${event.details.name}`}
           description={event.details.description}
           openGraph={{
-            title: `${profile.title} | What's On | ${event.details.name}`,
+            title: `${profile.title} | ${event.details.name}`,
             description: event.details.description,
             images: [
               {
@@ -142,10 +142,10 @@ const Page = ({ event, profile }: PageProps) => {
       {/* Render Event SEO */}
       {event.marketing?.seo && (
         <NextSeo
-          title={`${profile.title} | What's On | ${event.marketing.seo.title}`}
+          title={`${profile.title} | ${event.marketing.seo.title}`}
           description={event.marketing.seo.description}
           openGraph={{
-            title: `${profile.title} | What's On | ${event.marketing.seo.o_title}`,
+            title: `${profile.title} | ${event.marketing.seo.o_title}`,
             description: event.marketing.seo.o_description,
             images: [
               {
