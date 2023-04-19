@@ -11,7 +11,7 @@ export const FooterNavigation = () => {
       <ul className="flex flex-row flex-wrap items-center gap-4 mb-8 w-full justify-center lg:justify-end">
         <li>
           <Link
-            href={'/whats-on'}
+            href={'/events'}
             className="font-semibold opacity-80 transition-opacity hover:opacity-100 block"
           >
             What&apos;s on
