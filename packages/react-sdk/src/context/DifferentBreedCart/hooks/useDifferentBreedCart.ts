@@ -8,9 +8,8 @@ import { notifications } from '../utils/Notifications/Notifications';
 // Store
 import { DifferentBreedCartContext } from '..';
 
-// Services
-
 // Models
+import { ErrorResponse, ErrorResponseValidation } from '@waoadb/js-client-sdk';
 import { ClientCartModels } from '@waoadb/contracts-client';
 
 /**
@@ -24,6 +23,22 @@ export const useDifferentBreedCart = (
 ) => {
   // Get the cart context.
   const { cartState, cartDispatch } = useContext(DifferentBreedCartContext);
+
+  /**
+   * Handle Error
+   * @param error - Error response.
+   */
+  const handleError = (error: ErrorResponse | ErrorResponseValidation) => {
+    // Handle error.
+    if (error.response?.data?.message) {
+      notifications.showErrorToast(
+        'Request Failed',
+        error.response.data.message
+      );
+    } else {
+      notifications.showErrorToast('Request Failed', error.message);
+    }
+  };
 
   /**
    * Retrieves or creates a new cart.
@@ -65,7 +80,8 @@ export const useDifferentBreedCart = (
         if (response.success) {
           cartDispatch({ type: 'SET_CART', value: response.payload });
         }
-      });
+      })
+      .catch((error: ErrorResponseValidation) => handleError(error));
   };
 
   /**
@@ -78,7 +94,8 @@ export const useDifferentBreedCart = (
       .attachCustomer(cartState.cart!.cart_id, { cust_id })
       .then((response) => {
         cartDispatch({ type: 'SET_CART', value: response.payload });
-      });
+      })
+      .catch((error: ErrorResponseValidation) => handleError(error));
   };
 
   /**
@@ -130,7 +147,8 @@ export const useDifferentBreedCart = (
           type: 'SET_CHECKOUT_CONFIG',
           value: response.payload,
         });
-      });
+      })
+      .catch((error: ErrorResponseValidation) => handleError(error));
   };
 
   /**
@@ -155,7 +173,8 @@ export const useDifferentBreedCart = (
             payload.quantity > 1 ? 's' : ''
           } added to the cart.`
         );
-      });
+      })
+      .catch((error: ErrorResponseValidation) => handleError(error));
   };
 
   /**
@@ -180,7 +199,8 @@ export const useDifferentBreedCart = (
             `${ticket_title} ticket removed from the cart.`
           );
         }
-      });
+      })
+      .catch((error: ErrorResponseValidation) => handleError(error));
   };
 
   /**
@@ -205,7 +225,8 @@ export const useDifferentBreedCart = (
             `${payload.quantity} ${addon_title} added to the cart.`
           );
         }
-      });
+      })
+      .catch((error: ErrorResponseValidation) => handleError(error));
   };
 
   /**
@@ -230,7 +251,8 @@ export const useDifferentBreedCart = (
             `${addon_title} removed from the cart.`
           );
         }
-      });
+      })
+      .catch((error: ErrorResponseValidation) => handleError(error));
   };
 
   return {
