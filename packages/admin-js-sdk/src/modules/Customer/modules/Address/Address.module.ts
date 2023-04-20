@@ -1,16 +1,28 @@
 /* Dependencies */
-// Modules
-import { BaseModule } from '../../../Base/Base.module';
+// Services
+import { HttpClient } from '../../../../services/HttpClient.service';
 
 // Models
 import { ClientCustomerModels } from '@waoadb/contracts-client';
+type Props = {
+  /**
+   * Http Client.
+   */
+  httpClient: HttpClient;
+};
 
 /**
  * Customer Address Module
  * Handles API Requests for the customer addresses on the platform.
  * @class
  */
-export class CustomerAddressModule extends BaseModule {
+export class CustomerAddressModule {
+  private httpClient: HttpClient;
+
+  constructor({ httpClient }: Props) {
+    this.httpClient = httpClient;
+  }
+
   /**
    * Retrieve Customer Address.
    * @param cust_id - The customer id.
@@ -21,14 +33,19 @@ export class CustomerAddressModule extends BaseModule {
     cust_id: string,
     params: ClientCustomerModels.RetrieveAddressRequest
   ): Promise<ClientCustomerModels.RetrieveAddressResponse> {
-    return this.makeGetRequest<ClientCustomerModels.RetrieveAddressResponse>(
-      'client',
-      '/address',
-      params,
-      {
-        customer: cust_id,
-      }
-    );
+    return this.httpClient
+      .makeGetRequest<ClientCustomerModels.RetrieveAddressResponse>(
+        'client',
+        '/address',
+        params,
+        {
+          customer: cust_id,
+        }
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        throw error;
+      });
   }
 
   /**
@@ -38,14 +55,19 @@ export class CustomerAddressModule extends BaseModule {
   async retrieveAllAdresses(
     cust_id: string
   ): Promise<ClientCustomerModels.RetrieveAddressesResponse> {
-    return this.makeGetRequest<ClientCustomerModels.RetrieveAddressesResponse>(
-      'client',
-      '/address/all',
-      null,
-      {
-        customer: cust_id,
-      }
-    );
+    return this.httpClient
+      .makeGetRequest<ClientCustomerModels.RetrieveAddressesResponse>(
+        'client',
+        '/address/all',
+        null,
+        {
+          customer: cust_id,
+        }
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        throw error;
+      });
   }
 
   /**
@@ -66,14 +88,19 @@ export class CustomerAddressModule extends BaseModule {
     cust_id: string,
     payload: ClientCustomerModels.CreateAddressRequest
   ): Promise<ClientCustomerModels.CreateAddressResponse> {
-    return this.makePostRequest<ClientCustomerModels.CreateAddressResponse>(
-      'client',
-      '/address/create',
-      payload,
-      {
-        customer: cust_id,
-      }
-    );
+    return this.httpClient
+      .makePostRequest<ClientCustomerModels.CreateAddressResponse>(
+        'client',
+        '/address/create',
+        payload,
+        {
+          customer: cust_id,
+        }
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        throw error;
+      });
   }
 
   /**
@@ -95,14 +122,19 @@ export class CustomerAddressModule extends BaseModule {
     cust_id: string,
     payload: ClientCustomerModels.UpdateAddressRequest
   ): Promise<ClientCustomerModels.UpdateAddressResponse> {
-    return this.makePostRequest<ClientCustomerModels.UpdateAddressResponse>(
-      'client',
-      '/address/update',
-      payload,
-      {
-        customer: cust_id,
-      }
-    );
+    return this.httpClient
+      .makePostRequest<ClientCustomerModels.UpdateAddressResponse>(
+        'client',
+        '/address/update',
+        payload,
+        {
+          customer: cust_id,
+        }
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        throw error;
+      });
   }
 
   /**
@@ -115,13 +147,18 @@ export class CustomerAddressModule extends BaseModule {
     cust_id: string,
     payload: ClientCustomerModels.DeleteAddressRequest
   ): Promise<ClientCustomerModels.DeleteAddressResponse> {
-    return this.makePostRequest<ClientCustomerModels.DeleteAddressResponse>(
-      'client',
-      '/address/delete',
-      payload,
-      {
-        customer: cust_id,
-      }
-    );
+    return this.httpClient
+      .makePostRequest<ClientCustomerModels.DeleteAddressResponse>(
+        'client',
+        '/address/delete',
+        payload,
+        {
+          customer: cust_id,
+        }
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        throw error;
+      });
   }
 }

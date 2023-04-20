@@ -1,12 +1,20 @@
 /* Dependencies */
-import { AxiosInstance, AxiosRequestHeaders } from 'axios';
+import axios, {
+  AxiosInstance,
+  AxiosRequestHeaders,
+  AxiosResponse,
+} from 'axios';
 
 // Models
-type BaseProps = {
+type Props = {
   /**
-   * Axios HTTP Client to be used by the instance.
+   * Client API Key.
    */
-  httpClient: AxiosInstance;
+  clientAPIKey: string;
+  /**
+   * Profile Id
+   */
+  profileId: string;
 };
 
 type EndPoint = 'client' | 'cart';
@@ -16,17 +24,23 @@ type EndPoint = 'client' | 'cart';
  * All Modules extend from this class.
  * @class
  */
-export class BaseModule {
-  public httpClient: AxiosInstance;
+export class HttpClient {
+  private axiosInstance: AxiosInstance;
 
-  constructor(props: BaseProps) {
-    this.httpClient = props.httpClient;
+  constructor({ clientAPIKey, profileId }: Props) {
+    this.axiosInstance = axios.create({
+      headers: {
+        'Content-Type': 'application/json',
+        'client-key': clientAPIKey,
+        profile: profileId,
+      },
+    });
   }
 
   /**
    * Gets the required endpoint.
    */
-  getEndPoint(endPoint: EndPoint): string {
+  private getEndPoint(endPoint: EndPoint): string {
     switch (endPoint) {
       case 'cart': {
         return 'https://ms-cart.differentbreed.events/api/v1';
@@ -44,21 +58,19 @@ export class BaseModule {
    * @param params - The params to be sent.
    * @param headers - The params to be sent.
    */
-  async makeGetRequest<ResponseType>(
+  makeGetRequest<ResponseType>(
     endPoint: EndPoint,
     path: string,
     params?: Object,
     headers?: AxiosRequestHeaders
-  ): Promise<ResponseType> {
-    const response = await this.httpClient.get<ResponseType>(
+  ): Promise<AxiosResponse<ResponseType>> {
+    return this.axiosInstance.get<ResponseType>(
       `${this.getEndPoint(endPoint)}${path}`,
       {
         params: params ? params : {},
         headers: headers ? headers : {},
       }
     );
-
-    return response.data;
   }
 
   /**
@@ -69,19 +81,18 @@ export class BaseModule {
    * @param params - The params to be sent.
    * @param headers - The params to be sent.
    */
-  async makePostRequest<ResponseType>(
+  makePostRequest<ResponseType>(
     endPoint: EndPoint,
     path: string,
     payload?: Object,
     headers?: AxiosRequestHeaders
-  ): Promise<ResponseType> {
-    const response = await this.httpClient.post<ResponseType>(
+  ): Promise<AxiosResponse<ResponseType>> {
+    return this.axiosInstance.post<ResponseType>(
       `${this.getEndPoint(endPoint)}${path}`,
       payload,
       {
         headers: headers ? headers : {},
       }
     );
-    return response.data;
   }
 }

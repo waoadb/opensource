@@ -1,16 +1,28 @@
 /* Dependencies */
-// Modules
-import { BaseModule } from '../../../Base/Base.module';
+// Services
+import { HttpClient } from '../../../../services/HttpClient.service';
 
 // Models
 import { ClientCartModels } from '@waoadb/contracts-client';
+type Props = {
+  /**
+   * Http Client.
+   */
+  httpClient: HttpClient;
+};
 
 /**
  * Alterations Module
  * Handles API Requests for the cart alterations on the platform.
  * @class
  */
-export class AlterationsModule extends BaseModule {
+export class AlterationsModule {
+  private httpClient: HttpClient;
+
+  constructor({ httpClient }: Props) {
+    this.httpClient = httpClient;
+  }
+
   /**
    * Add Fee to cart entry.
    * @param cart_id - The cart id.
@@ -24,14 +36,19 @@ export class AlterationsModule extends BaseModule {
     cart_id: string,
     payload: ClientCartModels.AddFeeToCartRequest
   ): Promise<ClientCartModels.AddFeeToCartResponse> {
-    return this.makePostRequest<ClientCartModels.AddFeeToCartResponse>(
-      'cart',
-      '/alterations/fee/add',
-      payload,
-      {
-        cart: cart_id,
-      }
-    );
+    return this.httpClient
+      .makePostRequest<ClientCartModels.AddFeeToCartResponse>(
+        'cart',
+        '/alterations/fee/add',
+        payload,
+        {
+          cart: cart_id,
+        }
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        throw error;
+      });
   }
 
   /**
@@ -45,14 +62,19 @@ export class AlterationsModule extends BaseModule {
     cart_id: string,
     payload: ClientCartModels.RemoveFeeFromCartRequest
   ): Promise<ClientCartModels.RemoveFeeFromCartResponse> {
-    return this.makePostRequest<ClientCartModels.RemoveFeeFromCartResponse>(
-      'cart',
-      '/alterations/fee/remove',
-      payload,
-      {
-        cart: cart_id,
-      }
-    );
+    return this.httpClient
+      .makePostRequest<ClientCartModels.RemoveFeeFromCartResponse>(
+        'cart',
+        '/alterations/fee/remove',
+        payload,
+        {
+          cart: cart_id,
+        }
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        throw error;
+      });
   }
 
   /**
@@ -68,14 +90,19 @@ export class AlterationsModule extends BaseModule {
     cart_id: string,
     payload: ClientCartModels.AddDiscountToCartRequest
   ): Promise<ClientCartModels.AddDiscountToCartResponse> {
-    return this.makePostRequest<ClientCartModels.AddDiscountToCartResponse>(
-      'cart',
-      '/alterations/discount/add',
-      payload,
-      {
-        cart: cart_id,
-      }
-    );
+    return this.httpClient
+      .makePostRequest<ClientCartModels.AddDiscountToCartResponse>(
+        'cart',
+        '/alterations/discount/add',
+        payload,
+        {
+          cart: cart_id,
+        }
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        throw error;
+      });
   }
 
   /**
@@ -89,13 +116,18 @@ export class AlterationsModule extends BaseModule {
     cart_id: string,
     payload: ClientCartModels.RemoveDiscountFromCartRequest
   ): Promise<ClientCartModels.RemoveDiscountFromCartResponse> {
-    return this.makePostRequest<ClientCartModels.RemoveDiscountFromCartResponse>(
-      'cart',
-      '/alterations/discount/remove',
-      payload,
-      {
-        cart: cart_id,
-      }
-    );
+    return this.httpClient
+      .makePostRequest<ClientCartModels.RemoveDiscountFromCartResponse>(
+        'cart',
+        '/alterations/discount/remove',
+        payload,
+        {
+          cart: cart_id,
+        }
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        throw error;
+      });
   }
 }

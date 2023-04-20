@@ -1,16 +1,28 @@
 /* Dependencies */
-// Modules
-import { BaseModule } from '../../../Base/Base.module';
+// Services
+import { HttpClient } from '../../../../services/HttpClient.service';
 
 // Models
 import { ClientCartModels } from '@waoadb/contracts-client';
+type Props = {
+  /**
+   * Http Client.
+   */
+  httpClient: HttpClient;
+};
 
 /**
  * Stock Module
  * Handles API Requests for the cart stock on the platform.
  * @class
  */
-export class StockModule extends BaseModule {
+export class StockModule {
+  private httpClient: HttpClient;
+
+  constructor({ httpClient }: Props) {
+    this.httpClient = httpClient;
+  }
+
   /**
    * Add Ticket to cart.
    * @param cart_id - The cart id.
@@ -25,14 +37,19 @@ export class StockModule extends BaseModule {
     cart_id: string,
     payload: ClientCartModels.AddTicketToCartRequest
   ): Promise<ClientCartModels.AddTicketToCartResponse> {
-    return this.makePostRequest<ClientCartModels.AddTicketToCartResponse>(
-      'cart',
-      '/stock/ticket/add',
-      payload,
-      {
-        cart: cart_id,
-      }
-    );
+    return this.httpClient
+      .makePostRequest<ClientCartModels.AddTicketToCartResponse>(
+        'cart',
+        '/stock/ticket/add',
+        payload,
+        {
+          cart: cart_id,
+        }
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        throw error;
+      });
   }
 
   /**
@@ -46,14 +63,19 @@ export class StockModule extends BaseModule {
     cart_id: string,
     payload: ClientCartModels.RemoveTicketFromCartRequest
   ): Promise<ClientCartModels.RemoveTicketFromCartResponse> {
-    return this.makePostRequest<ClientCartModels.RemoveTicketFromCartResponse>(
-      'cart',
-      '/stock/ticket/remove',
-      payload,
-      {
-        cart: cart_id,
-      }
-    );
+    return this.httpClient
+      .makePostRequest<ClientCartModels.RemoveTicketFromCartResponse>(
+        'cart',
+        '/stock/ticket/remove',
+        payload,
+        {
+          cart: cart_id,
+        }
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        throw error;
+      });
   }
 
   /**
@@ -70,14 +92,19 @@ export class StockModule extends BaseModule {
     cart_id: string,
     payload: ClientCartModels.AddAddonToCartRequest
   ): Promise<ClientCartModels.AddAddonToCartResponse> {
-    return this.makePostRequest<ClientCartModels.AddAddonToCartResponse>(
-      'cart',
-      '/stock/addon/add',
-      payload,
-      {
-        cart: cart_id,
-      }
-    );
+    return this.httpClient
+      .makePostRequest<ClientCartModels.AddAddonToCartResponse>(
+        'cart',
+        '/stock/addon/add',
+        payload,
+        {
+          cart: cart_id,
+        }
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        throw error;
+      });
   }
 
   /**
@@ -91,13 +118,18 @@ export class StockModule extends BaseModule {
     cart_id: string,
     payload: ClientCartModels.RemoveAddonFromCartRequest
   ): Promise<ClientCartModels.RemoveAddonFromCartResponse> {
-    return this.makePostRequest<ClientCartModels.RemoveAddonFromCartResponse>(
-      'cart',
-      '/stock/addon/remove',
-      payload,
-      {
-        cart: cart_id,
-      }
-    );
+    return this.httpClient
+      .makePostRequest<ClientCartModels.RemoveAddonFromCartResponse>(
+        'cart',
+        '/stock/addon/remove',
+        payload,
+        {
+          cart: cart_id,
+        }
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        throw error;
+      });
   }
 }

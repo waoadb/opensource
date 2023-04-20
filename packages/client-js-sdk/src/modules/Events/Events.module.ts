@@ -1,16 +1,28 @@
 /* Dependencies */
-// Modules
-import { BaseModule } from '../Base/Base.module';
+// Services
+import { HttpClient } from '../../services/HttpClient.service';
 
 // Models
 import { ClientCacheModels } from '@waoadb/contracts-client';
+type Props = {
+  /**
+   * Http Client.
+   */
+  httpClient: HttpClient;
+};
 
 /**
  * Events Module
  * Handles API Requests for events on the platform.
  * @class
  */
-export class EventsModule extends BaseModule {
+export class EventsModule {
+  private httpClient: HttpClient;
+
+  constructor({ httpClient }: Props) {
+    this.httpClient = httpClient;
+  }
+
   /**
    * Retrieve events minimal.
    * Array of event slugs for use with static site generation.
@@ -24,11 +36,16 @@ export class EventsModule extends BaseModule {
   async retrieveEventsMinimal(
     params: ClientCacheModels.RetrieveEventListMinimalRequest
   ): Promise<ClientCacheModels.RetrieveEventListMinimalResponse> {
-    return this.makeGetRequest<ClientCacheModels.RetrieveEventListMinimalResponse>(
-      'client',
-      '/events/minimal',
-      params
-    );
+    return this.httpClient
+      .makeGetRequest<ClientCacheModels.RetrieveEventListMinimalResponse>(
+        'client',
+        '/events/minimal',
+        params
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        throw error;
+      });
   }
 
   /**
@@ -44,11 +61,16 @@ export class EventsModule extends BaseModule {
   async retrieveEvents(
     params: ClientCacheModels.RetrieveEventListRequest
   ): Promise<ClientCacheModels.RetrieveEventListResponse> {
-    return this.makeGetRequest<ClientCacheModels.RetrieveEventListResponse>(
-      'client',
-      '/events',
-      params
-    );
+    return this.httpClient
+      .makeGetRequest<ClientCacheModels.RetrieveEventListResponse>(
+        'client',
+        '/events',
+        params
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        throw error;
+      });
   }
 
   /**
@@ -65,11 +87,16 @@ export class EventsModule extends BaseModule {
   async retrieveEventsForVenue(
     params: ClientCacheModels.RetrieveVenueEventListRequest
   ): Promise<ClientCacheModels.RetrieveVenueEventListResponse> {
-    return this.makeGetRequest<ClientCacheModels.RetrieveVenueEventListResponse>(
-      'client',
-      '/events/venue',
-      params
-    );
+    return this.httpClient
+      .makeGetRequest<ClientCacheModels.RetrieveVenueEventListResponse>(
+        'client',
+        '/events/venue',
+        params
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        throw error;
+      });
   }
 
   /**
@@ -82,10 +109,15 @@ export class EventsModule extends BaseModule {
   async retrieveEvent(
     params: ClientCacheModels.RetrieveEventRequest
   ): Promise<ClientCacheModels.RetrieveEventResponse> {
-    return this.makeGetRequest<ClientCacheModels.RetrieveEventResponse>(
-      'client',
-      '/events/event',
-      params
-    );
+    return this.httpClient
+      .makeGetRequest<ClientCacheModels.RetrieveEventResponse>(
+        'client',
+        '/events/event',
+        params
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        throw error;
+      });
   }
 }

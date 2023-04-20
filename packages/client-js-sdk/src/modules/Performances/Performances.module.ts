@@ -1,16 +1,28 @@
 /* Dependencies */
-// Modules
-import { BaseModule } from '../Base/Base.module';
+// Services
+import { HttpClient } from '../../services/HttpClient.service';
 
 // Models
 import { ClientCacheModels } from '@waoadb/contracts-client';
+type Props = {
+  /**
+   * Http Client.
+   */
+  httpClient: HttpClient;
+};
 
 /**
  * Performances Module
  * Handles API Requests for performances on the platform.
  * @class
  */
-export class PerformancesModule extends BaseModule {
+export class PerformancesModule {
+  private httpClient: HttpClient;
+
+  constructor({ httpClient }: Props) {
+    this.httpClient = httpClient;
+  }
+
   /**
    * Retrieve Performances.
    * Array of complete performances.
@@ -25,11 +37,16 @@ export class PerformancesModule extends BaseModule {
   async retrievePerformances(
     params: ClientCacheModels.RetrievePerformancesRequest
   ): Promise<ClientCacheModels.RetrievePerformancesResponse> {
-    return this.makeGetRequest<ClientCacheModels.RetrievePerformancesResponse>(
-      'client',
-      '/performances',
-      params
-    );
+    return this.httpClient
+      .makeGetRequest<ClientCacheModels.RetrievePerformancesResponse>(
+        'client',
+        '/performances',
+        params
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        throw error;
+      });
   }
 
   /**
@@ -42,10 +59,15 @@ export class PerformancesModule extends BaseModule {
   async retrievePerformance(
     params: ClientCacheModels.RetrievePerformanceRequest
   ): Promise<ClientCacheModels.RetrievePerformanceResponse> {
-    return this.makeGetRequest<ClientCacheModels.RetrievePerformanceResponse>(
-      'client',
-      '/performances/performance',
-      params
-    );
+    return this.httpClient
+      .makeGetRequest<ClientCacheModels.RetrievePerformanceResponse>(
+        'client',
+        '/performances/performance',
+        params
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        throw error;
+      });
   }
 }

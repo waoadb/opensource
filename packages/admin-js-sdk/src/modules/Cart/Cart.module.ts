@@ -1,21 +1,35 @@
 /* Dependencies */
+// Services
+import { HttpClient } from '../../services/HttpClient.service';
+
 // Modules
-import { BaseModule } from '../Base/Base.module';
 import { AlterationsModule } from './modules/Alterations/Alterations.module';
 
 // Models
 import { ClientCartModels } from '@waoadb/contracts-client';
+type Props = {
+  /**
+   * Http Client.
+   */
+  httpClient: HttpClient;
+};
 
 /**
  * Cart Module
  * Handles API Requests for the cart on the platform.
  * @class
  */
-export class CartModule extends BaseModule {
+export class CartModule {
   // Modules
-  public alterations = new AlterationsModule({
-    httpClient: this.httpClient,
-  });
+  public alterations: AlterationsModule;
+  private httpClient: HttpClient;
+
+  constructor({ httpClient }: Props) {
+    this.httpClient = httpClient;
+
+    // Initialize modules.
+    this.alterations = new AlterationsModule({ httpClient: this.httpClient });
+  }
 
   /**
    * Mark cart as pending sale.
@@ -28,14 +42,19 @@ export class CartModule extends BaseModule {
     cart_id: string,
     payload: ClientCartModels.MarkPendingSaleRequest
   ): Promise<ClientCartModels.MarkPendingSaleResponse> {
-    return this.makePostRequest<ClientCartModels.MarkPendingSaleResponse>(
-      'cart',
-      '/cart/pending-sale',
-      payload,
-      {
-        cart: cart_id,
-      }
-    );
+    return this.httpClient
+      .makePostRequest<ClientCartModels.MarkPendingSaleResponse>(
+        'cart',
+        '/cart/pending-sale',
+        payload,
+        {
+          cart: cart_id,
+        }
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        throw error;
+      });
   }
 
   /**
@@ -48,13 +67,18 @@ export class CartModule extends BaseModule {
     cart_id: string,
     payload: ClientCartModels.MarkCartAsSoldRequest
   ): Promise<ClientCartModels.MarkCartAsSoldResponse> {
-    return this.makePostRequest<ClientCartModels.MarkCartAsSoldResponse>(
-      'cart',
-      '/cart/mark-sold',
-      payload,
-      {
-        cart: cart_id,
-      }
-    );
+    return this.httpClient
+      .makePostRequest<ClientCartModels.MarkCartAsSoldResponse>(
+        'cart',
+        '/cart/mark-sold',
+        payload,
+        {
+          cart: cart_id,
+        }
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        throw error;
+      });
   }
 }
