@@ -1,16 +1,28 @@
 /* Dependencies */
-// Modules
-import { BaseModule } from '../Base/Base.module';
+// Services
+import { HttpClient } from '../../services/HttpClient.service';
 
 // Models
 import { ClientCacheModels } from '@waoadb/contracts-client';
+type Props = {
+  /**
+   * Http Client.
+   */
+  httpClient: HttpClient;
+};
 
 /**
  * Venues Module
  * Handles API Requests for venues on the platform.
  * @class
  */
-export class VenuesModule extends BaseModule {
+export class VenuesModule {
+  private httpClient: HttpClient;
+
+  constructor({ httpClient }: Props) {
+    this.httpClient = httpClient;
+  }
+
   /**
    * Retrieve venues minimal.
    * Array of venue slugs for use with static site generation.
@@ -22,11 +34,16 @@ export class VenuesModule extends BaseModule {
   async retrieveVenuesMinimal(
     params: ClientCacheModels.RetrieveVenuesMinimalRequest
   ): Promise<ClientCacheModels.RetrieveVenuesMinimalResponse> {
-    return this.makeGetRequest<ClientCacheModels.RetrieveVenuesMinimalResponse>(
-      'client',
-      '/venues/minimal',
-      params
-    );
+    return this.httpClient
+      .makeGetRequest<ClientCacheModels.RetrieveVenuesMinimalResponse>(
+        'client',
+        '/venues/minimal',
+        params
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        throw error;
+      });
   }
 
   /**
@@ -40,11 +57,16 @@ export class VenuesModule extends BaseModule {
   async retrieveVenues(
     params: ClientCacheModels.RetrieveVenuesRequest
   ): Promise<ClientCacheModels.RetrieveVenuesResponse> {
-    return this.makeGetRequest<ClientCacheModels.RetrieveVenuesResponse>(
-      'client',
-      '/venues',
-      params
-    );
+    return this.httpClient
+      .makeGetRequest<ClientCacheModels.RetrieveVenuesResponse>(
+        'client',
+        '/venues',
+        params
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        throw error;
+      });
   }
 
   /**
@@ -56,10 +78,15 @@ export class VenuesModule extends BaseModule {
   async retrieveVenue(
     params: ClientCacheModels.RetrieveVenueRequest
   ): Promise<ClientCacheModels.RetrieveVenueResponse> {
-    return this.makeGetRequest<ClientCacheModels.RetrieveVenueResponse>(
-      'client',
-      '/venues/venue',
-      params
-    );
+    return this.httpClient
+      .makeGetRequest<ClientCacheModels.RetrieveVenueResponse>(
+        'client',
+        '/venues/venue',
+        params
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        throw error;
+      });
   }
 }

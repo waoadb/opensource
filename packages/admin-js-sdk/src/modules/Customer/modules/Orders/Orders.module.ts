@@ -1,16 +1,28 @@
 /* Dependencies */
-// Modules
-import { BaseModule } from '../../../Base/Base.module';
+// Services
+import { HttpClient } from '../../../../services/HttpClient.service';
 
 // Models
 import { ClientOrderModels } from '@waoadb/contracts-client';
+type Props = {
+  /**
+   * Http Client.
+   */
+  httpClient: HttpClient;
+};
 
 /**
  * Customer Orders Module
  * Handles API Requests for the customer orders on the platform.
  * @class
  */
-export class CustomerOrdersModule extends BaseModule {
+export class CustomerOrdersModule {
+  private httpClient: HttpClient;
+
+  constructor({ httpClient }: Props) {
+    this.httpClient = httpClient;
+  }
+
   /**
    * Retrieve Customer Orders List.
    * @param cust_id - The customer id.
@@ -25,14 +37,19 @@ export class CustomerOrdersModule extends BaseModule {
     cust_id: string,
     params: ClientOrderModels.RetrieveOrderListRequest
   ): Promise<ClientOrderModels.RetrieveOrderListResponse> {
-    return this.makeGetRequest<ClientOrderModels.RetrieveOrderListResponse>(
-      'client',
-      '/orders',
-      params,
-      {
-        customer: cust_id,
-      }
-    );
+    return this.httpClient
+      .makeGetRequest<ClientOrderModels.RetrieveOrderListResponse>(
+        'client',
+        '/orders',
+        params,
+        {
+          customer: cust_id,
+        }
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        throw error;
+      });
   }
 
   /**
@@ -45,13 +62,18 @@ export class CustomerOrdersModule extends BaseModule {
     cust_id: string,
     params: ClientOrderModels.RetrieveOrderRequest
   ): Promise<ClientOrderModels.RetrieveOrderResponse> {
-    return this.makeGetRequest<ClientOrderModels.RetrieveOrderResponse>(
-      'client',
-      '/orders/order',
-      params,
-      {
-        customer: cust_id,
-      }
-    );
+    return this.httpClient
+      .makeGetRequest<ClientOrderModels.RetrieveOrderResponse>(
+        'client',
+        '/orders/order',
+        params,
+        {
+          customer: cust_id,
+        }
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        throw error;
+      });
   }
 }

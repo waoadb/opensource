@@ -1,5 +1,7 @@
 /* Dependencies */
-import axios, { AxiosInstance } from 'axios';
+// Services
+import { HttpClient } from './services/HttpClient.service';
+import { AxiosError } from 'axios';
 
 // Modules
 import { EventsModule } from './modules/Events/Events.module';
@@ -9,10 +11,18 @@ import { VenuesModule } from './modules/Venues/Venues.module';
 import { CartModule } from './modules/Cart/Cart.module';
 
 // Models
+import {
+  ResponseError,
+  ResponseValidationError,
+} from '@waoadb/contracts-client';
+
 type Props = {
   profileId: string;
   clientAPIKey: string;
 };
+
+type ErrorResponse = AxiosError<ResponseError>;
+type ErrorResponseValidation = AxiosError<ResponseValidationError>;
 
 /**
  * Different Breed Client SDK
@@ -20,7 +30,7 @@ type Props = {
  */
 export class DifferentBreedClient {
   // HTTP Client
-  private httpClient: AxiosInstance;
+  private httpClient: HttpClient;
 
   // Modules
   public events: EventsModule;
@@ -31,13 +41,7 @@ export class DifferentBreedClient {
 
   constructor({ clientAPIKey, profileId }: Props) {
     // Create the http client.
-    this.httpClient = axios.create({
-      headers: {
-        'Content-Type': 'application/json',
-        'client-key': clientAPIKey,
-        profile: profileId,
-      },
-    });
+    this.httpClient = new HttpClient({ clientAPIKey, profileId });
 
     // Initialize modules.
     this.events = new EventsModule({ httpClient: this.httpClient });
@@ -47,3 +51,6 @@ export class DifferentBreedClient {
     this.cart = new CartModule({ httpClient: this.httpClient });
   }
 }
+
+// Export types.
+export type { ErrorResponse, ErrorResponseValidation };

@@ -1,21 +1,38 @@
 /* Dependencies */
 // Modules
-import { BaseModule } from '../Base/Base.module';
 import { StockModule } from './modules/Stock/Stock.module';
+import { CheckoutModule } from './modules/Checkout/Checkout.module';
+
+// Services
+import { HttpClient } from '../../services/HttpClient.service';
 
 // Models
 import { ClientCartModels } from '@waoadb/contracts-client';
-import { CheckoutModule } from './modules/Checkout/Checkout.module';
+type Props = {
+  /**
+   * Http Client.
+   */
+  httpClient: HttpClient;
+};
 
 /**
  * Cart Module
  * Handles API Requests for the cart on the platform.
  * @class
  */
-export class CartModule extends BaseModule {
+export class CartModule {
   // Modules
-  public stock = new StockModule({ httpClient: this.httpClient });
-  public checkout = new CheckoutModule({ httpClient: this.httpClient });
+  public stock: StockModule;
+  public checkout: CheckoutModule;
+  private httpClient: HttpClient;
+
+  constructor({ httpClient }: Props) {
+    this.httpClient = httpClient;
+
+    // Initialize modules.
+    this.stock = new StockModule({ httpClient: this.httpClient });
+    this.checkout = new CheckoutModule({ httpClient: this.httpClient });
+  }
 
   /**
    * Retrieve the cart.
@@ -24,14 +41,19 @@ export class CartModule extends BaseModule {
   async retrieveCart(
     cart_id: string
   ): Promise<ClientCartModels.RetrieveCartResponse> {
-    return this.makeGetRequest<ClientCartModels.RetrieveCartResponse>(
-      'cart',
-      '/cart',
-      null,
-      {
-        cart: cart_id,
-      }
-    );
+    return this.httpClient
+      .makeGetRequest<ClientCartModels.RetrieveCartResponse>(
+        'cart',
+        '/cart',
+        null,
+        {
+          cart: cart_id,
+        }
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        throw error;
+      });
   }
 
   /**
@@ -43,11 +65,16 @@ export class CartModule extends BaseModule {
   async createCart(
     payload: ClientCartModels.CreateCartRequest
   ): Promise<ClientCartModels.CreateCartResponse> {
-    return this.makePostRequest<ClientCartModels.CreateCartResponse>(
-      'cart',
-      '/cart/create',
-      payload
-    );
+    return this.httpClient
+      .makePostRequest<ClientCartModels.CreateCartResponse>(
+        'cart',
+        '/cart/create',
+        payload
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        throw error;
+      });
   }
 
   /**
@@ -60,14 +87,19 @@ export class CartModule extends BaseModule {
     cart_id: string,
     payload: ClientCartModels.AttachCustomerRequest
   ): Promise<ClientCartModels.AttachCustomerResponse> {
-    return this.makePostRequest<ClientCartModels.AttachCustomerResponse>(
-      'cart',
-      '/cart/attach-customer',
-      payload,
-      {
-        cart: cart_id,
-      }
-    );
+    return this.httpClient
+      .makePostRequest<ClientCartModels.AttachCustomerResponse>(
+        'cart',
+        '/cart/attach-customer',
+        payload,
+        {
+          cart: cart_id,
+        }
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        throw error;
+      });
   }
 
   /**
@@ -81,14 +113,19 @@ export class CartModule extends BaseModule {
     cart_id: string,
     payload: ClientCartModels.ValidateCartRequest
   ): Promise<ClientCartModels.ValidateCartResponse> {
-    return this.makePostRequest<ClientCartModels.ValidateCartResponse>(
-      'cart',
-      '/cart/validate',
-      payload,
-      {
-        cart: cart_id,
-      }
-    );
+    return this.httpClient
+      .makePostRequest<ClientCartModels.ValidateCartResponse>(
+        'cart',
+        '/cart/validate',
+        payload,
+        {
+          cart: cart_id,
+        }
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        throw error;
+      });
   }
 
   /**
@@ -98,13 +135,18 @@ export class CartModule extends BaseModule {
   async deleteCart(
     cart_id: string
   ): Promise<ClientCartModels.DeleteCartResponse> {
-    return this.makeGetRequest<ClientCartModels.DeleteCartResponse>(
-      'cart',
-      '/cart/delete',
-      null,
-      {
-        cart: cart_id,
-      }
-    );
+    return this.httpClient
+      .makeGetRequest<ClientCartModels.DeleteCartResponse>(
+        'cart',
+        '/cart/delete',
+        null,
+        {
+          cart: cart_id,
+        }
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        throw error;
+      });
   }
 }
