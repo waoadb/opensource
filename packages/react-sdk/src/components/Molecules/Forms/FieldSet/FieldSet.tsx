@@ -1,5 +1,16 @@
 /* Dependencies */
 import { PropsWithChildren } from 'react';
+import classNames from 'classnames';
+
+// Styles
+const variants = Object.freeze({
+  h1: 'db-text-3xl md:db-text-5xl',
+  h2: 'db-text-2xl md:db-text-3xl',
+  h3: 'db-text-xl md:db-text-2xl',
+  h4: 'db-text-lg md:db-text-xl',
+  h5: 'db-text-base',
+  base: 'db-text-base',
+});
 
 // Models
 type Props = PropsWithChildren<{
@@ -21,7 +32,7 @@ type Props = PropsWithChildren<{
   /**
    * Title Size
    */
-  titleSize?: 'db-text-base' | 'db-text-xl';
+  titleSize?: keyof typeof variants;
 }>;
 
 /**
@@ -31,7 +42,7 @@ export const FieldSet = ({
   children,
   error,
   title,
-  titleSize,
+  titleSize = 'base',
   required,
 }: Props) => {
   return (
@@ -42,9 +53,10 @@ export const FieldSet = ({
     >
       <fieldset className="db-block db-w-full">
         <legend
-          className={`${
-            titleSize ? titleSize : 'db-text-base'
-          } db-w-full db-mt-0`}
+          className={classNames(
+            'db-w-full db-font-semibold',
+            variants[titleSize]
+          )}
         >
           {title} {required && <span className="db-text-indigo-600">*</span>}
           {error && (

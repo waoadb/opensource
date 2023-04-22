@@ -3,7 +3,13 @@ import { ClientCartModels } from '@waoadb/contracts-client';
 
 // Models
 type DynamicFormFieldConfig = {
+  /**
+   * Whether the field is required.
+   */
   required: boolean;
+  /**
+   * Whether the field is enabled.
+   */
   enabled: boolean;
 };
 

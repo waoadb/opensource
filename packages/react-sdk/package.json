@@ -1,5 +1,6 @@
 {
   "name": "@waoadb/react-sdk",
+  "description": "React SDK for Different Breed ®",
   "version": "0.0.1",
   "private": false,
   "publishConfig": {
@@ -26,6 +27,7 @@
   "dependencies": {
     "@waoadb/contracts-client": "^0.0.10",
     "@waoadb/js-client-sdk": "*",
+    "classnames": "^2.3.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",

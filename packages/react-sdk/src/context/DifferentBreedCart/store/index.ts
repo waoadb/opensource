@@ -26,6 +26,7 @@ type InitialState = {
   checkoutConfig: ClientCartModels.CheckoutConfigItem[] | null;
 };
 
+// Initial State
 export const initialState: InitialState = {
   cart: null,
   cart_id: null,

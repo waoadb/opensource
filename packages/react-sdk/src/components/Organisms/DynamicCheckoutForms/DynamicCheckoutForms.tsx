@@ -3,25 +3,13 @@ import { forwardRef, useCallback, useImperativeHandle, useRef } from 'react';
 import { v4 as uuid } from 'uuid';
 
 // Helpers
-import { cleanObjects } from '../../../helpers/cleanObjects/cleanObjects';
+import { convertBlankStringsToNull } from '../../../helpers/convertBlankStringsToNull/convertBlankStringsToNull';
 
 // Components
-import { Accordion } from '../../Molecules/Accordion/Accordion';
-import { Heading } from '../../Atoms/Heading/Heading';
-import { PerformanceInformation } from '../../Molecules/PerformanceInformation/PerformanceInformation';
-
-import {
-  CoreDetailsForm,
-  CoreDetailsFormImperativeMethods,
-} from './forms/CoreDetailsForm/CoreDetailsForm';
-import {
-  CustomDetailsForm,
-  CustomDetailsFormImperativeMethods,
-} from './forms/CustomDetailsForm/CustomDetailsForm';
-import {
-  DeliveryMethodForm,
-  DeliveryMethodFormImperativeMethods,
-} from './forms/DeliveryMethodForm/DeliveryMethodForm';
+import { CoreDetailsFormImperativeMethods } from './Forms/CoreDetailsForm/CoreDetailsForm';
+import { CustomDetailsFormImperativeMethods } from './Forms/CustomDetailsForm/CustomDetailsForm';
+import { DeliveryMethodFormImperativeMethods } from './Forms/DeliveryMethodForm/DeliveryMethodForm';
+import { DynamicRender } from './Forms/DynamicRender/DynamicRender';
 
 // Models
 import { ClientCartModels } from '@waoadb/contracts-client';
@@ -49,6 +37,31 @@ type EntryFormRef = {
   delivery: DeliveryMethodFormImperativeMethods;
 };
 
+/**
+ * Dynamic Checkout Forms
+ * Forwards a ref to the parent component.
+ * @param params - DynamicCheckoutFormProps
+ * @returns - DynamicCheckoutForm
+ * @example
+ * const ref = useRef<DynamicCheckoutFormsImperativeMethods>();
+ *
+ * const triggerSubmit = () => {
+ *  ref.current?.triggerSubmit();
+ * }
+ *
+ * const onSubmit = (payload: ClientCartModels.ValidateCartRequest) => {
+ *  console.log(payload);
+ * }
+ *
+ * return (
+ *  <DynamicCheckoutForms
+ *     ref={ref}
+ *    cart={cart}
+ *    checkoutConfig={checkoutConfig}
+ *    onSubmit={onSubmit}
+ *  />
+ * )
+ */
 export const DynamicCheckoutForms = forwardRef<
   DynamicCheckoutFormsImperativeMethods,
   Props
@@ -133,14 +146,22 @@ export const DynamicCheckoutForms = forwardRef<
         collected_core.collection_method === 'customer' &&
         collected_custom.collection_method === 'customer'
       ) {
+        // Skip if no customer details.
         if (!formData.customer) return;
 
-        const coreDetails = cleanObjects(formData.customer.core.values);
-        const customDetails = formData.customer.custom.values;
+        // Core Fields
+        const coreDetails = convertBlankStringsToNull(
+          formData.customer.core.values
+        );
 
-        // Clean the cuystom details
+        // Send [] if no custom fields.
+        const customDetails = formData.customer.custom
+          ? formData.customer.custom.values
+          : { custom_details: [] };
+
+        // Clean the custom details
         customDetails.custom_details.forEach((customDetail) =>
-          cleanObjects(customDetail)
+          convertBlankStringsToNull(customDetail)
         );
 
         const billingAddress = coreDetails.billing_address;
@@ -159,19 +180,23 @@ export const DynamicCheckoutForms = forwardRef<
       // Collection Method: Attendees Or Mixed
       else {
         entry.tickets.forEach((ticket, index) => {
-          const coreDetails = cleanObjects(
+          const coreDetails = convertBlankStringsToNull(
             collected_core.collection_method === 'customer'
               ? formData.customer!.core.values
               : formData.attendees[index].core.values
           );
+
+          // Send [] if no custom fields.
           const customDetails =
             collected_custom.collection_method === 'customer'
-              ? formData.customer!.custom.values
-              : formData.attendees[index].custom.values;
+              ? formData.customer?.custom?.values || { custom_details: [] }
+              : formData.attendees[index]?.custom?.values || {
+                  custom_details: [],
+                };
 
           // Clean the custom details
           customDetails.custom_details.forEach((customDetail) =>
-            cleanObjects(customDetail)
+            convertBlankStringsToNull(customDetail)
           );
 
           const billingAddress = coreDetails.billing_address;
@@ -206,173 +231,15 @@ export const DynamicCheckoutForms = forwardRef<
 
   return (
     <ul className="db-w-full db-grid db-grid-cols-1 db-divide-y db-divide-gray-100">
-      {cart.entries.map((entry, entryIndex) => {
-        // Get the checkout config for the event
-        const configEntry = checkoutConfig.find(
-          (configEntry) => configEntry.event_id === entry.event_id
-        );
-
-        // If no config entry is found, return null.
-        if (!configEntry) return null;
-
-        // Spread the checkout config
-        const { collected_core, collected_custom } = configEntry;
-
-        // Check if custom fields has length
-        // [] is sent if no custom fields are defined.
-        const customFieldsHasLength = collected_custom.fields.length > 0;
-
-        // Check methods for attendees
-        const coreAttendees = collected_core.collection_method === 'attendee';
-        const customAttendees =
-          collected_custom.collection_method === 'attendee' &&
-          customFieldsHasLength;
-
-        // Determine render types
-        const renderAttendees = coreAttendees || customAttendees;
-        const renderCustomer =
-          !coreAttendees || (!customAttendees && customFieldsHasLength);
-
-        return (
-          <li className="db-w-full db-py-5" key={entry.entry_id}>
-            {/* Event Details */}
-            <Heading level="h3" style="h3">
-              {entry.event.name}
-            </Heading>
-            <div className="db-w-full db-my-2">
-              <PerformanceInformation performance={entry.performance} />
-            </div>
-            {/* / Event Details */}
-
-            {/* Collection Method: Customer */}
-            {renderCustomer && (
-              <div className="db-w-full db-my-2">
-                <div className="db-w-full db-py-2">
-                  {!coreAttendees && (
-                    <CoreDetailsForm
-                      config={configEntry}
-                      ref={(el) => {
-                        entryFormData.current[entryIndex] = {
-                          ...entryFormData.current[entryIndex],
-                          entry_id: entry.entry_id,
-                          customer: {
-                            ...entryFormData.current[entryIndex]?.customer!,
-                            core: el!,
-                          },
-                        };
-                      }}
-                    />
-                  )}
-
-                  {!customAttendees && (
-                    <CustomDetailsForm
-                      config={configEntry}
-                      ref={(el) => {
-                        // Update the current entry
-                        entryFormData.current[entryIndex] = {
-                          ...entryFormData.current[entryIndex],
-                          entry_id: entry.entry_id,
-                          customer: {
-                            ...entryFormData.current[entryIndex]?.customer!,
-                            custom: el!,
-                          },
-                        };
-                      }}
-                    />
-                  )}
-                </div>
-              </div>
-            )}
-            {/* / Collection Method: Customer */}
-
-            {/* Collection Method: Attendees */}
-            {renderAttendees && (
-              <>
-                {entry.tickets.map((ticket, ticketIndex) => {
-                  return (
-                    <div
-                      className="db-w-full db-my-2"
-                      key={ticket.ticket_entry_id}
-                    >
-                      <Accordion
-                        title={`${ticket.name}`}
-                        unmountOnClose={false}
-                        el="div"
-                        defaultOpen={true}
-                      >
-                        <div className="db-w-full db-py-2">
-                          {coreAttendees && (
-                            <CoreDetailsForm
-                              config={configEntry}
-                              ref={(el) => {
-                                const currentAttendees =
-                                  entryFormData.current[entryIndex]
-                                    ?.attendees || [];
-
-                                currentAttendees[ticketIndex] = {
-                                  ...currentAttendees[ticketIndex],
-                                  core: el!,
-                                };
-
-                                entryFormData.current[entryIndex] = {
-                                  ...entryFormData.current[entryIndex],
-                                  entry_id: entry.entry_id,
-                                  attendees: currentAttendees,
-                                };
-                              }}
-                            />
-                          )}
-
-                          {customAttendees && (
-                            <div className="db-w-full db-mt-4">
-                              <CustomDetailsForm
-                                config={configEntry}
-                                ref={(el) => {
-                                  const currentAttendees =
-                                    entryFormData.current[entryIndex]
-                                      ?.attendees || [];
-
-                                  currentAttendees[ticketIndex] = {
-                                    ...currentAttendees[ticketIndex],
-                                    custom: el!,
-                                  };
-
-                                  entryFormData.current[entryIndex] = {
-                                    ...entryFormData.current[entryIndex],
-                                    entry_id: entry.entry_id,
-                                    attendees: currentAttendees,
-                                  };
-                                }}
-                              />
-                            </div>
-                          )}
-                        </div>
-                      </Accordion>
-                    </div>
-                  );
-                })}
-              </>
-            )}
-            {/* / Collection Method: Attendees */}
-
-            {/* Delivery Methods */}
-            <div className="db-w-full db-mt-4">
-              <DeliveryMethodForm
-                config={configEntry}
-                showAddonDeliveryMethods={entry.addons.length > 0}
-                ref={(el) => {
-                  entryFormData.current[entryIndex] = {
-                    ...entryFormData.current[entryIndex],
-                    entry_id: entry.entry_id,
-                    delivery: el!,
-                  };
-                }}
-              />
-            </div>
-            {/* / Delivery Methods */}
-          </li>
-        );
-      })}
+      {cart.entries.map((entry, entryIndex) => (
+        <DynamicRender
+          key={entry.entry_id}
+          entry={entry}
+          entryIndex={entryIndex}
+          checkoutConfig={checkoutConfig}
+          entryFormData={entryFormData}
+        />
+      ))}
     </ul>
   );
 });

@@ -80,7 +80,7 @@ export const FormErrorMessage = ({ propMatch, errors, touched }: Props) => {
   return (
     <>
       {errorMessage && (
-        <div className="form-error-highlight db-w-full db-mb-2 db-p-2 db-bg-red-600 db-text-white">
+        <div className="form-error-highlight db-w-full db-my-2 db-p-2 db-bg-red-600 db-text-white">
           <p>{errorMessage}</p>
         </div>
       )}

@@ -2,14 +2,14 @@
 import { FormikErrors, FormikTouched } from 'formik';
 
 // Helpers
-import { cleanFieldId } from '../../../../../helpers/cleanFieldId/cleanFieldId';
+import { removeFieldSuffix } from '../../helpers/removeFieldSuffix/removeFieldSuffix';
 import { handleFieldError } from '../../../../../helpers/handleFieldError/handleFieldError';
 import { getDynamicFieldConfig } from '../../../../../helpers/getDynamicFieldConfig/getDynamicFieldConfig';
 
 // Components
 import { Select } from '../../../../Molecules/Forms/Select/Select';
 import { Input } from '../../../../Molecules/Forms/Input/Input';
-import { CoreDetailsFormValues } from '../../forms/CoreDetailsForm/CoreDetailsForm';
+import { CoreDetailsFormValues } from '../../Forms/CoreDetailsForm/CoreDetailsForm';
 
 // Models
 import { ClientCartModels } from '@waoadb/contracts-client';
@@ -39,7 +39,7 @@ export const DynamicFormCoreField = ({
   handleBlur,
 }: DynamicFormCoreFieldProps) => {
   // Clean the field id
-  const cleanedFieldId = cleanFieldId(field_id);
+  const cleanedFieldId = removeFieldSuffix(field_id);
 
   // Get the field config
   const fieldConfig = getDynamicFieldConfig(cleanedFieldId, configFields);

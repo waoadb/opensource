@@ -1,4 +1,6 @@
-# Getting Started with Create React App
+# Different Breed ® - React SDK
+
+## Overview
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

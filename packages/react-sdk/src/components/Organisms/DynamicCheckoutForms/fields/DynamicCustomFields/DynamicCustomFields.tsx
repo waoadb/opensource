@@ -10,7 +10,7 @@ import { TextArea } from '../../../../Molecules/Forms/TextArea/TextArea';
 
 // Models
 import { ClientCartModels } from '@waoadb/contracts-client';
-import { CustomDetailsFormValues } from '../../forms/CustomDetailsForm/CustomDetailsForm';
+import { CustomDetailsFormValues } from '../../Forms/CustomDetailsForm/CustomDetailsForm';
 
 // Models
 type DynamicFormCoreFieldProps = {
