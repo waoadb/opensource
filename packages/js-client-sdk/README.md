@@ -1,24 +1,24 @@
-# Different Breed ® - React SDK
+# Different Breed ® - Javascript Client SDK
 
 > 💡 This package is intended to be installed and not edited directly. We simply offer the source code to provide transparency around what is happening under the hood. If you require changes or additional features please [raise an issue](https://github.com/waoadb/opensource/issues) within Github.
 
 ## Overview
 
-The following package serves as a software development kit to speed up and simplify the integration of your React / Next.js project with the Different Breed Client API’s.
+The following package serves as a software development kit to speed up and simplify the integration of your javascript project with the Different Breed Client API’s.
 
 ## Quick Start
 
 Install the application using your favourite package manager.
 
-`npm install @waoadb/react-sdk`
+`npm install @waoadb/js-client-sdk`
 
 or
 
-`yarn add @waoadb/react-sdk`
+`yarn add @waoadb/js-client-sdk`
 
 ## Documentation
 
-All documentation for Open Source Different Breed ® packages can be found here: [Documentation](https://opensource.differentbreed.events). For the React SDK, please see the following link: [React SDK](https://opensource.differentbreed.events/docs/react-sdk).
+All documentation for Open Source Different Breed ® packages can be found here: [Documentation](https://opensource.differentbreed.events). For this package, please see the following link: [Javascript Client SDK](https://opensource.differentbreed.events/docs/js-client-sdk).
 
 ## Local Development
 
@@ -29,18 +29,8 @@ All documentation for Open Source Different Breed ® packages can be found here
 The parent repo housing this component is a Mono repo powered by Lerna. To use this package locally in a theme, simply add the following code to your `package.json` file and run `yarn` to link the package.
 
 ```jsx
-"@waoadb/react-sdk": "*",
+"@waoadb/js-client-sdk": "*",
 ```
-
-### Active Changes
-
-To make active changes in a mock environment before building, Simply run the storybook instance set up for our packages. This can be done by running the following command:
-
-```jsx
-yarn dev:storybook-packages
-```
-
-This will spin up an associated storybook linked to all open source packages within the repo.
 
 ### Build
 
@@ -72,7 +62,7 @@ Different Breed has adopted a Code of Conduct that we expect project participant
 
 ### [Contributing Guide](https://opensource.differentbreed.events/docs/contributing/)
 
-Read our [contributing guide](https://opensource.differentbreed.events/docs/contributing/) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to.
+Read our [contributing guide](https://opensource.differentbreed.events/docs/contributing/) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes.
 
 ### License
 
