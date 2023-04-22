@@ -1,7 +1,8 @@
 ---
 sidebar_label: 'Versioning'
-sidebar_position: 4
 ---
+
+# Versioning
 
 All stable builds of Different Breed Open Source undergo a high level of testing and follow semantic versioning (semver). We also offer unstable release channels to encourage early feedback on experimental features. This page describes what you can expect from releases.
 

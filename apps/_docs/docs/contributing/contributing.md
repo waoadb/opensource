@@ -1,21 +1,22 @@
 ---
 sidebar_label: 'Contributing'
-sidebar_position: 3
 ---
 
-# Contributing
+# How To Contribute
 
-## [Code of Conduct](/docs/contributing/code-of-conduct)
+This is one of Different Breed's first open source projects that is both under very active development and is also being used to ship code to everybody on waoadb.com. We’re still working out the kinks to make contributing to this project as easy and transparent as possible, but we’re not quite there yet. Hopefully this document makes the process for contributing clear and answers some questions that you may have.
 
-Different Breed Open Source has adopted the [Contributor Covenant](https://www.contributor-covenant.org/) as its Code of Conduct, and we expect project participants to adhere to it. Please [read the full text] so that you can understand what actions will and will not be tolerated.
+## Code of Conduct
+
+Different Breed Open Source has adopted the [Contributor Covenant](https://www.contributor-covenant.org/) as its [Code of Conduct](/docs/contributing/code-of-conduct), and we expect project participants to adhere to it. Please [read the full text](/docs/contributing/code-of-conduct) so that you can understand what actions will and will not be tolerated.
 
 ## Open Development
 
-All work on Different Breed Open Source happens directly on [GitHub]. Both core team members and external contributors send pull requests which go through the same review process.
+All work on Different Breed Open Source happens directly on [GitHub](https://github.com/waoadb/open-source). Both core team members and external contributors send pull requests which go through the same review process.
 
 ## Semantic Versioning
 
-Different Breed Open Source follows [semantic versioning](https://semver.org/). We release patch versions for critical bugfixes, minor versions for new features or non-essential changes, and major versions for any breaking changes. When we make breaking changes, we also introduce deprecation warnings in a minor version so that our users learn about the upcoming changes and migrate their code in advance. Learn more about our commitment to stability and incremental migration in [our versioning policy.]
+Different Breed Open Source follows [semantic versioning](https://semver.org/). We release patch versions for critical bugfixes, minor versions for new features or non-essential changes, and major versions for any breaking changes. When we make breaking changes, we also introduce deprecation warnings in a minor version so that our users learn about the upcoming changes and migrate their code in advance. Learn more about our commitment to stability and incremental migration in (/docs/versioning)[our versioning policy.]
 
 Every significant change is documented in the [changelog file].
 
@@ -27,23 +28,25 @@ Code that lands in `production` must be compatible with the latest stable rele
 
 ## Bugs
 
-## Where to Find Known Issues
+### Where to Find Known Issues
 
-We are using [GitHub Issues] for our public bugs. We keep a close eye on this and try to make it clear when we have an internal fix in progress. Before filing a new task, try to make sure your problem doesn’t already exist.
+We are using [GitHub Issues](https://github.com/waoadb/open-source/issues) for our public bugs. We keep a close eye on this and try to make it clear when we have an internal fix in progress. Before filing a new task, try to make sure your problem doesn’t already exist.
 
-## Reporting New Issues
+### Reporting New Issues
 
-The best way to get your bug fixed is to provide a reduced test case. This [JSFiddle template](https://jsfiddle.net/Luktwrdm/) is a great starting point.
+The best way to get your bug fixed is to provide an example of the issue using a service such as [jsfiddle.net](https://jsfiddle.net/). This will allow our team to easily spot and debug the issue.
 
-## Security Bugs
+If you are unable to provide an example, please provide as much information as possible about your environment and what you were doing when the issue occurred. If possible, please provide the exact error message that you received.
+
+### Security Bugs
 
 Different Breed Open Source has a [security policy] for the safe disclosure of security bugs. With that in mind, please do not file public issues; go through the process outlined on that page.
 
 ## How to Get in Touch
 
-- Questions - Use our [Discussions] section within the repo to ask any questions about Different Breed Open Source.
-- Issues / Bugs - To report issues or bugs, please [open an issue] on our repo with an example showing the issue.
-- Feature Requests - Use our [Discussions] section within the repo to make any suggestions for features to be introduced within Different Breed Open Source.
+- Questions - Use our [Discussions](https://github.com/waoadb/open-source/discussions) section within the repo to ask any questions about Different Breed Open Source.
+- Issues / Bugs - To report issues or bugs, please [open an issue](https://github.com/waoadb/open-source/issues) on our repo with an example showing the issue.
+- Feature Requests - Use our [Discussions](https://github.com/waoadb/open-source/discussions) section within the repo to make any suggestions for features to be introduced within Different Breed Open Source.
 
 For anything else please contact [opensource@differentbreed.events](mailto:opensource@differentbreed.events).
 
@@ -53,7 +56,7 @@ If you intend to change the public API, or make any non-trivial changes to the i
 
 If you’re only fixing a bug, it’s fine to submit a pull request right away but we still recommend to file an issue detailing what you’re fixing. This is helpful in case we don’t accept that specific fix but want to keep track of the issue.
 
-## Your First Pull Request
+### Your First Pull Request
 
 Working on your first Pull Request? You can learn how from this free video series:
 
@@ -63,7 +66,7 @@ If you decide to fix an issue, please be sure to check the comment thread in cas
 
 If somebody claims an issue but doesn’t follow up for more than two weeks, it’s fine to take it over but you should still leave a comment.
 
-## Sending a Pull Request
+### Sending a Pull Request
 
 The core team is monitoring for pull requests. We will review your pull request and either merge it, request changes to it, or close it with an explanation. For API changes we may need to fix our internal uses at Different Breed, which could cause some delay. We’ll do our best to provide updates and feedback throughout the process.
 
@@ -75,7 +78,7 @@ Our CI will also run the full build to ensure that the project succeeds as expec
 
 In order to accept your pull request, we need you to submit a CLA. You only need to do this once, so if you’ve done this for another Different Breed open source project, you’re good to go. If you are submitting a pull request for the first time, just let us know that you have completed the CLA and we can cross-check with your GitHub username.
 
-[Complete your CLA here]
+[Complete your CLA here](https://forms.gle/ZBaXwerHaEJZiDEC9)
 
 ## Contribution Prerequisites
 
