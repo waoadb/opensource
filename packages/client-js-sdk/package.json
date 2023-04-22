@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/waoadb/open-source.git"
+    "url": "git+https://github.com/waoadb/opensource.git"
   },
   "keywords": [
     "contracts",
@@ -23,9 +23,9 @@
   "author": "Different Breed",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/waoadb/open-source/issues"
+    "url": "https://github.com/waoadb/opensource/issues"
   },
-  "homepage": "https://github.com/waoadb/open-source/packages/client-js-sdk#readme",
+  "homepage": "https://github.com/waoadb/opensource/packages/client-js-sdk#readme",
   "prettier": {
     "singleQuote": true,
     "tabWidth": 2

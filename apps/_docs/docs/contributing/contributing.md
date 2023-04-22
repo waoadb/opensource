@@ -12,7 +12,7 @@ Different Breed Open Source has adopted the [Contributor Covenant](https://www.
 
 ## Open Development
 
-All work on Different Breed Open Source happens directly on [GitHub](https://github.com/waoadb/open-source). Both core team members and external contributors send pull requests which go through the same review process.
+All work on Different Breed Open Source happens directly on [GitHub](https://github.com/waoadb/opensource). Both core team members and external contributors send pull requests which go through the same review process.
 
 ## Semantic Versioning
 
@@ -30,7 +30,7 @@ Code that lands in `production` must be compatible with the latest stable rele
 
 ### Where to Find Known Issues
 
-We are using [GitHub Issues](https://github.com/waoadb/open-source/issues) for our public bugs. We keep a close eye on this and try to make it clear when we have an internal fix in progress. Before filing a new task, try to make sure your problem doesn’t already exist.
+We are using [GitHub Issues](https://github.com/waoadb/opensource/issues) for our public bugs. We keep a close eye on this and try to make it clear when we have an internal fix in progress. Before filing a new task, try to make sure your problem doesn’t already exist.
 
 ### Reporting New Issues
 
@@ -44,9 +44,9 @@ Different Breed Open Source has a [security policy] for the safe disclosure of
 
 ## How to Get in Touch
 
-- Questions - Use our [Discussions](https://github.com/waoadb/open-source/discussions) section within the repo to ask any questions about Different Breed Open Source.
-- Issues / Bugs - To report issues or bugs, please [open an issue](https://github.com/waoadb/open-source/issues) on our repo with an example showing the issue.
-- Feature Requests - Use our [Discussions](https://github.com/waoadb/open-source/discussions) section within the repo to make any suggestions for features to be introduced within Different Breed Open Source.
+- Questions - Use our [Discussions](https://github.com/waoadb/opensource/discussions) section within the repo to ask any questions about Different Breed Open Source.
+- Issues / Bugs - To report issues or bugs, please [open an issue](https://github.com/waoadb/opensource/issues) on our repo with an example showing the issue.
+- Feature Requests - Use our [Discussions](https://github.com/waoadb/opensource/discussions) section within the repo to make any suggestions for features to be introduced within Different Breed Open Source.
 
 For anything else please contact [opensource@differentbreed.events](mailto:opensource@differentbreed.events).
 
@@ -60,7 +60,7 @@ If you’re only fixing a bug, it’s fine to submit a pull request right away b
 
 Working on your first Pull Request? You can learn how from this free video series:
 
-**[How to Contribute to an Open Source Project on GitHub](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github)**
+**[How to Contribute to an Open Source Project on GitHub](https://egghead.io/courses/how-to-contribute-to-an-opensource-project-on-github)**
 
 If you decide to fix an issue, please be sure to check the comment thread in case somebody is already working on a fix. If nobody is working on it at the moment, please leave a comment stating that you intend to work on it so other people don’t accidentally duplicate your effort.
 

@@ -19,7 +19,7 @@ const config = {
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'waoadb', // Usually your GitHub org/user name.
-  projectName: 'open-source', // Usually your repo name.
+  projectName: 'opensource', // Usually your repo name.
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -41,7 +41,7 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl: 'https://github.com/waoadb/open-source/apps/_docs',
+          editUrl: 'https://github.com/waoadb/opensource/apps/_docs',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -74,7 +74,7 @@ const config = {
             position: 'right',
           },
           {
-            href: 'https://github.com/waoadb/open-source',
+            href: 'https://github.com/waoadb/opensource',
             label: 'GitHub',
             position: 'right',
           },
