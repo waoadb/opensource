@@ -1,6 +1,6 @@
 {
   "name": "@waoadb/js-admin-sdk",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Shared javascript package used to streamline admin level api interactions with the platform.",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -9,8 +9,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "dev": "tsc-watch -p tsconfig.json --onSuccess \"node build/index.js\""
+    "package:build": "tsc -p tsconfig.json",
+    "package:dev": "tsc-watch -p tsconfig.json --onSuccess \"node build/index.js\""
   },
   "repository": {
     "type": "git",
