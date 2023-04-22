@@ -1,5 +1,5 @@
 /* Dependencies */
-import { forwardRef, useImperativeHandle } from 'react';
+import { forwardRef, useImperativeHandle, useMemo } from 'react';
 import { setNestedObjectValues, useFormik } from 'formik';
 
 // Helpers
@@ -9,10 +9,10 @@ import { getDeliveryMethodsFormConfig } from '../../helpers/getDeliveryMethodFor
 // Components
 import { RadioList } from '../../../../Molecules/Forms/RadioList/RadioList';
 import { FormErrorMessage } from '../../../../Molecules/Forms/FormErrorMessage/FormErrorMessage';
+import { FieldSet } from '../../../../Molecules/Forms/FieldSet/FieldSet';
 
 // Models
 import { ClientCartModels } from '@waoadb/contracts-client';
-import { Heading } from '../../../../Atoms/Heading/Heading';
 
 export type DeliveryMethodFormImperativeMethods = {
   isValid: boolean;
@@ -37,7 +37,7 @@ type DeliveryMethodFormProps = {
 };
 
 /**
- * Dynamic Checkout Form - Custom Details
+ * Form - Delivery Method
  * Forwards a ref to the parent component.
  * @param params - DynamicCheckoutFormProps
  */
@@ -52,14 +52,19 @@ export const DeliveryMethodForm = forwardRef<
     enabledAddonDeliveryMethods,
     enabledTicketDeliveryMethods,
     errorsPropMatch,
-  } = getDeliveryMethodsFormConfig(config, showAddonDeliveryMethods);
+  } = useMemo(() => {
+    return getDeliveryMethodsFormConfig(config, showAddonDeliveryMethods);
+  }, [config, showAddonDeliveryMethods]);
 
+  // Create Formik Instance
   const formik = useFormik({
     initialValues,
+    validateOnMount: true,
     validationSchema: schema,
     onSubmit: () => {},
   });
 
+  // Imperative Methods
   useImperativeHandle<any, DeliveryMethodFormImperativeMethods>(
     forwardedRef,
     () => {
@@ -84,55 +89,28 @@ export const DeliveryMethodForm = forwardRef<
   return (
     <div className="db-w-full">
       <form onSubmit={formik.handleSubmit}>
-        <Heading level="h3" style="h5" className="mb-2">
-          Delivery Methods
-        </Heading>
-
-        {/* Error Messages */}
-        <FormErrorMessage
-          errors={formik.errors}
-          touched={formik.touched}
-          propMatch={errorsPropMatch}
-        />
-        {/* / Error Messages */}
-
-        {/* Ticket Delivery Options */}
-        <div className="db-w-full">
-          <RadioList
-            title="Ticket Delivery Method"
-            items={enabledTicketDeliveryMethods.map((method) => {
-              return {
-                name: 'ticket_delivery_method',
-                value: method,
-                label: method,
-                onBlur: formik.handleBlur,
-                onChange: formik.handleChange,
-                selected: formik.values.ticket_delivery_method === method,
-              };
-            })}
-            required={true}
-            error={handleFieldError(
-              formik.errors,
-              formik.touched,
-              'ticket_delivery_method'
-            )}
+        <FieldSet title="Delivery Method" titleSize="h4">
+          {/* Error Messages */}
+          <FormErrorMessage
+            errors={formik.errors}
+            touched={formik.touched}
+            propMatch={errorsPropMatch}
           />
-        </div>
-        {/* / Ticket Delivery Options */}
+          {/* / Error Messages */}
 
-        {/* Addon Delivery Options */}
-        {showAddonDeliveryMethods && (
-          <div className="db-w-full db-mt-4">
+          {/* Ticket Delivery Options */}
+          <div className="db-w-full mt-2">
             <RadioList
-              title="Addon Delivery Method"
-              items={enabledAddonDeliveryMethods.map((method) => {
+              title="Ticket Delivery Method"
+              items={enabledTicketDeliveryMethods.map((method) => {
                 return {
-                  name: 'addon_delivery_method',
-                  value: method,
-                  label: method,
+                  name: 'ticket_delivery_method',
+                  value: method.value,
+                  label: method.title,
                   onBlur: formik.handleBlur,
                   onChange: formik.handleChange,
-                  selected: formik.values.addon_delivery_method === method,
+                  selected:
+                    formik.values.ticket_delivery_method === method.value,
                 };
               })}
               required={true}
@@ -143,7 +121,35 @@ export const DeliveryMethodForm = forwardRef<
               )}
             />
           </div>
-        )}
+          {/* / Ticket Delivery Options */}
+
+          {/* Addon Delivery Options */}
+          {showAddonDeliveryMethods && (
+            <div className="db-w-full db-mt-4">
+              <RadioList
+                title="Addon Delivery Method"
+                items={enabledAddonDeliveryMethods.map((method) => {
+                  return {
+                    name: 'addon_delivery_method',
+                    value: method.value,
+                    label: method.title,
+                    onBlur: formik.handleBlur,
+                    onChange: formik.handleChange,
+                    selected:
+                      formik.values.addon_delivery_method === method.value,
+                  };
+                })}
+                required={true}
+                error={handleFieldError(
+                  formik.errors,
+                  formik.touched,
+                  'addon_delivery_method'
+                )}
+              />
+            </div>
+          )}
+          {/* / Addon Delivery Options */}
+        </FieldSet>
       </form>
     </div>
   );

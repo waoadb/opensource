@@ -1,4 +1,6 @@
-export interface GetDescribedByProps {
+/* Dependencies */
+// Models
+type Props = {
   /**
    * Error message.
    */
@@ -19,14 +21,14 @@ export interface GetDescribedByProps {
    * Tooltip text.
    */
   toolTip?: string;
-}
+};
 
 /**
  * Sets the described by values for the field.
  * @param props - The props to be used.
  * @returns
  */
-export const getDescribedBy = (props: GetDescribedByProps): string => {
+export const getDescribedBy = (props: Props): string => {
   let describedBy = '';
   if (props.toolTip) {
     describedBy += `${props.id}_${props.name}-tooltip `;

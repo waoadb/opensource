@@ -38,7 +38,7 @@ export const RadioList: React.FC<Props> = ({
   title,
 }) => {
   return (
-    <FieldSet title={title} error={error} required={required}>
+    <FieldSet title={title} error={error} required={required} titleSize="base">
       {items.map((item, index) => {
         return (
           <div className="db-block db-w-full db-mt-1" key={index}>

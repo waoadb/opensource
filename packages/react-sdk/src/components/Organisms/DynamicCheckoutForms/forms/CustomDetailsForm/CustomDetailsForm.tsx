@@ -1,5 +1,5 @@
 /* Dependencies */
-import { forwardRef, useImperativeHandle } from 'react';
+import { forwardRef, useMemo, useImperativeHandle } from 'react';
 import {
   FieldArray,
   FormikProvider,
@@ -11,9 +11,9 @@ import {
 import { getCustomFieldsFormConfig } from '../../helpers/getCustomFieldsFormConfig/getCustomFieldsFormConfig';
 
 // Components
-import { DynamicFormCustomField } from '../../fields/DynamicCustomFields/DynamicCustomFields';
+import { DynamicFormCustomField } from '../../Fields/DynamicCustomFields/DynamicCustomFields';
 import { FormErrorMessage } from '../../../../Molecules/Forms/FormErrorMessage/FormErrorMessage';
-import { Heading } from '../../../../Atoms/Heading/Heading';
+import { FieldSet } from '../../../../Molecules/Forms/FieldSet/FieldSet';
 
 // Models
 import { ClientCartModels } from '@waoadb/contracts-client';
@@ -34,7 +34,7 @@ export type CustomDetailsFormValues = {
 };
 
 /**
- * Dynamic Checkout Form - Custom Details
+ * Form - Custom Details
  * Forwards a ref to the parent component.
  * @param params - DynamicCheckoutFormProps
  */
@@ -42,20 +42,32 @@ export const CustomDetailsForm = forwardRef<
   CustomDetailsFormImperativeMethods,
   CustomDetailsFormProps
 >(({ config, defaultValues }, forwardedRef) => {
-  // Get the enabled custom fields
-  const enabledCustomFields = config.collected_custom.fields
-    .filter((field) => field.field_enabled === true)
-    .reverse();
+  // Get the enabled custom fields and config
+  const {
+    enabledCustomFields,
+    enabledFieldsConfig: { initialValues, schema, errorsPropMatch },
+  } = useMemo(() => {
+    // Get the enabled custom fields
+    const enabledCustomFields = config.collected_custom.fields
+      .filter((field) => field.field_enabled === true)
+      .reverse();
 
-  const { initialValues, schema, errorsPropMatch } =
-    getCustomFieldsFormConfig(enabledCustomFields);
+    // Get the enabled custom fields config
+    const enabledFieldsConfig = getCustomFieldsFormConfig(enabledCustomFields);
 
+    // Return the data
+    return { enabledCustomFields, enabledFieldsConfig };
+  }, [config.collected_custom.fields]);
+
+  // Create Formik Instance
   const formik = useFormik({
     initialValues: defaultValues || initialValues,
+    validateOnMount: true,
     validationSchema: schema,
     onSubmit: () => {},
   });
 
+  // Imperative Methods
   useImperativeHandle<unknown, CustomDetailsFormImperativeMethods>(
     forwardedRef,
     () => {
@@ -80,41 +92,41 @@ export const CustomDetailsForm = forwardRef<
   return (
     <div className="db-w-full">
       <form onSubmit={formik.handleSubmit}>
-        <Heading level="h3" style="h5" className="mb-2">
-          Additional Details
-        </Heading>
+        <FieldSet title="Additional Details" titleSize="h4">
+          {/* Error Messages */}
+          <FormErrorMessage
+            errors={formik.errors}
+            touched={formik.touched}
+            propMatch={errorsPropMatch}
+          />
+          {/* / Error Messages */}
 
-        {/* Error Messages */}
-        <FormErrorMessage
-          errors={formik.errors}
-          touched={formik.touched}
-          propMatch={errorsPropMatch}
-        />
-        {/* / Error Messages */}
-
-        <FormikProvider value={formik}>
-          <div className="db-w-full db-space-y-2">
-            <FieldArray
-              name="custom_details"
-              render={(arrayHelpers) => (
-                <>
-                  {enabledCustomFields.map((field, customIndex) => (
-                    <DynamicFormCustomField
-                      field={field}
-                      index={customIndex}
-                      values={formik.values}
-                      errors={formik.errors}
-                      touched={formik.touched}
-                      handleChange={formik.handleChange}
-                      handleBlur={formik.handleBlur}
-                      key={field.field_id}
-                    />
-                  ))}
-                </>
-              )}
-            ></FieldArray>
-          </div>
-        </FormikProvider>
+          {/*  Custom Fields  */}
+          <FormikProvider value={formik}>
+            <div className="db-w-full db-space-y-2 db-mt-2">
+              <FieldArray
+                name="custom_details"
+                render={() => (
+                  <>
+                    {enabledCustomFields.map((field, customIndex) => (
+                      <DynamicFormCustomField
+                        field={field}
+                        index={customIndex}
+                        values={formik.values}
+                        errors={formik.errors}
+                        touched={formik.touched}
+                        handleChange={formik.handleChange}
+                        handleBlur={formik.handleBlur}
+                        key={field.field_id}
+                      />
+                    ))}
+                  </>
+                )}
+              ></FieldArray>
+            </div>
+          </FormikProvider>
+          {/*  / Custom Fields  */}
+        </FieldSet>
       </form>
     </div>
   );

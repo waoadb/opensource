@@ -3,7 +3,7 @@ import * as yup from 'yup';
 
 // Models
 import { ClientCartModels } from '@waoadb/contracts-client';
-import { CoreDetailsFormValues } from '../../forms/CoreDetailsForm/CoreDetailsForm';
+import { CoreDetailsFormValues } from '../../Forms/CoreDetailsForm/CoreDetailsForm';
 
 /**
  * Get Core Fields Form Config.

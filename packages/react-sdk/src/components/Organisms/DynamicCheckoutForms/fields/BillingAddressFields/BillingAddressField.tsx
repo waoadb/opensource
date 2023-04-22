@@ -1,22 +1,46 @@
 /* Dependencies */
+import { useMemo } from 'react';
 import { FormikErrors, FormikTouched } from 'formik';
 
 // Helpers
 import { handleFieldError } from '../../../../../helpers/handleFieldError/handleFieldError';
+import { getCoreFieldsFormConfig } from '../../helpers/getCoreFieldsFormConfig/getCoreFieldsValidationSchema';
 
 // Components
 import { FieldSet } from '../../../../Molecules/Forms/FieldSet/FieldSet';
 import { Input } from '../../../../Molecules/Forms/Input/Input';
 import { Select } from '../../../../Molecules/Forms/Select/Select';
+import { FormErrorMessage } from '../../../../Molecules/Forms/FormErrorMessage/FormErrorMessage';
+import { CoreDetailsFormValues } from '../../Forms/CoreDetailsForm/CoreDetailsForm';
 
 // Models
-import { CoreDetailsFormValues } from '../../forms/CoreDetailsForm/CoreDetailsForm';
+import { ClientCartModels } from '@waoadb/contracts-client';
+
 import { countries } from '../../models/countries.model';
 type BillingAddressFieldsProps = {
+  /**
+   * The core fields.
+   */
+  configFields: ClientCartModels.ConfigCollectedCoreFields;
+  /**
+   * The form values.
+   */
   values: Partial<CoreDetailsFormValues>;
+  /**
+   * The form errors.
+   */
   errors: FormikErrors<Partial<CoreDetailsFormValues>>;
+  /**
+   * The form touched fields.
+   */
   touched: FormikTouched<Partial<CoreDetailsFormValues>>;
+  /**
+   * The form handle blur.
+   */
   handleBlur: (e: React.FocusEvent<any>) => void;
+  /**
+   * The form handle change.
+   */
   handleChange: (e: React.ChangeEvent<any>) => void;
 };
 
@@ -30,10 +54,22 @@ export const BillingAddressFields = ({
   touched,
   handleBlur,
   handleChange,
+  configFields,
 }: BillingAddressFieldsProps) => {
+  // Config
+  const { errorsBillingAddressPropMatch } = useMemo(() => {
+    return getCoreFieldsFormConfig(configFields);
+  }, [configFields]);
+
   return (
-    <FieldSet title="Billing Address">
-      <div className="db-w-full db-grid db-grid-cols-1 db-gap-2">
+    <FieldSet title="Billing Address" titleSize="h4">
+      <FormErrorMessage
+        errors={errors}
+        touched={touched}
+        propMatch={errorsBillingAddressPropMatch}
+      />
+
+      <div className="db-w-full db-grid db-grid-cols-1 db-gap-2 db-mt-2">
         {/* Address Name */}
         <div className="db-w-full">
           <Input

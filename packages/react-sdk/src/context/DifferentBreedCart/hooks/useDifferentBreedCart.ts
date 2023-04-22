@@ -83,7 +83,7 @@ export const useDifferentBreedCart = (
         // If the cart does not exist, remove the cart ID from local storage.
         localStorage.removeItem('cart_id');
         // Create a new cart.
-        retrieveCart(cust_id);
+        createCart(cust_id);
       });
   };
 
@@ -274,6 +274,7 @@ export const useDifferentBreedCart = (
       .catch((error: ErrorResponseValidation) => handleError(error));
   };
 
+  // Return the cart state and dispatch.
   return {
     cartState,
     cartDispatch,

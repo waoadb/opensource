@@ -1,7 +1,7 @@
 // Styles
 import './styles.scss';
 
-// Context
+// Context Provider
 export { useDifferentBreedCart } from './context/DifferentBreedCart/hooks/useDifferentBreedCart';
 export {
   DifferentBreedCartContext,

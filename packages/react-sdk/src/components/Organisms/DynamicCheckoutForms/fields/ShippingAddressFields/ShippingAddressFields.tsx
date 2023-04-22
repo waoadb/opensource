@@ -1,22 +1,46 @@
 /* Dependencies */
+import { useMemo } from 'react';
 import { FormikErrors, FormikTouched } from 'formik';
 
 // Helpers
 import { handleFieldError } from '../../../../../helpers/handleFieldError/handleFieldError';
+import { getCoreFieldsFormConfig } from '../../helpers/getCoreFieldsFormConfig/getCoreFieldsValidationSchema';
 
 // Components
 import { FieldSet } from '../../../../Molecules/Forms/FieldSet/FieldSet';
 import { Input } from '../../../../Molecules/Forms/Input/Input';
 import { Select } from '../../../../Molecules/Forms/Select/Select';
+import { FormErrorMessage } from '../../../../Molecules/Forms/FormErrorMessage/FormErrorMessage';
 
 // Models
-import { CoreDetailsFormValues } from '../../forms/CoreDetailsForm/CoreDetailsForm';
+import { ClientCartModels } from '@waoadb/contracts-client';
+import { CoreDetailsFormValues } from '../../Forms/CoreDetailsForm/CoreDetailsForm';
 import { countries } from '../../models/countries.model';
+
 type ShippingAddressFieldsProps = {
+  /**
+   * The core fields.
+   */
+  configFields: ClientCartModels.ConfigCollectedCoreFields;
+  /**
+   * The form values.
+   */
   values: Partial<CoreDetailsFormValues>;
+  /**
+   * The form errors.
+   */
   errors: FormikErrors<Partial<CoreDetailsFormValues>>;
+  /**
+   * The form touched fields.
+   */
   touched: FormikTouched<Partial<CoreDetailsFormValues>>;
+  /**
+   * The form handle blur.
+   */
   handleBlur: (e: React.FocusEvent<any>) => void;
+  /**
+   * The form handle change.
+   */
   handleChange: (e: React.ChangeEvent<any>) => void;
 };
 
@@ -30,10 +54,22 @@ export const ShippingAddressFields = ({
   touched,
   handleBlur,
   handleChange,
+  configFields,
 }: ShippingAddressFieldsProps) => {
+  // Config
+  const { errorsShippingAddressPropMatch } = useMemo(() => {
+    return getCoreFieldsFormConfig(configFields);
+  }, [configFields]);
+
   return (
-    <FieldSet title="Shipping Address">
-      <div className="db-w-full db-grid db-grid-cols-1 db-gap-2">
+    <FieldSet title="Shipping Address" titleSize="h4">
+      <FormErrorMessage
+        errors={errors}
+        touched={touched}
+        propMatch={errorsShippingAddressPropMatch}
+      />
+
+      <div className="db-w-full db-grid db-grid-cols-1 db-gap-2 db-mt-2">
         {/* Address Name */}
         <div className="db-w-full">
           <Input

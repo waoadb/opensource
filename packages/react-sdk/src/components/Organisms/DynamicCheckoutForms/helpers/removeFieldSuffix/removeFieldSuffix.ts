@@ -3,6 +3,6 @@
  * @param field_id - The field id.
  * @returns
  */
-export const cleanFieldId = (field_id: string): string => {
+export const removeFieldSuffix = (field_id: string): string => {
   return field_id.replace('_enabled', '').replace('_required', '');
 };

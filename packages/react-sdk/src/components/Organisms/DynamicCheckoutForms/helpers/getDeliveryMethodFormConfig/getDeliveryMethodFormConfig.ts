@@ -4,6 +4,30 @@ import * as yup from 'yup';
 // Models
 import { ClientCartModels } from '@waoadb/contracts-client';
 
+type EnabledTicketDeliveryMethods = {
+  /**
+   * The title of the delivery method.
+   */
+  title: string;
+  /**
+   * The value of the delivery method.
+   * This is the value that will be sent to the API.
+   */
+  value: ClientCartModels.BaseDeliveryMethods['ticket_delivery_method'];
+};
+
+type EnabledAddonDeliveryMethods = {
+  /**
+   * The title of the delivery method.
+   */
+  title: string;
+  /**
+   * The value of the delivery method.
+   * This is the value that will be sent to the API.
+   */
+  value: ClientCartModels.BaseDeliveryMethods['addon_delivery_method'];
+};
+
 /**
  * Get Delivery Methods Form Config.
  * @param config - The checkout config.
@@ -15,35 +39,48 @@ export const getDeliveryMethodsFormConfig = (
   showAddonDeliveryMethods: boolean
 ) => {
   // Get the enabled custom fields
-  const enabledTicketDeliveryMethods: ClientCartModels.BaseDeliveryMethods['ticket_delivery_method'][] =
-    [];
-  const enabledAddonDeliveryMethods: ClientCartModels.BaseDeliveryMethods['addon_delivery_method'][] =
-    [];
+  const enabledTicketDeliveryMethods: EnabledTicketDeliveryMethods[] = [];
+  const enabledAddonDeliveryMethods: EnabledAddonDeliveryMethods[] = [];
 
   // Determine ticket delivery methods
   if (config.delivery_options.ticket_delivery) {
-    enabledTicketDeliveryMethods.push('delivery');
+    enabledTicketDeliveryMethods.push({
+      title: 'Postal Delivery',
+      value: 'delivery',
+    });
   }
   if (config.delivery_options.ticket_digital) {
-    enabledTicketDeliveryMethods.push('digital');
+    enabledTicketDeliveryMethods.push({
+      title: 'Digital Tickets',
+      value: 'digital',
+    });
   }
   if (config.delivery_options.ticket_collect) {
-    enabledTicketDeliveryMethods.push('collect');
+    enabledTicketDeliveryMethods.push({
+      title: 'Collect At Venue',
+      value: 'collect',
+    });
   }
 
   // Determine addons delivery methods
   if (config.delivery_options.addon_delivery) {
-    enabledAddonDeliveryMethods.push('delivery');
+    enabledAddonDeliveryMethods.push({
+      title: 'Postal Delivery',
+      value: 'delivery',
+    });
   }
   if (config.delivery_options.addon_collect) {
-    enabledAddonDeliveryMethods.push('collect');
+    enabledAddonDeliveryMethods.push({
+      title: 'Collect At Venue',
+      value: 'collect',
+    });
   }
 
   // Create the initial values for the custom fields.
   const initialValues: Partial<ClientCartModels.BaseDeliveryMethods> = {
-    ticket_delivery_method: enabledTicketDeliveryMethods[0],
+    ticket_delivery_method: enabledTicketDeliveryMethods[0].value,
     ...(showAddonDeliveryMethods && {
-      addon_delivery_method: enabledAddonDeliveryMethods[0],
+      addon_delivery_method: enabledAddonDeliveryMethods[0].value,
     }),
   };
 
@@ -51,13 +88,13 @@ export const getDeliveryMethodsFormConfig = (
   const schema = yup.object().shape({
     ticket_delivery_method: yup
       .string()
-      .oneOf(enabledTicketDeliveryMethods)
-      .required(),
+      .oneOf(enabledTicketDeliveryMethods.map((method) => method.value))
+      .required('Please select a ticket delivery method.'),
     ...(showAddonDeliveryMethods && {
       addon_delivery_method: yup
         .string()
-        .oneOf(enabledAddonDeliveryMethods)
-        .required(),
+        .oneOf(enabledAddonDeliveryMethods.map((method) => method.value))
+        .required('Please select an addon delivery method.'),
     }),
   });
 
