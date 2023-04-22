@@ -1,26 +1,21 @@
 /* Dependencies */
 import { GetServerSideProps } from 'next';
 import { NextSeo } from 'next-seo';
-import { useMemo } from 'react';
 
 // Services
 import { differentBreedClient } from '@/services/differentBreedClient/differentBreedClient';
 
 // Layouts
-import Layout from '@/Layouts/Layout';
+import Layout from '@/layouts/Layout';
 
 // Components
-import { CalendarIcon } from '@heroicons/react/24/outline';
-import { FeaturedEventBanner } from '@/components/Organisms/FeaturedEventBanner/FeaturedEventBanner';
-import { EventCardList } from '@/components/Organisms/EventCardList/EventCardList';
-import { Placeholder } from '@/components/Molecules/Placeholder/Placeholder';
-
-// Models
 import { ClientCacheModels } from '@waoadb/contracts-client';
 import { CircleImage } from '@/components/Molecules/CircleImage/CircleImage';
 import { ProfileDetails } from '@/components/Molecules/ProfileDetails/ProfileDetails';
 import { SocialLinksList } from '@/components/Molecules/SocialLinksList/SocialLinksList';
 import { SupportDetails } from '@/components/Molecules/SupportDetails/SupportDetails';
+
+// Models
 type PageProps = {
   /**
    * The profile of the organisation.

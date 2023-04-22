@@ -8,7 +8,7 @@ import { useMemo } from 'react';
 import { differentBreedClient } from '@/services/differentBreedClient/differentBreedClient';
 
 // Layouts
-import Layout from '@/Layouts/Layout';
+import Layout from '@/layouts/Layout';
 
 // Components
 import { CalendarIcon } from '@heroicons/react/24/outline';

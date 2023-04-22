@@ -9,7 +9,7 @@ import { BuildingOfficeIcon } from '@heroicons/react/24/outline';
 import { differentBreedClient } from '@/services/differentBreedClient/differentBreedClient';
 
 // Layouts
-import Layout from '@/Layouts/Layout';
+import Layout from '@/layouts/Layout';
 
 // Components
 import { Pagination } from '@/components/Molecules/Pagination/Pagination';

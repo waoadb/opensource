@@ -6,15 +6,15 @@ import { NextSeo } from 'next-seo';
 import { differentBreedClient } from '@/services/differentBreedClient/differentBreedClient';
 
 // Layouts
-import Layout from '@/Layouts/Layout';
+import Layout from '@/layouts/Layout';
 
 // Components
 import { Heading } from '@/components/Atoms/Heading/Heading';
+import { Paragraph } from '@/components/Atoms/Paragraph/Paragraph';
+import { Link } from '@/components/Atoms/Link/Link';
 
 // Models
 import { ClientCacheModels } from '@waoadb/contracts-client';
-import { Paragraph } from '@/components/Atoms/Paragraph/Paragraph';
-import { Link } from '@/components/Atoms/Link/Link';
 
 type PageProps = {
   profile: ClientCacheModels.CacheProfile;

@@ -12,21 +12,21 @@ import { httpClient } from '@/services/httpClient/httpClient';
 import { differentBreedClient } from '@/services/differentBreedClient/differentBreedClient';
 import { useDifferentBreedCart } from '@waoadb/react-sdk';
 import '@waoadb/react-sdk/build/index.css';
-
-// Layouts
-import Layout from '@/Layouts/Layout';
-
-// Components
-import { Heading } from '@/components/Atoms/Heading/Heading';
 import {
   DynamicCheckoutForms,
   DynamicCheckoutFormsImperativeMethods,
 } from '@waoadb/react-sdk';
 
-// Models
-import { ClientCacheModels, ClientCartModels } from '@waoadb/contracts-client';
+// Layouts
+import Layout from '@/layouts/Layout';
+
+// Components
+import { Heading } from '@/components/Atoms/Heading/Heading';
 import { CheckoutSummary } from '@/components/Molecules/CheckoutSummary/CheckoutSummary';
 import { Placeholder } from '@/components/Molecules/Placeholder/Placeholder';
+
+// Models
+import { ClientCacheModels, ClientCartModels } from '@waoadb/contracts-client';
 import { ShoppingCartIcon } from '@heroicons/react/24/outline';
 type PageProps = {
   profile: ClientCacheModels.CacheProfile;

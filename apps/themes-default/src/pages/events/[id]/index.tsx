@@ -14,7 +14,7 @@ import {
 import { differentBreedClient } from '@/services/differentBreedClient/differentBreedClient';
 
 // Layouts
-import Layout from '@/Layouts/Layout';
+import Layout from '@/layouts/Layout';
 
 // Components
 import { EventBanner } from '@/components/Organisms/EventBanner/EventBanner';
@@ -29,6 +29,7 @@ import { VenueCard } from '@/components/Molecules/VenueCard/VenueCard';
 import { TBCEventCard } from '@/components/Molecules/TBCEventCard/TBCEventCard';
 import { Heading } from '@/components/Atoms/Heading/Heading';
 import { Placeholder } from '@/components/Molecules/Placeholder/Placeholder';
+import { BookNowModal } from '@/components/Organisms/BookNowModal/BookNowModal';
 
 // Client Side Only Components
 const PerformanceFilters = dynamic(
@@ -43,7 +44,6 @@ const PerformanceFilters = dynamic(
 
 // Models
 import { ClientCacheModels } from '@waoadb/contracts-client';
-import { BookNowModal } from '@/components/Organisms/BookNowModal/BookNowModal';
 type View = 'list' | 'calendar';
 type PageParams = {
   id: string;
