@@ -6,6 +6,8 @@
 
 The following package serves as a software development kit to speed up and simplify the integration of your javascript project with the Different Breed Client API’s.
 
+---
+
 ## Quick Start
 
 Install the application using your favourite package manager.
@@ -16,9 +18,13 @@ or
 
 `yarn add @waoadb/js-client-sdk`
 
+---
+
 ## Documentation
 
 All documentation for Open Source Different Breed ® packages can be found here: [Documentation](https://opensource.differentbreed.events). For this package, please see the following link: [Javascript Client SDK](https://opensource.differentbreed.events/docs/js-client-sdk).
+
+---
 
 ## Local Development
 
@@ -52,6 +58,8 @@ yarn packages:publish
 
 This will perform the following: Build the package, increase the version and then release the package to NPM. It is worth noting that only team accounts may publish to the NPM organisation. Please contact your team lead for these permissions.
 
+---
+
 ## Contributing
 
 The main purpose of this repository is to continue evolving Different Breed ®'s open source work, making it faster and easier to use. Development of Different Breed packages and themes happens in the open on GitHub, and we are grateful to the community for contributing bugfixes and improvements. Read below to learn how you can take part in improving Different Breed Open Source.
@@ -64,6 +72,6 @@ Different Breed has adopted a Code of Conduct that we expect project participant
 
 Read our [contributing guide](https://opensource.differentbreed.events/docs/contributing/) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes.
 
-### License
+### [License](https://github.com/waoadb/open-source/blob/production/LICENSE)
 
 Different Breed Open Source is [MIT licensed](https://github.com/waoadb/open-source/blob/production/LICENSE).
