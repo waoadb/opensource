@@ -1,5 +1,4 @@
 ---
-sidebar_label: 'Overview'
 title: 'Overview'
 description: 'How we operate Different Breed ® Open Source'
 ---

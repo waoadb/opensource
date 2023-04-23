@@ -1,5 +1,6 @@
 ---
-sidebar_label: 'Report Security Issues'
+title: 'Report Security Issues'
+description: 'The best way to report security issues.'
 ---
 
 # Reporting Security Issues

@@ -1,3 +1,8 @@
+---
+title: 'Browser Support'
+description: 'Our standards towards browser support.'
+---
+
 # Browser Support
 
 ## Supported Browsers

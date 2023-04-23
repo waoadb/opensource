@@ -30,6 +30,11 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'Development Kits',
+      items: ['development-kits/react'],
+    },
+    {
+      type: 'category',
       label: 'Operate',
       items: ['operate/overview', 'operate/support', 'operate/versioning'],
     },

@@ -3,18 +3,17 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
-import dynamic from 'next/dynamic';
 
 // Services
 import { httpClient } from '@/services/httpClient/httpClient';
 
 // Different Breed
 import { differentBreedClient } from '@/services/differentBreedClient/differentBreedClient';
-import { useDifferentBreedCart } from '@waoadb/react-sdk';
 import '@waoadb/react-sdk/build/index.css';
 import {
   DynamicCheckoutForms,
   DynamicCheckoutFormsImperativeMethods,
+  useDifferentBreedCart,
 } from '@waoadb/react-sdk';
 
 // Layouts

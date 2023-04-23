@@ -1,5 +1,6 @@
 ---
-sidebar_label: 'Contributing'
+title: 'Contributing'
+description: 'Guide for contributing to our open soruce work.'
 ---
 
 # How To Contribute
