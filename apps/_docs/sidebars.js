@@ -16,6 +16,12 @@ const sidebars = {
   // By default, Docusaurus generates a sidebar from the docs folder structure
   docsSidebar: [
     'intro',
+    'authentication',
+    {
+      type: 'category',
+      label: 'API Reference',
+      items: ['api-reference/overview'],
+    },
     {
       type: 'category',
       label: 'Themes',
@@ -26,17 +32,22 @@ const sidebars = {
         'themes/accessibility',
         'themes/static-site',
         'themes/server-side',
+        'themes/seo',
       ],
     },
     {
       type: 'category',
       label: 'Development Kits',
-      items: ['development-kits/react'],
+      items: [
+        'development-kits/react',
+        'development-kits/js-client',
+        'development-kits/js-admin',
+      ],
     },
     {
       type: 'category',
       label: 'Operate',
-      items: ['operate/overview', 'operate/support', 'operate/versioning'],
+      items: ['operate/support', 'operate/versioning'],
     },
     {
       type: 'category',

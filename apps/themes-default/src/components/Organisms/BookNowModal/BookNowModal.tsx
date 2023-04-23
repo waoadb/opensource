@@ -55,11 +55,8 @@ export const BookNowModal = ({
   const [hasNoStock, setHasNoStock] = useState<boolean>(false);
 
   // Cart Provider
-  const {
-    addTicketToCart,
-    addAddonToCart,
-    cartState: { cart_id },
-  } = useDifferentBreedCart(differentBreedClient);
+  const { addTicketToCart, addAddonToCart } =
+    useDifferentBreedCart(differentBreedClient);
 
   // Memory
   const performanceDate = useMemo(() => {
@@ -173,7 +170,7 @@ export const BookNowModal = ({
                 event_id={event_id}
                 performance_id={performanceData.performance_id}
                 handleSubmit={async (payload, title, callback) => {
-                  await addTicketToCart(cart_id!, payload, title);
+                  await addTicketToCart(payload, title);
                   callback();
                 }}
               />
@@ -197,7 +194,7 @@ export const BookNowModal = ({
                     event_id={event_id}
                     performance_id={performanceData.performance_id}
                     handleSubmit={async (payload, title, callback) => {
-                      await addAddonToCart(cart_id!, payload, title);
+                      await addAddonToCart(payload, title);
                       callback();
                     }}
                   />

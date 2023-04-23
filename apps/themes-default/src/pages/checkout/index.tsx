@@ -80,7 +80,7 @@ const Page = ({ profile }: PageProps) => {
   // UseEffects
   useEffect(() => {
     if (cart) {
-      retrieveCheckoutConfig(cart.cart_id);
+      retrieveCheckoutConfig();
       setRenderForm(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -23,7 +23,7 @@ Inside of the `package.json`, remove the following lines:
 We then want to install the packages at their latest versions. We can do this by running the following command in the root of the project.
 
 ```bash
-yarn add @waoadb/js-admin-sdk @waoadb/js-client-sdk @waoadb/react-sdk
+yarn add @waoadb/js-admin-sdk @waoadb/js-client-sdk @waoadb/react-sdk @waoadb/contracts-client
 ```
 
 This will install the latest version of each package and complete the setup for this theme.
