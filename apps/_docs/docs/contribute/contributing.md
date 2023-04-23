@@ -8,15 +8,15 @@ This is one of Different Breed's first open source projects that is both under v
 
 ## Code of Conduct
 
-Different Breed Open Source has adopted the [Contributor Covenant](https://www.contributor-covenant.org/) as its [Code of Conduct](/docs/contributing/code-of-conduct), and we expect project participants to adhere to it. Please [read the full text](/docs/contributing/code-of-conduct) so that you can understand what actions will and will not be tolerated.
+Different Breed ® Open Source has adopted the [Contributor Covenant](https://www.contributor-covenant.org/) as its [Code of Conduct](/docs/contributing/code-of-conduct), and we expect project participants to adhere to it. Please [read the full text](/docs/contributing/code-of-conduct) so that you can understand what actions will and will not be tolerated.
 
 ## Open Development
 
-All work on Different Breed Open Source happens directly on [GitHub](https://github.com/waoadb/opensource). Both core team members and external contributors send pull requests which go through the same review process.
+All work on Different Breed ® Open Source happens directly on [GitHub](https://github.com/waoadb/opensource). Both core team members and external contributors send pull requests which go through the same review process.
 
 ## Semantic Versioning
 
-Different Breed Open Source follows [semantic versioning](https://semver.org/). We release patch versions for critical bugfixes, minor versions for new features or non-essential changes, and major versions for any breaking changes. When we make breaking changes, we also introduce deprecation warnings in a minor version so that our users learn about the upcoming changes and migrate their code in advance. Learn more about our commitment to stability and incremental migration in (/docs/versioning)[our versioning policy.]
+Different Breed ® Open Source follows [semantic versioning](https://semver.org/). We release patch versions for critical bugfixes, minor versions for new features or non-essential changes, and major versions for any breaking changes. When we make breaking changes, we also introduce deprecation warnings in a minor version so that our users learn about the upcoming changes and migrate their code in advance. Learn more about our commitment to stability and incremental migration in (/docs/versioning)[our versioning policy.]
 
 Every significant change is documented in the [changelog file].
 
@@ -40,13 +40,13 @@ If you are unable to provide an example, please provide as much information as p
 
 ### Security Bugs
 
-Different Breed Open Source has a [security policy] for the safe disclosure of security bugs. With that in mind, please do not file public issues; go through the process outlined on that page.
+Different Breed ® Open Source has a [security policy] for the safe disclosure of security bugs. With that in mind, please do not file public issues; go through the process outlined on that page.
 
 ## How to Get in Touch
 
-- Questions - Use our [Discussions](https://github.com/waoadb/opensource/discussions) section within the repo to ask any questions about Different Breed Open Source.
+- Questions - Use our [Discussions](https://github.com/waoadb/opensource/discussions) section within the repo to ask any questions about Different Breed ® Open Source.
 - Issues / Bugs - To report issues or bugs, please [open an issue](https://github.com/waoadb/opensource/issues) on our repo with an example showing the issue.
-- Feature Requests - Use our [Discussions](https://github.com/waoadb/opensource/discussions) section within the repo to make any suggestions for features to be introduced within Different Breed Open Source.
+- Feature Requests - Use our [Discussions](https://github.com/waoadb/opensource/discussions) section within the repo to make any suggestions for features to be introduced within Different Breed ® Open Source.
 
 For anything else please contact [opensource@differentbreed.events](mailto:opensource@differentbreed.events).
 
@@ -76,7 +76,7 @@ Our CI will also run the full build to ensure that the project succeeds as expec
 
 ## Contributor License Agreement (CLA)
 
-In order to accept your pull request, we need you to submit a CLA. You only need to do this once, so if you’ve done this for another Different Breed open source project, you’re good to go. If you are submitting a pull request for the first time, just let us know that you have completed the CLA and we can cross-check with your GitHub username.
+In order to accept your pull request, we need you to submit a CLA. You only need to do this once, so if you’ve done this for another Different Breed ® Open Source project, you’re good to go. If you are submitting a pull request for the first time, just let us know that you have completed the CLA and we can cross-check with your GitHub username.
 
 [Complete your CLA here](https://forms.gle/ZBaXwerHaEJZiDEC9)
 

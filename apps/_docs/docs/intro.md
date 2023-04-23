@@ -30,24 +30,6 @@ Whether you choose to use Different Breed ® or wish to use our components elsew
 
 ---
 
-## Our Standards
-
-Within the active development of Different Breed ® Open Source we use the same industry standards that our core team use to create and maintain features on the core platforms.
-
-### Atomic Design
-
-We use the [Atomic Design](https://bradfrost.com/blog/post/atomic-web-design/) methodology for creating each component within our theme’s. This allows for rapid prototyping and delivery of new features while also bringing the fundamentals of a living design system to life. With this in mind, each theme comes bundled with storybook that can be used to easily update and maintain components without the need to run the theme directly.
-
-### Typescript & Eslint
-
-We use Typescript and Eslint to ensure code quality and consistency. Typescript helps catch errors before they occur, while Eslint enforces code style guidelines and best practices. This leads to more maintainable and scalable code.
-
-### Browser Support
-
-Different Breed ® Open Source supports evergreen browsers, which include the latest versions of Chrome, Firefox, Edge, and Safari. This means that the themes and packages are designed to work with the most up-to-date browser versions, ensuring the best possible experience for end-users.
-
----
-
 ## Local Development
 
 This repo is powered by Lerna with NX enabled under the hood. To run this repo locally first install it’s dependencies by running `yarn` within the root folder.
@@ -58,7 +40,7 @@ Once installed, please consult the relevant package / theme README for the instr
 
 ## Contributing
 
-The main purpose of this repository is to continue evolving Different Breed ®'s open source work, making it faster and easier to use. Development of Different Breed packages and themes happens in the open on GitHub, and we are grateful to the community for contributing bugfixes and improvements. Read below to learn how you can take part in improving Different Breed Open Source.
+The main purpose of this repository is to continue evolving Different Breed ®'s open source work, making it faster and easier to use. Development of Different Breed packages and themes happens in the open on GitHub, and we are grateful to the community for contributing bugfixes and improvements. Read below to learn how you can take part in improving Different Breed ® Open Source.
 
 ### [Code of Conduct](https://opensource.differentbreed.events/docs/contributing/code-of-conduct)
 
@@ -70,4 +52,4 @@ Read our [contributing guide](https://opensource.differentbreed.events/docs/con
 
 ### [License](https://github.com/waoadb/open-source/blob/production/LICENSE)
 
-Different Breed Open Source is [MIT licensed](https://github.com/waoadb/open-source/blob/production/LICENSE).
+Different Breed ® Open Source is [MIT licensed](https://github.com/waoadb/open-source/blob/production/LICENSE).

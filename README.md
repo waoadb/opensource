@@ -1,4 +1,4 @@
-# Different Breed ® - Open Source
+# Open Source
 
 [Documentation](https://opensource.differentbreed.events)
 
@@ -55,7 +55,7 @@ Once installed, please consult the relevant package / theme README for the instr
 
 ## Contributing
 
-The main purpose of this repository is to continue evolving Different Breed ®'s open source work, making it faster and easier to use. Development of Different Breed packages and themes happens in the open on GitHub, and we are grateful to the community for contributing bugfixes and improvements. Read below to learn how you can take part in improving Different Breed Open Source.
+The main purpose of this repository is to continue evolving Different Breed ®'s open source work, making it faster and easier to use. Development of Different Breed packages and themes happens in the open on GitHub, and we are grateful to the community for contributing bugfixes and improvements. Read below to learn how you can take part in improving Different Breed ® Open Source.
 
 ### [Code of Conduct](https://opensource.differentbreed.events/docs/contributing/code-of-conduct)
 
@@ -67,4 +67,4 @@ Read our [contributing guide](https://opensource.differentbreed.events/docs/con
 
 ### [License](https://github.com/waoadb/open-source/blob/production/LICENSE)
 
-Different Breed Open Source is [MIT licensed](https://github.com/waoadb/open-source/blob/production/LICENSE).
+Different Breed ® Open Source is [MIT licensed](https://github.com/waoadb/open-source/blob/production/LICENSE).

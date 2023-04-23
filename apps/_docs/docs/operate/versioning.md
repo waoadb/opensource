@@ -1,10 +1,6 @@
----
-sidebar_label: 'Versioning'
----
-
 # Versioning
 
-All stable builds of Different Breed Open Source undergo a high level of testing and follow semantic versioning (semver). We also offer unstable release channels to encourage early feedback on experimental features. This page describes what you can expect from releases.
+All stable builds of Different Breed ® Open Source undergo a high level of testing and follow semantic versioning (semver). We also offer unstable release channels to encourage early feedback on experimental features. This page describes what you can expect from releases.
 
 ## **Stable releases**
 
@@ -28,13 +24,13 @@ Breaking changes are inconvenient for everyone. To minimise the number of major 
 
 ## Commitment to Stability
 
-As we evolve Different Breed Open Source over time, we strive to minimise the effort required to take advantage of new features. Whenever possible, we will maintain backwards compatibility with older APIs, even if it means putting them in a separate package to enable legacy and stable code to continue running.
+As we evolve Different Breed ® Open Source over time, we strive to minimise the effort required to take advantage of new features. Whenever possible, we will maintain backwards compatibility with older APIs, even if it means putting them in a separate package to enable legacy and stable code to continue running.
 
-Different Breed Open Source modules are used both internally and by the community, so we need to make upgrading to new versions as easy as possible. If we make significant changes without a migration path, people will be stuck on old versions. We test upgrade paths on Different Breed itself. If our team of fewer than five people can update components alone, we anticipate the upgrade will be manageable for anyone using Different Breed.
+Different Breed ® Open Source modules are used both internally and by the community, so we need to make upgrading to new versions as easy as possible. If we make significant changes without a migration path, people will be stuck on old versions. We test upgrade paths on Different Breed itself. If our team of fewer than five people can update components alone, we anticipate the upgrade will be manageable for anyone using Different Breed.
 
 ## Gradual Upgrades via Warnings
 
-Development builds of Different Breed Open Source include many helpful warnings. Whenever possible, we add warnings in preparation for future breaking changes. If your app has no warnings in the latest release, it will be compatible with the next major release. This allows you to upgrade your apps one component at a time.
+Development builds of Different Breed ® Open Source include many helpful warnings. Whenever possible, we add warnings in preparation for future breaking changes. If your app has no warnings in the latest release, it will be compatible with the next major release. This allows you to upgrade your apps one component at a time.
 
 Development warnings won't affect the runtime behavior of your app. Thus, you can feel confident that your app will behave the same way between the development and production builds. The only differences are that the production build won't log the warnings and that it is more efficient. If you ever notice otherwise, please file an issue.
 
@@ -56,7 +52,7 @@ According to [semver](https://semver.org/#spec-item-7), it is possible for a min
 
 However, this raises the question of why these releases aren't versioned as patches instead.
 
-The answer is that any change to Different Breed Open Source (or other software) carries some risk of breaking in unexpected ways. For instance, a patch release that fixes one bug may accidentally introduce a different bug. This would not only be disruptive to developers but also harm their confidence in future patch releases. It's especially regrettable if the original fix is for a bug that rarely occurs in practice.
+The answer is that any change to Different Breed ® Open Source (or other software) carries some risk of breaking in unexpected ways. For instance, a patch release that fixes one bug may accidentally introduce a different bug. This would not only be disruptive to developers but also harm their confidence in future patch releases. It's especially regrettable if the original fix is for a bug that rarely occurs in practice.
 
 Our track record for keeping releases free of bugs is strong, but patch releases have an even higher bar for reliability because most developers assume they can be adopted without adverse consequences. For these reasons, we reserve patch releases only for the most critical bugs and security vulnerabilities.
 
@@ -64,4 +60,4 @@ If a release includes non-essential changes, such as internal refactors, changes
 
 ---
 
-Our versioning policy is based on the Meta versioning policy for React, which is available at [https://opensource.fb.com/code-of-conduct/](https://opensource.fb.com/code-of-conduct/).
+Our versioning policy is based on the Meta versioning policy for React, which is available at [https://react.dev/community/versioning-policy](https://react.dev/community/versioning-policy).

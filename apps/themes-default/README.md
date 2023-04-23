@@ -22,7 +22,7 @@ Inside of the `package.json`, remove the following lines:
 
 We then want to install the packages at their latest versions. We can do this by running the following command in the root of the project.
 
-```jsx
+```bash
 yarn add @waoadb/js-admin-sdk @waoadb/js-client-sdk @waoadb/react-sdk
 ```
 
@@ -30,17 +30,17 @@ This will install the latest version of each package and complete the setup for 
 
 Next, we need to set some environment variables within the `.env.local` file. To do this, we can make a copy of the `.env.sample` file located in the root of the theme.
 
-```jsx
+```bash
 cp.env.sample.env.local;
 ```
 
 Then, within your [profile settings](https://app.differentbreed.events/profile/) on the Different Breed ® platform, click into `Integrations -> API Keys` and create a pair of [client and admin](http://opensource.differentbreed.events/docs/authentication/client-and-admin-keys) keys to be used.
 
-Tip: Your Profile ID is located as a UUID within the URL on the platform, i.e., `https://app.differentbreed.events/profile/YOUR_PROFILE_ID/settings/integrations/api-keys`.
+Tip: Your Profile ID is located as a UUID within the URL on the platform, i.e., `/profile/**YOUR_PROFILE_ID**/settings/integrations/api-keys`.
 
 Using the information provided when you create the API Keys, update the `.env.local` file to reference the new values, i.e.,
 
-```jsx
+```bash
 NEXT_PUBLIC_SITE_URL = YOUR_SITE_URL;
 NEXT_PUBLIC_DIFFERENT_BREED_PROFILE_ID = YOUR_PROFILE_ID;
 NEXT_PUBLIC_DIFFERENT_BREED_CLIENT_KEY = YOUR_CLIENT_API_KEY;
@@ -70,7 +70,7 @@ We personally ❤️ [Netlify](https://www.netlify.com/) and use it for all of o
 
 ## Contributing
 
-The main purpose of this repository is to continue evolving Different Breed ®'s open source work, making it faster and easier to use. Development of Different Breed packages and themes happens in the open on GitHub, and we are grateful to the community for contributing bugfixes and improvements. Read below to learn how you can take part in improving Different Breed Open Source.
+The main purpose of this repository is to continue evolving Different Breed ®'s open source work, making it faster and easier to use. Development of Different Breed packages and themes happens in the open on GitHub, and we are grateful to the community for contributing bugfixes and improvements. Read below to learn how you can take part in improving Different Breed ® Open Source.
 
 ### [Code of Conduct](https://opensource.differentbreed.events/docs/contributing/code-of-conduct)
 
@@ -82,4 +82,4 @@ Read our [contributing guide](https://opensource.differentbreed.events/docs/con
 
 ## [License](https://github.com/waoadb/open-source/blob/production/LICENSE)
 
-Different Breed Open Source is [MIT licensed](https://github.com/waoadb/open-source/blob/production/LICENSE).
+Different Breed ® Open Source is [MIT licensed](https://github.com/waoadb/open-source/blob/production/LICENSE).
