@@ -3,46 +3,71 @@ sidebar_label: 'Start Here'
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# Different Breed ® - Open Source
 
-Let's discover **Docusaurus in less than 5 minutes**.
+## What is Different Breed ® - Open Source?
 
-## Getting Started
+Different Breed ® Open Source is a collection of themes and packages designed to enhance a developer's experience when integrating with our platform.
 
-Get started by **creating a new site**.
+The following project types are currently available:
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+- Themes: We offer a suite of self-service themes on the platform, all located within the `apps/` directory of this repository. These themes enable existing Different Breed ® customers to move to a custom solution without requiring a full rebuild of the experience. They also provide developers with a solid foundation to start with or build upon.
+- Packages: The `/packages` directory contains the code that powers the SDKs offered by Different Breed ®. We recommend installing these packages via NPM, and the code is available in this repository to show what happens under the hood.
 
-### What you'll need
+---
 
-- [Node.js](https://nodejs.org/en/download/) version 16.14 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+## Our Motivations
 
-## Generate a new site
+As a business, Different Breed ® exists with the mission to create experiences that tear down barriers. We believe that to achieve this mission, we must first remove the barriers that prevent people from offering accessible and inclusive experiences.
 
-Generate a new Docusaurus site using the **classic template**.
+By open-sourcing our platform's themes and packages, we hope to remove the barriers to getting up and running with Different Breed ®, allowing developers and customers to get started quickly while still retaining full control over the experience they deliver.
 
-The classic template will automatically be added to your project after you run the command:
+Our goal is simple: we wish to reduce the setup time on projects and empower agencies and developers to use more of the budget to create experiences that make an impact on the end-user.
 
-```bash
-npm init docusaurus@latest my-website classic
-```
+All of our open-source themes aim to meet AA levels of compliance in reference to [WCAG2.1](https://www.w3.org/TR/WCAG21/) spec for accessibility, and we are committed to ensuring that whoever chooses our open-source work is set up from the beginning with solid foundations to continue that level of standard.
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
+Whether you choose to use Different Breed ® or wish to use our components elsewhere, we wish you all the best and can't wait to see the wonderful work you create.
 
-The command also installs all necessary dependencies you need to run Docusaurus.
+---
 
-## Start your site
+## Our Standards
 
-Run the development server:
+Within the active development of Different Breed ® Open Source we use the same industry standards that our core team use to create and maintain features on the core platforms.
 
-```bash
-cd my-website
-npm run start
-```
+### Atomic Design
 
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
+We use the [Atomic Design](https://bradfrost.com/blog/post/atomic-web-design/) methodology for creating each component within our theme’s. This allows for rapid prototyping and delivery of new features while also bringing the fundamentals of a living design system to life. With this in mind, each theme comes bundled with storybook that can be used to easily update and maintain components without the need to run the theme directly.
 
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
+### Typescript & Eslint
 
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+We use Typescript and Eslint to ensure code quality and consistency. Typescript helps catch errors before they occur, while Eslint enforces code style guidelines and best practices. This leads to more maintainable and scalable code.
+
+### Browser Support
+
+Different Breed ® Open Source supports evergreen browsers, which include the latest versions of Chrome, Firefox, Edge, and Safari. This means that the themes and packages are designed to work with the most up-to-date browser versions, ensuring the best possible experience for end-users.
+
+---
+
+## Local Development
+
+This repo is powered by Lerna with NX enabled under the hood. To run this repo locally first install it’s dependencies by running `yarn` within the root folder.
+
+Once installed, please consult the relevant package / theme README for the instructions on how best to work locally.
+
+---
+
+## Contributing
+
+The main purpose of this repository is to continue evolving Different Breed ®'s open source work, making it faster and easier to use. Development of Different Breed packages and themes happens in the open on GitHub, and we are grateful to the community for contributing bugfixes and improvements. Read below to learn how you can take part in improving Different Breed Open Source.
+
+### [Code of Conduct](https://opensource.differentbreed.events/docs/contributing/code-of-conduct)
+
+Different Breed has adopted a Code of Conduct that we expect project participants to adhere to. Please read the [full text](https://opensource.differentbreed.events/docs/contributing/code-of-conduct) so that you can understand what actions will and will not be tolerated.
+
+### [Contributing Guide](https://opensource.differentbreed.events/docs/contributing/)
+
+Read our [contributing guide](https://opensource.differentbreed.events/docs/contributing/) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to.
+
+### [License](https://github.com/waoadb/open-source/blob/production/LICENSE)
+
+Different Breed Open Source is [MIT licensed](https://github.com/waoadb/open-source/blob/production/LICENSE).
