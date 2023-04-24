@@ -16,12 +16,12 @@ const sidebars = {
   // By default, Docusaurus generates a sidebar from the docs folder structure
   docsSidebar: [
     'intro',
-    'authentication',
     {
       type: 'category',
-      label: 'API Reference',
-      items: ['api-reference/overview'],
+      label: 'Getting Started',
+      items: ['getting-started/platform'],
     },
+    'authentication',
     {
       type: 'category',
       label: 'Themes',
@@ -61,18 +61,7 @@ const sidebars = {
     'license',
   ],
 
-  // But you can create a sidebar manually
-  /*
-  tutorialSidebar: [
-    'intro',
-    'hello',
-    {
-      type: 'category',
-      label: 'Tutorial',
-      items: ['tutorial-basics/create-a-document'],
-    },
-  ],
-   */
+  apiReferenceSidebar: ['api-reference/overview'],
 };
 
 module.exports = sidebars;

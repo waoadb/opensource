@@ -5,9 +5,9 @@ description: How to use the Javascript Client SDK with Different Breed ®.
 
 # Javascript Client SDK
 
-The following package serves as a software development kit to speed up and simplify the integration of your javascript project with the Different Breed Client API’s.
+## Overview
 
----
+The following package serves as a software development kit to speed up and simplify the integration of your javascript project with the Different Breed Client API’s.
 
 ## Quick Start
 

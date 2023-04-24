@@ -69,6 +69,12 @@ const config = {
             label: 'Docs',
           },
           {
+            type: 'docSidebar',
+            sidebarId: 'apiReferenceSidebar',
+            position: 'left',
+            label: 'API',
+          },
+          {
             label: 'Different Breed ®',
             href: 'https://differentbreed.events',
             position: 'right',
@@ -87,7 +93,7 @@ const config = {
       footer: {
         style: 'dark',
         links: [],
-        copyright: `Copyright © ${new Date().getFullYear()} Different Breed, Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Different Breed ®, Built with Docusaurus.`,
       },
       prism: {
         theme: lightCodeTheme,
