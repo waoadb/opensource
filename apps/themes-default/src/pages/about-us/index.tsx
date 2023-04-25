@@ -6,7 +6,7 @@ import { NextSeo } from 'next-seo';
 import { differentBreedClient } from '@/services/differentBreedClient/differentBreedClient';
 
 // Layouts
-import Layout from '@/layouts/Layout';
+import Layout from '@/layout/Layout';
 
 // Components
 import { ClientCacheModels } from '@waoadb/contracts-client';

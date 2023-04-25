@@ -14,7 +14,7 @@ import {
 import { differentBreedClient } from '@/services/differentBreedClient/differentBreedClient';
 
 // Layouts
-import Layout from '@/layouts/Layout';
+import Layout from '@/layout/Layout';
 
 // Components
 import { EventBanner } from '@/components/Organisms/EventBanner/EventBanner';

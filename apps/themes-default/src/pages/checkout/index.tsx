@@ -17,7 +17,7 @@ import {
 } from '@waoadb/react-sdk';
 
 // Layouts
-import Layout from '@/layouts/Layout';
+import Layout from '@/layout/Layout';
 
 // Components
 import { Heading } from '@/components/Atoms/Heading/Heading';
