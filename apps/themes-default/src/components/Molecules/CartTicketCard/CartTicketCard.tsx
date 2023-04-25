@@ -12,7 +12,7 @@ type Props = {
   /**
    * Ticket
    */
-  ticket: ClientCartModels.CartEntryTicket;
+  ticket: ClientCartModels.CartTicket;
   /**
    * Cart entry id
    */

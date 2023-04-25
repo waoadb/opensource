@@ -8,7 +8,7 @@ type Props = {
   /**
    * Tickets to render.
    */
-  tickets: ClientCartModels.CartEntryTicket[];
+  tickets: ClientCartModels.CartTicket[];
   /**
    * Cart entry id.
    */

@@ -69,10 +69,15 @@ const config = {
             label: 'Docs',
           },
           {
-            type: 'docSidebar',
-            sidebarId: 'apiReferenceSidebar',
-            position: 'left',
             label: 'API',
+            href: 'https://waoadb-opensource.stoplight.io/docs/open-source',
+            position: 'left',
+          },
+          {
+            type: 'docSidebar',
+            sidebarId: 'guidesSidebar',
+            position: 'left',
+            label: 'Guides',
           },
           {
             label: 'Different Breed ®',

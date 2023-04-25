@@ -26,7 +26,7 @@ type Props = {
   /**
    * Addon
    */
-  addon: ClientCartModels.CartEntryAddon;
+  addon: ClientCartModels.CartAddon;
   /**
    * Cart entry id
    */

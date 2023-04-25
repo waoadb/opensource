@@ -61,7 +61,7 @@ const sidebars = {
     'license',
   ],
 
-  apiReferenceSidebar: ['api-reference/overview'],
+  guidesSidebar: ['guides/overview'],
 };
 
 module.exports = sidebars;

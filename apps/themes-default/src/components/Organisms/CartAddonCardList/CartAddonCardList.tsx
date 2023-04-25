@@ -8,7 +8,7 @@ type Props = {
   /**
    * Addons to render.
    */
-  addons: ClientCartModels.CartEntryAddon[];
+  addons: ClientCartModels.CartAddon[];
   /**
    * Cart entry id.
    */
