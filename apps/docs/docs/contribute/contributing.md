@@ -9,7 +9,7 @@ This is one of Different Breed's first open source projects that is both under v
 
 ## Code of Conduct
 
-Different Breed ® Open Source has adopted the [Contributor Covenant](https://www.contributor-covenant.org/) as its [Code of Conduct](/docs/contributing/code-of-conduct), and we expect project participants to adhere to it. Please [read the full text](/docs/contributing/code-of-conduct) so that you can understand what actions will and will not be tolerated.
+Different Breed ® Open Source has adopted the [Contributor Covenant](https://www.contributor-covenant.org/) as its [Code of Conduct](/docs/contribute/code-of-conduct), and we expect project participants to adhere to it. Please [read the full text](/docs/contribute/code-of-conduct) so that you can understand what actions will and will not be tolerated.
 
 ## Open Development
 
