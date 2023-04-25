@@ -9,7 +9,7 @@ import { NextSeo } from 'next-seo';
 import { differentBreedClient } from '@/services/differentBreedClient/differentBreedClient';
 
 // Layouts
-import Layout from '@/Layouts/Layout';
+import Layout from '@/layouts/Layout';
 
 // Components
 import { CalendarIcon } from '@heroicons/react/24/outline';
@@ -17,6 +17,7 @@ import { Pagination } from '@/components/Molecules/Pagination/Pagination';
 import { Heading } from '@/components/Atoms/Heading/Heading';
 import { Placeholder } from '@/components/Molecules/Placeholder/Placeholder';
 import { EventCardList } from '@/components/Organisms/EventCardList/EventCardList';
+import { VenueBanner } from '@/components/Organisms/VenueBanner/VenueBanner';
 
 // Client Side Only Components
 const WhatsOnFilters = dynamic(
@@ -31,7 +32,6 @@ const WhatsOnFilters = dynamic(
 
 // Models
 import { ClientCacheModels } from '@waoadb/contracts-client';
-import { VenueBanner } from '@/components/Organisms/VenueBanner/VenueBanner';
 type PageParams = {
   id: string;
 };

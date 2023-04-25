@@ -8,13 +8,14 @@ import { NextSeo } from 'next-seo';
 import { differentBreedClient } from '@/services/differentBreedClient/differentBreedClient';
 
 // Layouts
-import Layout from '@/Layouts/Layout';
+import Layout from '@/layouts/Layout';
 
 // Components
 import { Heading } from '@/components/Atoms/Heading/Heading';
 import { SearchNoResults } from '@/components/Molecules/SearchNoResults/SearchNoResults';
 import { SearchPlaceholder } from '@/components/Molecules/SearchPlaceholder/SearchPlaceholder';
 import { EventCardList } from '@/components/Organisms/EventCardList/EventCardList';
+import { VenueCardList } from '@/components/Organisms/VenueCardList/VenueCardList';
 
 // Client Side Only Components
 const SearchFilters = dynamic(
@@ -29,7 +30,6 @@ const SearchFilters = dynamic(
 
 // Models
 import { ClientCacheModels } from '@waoadb/contracts-client';
-import { VenueCardList } from '@/components/Organisms/VenueCardList/VenueCardList';
 
 type PageProps = {
   profile: ClientCacheModels.CacheProfile;

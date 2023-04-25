@@ -22,7 +22,7 @@ export const CartEntries = () => {
   const {
     removeAddonFromCart,
     removeTicketFromCart,
-    cartState: { cart, cart_id },
+    cartState: { cart },
   } = useDifferentBreedCart(differentBreedClient);
 
   // Handle no cart
@@ -56,7 +56,7 @@ export const CartEntries = () => {
               entry_id={entry.entry_id}
               tickets={entry.tickets}
               handleSubmit={(payload, title, callback) => {
-                removeTicketFromCart(cart_id!, payload, title);
+                removeTicketFromCart(payload, title);
                 callback();
               }}
             />
@@ -73,7 +73,7 @@ export const CartEntries = () => {
                 entry_id={entry.entry_id}
                 addons={entry.addons}
                 handleSubmit={(payload, title, callback) => {
-                  removeAddonFromCart(cart_id!, payload, title);
+                  removeAddonFromCart(payload, title);
                   callback();
                 }}
               />

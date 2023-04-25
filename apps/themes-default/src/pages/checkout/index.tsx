@@ -3,30 +3,29 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
-import dynamic from 'next/dynamic';
 
 // Services
 import { httpClient } from '@/services/httpClient/httpClient';
 
 // Different Breed
 import { differentBreedClient } from '@/services/differentBreedClient/differentBreedClient';
-import { useDifferentBreedCart } from '@waoadb/react-sdk';
 import '@waoadb/react-sdk/build/index.css';
-
-// Layouts
-import Layout from '@/Layouts/Layout';
-
-// Components
-import { Heading } from '@/components/Atoms/Heading/Heading';
 import {
   DynamicCheckoutForms,
   DynamicCheckoutFormsImperativeMethods,
+  useDifferentBreedCart,
 } from '@waoadb/react-sdk';
+
+// Layouts
+import Layout from '@/layouts/Layout';
+
+// Components
+import { Heading } from '@/components/Atoms/Heading/Heading';
+import { CheckoutSummary } from '@/components/Molecules/CheckoutSummary/CheckoutSummary';
+import { Placeholder } from '@/components/Molecules/Placeholder/Placeholder';
 
 // Models
 import { ClientCacheModels, ClientCartModels } from '@waoadb/contracts-client';
-import { CheckoutSummary } from '@/components/Molecules/CheckoutSummary/CheckoutSummary';
-import { Placeholder } from '@/components/Molecules/Placeholder/Placeholder';
 import { ShoppingCartIcon } from '@heroicons/react/24/outline';
 type PageProps = {
   profile: ClientCacheModels.CacheProfile;
@@ -81,7 +80,7 @@ const Page = ({ profile }: PageProps) => {
   // UseEffects
   useEffect(() => {
     if (cart) {
-      retrieveCheckoutConfig(cart.cart_id);
+      retrieveCheckoutConfig();
       setRenderForm(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

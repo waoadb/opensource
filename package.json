@@ -1,22 +1,22 @@
 {
-  "name": "root",
+  "name": "@waoadb/opensource",
   "private": true,
   "engines": {
-    "node": ">=14.16.0 <=18.0.0"
+    "node": ">=16.14.2"
   },
   "scripts": {
     "DEVELOPMENT": "##========================================##",
-    "dev-theme": "lerna run dev-theme --parallel",
-    "dev-packages": "lerna run dev --parallel",
-    "build": "lerna run build --stream",
+    "dev:theme": "lerna run dev --parallel",
+    "dev:packages": "lerna run package:dev --parallel",
+    "dev:docs": "lerna run start --scope=@waoadb/opensource-docs",
     "PRODUCTION": "##========================================##",
-    "build:all": "yarn packages:build && lerna run build-theme --parallel",
-    "build:themes-plugins": "cp .netlify/theme/theme.toml netlify.toml",
-    "build:themes-default": "yarn build:themes-plugins && lerna run build-theme --scope=@waoadb/themes-default",
+    "build:all": "yarn packages:build && lerna run build --parallel",
+    "build:themes-default": "lerna run build --scope=@waoadb/themes-default",
+    "build:docs": "lerna run build --scope=@waoadb/opensource-docs",
     "PACKAGES": "##========================================##",
-    "packages:build": "lerna run build --scope='{@waoadb/js-client-sdk,@waoadb/js-admin-sdk,@waoadb/react-sdk}'",
+    "packages:build": "lerna run package:build",
     "packages:version": "lerna version --no-private",
-    "packages:publish": "lerna publish --no-private"
+    "packages:publish": "yarn packages:build && lerna publish --no-private"
   },
   "prettier": {
     "singleQuote": true,

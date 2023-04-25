@@ -12,7 +12,7 @@ import { differentBreedClient } from '@/services/differentBreedClient/differentB
 import { useDifferentBreedCart } from '@waoadb/react-sdk';
 
 // Layouts
-import Layout from '@/Layouts/Layout';
+import Layout from '@/layouts/Layout';
 
 // Components
 import { Heading } from '@/components/Atoms/Heading/Heading';

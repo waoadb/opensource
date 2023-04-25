@@ -9,7 +9,7 @@ import { NextSeo } from 'next-seo';
 import { differentBreedClient } from '@/services/differentBreedClient/differentBreedClient';
 
 // Layouts
-import Layout from '@/Layouts/Layout';
+import Layout from '@/layouts/Layout';
 
 // Components
 import { Error404 } from '@/components/Organisms/Error404/Error404';

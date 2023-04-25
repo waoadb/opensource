@@ -110,7 +110,7 @@ export const useDifferentBreedCart = (
   const attachCustomerToCart = async (cust_id: string) => {
     // Add customer to cart.
     await differentBreedClient.cart
-      .attachCustomer(cartState.cart!.cart_id, { cust_id })
+      .attachCustomer(cartState.cart_id!, { cust_id })
       .then((response) => {
         cartDispatch({ type: 'SET_CART', value: response.payload });
       })
@@ -119,16 +119,14 @@ export const useDifferentBreedCart = (
 
   /**
    * Validate the cart.
-   * @param cart_id - Cart ID.
    * @param payload - The data to be sent.
    */
   const validateCart = async (
-    cart_id: string,
     payload: ClientCartModels.ValidateCartRequest
   ): Promise<boolean> => {
     // Validate the cart.
     const response = await differentBreedClient.cart.validateCart(
-      cart_id,
+      cartState.cart_id!,
       payload
     );
 
@@ -138,11 +136,10 @@ export const useDifferentBreedCart = (
 
   /**
    * Delete the cart.
-   * @param cart_id - Cart ID.
    */
-  const deleteCart = async (cart_id: string) => {
+  const deleteCart = async () => {
     // Delete the cart.
-    await differentBreedClient.cart.deleteCart(cart_id);
+    await differentBreedClient.cart.deleteCart(cartState.cart_id!);
 
     // Remove the cart ID from local storage.
     localStorage.removeItem('cart_id');
@@ -153,14 +150,13 @@ export const useDifferentBreedCart = (
 
   /**
    * Retrieve Checkout config.
-   * @param cart_id - Cart ID.
    */
-  const retrieveCheckoutConfig = async (cart_id: string) => {
+  const retrieveCheckoutConfig = async () => {
     cartDispatch({ type: 'SET_CHECKOUT_CONFIG', value: null });
 
     // Retrieve the checkout config.
     await differentBreedClient.cart.checkout
-      .retrieveCheckoutConfig(cart_id)
+      .retrieveCheckoutConfig(cartState.cart_id!)
       .then((response) => {
         cartDispatch({
           type: 'SET_CHECKOUT_CONFIG',
@@ -172,18 +168,16 @@ export const useDifferentBreedCart = (
 
   /**
    * Add Ticket To Cart.
-   * @param cart_id - Cart ID.
    * @param payload - The data to be sent.
    * @param ticket_title - The title of the ticket.
    */
   const addTicketToCart = async (
-    cart_id: string,
     payload: ClientCartModels.AddTicketToCartRequest,
     ticket_title: string
   ) => {
     // Add ticket to cart.
     differentBreedClient.cart.stock
-      .addTicketToCart(cart_id, payload)
+      .addTicketToCart(cartState.cart_id!, payload)
       .then((response) => {
         cartDispatch({ type: 'SET_CART', value: response.payload });
         notifications.showSuccessToast(
@@ -203,13 +197,12 @@ export const useDifferentBreedCart = (
    * @param ticket_title - The title of the ticket.
    */
   const removeTicketFromCart = async (
-    cart_id: string,
     payload: ClientCartModels.RemoveTicketFromCartRequest,
     ticket_title: string
   ) => {
     // Remove ticket from cart.
     differentBreedClient.cart.stock
-      .removeTicketFromCart(cart_id, payload)
+      .removeTicketFromCart(cartState.cart_id!, payload)
       .then((response) => {
         if (response.success) {
           cartDispatch({ type: 'SET_CART', value: response.payload });
@@ -224,18 +217,16 @@ export const useDifferentBreedCart = (
 
   /**
    * Add Addon To Cart.
-   * @param cart_id - Cart ID.
    * @param payload - The data to be sent.
    * @param addon_title - The title of the addon.
    */
   const addAddonToCart = async (
-    cart_id: string,
     payload: ClientCartModels.AddAddonToCartRequest,
     addon_title: string
   ) => {
     // Add addon to cart.
     differentBreedClient.cart.stock
-      .addAddonToCart(cart_id, payload)
+      .addAddonToCart(cartState.cart_id!, payload)
       .then((response) => {
         if (response.success) {
           cartDispatch({ type: 'SET_CART', value: response.payload });
@@ -250,18 +241,16 @@ export const useDifferentBreedCart = (
 
   /**
    * Remove Addon From Cart.
-   * @param cart_id - Cart ID.
    * @param payload - The data to be sent.
    * @param addon_title - The title of the addon.
    */
   const removeAddonFromCart = async (
-    cart_id: string,
     payload: ClientCartModels.RemoveAddonFromCartRequest,
     addon_title: string
   ) => {
     // Remove addon from cart.
     differentBreedClient.cart.stock
-      .removeAddonFromCart(cart_id, payload)
+      .removeAddonFromCart(cartState.cart_id!, payload)
       .then((response) => {
         if (response.success) {
           cartDispatch({ type: 'SET_CART', value: response.payload });

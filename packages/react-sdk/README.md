@@ -1,48 +1,87 @@
-# Different Breed ® - React SDK
+# Different Breed ® - React SDK
+
+> 💡 This package is intended to be installed and not edited directly. We simply offer the source code to provide transparency around what is happening under the hood. If you require changes or additional features please [raise an issue](https://github.com/waoadb/opensource/issues) within Github.
 
 ## Overview
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The following package serves as a software development kit to speed up and simplify the integration of your React / Next.js project with the Different Breed Client API’s.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Quick Start
 
-### `npm start`
+Install the application using your favourite package manager.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+`npm install @waoadb/react-sdk`
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+or
 
-### `npm test`
+`yarn add @waoadb/react-sdk`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Documentation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+All documentation for Open Source Different Breed ® packages can be found here: [Documentation](https://opensource.differentbreed.events). For the React SDK, please see the following link: [React SDK](https://opensource.differentbreed.events/docs/react-sdk).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Local Development
 
-### `npm run eject`
+> 💡 These instructions are intended for the Different Breed Team, If you require changes or additional features please raise an issue within Github.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Linking
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The parent repo housing this component is a Mono repo powered by Lerna. To use this package locally in a theme, simply add the following code to your `package.json` file and run `yarn` to link the package.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```jsx
+"@waoadb/react-sdk": "*",
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Active Changes
 
-## Learn More
+To make active changes in a mock environment before building, Simply run the storybook instance set up for our packages. This can be done by running the following command:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```jsx
+yarn dev:storybook-packages
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+This will spin up an associated storybook linked to all open source packages within the repo.
+
+### Build
+
+When running the plugin with our theme, We ideally do not want to run watch tasks for each package being used as this lead to additional RAM being used. For the purposes of editing packages we ideally want to use the storybook instance to test changes then initiate a build to pull those changes into the project we are working on.
+
+To build a package, run the following command:
+
+```jsx
+yarn packages:build
+```
+
+### Publishing
+
+Package publishing is powered by Lerna versions and can be run using the following command.
+
+```jsx
+yarn packages:publish
+```
+
+This will perform the following: Build the package, increase the version and then release the package to NPM. It is worth noting that only team accounts may publish to the NPM organisation. Please contact your team lead for these permissions.
+
+---
+
+## Contributing
+
+The main purpose of this repository is to continue evolving Different Breed ®'s open source work, making it faster and easier to use. Development of Different Breed packages and themes happens in the open on GitHub, and we are grateful to the community for contributing bugfixes and improvements. Read below to learn how you can take part in improving Different Breed ® Open Source.
+
+### [Code of Conduct](https://opensource.differentbreed.events/docs/contributing/code-of-conduct)
+
+Different Breed has adopted a Code of Conduct that we expect project participants to adhere to. Please read the [full text](https://opensource.differentbreed.events/docs/contributing/code-of-conduct) so that you can understand what actions will and will not be tolerated.
+
+### [Contributing Guide](https://opensource.differentbreed.events/docs/contributing/)
+
+Read our [contributing guide](https://opensource.differentbreed.events/docs/contributing/) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to.
+
+### [License](https://github.com/waoadb/open-source/blob/production/LICENSE)
+
+Different Breed ® Open Source is [MIT licensed](https://github.com/waoadb/open-source/blob/production/LICENSE).

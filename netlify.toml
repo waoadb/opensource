@@ -1,5 +1,0 @@
-[[plugins]]
-  package = "./tools/netlify/stop-build"
-
-[[plugins]]
-  package = "@netlify/plugin-nextjs"

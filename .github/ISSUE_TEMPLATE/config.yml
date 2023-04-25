@@ -1,0 +1,7 @@
+contact_links:
+  - name: 🚨 Report a security vulnerability
+    url: https://opensource.differentbreed.events/docs/security
+    about: Please review our security policy for more details.
+  - name: 🤔 Questions and Help
+    url: https://github.com/waoadb/opensource/discussions
+    about: This issue tracker is not for support questions. Please refer to the Discussion forums.
