@@ -1,7 +1,12 @@
 {
   "name": "@waoadb/react-sdk",
-  "description": "React SDK for Different Breed ®",
   "version": "0.0.4",
+  "description": "React SDK for Different Breed ®",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/waoadb/opensource/issues"
+  },
+  "homepage": "https://github.com/waoadb/opensource/packages/react-sdk#readme",
   "private": false,
   "publishConfig": {
     "access": "public"
