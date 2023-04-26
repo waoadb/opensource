@@ -18,12 +18,12 @@ const sidebars = {
     'intro',
     {
       type: 'category',
-      label: 'Getting Started',
+      label: 'Key Concepts',
       items: [
-        'getting-started/platform',
-        'getting-started/customers',
-        'getting-started/cart',
-        'getting-started/stock-availability',
+        'key-concepts/platform',
+        'key-concepts/customers',
+        'key-concepts/cart',
+        'key-concepts/stock-availability',
       ],
     },
     'authentication',
