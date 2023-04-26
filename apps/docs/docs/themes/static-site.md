@@ -21,7 +21,7 @@ As a platform we have a concept of `minimal` endpoints for the resource categori
 
 ## Notes On Dynamic Elements
 
-It's important to note that while static site generation can handle 80-90% of the integration with Different Breed®, you'll still need to use server-side rendering for specific areas like the Cart & Checkout. Our [React SDK] provides core functionality using the [Context API](https://react.dev/learn/passing-data-deeply-with-context), which handles this for you.
+It's important to note that while static site generation can handle 80-90% of the integration with Different Breed ®, you'll still need to use server-side rendering for specific areas like the Cart & Checkout. Our [React SDK] provides core functionality using the [Context API](https://react.dev/learn/passing-data-deeply-with-context), which handles this for you.
 
 ## Notes On Request Limits
 

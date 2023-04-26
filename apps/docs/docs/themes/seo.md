@@ -7,7 +7,7 @@ description: 'How we approach SEO in Different Breed ® Open Source'
 
 ## Overview
 
-Currently, we do not provide any SEO information for non-event pages. This is intentional, as ideally Different Breed® would be used alongside a CMS that could handle this information for us.
+Currently, we do not provide any SEO information for non-event pages. This is intentional, as ideally Different Breed ® would be used alongside a CMS that could handle this information for us.
 
 We use the popular [Next SEO](https://github.com/garmeeh/next-seo) package to implement SEO within our themes.
 
@@ -35,7 +35,7 @@ If a user wishes to use us as a standalone service, we should utilise the [profi
 
 ### Event Pages
 
-The user can configure the SEO for each event to be displayed within Different Breed®. This information will be returned in the [retrieve event] response and can be used directly on the theme page.
+The user can configure the SEO for each event to be displayed within Different Breed ®. This information will be returned in the [retrieve event] response and can be used directly on the theme page.
 
 For example:
 

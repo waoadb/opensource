@@ -8,7 +8,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'Different Breed ® Open Source',
   tagline: 'Creating experiences that tear down barriers.',
-  favicon: 'img/favicon.ico',
+  favicon: '/favicon/favicon.ico',
 
   // Set the production url of your site here
   url: 'https://opensource.differentbreed.events',
@@ -50,16 +50,18 @@ const config = {
     ],
   ],
 
+  plugins: [require.resolve('docusaurus-plugin-image-zoom')],
+
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
-      image: 'img/docusaurus-social-card.jpg',
+      image: 'social-image/social-preview.jpg',
       navbar: {
         title: 'Different Breed ®',
         logo: {
-          alt: 'My Site Logo',
-          src: 'img/logo.svg',
+          alt: 'Different Breed Logo',
+          src: '/logo/logo.png',
         },
         items: [
           {
@@ -107,6 +109,16 @@ const config = {
       colorMode: {
         defaultMode: 'dark',
         respectPrefersColorScheme: true,
+      },
+      zoom: {
+        selector: '[data-image-zoom]',
+        background: {
+          light: 'rgb(255, 255, 255)',
+          dark: 'rgb(50, 50, 50)',
+        },
+        config: {
+          // options you can specify via https://github.com/francoischalifour/medium-zoom#usage
+        },
       },
     }),
 };

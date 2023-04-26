@@ -7,7 +7,7 @@ description: "How we approach authentication in Different Breed ® API's"
 
 ## Overview
 
-Different Breed® uses a combination of `Client` and `Admin` level API keys to authenticate requests. You can create these keys within your profile settings on the platform, and a unique set should be created for each application that you want to connect to our services.
+Different Breed ® uses a combination of `Client` and `Admin` level API keys to authenticate requests. You can create these keys within your profile settings on the platform, and a unique set should be created for each application that you want to connect to our services.
 
 API keys do not expire and will be valid until revoked within your profile settings. Once a key is revoked, the platform will immediately start denying requests from the revoked keys.
 
