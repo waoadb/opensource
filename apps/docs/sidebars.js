@@ -23,6 +23,7 @@ const sidebars = {
         'getting-started/platform',
         'getting-started/customers',
         'getting-started/cart',
+        'getting-started/stock-availability',
       ],
     },
     'authentication',
