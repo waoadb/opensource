@@ -100,7 +100,7 @@ const config = {
       footer: {
         style: 'dark',
         links: [],
-        copyright: `Copyright © ${new Date().getFullYear()} Different Breed ®, Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Different Breed ® | Powered by Docusaurus.`,
       },
       prism: {
         theme: lightCodeTheme,

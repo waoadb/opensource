@@ -19,7 +19,11 @@ const sidebars = {
     {
       type: 'category',
       label: 'Getting Started',
-      items: ['getting-started/platform'],
+      items: [
+        'getting-started/platform',
+        'getting-started/customers',
+        'getting-started/cart',
+      ],
     },
     'authentication',
     {

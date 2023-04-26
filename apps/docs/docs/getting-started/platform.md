@@ -32,12 +32,12 @@ As a platform, we should be integrated for the following aspects of your experie
 - [Event Information](https://waoadb-opensource.stoplight.io/docs/open-source/6nf3wkiybtq0n-events) - We provide event details, including SEO, refund policy, and much more.
 - [Venue Information](https://waoadb-opensource.stoplight.io/docs/open-source/x1ctkaabyubfm-venues) - We provide venue details.
 - [Profile Information](https://waoadb-opensource.stoplight.io/docs/open-source/1t6o7hc011676-profiles) - We provide profile details, including support details.
-- [Performance Information] - We provide performance details.
+- [Performance Information](https://waoadb-opensource.stoplight.io/docs/open-source/uxqtt87xy8ge2-performances-and-stock) - We provide performance details.
 - [Tickets & Addons](https://waoadb-opensource.stoplight.io/docs/open-source/d23028ddab6b4-add-ticket) - We provide stock information for an event performance.
 - [Cart Provider](https://waoadb-opensource.stoplight.io/docs/open-source/tw0dfszlkili2-cart-and-checkout) - We provide an API-driven cart for you to use.
-- [Checkout Forms] - We handle the forms to enable the collected data to be controlled within the Different Breed ® Platform.
+- [Checkout Forms](https://opensource.differentbreed.events/docs/getting-started/checkout) - We handle the forms to enable the collected data to be controlled within the Different Breed ® Platform.
 
-Refer to the [Cart] & [Checkout] pages for more details on how these features should be integrated.
+Refer to the [Cart](https://opensource.differentbreed.events/docs/getting-started/cart) & [Checkout](https://opensource.differentbreed.events/docs/getting-started/checkout) pages for more details on how these features should be integrated.
 
 Below are some high-level examples of how Different Breed ® can fit into your next project.
 
