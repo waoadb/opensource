@@ -120,6 +120,29 @@ const config = {
           // options you can specify via https://github.com/francoischalifour/medium-zoom#usage
         },
       },
+      algolia: {
+        // The application ID provided by Algolia
+        appId: process.env.ALGOLIA_DOC_SEARCH_APP_ID,
+
+        // Public API key: it is safe to commit it
+        apiKey: process.env.ALGOLIA_DOC_SEARCH_API_KEY, // Algolia search key
+
+        indexName: process.env.ALGOLIA_DOC_SEARCH_INDEX_NAME, // Algolia search index name
+
+        // Optional: see doc section below
+        contextualSearch: true,
+
+        // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
+        externalUrlRegex: 'external\\.com|domain\\.com',
+
+        // Optional: Algolia search parameters
+        searchParameters: {},
+
+        // Optional: path for search page that enabled by default (`false` to disable it)
+        searchPagePath: 'search',
+
+        //... other Algolia params
+      },
     }),
 };
 
