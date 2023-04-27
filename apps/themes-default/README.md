@@ -1,6 +1,6 @@
 # Different Breed ® - Default Theme
 
-For the most up-to-date information about theme development on Different Breed ®, check out [our open-source documentation](http://opensource.differentbreed.events/docs/theme/).
+For the most up-to-date information about theme development on Different Breed ®, check out [our open-source documentation](https://opensource.differentbreed.events/docs/themes/overview).
 
 ## Overview
 
@@ -34,7 +34,7 @@ Next, we need to set some environment variables within the `.env.local` file. To
 cp.env.sample.env.local;
 ```
 
-Then, within your [profile settings](https://app.differentbreed.events/profile/) on the Different Breed ® platform, click into `Integrations -> API Keys` and create a pair of [client and admin](http://opensource.differentbreed.events/docs/authentication/client-and-admin-keys) keys to be used.
+Then, within your [profile settings](https://app.differentbreed.events/profile/) on the Different Breed ® platform, click into `Integrations -> API Keys` and create a pair of [client and admin](https://opensource.differentbreed.events/docs/authentication) keys to be used.
 
 Tip: Your Profile ID is located as a UUID within the URL on the platform, i.e., `/profile/**YOUR_PROFILE_ID**/settings/integrations/api-keys`.
 
@@ -72,14 +72,14 @@ We personally ❤️ [Netlify](https://www.netlify.com/) and use it for all of o
 
 The main purpose of this repository is to continue evolving Different Breed ®'s open source work, making it faster and easier to use. Development of Different Breed packages and themes happens in the open on GitHub, and we are grateful to the community for contributing bugfixes and improvements. Read below to learn how you can take part in improving Different Breed ® Open Source.
 
-### [Code of Conduct](https://opensource.differentbreed.events/docs/contributing/code-of-conduct)
+### [Code of Conduct](https://opensource.differentbreed.events/docs/contribute/code-of-conduct)
 
-Different Breed has adopted a Code of Conduct that we expect project participants to adhere to. Please read the [full text](https://opensource.differentbreed.events/docs/contributing/code-of-conduct) so that you can understand what actions will and will not be tolerated.
+Different Breed has adopted a Code of Conduct that we expect project participants to adhere to. Please read the [full text](https://opensource.differentbreed.events/docs/contribute/code-of-conduct) so that you can understand what actions will and will not be tolerated.
 
-### [Contributing Guide](https://opensource.differentbreed.events/docs/contributing/)
+### [Contributing Guide](https://opensource.differentbreed.events/docs/contribute/contributing)
 
-Read our [contributing guide](https://opensource.differentbreed.events/docs/contributing/) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to.
+Read our [contributing guide](https://opensource.differentbreed.events/docs/contribute/contributing) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes.
 
-## [License](https://github.com/waoadb/open-source/blob/production/LICENSE)
+### [License](https://github.com/waoadb/open-source/blob/production/LICENSE)
 
 Different Breed ® Open Source is [MIT licensed](https://github.com/waoadb/open-source/blob/production/LICENSE).
