@@ -7,11 +7,11 @@ description: How to checkout with Different Breed ®.
 
 ## Overview
 
-Different Breed® offers a flexible and fully customisable checkout experience. We provide easy-to-use [APIs](https://waoadb-opensource.stoplight.io/docs/open-source/tw0dfszlkili2-cart-and-checkout) and a [React SDK](/docs/development-kits/react#checkout-forms) that can solve complex areas such as [forms](/docs/development-kits/react#checkout-forms). You can focus on creating any checkout experience you desire, with full control over the design and implementation.
+Different Breed ® offers a flexible and fully customisable checkout experience. We provide easy-to-use [APIs](https://waoadb-opensource.stoplight.io/docs/open-source/tw0dfszlkili2-cart-and-checkout) and a [React SDK](/docs/development-kits/react#checkout-forms) that can solve complex areas such as [forms](/docs/development-kits/react#checkout-forms). You can focus on creating any checkout experience you desire, with full control over the design and implementation.
 
 ## Collected Details
 
-At checkout, we require the user to provide certain data. The fields to be collected can be configured in the Different Breed® backend on an event basis by the event coordinator.
+At checkout, we require the user to provide certain data. The fields to be collected can be configured in the Different Breed ® backend on an event basis by the event coordinator.
 
 <img src="/checkout/checkout-forms.png" alt="Checkout forms diagram" data-image-zoom width="100%" height="auto"/>
 
@@ -23,7 +23,7 @@ We strongly advise using our packages to handle the checkout data collection. If
 
 ### Core Fields
 
-Core Fields are data collection fields that are defined by the system. They can be enabled and set as required in the event configuration on Different Breed®.
+Core Fields are data collection fields that are defined by the system. They can be enabled and set as required in the event configuration on Different Breed ®.
 
 | Field            | Field Type |
 | ---------------- | ---------- |

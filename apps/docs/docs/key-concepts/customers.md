@@ -7,7 +7,7 @@ description: Handling customers on the platform.
 
 ## Overview
 
-Different Breed® offers a completely headless customer management experience. We aim to provide you with full control over all customer data, allowing you to create the after-sales and offline experience that best suits your needs.
+Different Breed ® offers a completely headless customer management experience. We aim to provide you with full control over all customer data, allowing you to create the after-sales and offline experience that best suits your needs.
 
 ## The Recommended Flow
 

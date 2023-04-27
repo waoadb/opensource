@@ -7,7 +7,7 @@ description: How the Different Breed ® cart works.
 
 ## Overview
 
-Different Breed® offers a fully headless cart experience driven by APIs. This means that when building out your experience, you can choose the best way to display the cart and the items within it to your user.
+Different Breed ® offers a fully headless cart experience driven by APIs. This means that when building out your experience, you can choose the best way to display the cart and the items within it to your user.
 
 In the simplest terms, we sit in the background and provide the information that you present to the user.
 

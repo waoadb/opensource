@@ -9,7 +9,7 @@ description: How to use the Stock Availability API with Different Breed ®.
 
 ## Overview
 
-Different Breed® handles stock availability in real-time, with a 1-minute cache to optimize experiences during peak times. To achieve this, we have split the [Performance Stock](https://waoadb-opensource.stoplight.io/docs/open-source/x8ntsp0jhehgf-cache-performance) and Stock Availability (Coming Soon!) into separate APIs. This allows us to cache the performance stock for a long period while keeping the availability of that stock readily available.
+Different Breed ® handles stock availability in real-time, with a 1-minute cache to optimize experiences during peak times. To achieve this, we have split the [Performance Stock](https://waoadb-opensource.stoplight.io/docs/open-source/x8ntsp0jhehgf-cache-performance) and Stock Availability (Coming Soon!) into separate APIs. This allows us to cache the performance stock for a long period while keeping the availability of that stock readily available.
 
 To display the stock performance to the end-user, simply make two API calls:
 
