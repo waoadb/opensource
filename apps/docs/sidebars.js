@@ -23,6 +23,7 @@ const sidebars = {
         'key-concepts/platform',
         'key-concepts/customers',
         'key-concepts/cart',
+        'key-concepts/checkout',
         'key-concepts/stock-availability',
       ],
     },
