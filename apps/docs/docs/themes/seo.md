@@ -87,6 +87,6 @@ In some instances, when the SEO event has not been configured, a default fallbac
 
 ## Site Map
 
-Sitemaps can be generated using the `minimal` endpoints within our [API] for [Events] and [Venues].
+Sitemaps can be generated using the `minimal` endpoints within our [API] for [Events](https://waoadb-opensource.stoplight.io/docs/open-source/cfca647f0fdd3-retrieve-events-minimal) and [Venues](https://waoadb-opensource.stoplight.io/docs/open-source/24f49a1e756d9-retrieve-venues-minimal).
 
-An example of a Next.js implementation can be found in our [default theme].
+An example of a Next.js implementation can be found in our [default theme](https://github.com/waoadb/opensource/tree/production/apps/themes-default).

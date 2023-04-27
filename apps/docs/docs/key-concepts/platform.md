@@ -9,7 +9,7 @@ description: How does Different Breed ® fit into my solution?
 
 Different Breed ® is a fully API-driven event management and ticketing solution that prioritizes composability. We follow the MACH architecture standard, which enables businesses to choose the technical solutions that work best for them and connect them together.
 
-<img src="/getting-started/where-we-fit.png" alt="Where different breed fits example" data-image-zoom width="100%" height="auto"/>
+<img src="/key-concepts/where-we-fit.png" alt="Where different breed fits example" data-image-zoom width="100%" height="auto"/>
 
 Put simply, we believe that technology providers should offer a Lego-type experience where the base solution is the Lego board and the providers are the bricks used to bring your vision to life.
 
@@ -35,21 +35,21 @@ As a platform, we should be integrated for the following aspects of your experie
 - [Performance Information](https://waoadb-opensource.stoplight.io/docs/open-source/uxqtt87xy8ge2-performances-and-stock) - We provide performance details.
 - [Tickets & Addons](https://waoadb-opensource.stoplight.io/docs/open-source/d23028ddab6b4-add-ticket) - We provide stock information for an event performance.
 - [Cart Provider](https://waoadb-opensource.stoplight.io/docs/open-source/tw0dfszlkili2-cart-and-checkout) - We provide an API-driven cart for you to use.
-- [Checkout Forms](https://opensource.differentbreed.events/docs/getting-started/checkout) - We handle the forms to enable the collected data to be controlled within the Different Breed ® Platform.
+- [Checkout Forms](/docs/key-concepts/checkout) - We handle the forms to enable the collected data to be controlled within the Different Breed ® Platform.
 
-Refer to the [Cart](https://opensource.differentbreed.events/docs/getting-started/cart) & [Checkout](https://opensource.differentbreed.events/docs/getting-started/checkout) pages for more details on how these features should be integrated.
+Refer to the [Cart](/docs/key-concepts/cart) & [Checkout](/docs/key-concepts/checkout) pages for more details on how these features should be integrated.
 
 Below are some high-level examples of how Different Breed ® can fit into your next project.
 
 ### Standalone
 
-<img src="/getting-started/stand-alone.png" alt="Stand alone solution example" data-image-zoom width="100%" height="auto"/>
+<img src="/key-concepts/stand-alone.png" alt="Stand alone solution example" data-image-zoom width="100%" height="auto"/>
 
 In a standalone experience, we act as the source of truth for all data that is sent to the end user. You can then build a micro-service or lambda layer to orchestrate your CRM and payment provider of choice.
 
 ### Composable
 
-<img src="/getting-started/composable.png" alt="Composable solution example" data-image-zoom width="100%" height="auto"/>
+<img src="/key-concepts/composable.png" alt="Composable solution example" data-image-zoom width="100%" height="auto"/>
 
 In a composable experience, we serve as the source of truth for event and stock data that is sent to the end user. This can be combined with, or served alongside, a CMS page to provide a more customised experience for the user.
 

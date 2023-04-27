@@ -11,18 +11,18 @@ Different Breed® offers a fully headless cart experience driven by APIs. This m
 
 In the simplest terms, we sit in the background and provide the information that you present to the user.
 
-By using our [React SDK](https://opensource.differentbreed.events/docs/development-kits/react), you can present this information through a [context provider](https://opensource.differentbreed.events/docs/development-kits/react#using-the-cart-hook) and a [custom hook](https://opensource.differentbreed.events/docs/development-kits/react#using-the-cart-hook). Our [Default Theme](https://github.com/waoadb/opensource/tree/production/apps/themes-default) also serves as a great example of how to integrate.
+By using our [React SDK](/docs/development-kits/react), you can present this information through a [context provider](/docs/development-kits/react#using-the-cart-hook) and a [custom hook](/docs/development-kits/react#using-the-cart-hook). Our [Default Theme](https://github.com/waoadb/opensource/tree/production/apps/themes-default) also serves as a great example of how to integrate.
 
 ## Cart Building Flow
 
 When interacting with the cart, there are a few key concepts that you need to understand.
 
 - Cart Expiry - A cart expiry time can be set by the user within their profile settings. This is the length of time that a cart can remain idle before being marked as expired.
-- [Customer](https://opensource.differentbreed.events/docs/getting-started/customers) - Before a cart can be processed it must have a [customer attached](https://waoadb-opensource.stoplight.io/docs/open-source/f09db38afd55f-attach-customer) to it. For details on customers, please refer to our docs on [customer management].
-- [Cart Entries](https://opensource.differentbreed.events/docs/getting-started/cart#cart-entries) - Entries within a cart are defined by the performance of the event and not the event itself. A more details overview is provided in the [section below].
-- [Stock](https://opensource.differentbreed.events/docs/getting-started/cart#stock) - [Ticket’s](https://waoadb-opensource.stoplight.io/docs/open-source/d23028ddab6b4-add-ticket) and [Addons](https://waoadb-opensource.stoplight.io/docs/open-source/e6f2f086d3142-add-addon) can be added to a cart.
-- [Fees](https://opensource.differentbreed.events/docs/getting-started/cart#fees--discounts) - [Fee’s](https://waoadb-opensource.stoplight.io/docs/open-source/a594fbb7469bf-add-fee) can be added at the cart entry level, Any fee’s should be handled by your backend system and the order total will update to reflect once applied.
-- [Discounts](https://opensource.differentbreed.events/docs/getting-started/cart#fees--discounts) - [Discounts](https://waoadb-opensource.stoplight.io/docs/open-source/3dd62855dcc1d-add-discount) can be added at the cart entry level, Any discounts should be handled by your backend system and the order total will update to reflect once applied.
+- [Customer](/docs/key-concepts/customers) - Before a cart can be processed it must have a [customer attached](https://waoadb-opensource.stoplight.io/docs/open-source/f09db38afd55f-attach-customer) to it. For details on customers, please refer to our docs on [customer management].
+- [Cart Entries](/docs/key-concepts/cart#cart-entries) - Entries within a cart are defined by the performance of the event and not the event itself. A more details overview is provided in the [section below].
+- [Stock](/docs/key-concepts/cart#stock) - [Ticket’s](https://waoadb-opensource.stoplight.io/docs/open-source/d23028ddab6b4-add-ticket) and [Addons](https://waoadb-opensource.stoplight.io/docs/open-source/e6f2f086d3142-add-addon) can be added to a cart.
+- [Fees](/docs/key-concepts/cart#fees--discounts) - [Fee’s](https://waoadb-opensource.stoplight.io/docs/open-source/a594fbb7469bf-add-fee) can be added at the cart entry level, Any fee’s should be handled by your backend system and the order total will update to reflect once applied.
+- [Discounts](/docs/key-concepts/cart#fees--discounts) - [Discounts](https://waoadb-opensource.stoplight.io/docs/open-source/3dd62855dcc1d-add-discount) can be added at the cart entry level, Any discounts should be handled by your backend system and the order total will update to reflect once applied.
 
 <img src="/cart/cart-building-flow.png" alt="Cart building flow diagram" data-image-zoom width="100%" height="auto"/>
 
@@ -54,7 +54,7 @@ Each stock item will contain key properties to help shape the validation logic p
 - Min Quantity: The minimum quantity allowed per performance.
 - Max Quantity: The maximum quantity allowed per performance.
 
-It is important to note that we have a single restriction within the system: an [addon](https://waoadb-opensource.stoplight.io/docs/open-source/e6f2f086d3142-add-addon) may only be purchased with a ticket. This means that if a user removes the tickets from the cart entry for a performance, you should notify the user that at least one ticket is required to purchase an addon for the desired [performance.](http://performance.You)
+It is important to note that we have a single restriction within the system: an [addon](https://waoadb-opensource.stoplight.io/docs/open-source/e6f2f086d3142-add-addon) may only be purchased with a ticket. This means that if a user removes the tickets from the cart entry for a performance, you should notify the user that at least one ticket is required to purchase an addon for the desired [performance.](https://waoadb-opensource.stoplight.io/docs/open-source/x8ntsp0jhehgf-cache-performance)
 
 When you remove a ticket and its addons from the cart, our service will automatically remove any empty cart entries, making it easy to maintain your cart.
 

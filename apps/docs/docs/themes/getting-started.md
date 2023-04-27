@@ -31,7 +31,7 @@ Next, we need to set some environment variables within the `.env.local` file. To
 cp .env.sample .env.local;
 ```
 
-Then, within your [profile settings](https://app.differentbreed.events/profile/) on the Different Breed ® platform, click into `Integrations -> API Keys` and create a pair of [client and admin](http://opensource.differentbreed.events/docs/authentication/client-and-admin-keys) keys to be used.
+Then, within your [profile settings](https://app.differentbreed.events/profile/) on the Different Breed ® platform, click into `Integrations -> API Keys` and create a pair of [client and admin](/docs/authentication) keys to be used.
 
 Tip: Your Profile ID is located as a UUID within the URL on the platform, i.e., `/profile/**YOUR_PROFILE_ID**/settings/integrations/api-keys`.
 

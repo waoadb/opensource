@@ -42,7 +42,7 @@ This allows you to specify the credentials once and reuse the same client throug
 
 ## Methods
 
-All methods attached to the JavaScript client are documented in the [API Reference](http://opensource.differentbreed.events/docs/api-reference/overview). Our JavaScript clients simply provide a ready-to-use wrapper for interacting with those APIs.
+All methods attached to the JavaScript client are documented in the [API Docs](https://waoadb-opensource.stoplight.io/docs/open-source/). Our JavaScript clients simply provide a ready-to-use wrapper for interacting with those APIs.
 
 For example:
 

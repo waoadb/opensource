@@ -7,7 +7,7 @@ description: How to checkout with Different Breed ®.
 
 ## Overview
 
-Different Breed® offers a flexible and fully customisable checkout experience. We provide easy-to-use [APIs](https://waoadb-opensource.stoplight.io/docs/open-source/tw0dfszlkili2-cart-and-checkout) and a [React SDK](https://opensource.differentbreed.events/docs/development-kits/react#checkout-forms) that can solve complex areas such as [forms](https://opensource.differentbreed.events/docs/development-kits/react#checkout-forms). You can focus on creating any checkout experience you desire, with full control over the design and implementation.
+Different Breed® offers a flexible and fully customisable checkout experience. We provide easy-to-use [APIs](https://waoadb-opensource.stoplight.io/docs/open-source/tw0dfszlkili2-cart-and-checkout) and a [React SDK](/docs/development-kits/react#checkout-forms) that can solve complex areas such as [forms](/docs/development-kits/react#checkout-forms). You can focus on creating any checkout experience you desire, with full control over the design and implementation.
 
 ## Collected Details
 
@@ -17,7 +17,7 @@ At checkout, we require the user to provide certain data. The fields to be colle
 
 When a cart is ready for checkout, you can call the [checkout config](https://waoadb-opensource.stoplight.io/docs/open-source/11223af820471-retrieve-checkout-config) endpoint to retrieve the fields that need to be collected for each [entry](https://waoadb-opensource.stoplight.io/docs/open-source/6osfc4e1snjj6-cart-entry) in the cart.
 
-This part of the system can be complex. To simplify integration, we have developed a [Checkout Form](https://opensource.differentbreed.events/docs/development-kits/react#checkout-forms) that can be easily customised visually.
+This part of the system can be complex. To simplify integration, we have developed a [Checkout Form](/docs/development-kits/react#checkout-forms) that can be easily customised visually.
 
 We strongly advise using our packages to handle the checkout data collection. If you choose to implement the forms manually, the following fields can be applied:
 

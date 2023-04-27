@@ -25,7 +25,7 @@ To delete a customer, call the [delete customer endpoint](https://waoadb-opensou
 
 ## Accessing Customer Data
 
-After creating a customer, you can use their ID and the profile's [admin API key](https://opensource.differentbreed.events/docs/authentication#admin-key) to retrieve information from the customer API. The information available includes:
+After creating a customer, you can use their ID and the profile's [admin API key](/docs/authentication#admin-key) to retrieve information from the customer API. The information available includes:
 
 - [Orders](https://waoadb-opensource.stoplight.io/docs/open-source/51d278bdb4592-retrieve-orders): a paginated order history
 - [Address](https://waoadb-opensource.stoplight.io/docs/open-source/49713ad2c8760-retrieve-address): saved customer addresses
