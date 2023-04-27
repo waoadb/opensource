@@ -1,6 +1,6 @@
 {
   "name": "@waoadb/react-sdk",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "React SDK for Different Breed ®",
   "license": "MIT",
   "bugs": {
@@ -34,7 +34,7 @@
     "@heroicons/react": "^2.0.17",
     "@popperjs/core": "^2.11.7",
     "@waoadb/contracts-client": "^0.0.12",
-    "@waoadb/js-client-sdk": "^0.0.5",
+    "@waoadb/js-client-sdk": "^0.0.6",
     "classnames": "^2.3.2",
     "dayjs": "^1.11.7",
     "formik": "^2.2.9",
