@@ -78,7 +78,7 @@ export const getCoreFieldsFormConfig = (
         title: yup.string().required('Title is required'),
         first_name: yup.string().required('First Name is required'),
         surname: yup.string().required('Surname is required'),
-        ...(config.email_enabled && {
+        ...(config.email_enabled === true && {
           ...(config.email_required
             ? {
                 email_address: yup
@@ -90,7 +90,7 @@ export const getCoreFieldsFormConfig = (
                 email_address: yup.string().email('Email Address is invalid'),
               }),
         }),
-        ...(config.mobile_phone_enabled && {
+        ...(config.mobile_phone_enabled === true && {
           ...(config.mobile_phone_required
             ? {
                 mobile_phone: yup
@@ -104,7 +104,7 @@ export const getCoreFieldsFormConfig = (
                   .matches(/^(\+44|0)7\d{9}$/, 'Mobile Phone is invalid'),
               }),
         }),
-        ...(config.work_phone_enabled && {
+        ...(config.work_phone_enabled === true && {
           ...(config.work_phone_required
             ? {
                 work_phone: yup
@@ -118,7 +118,7 @@ export const getCoreFieldsFormConfig = (
                   .matches(/^(\+44|0)1\d{9}$/, 'Work Phone is invalid'),
               }),
         }),
-        ...(config.job_title_enabled && {
+        ...(config.job_title_enabled === true && {
           ...(config.job_title_required
             ? {
                 job_title: yup.string().required('Job Title is required'),
@@ -127,7 +127,7 @@ export const getCoreFieldsFormConfig = (
                 job_title: yup.string(),
               }),
         }),
-        ...(config.company_name_enabled && {
+        ...(config.company_name_enabled === true && {
           ...(config.company_name_required
             ? {
                 company_name: yup.string().required('Company Name is required'),
@@ -136,7 +136,7 @@ export const getCoreFieldsFormConfig = (
                 company_name: yup.string(),
               }),
         }),
-        ...(config.gender_enabled && {
+        ...(config.gender_enabled === true && {
           ...(config.gender_required
             ? {
                 company_name: yup.string().required('Gender is required'),
@@ -145,7 +145,7 @@ export const getCoreFieldsFormConfig = (
                 company_name: yup.string(),
               }),
         }),
-        ...(config.website_url_enabled && {
+        ...(config.website_url_enabled === true && {
           ...(config.gender_required
             ? {
                 company_name: yup.string().required('Gender is required'),
@@ -155,7 +155,7 @@ export const getCoreFieldsFormConfig = (
               }),
         }),
       }),
-      ...(config.billing_address_enabled && {
+      ...(config.billing_address_enabled === true && {
         billing_address: yup
           .object({
             name: yup.string().required('Name is required'),
@@ -168,7 +168,7 @@ export const getCoreFieldsFormConfig = (
           })
           .required(),
       }),
-      ...(config.shipping_address_enabled && {
+      ...(config.shipping_address_enabled === true && {
         shipping_address: yup
           .object({
             name: yup.string().required('Name is required'),
