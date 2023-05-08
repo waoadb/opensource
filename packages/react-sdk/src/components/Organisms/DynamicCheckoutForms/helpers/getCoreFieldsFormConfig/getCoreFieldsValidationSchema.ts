@@ -139,19 +139,19 @@ export const getCoreFieldsFormConfig = (
         ...(config.gender_enabled === true && {
           ...(config.gender_required
             ? {
-                company_name: yup.string().required('Gender is required'),
+                gender: yup.string().required('Gender is required'),
               }
             : {
-                company_name: yup.string(),
+                gender: yup.string(),
               }),
         }),
         ...(config.website_url_enabled === true && {
-          ...(config.gender_required
+          ...(config.website_url_required
             ? {
-                company_name: yup.string().required('Gender is required'),
+                website_url: yup.string().required('Gender is required'),
               }
             : {
-                company_name: yup.string(),
+                website_url: yup.string(),
               }),
         }),
       }),
