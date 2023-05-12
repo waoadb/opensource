@@ -3,9 +3,9 @@ import { useMemo } from 'react';
 import classNames from 'classnames';
 
 // Models
-import { ClientCacheModels } from '@waoadb/contracts-client';
+import { ClientCacheModels, ClientCartModels } from '@waoadb/contracts-client';
 type IconType =
-  | ClientCacheModels.AvailabilityTicketAccessibilityTypes
+  | ClientCartModels.AccessibilityTypes
   | keyof ClientCacheModels.CacheVenue['accessibility'];
 type Props = {
   /**

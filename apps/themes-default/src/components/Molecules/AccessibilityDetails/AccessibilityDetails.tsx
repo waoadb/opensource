@@ -13,9 +13,9 @@ import { Heading } from '@/components/Atoms/Heading/Heading';
 import { Paragraph } from '@/components/Atoms/Paragraph/Paragraph';
 
 // Models
-import { ClientCacheModels } from '@waoadb/contracts-client';
+import { ClientCacheModels, ClientCartModels } from '@waoadb/contracts-client';
 type JoinedAccessibilityTypes =
-  | ClientCacheModels.AvailabilityTicketAccessibilityTypes
+  | ClientCartModels.AccessibilityTypes
   | keyof ClientCacheModels.CacheVenue['accessibility'];
 type Props = {
   /**

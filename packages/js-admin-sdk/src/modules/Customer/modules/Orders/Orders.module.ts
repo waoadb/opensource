@@ -3,7 +3,10 @@
 import { HttpClient } from '../../../../services/HttpClient.service';
 
 // Models
-import { ClientOrderModels } from '@waoadb/contracts-client';
+import {
+  ClientCacheModels,
+  ClientCustomerModels,
+} from '@waoadb/contracts-client';
 type Props = {
   /**
    * Http Client.
@@ -35,10 +38,10 @@ export class CustomerOrdersModule {
    */
   async retrieveOrdersList(
     cust_id: string,
-    params: ClientOrderModels.RetrieveOrderListRequest
-  ): Promise<ClientOrderModels.RetrieveOrderListResponse> {
+    params: ClientCustomerModels.RetrieveEventOrderListRequest
+  ): Promise<ClientCustomerModels.RetrieveEventOrderListResponse> {
     return this.httpClient
-      .makeGetRequest<ClientOrderModels.RetrieveOrderListResponse>(
+      .makeGetRequest<ClientCustomerModels.RetrieveEventOrderListResponse>(
         'client',
         '/orders',
         params,
@@ -60,10 +63,10 @@ export class CustomerOrdersModule {
    */
   async retrieveOrder(
     cust_id: string,
-    params: ClientOrderModels.RetrieveOrderRequest
-  ): Promise<ClientOrderModels.RetrieveOrderResponse> {
+    params: ClientCustomerModels.RetrieveOrderRequest
+  ): Promise<ClientCustomerModels.RetrieveOrderResponse> {
     return this.httpClient
-      .makeGetRequest<ClientOrderModels.RetrieveOrderResponse>(
+      .makeGetRequest<ClientCustomerModels.RetrieveOrderResponse>(
         'client',
         '/orders/order',
         params,

@@ -11,9 +11,9 @@ import { Modal } from '@/components/Organisms/Modal/Modal';
 import { AccessibilityDetails } from '@/components/Molecules/AccessibilityDetails/AccessibilityDetails';
 
 // Models
-import { ClientCacheModels } from '@waoadb/contracts-client';
+import { ClientCacheModels, ClientCartModels } from '@waoadb/contracts-client';
 type JoinedAccessibilityTypes =
-  | ClientCacheModels.AvailabilityTicketAccessibilityTypes
+  | ClientCartModels.AccessibilityTypes
   | keyof ClientCacheModels.CacheVenue['accessibility'];
 
 type Props = {

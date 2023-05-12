@@ -1,6 +1,6 @@
 /* Dependencies */
 // Models
-import { ClientCacheModels } from '@waoadb/contracts-client';
+import { ClientCacheModels, ClientCartModels } from '@waoadb/contracts-client';
 
 export const accessibleTitles = {
   assistance_dogs: 'Assistance Dogs',
@@ -50,7 +50,7 @@ type AccessibilityContent = {
 };
 
 type JoinedAccessibilityTypes =
-  | ClientCacheModels.AvailabilityTicketAccessibilityTypes
+  | ClientCartModels.AccessibilityTypes
   | keyof ClientCacheModels.CacheVenue['accessibility'];
 
 /**
