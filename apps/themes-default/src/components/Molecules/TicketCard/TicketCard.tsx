@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import classNames from 'classnames';
 
 // Helpers
+import { formatCurrency } from '@waoadb/js-client-sdk';
 import { handleFieldError } from '@/helpers/handleFieldError/handleFieldError';
 
 // Components
@@ -14,13 +15,21 @@ import { Button } from '@/components/Atoms/Button/Button';
 import { Input } from '../Forms/Input/Input';
 
 // Models
-import { ClientCacheModels, ClientCartModels } from '@waoadb/contracts-client';
+import {
+  ClientCacheModels,
+  ClientCartModels,
+  ClientGenericModels,
+} from '@waoadb/contracts-client';
 
 type Props = {
   /**
    * Ticket
    */
   ticket: ClientCacheModels.CachePerformance['stock']['tickets'][0];
+  /**
+   * Currency
+   */
+  currency: ClientGenericModels.CurrencyCode['code'];
   /**
    * Event id
    */
@@ -50,6 +59,7 @@ export const TicketCard = ({
   event_id,
   performance_id,
   onSubmit,
+  currency,
 }: Props) => {
   // Create validation schema
   const validationSchema = useMemo(() => {
@@ -80,7 +90,8 @@ export const TicketCard = ({
 
       <Paragraph className="mt-1">
         <span aria-atomic={true} aria-live="polite">
-          <span className="sr-only">Price:</span>£{ticket.price.toFixed(2)}
+          <span className="sr-only">Price:</span>
+          {formatCurrency(ticket.price, currency)}
         </span>
       </Paragraph>
 

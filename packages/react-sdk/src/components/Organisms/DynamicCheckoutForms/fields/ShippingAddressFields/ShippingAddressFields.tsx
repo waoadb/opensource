@@ -13,9 +13,11 @@ import { Select } from '../../../../Molecules/Forms/Select/Select';
 import { FormErrorMessage } from '../../../../Molecules/Forms/FormErrorMessage/FormErrorMessage';
 
 // Models
-import { ClientCartModels } from '@waoadb/contracts-client';
+import {
+  ClientCartModels,
+  ClientGenericModels,
+} from '@waoadb/contracts-client';
 import { CoreDetailsFormValues } from '../../Forms/CoreDetailsForm/CoreDetailsForm';
-import { countries } from '../../models/countries.model';
 
 type ShippingAddressFieldsProps = {
   /**
@@ -183,10 +185,10 @@ export const ShippingAddressFields = ({
           <Select
             name="shipping_address.country"
             label="Country"
-            options={countries.map((country) => {
+            options={ClientGenericModels.countryCodes.map((country) => {
               return {
                 value: country.code,
-                key: country.name,
+                key: country.title,
               };
             })}
             onBlur={handleBlur}

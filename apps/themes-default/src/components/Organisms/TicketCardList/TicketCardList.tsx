@@ -3,12 +3,20 @@
 import { TicketCard } from '@/components/Molecules/TicketCard/TicketCard';
 
 // Models
-import { ClientCacheModels, ClientCartModels } from '@waoadb/contracts-client';
+import {
+  ClientCacheModels,
+  ClientCartModels,
+  ClientGenericModels,
+} from '@waoadb/contracts-client';
 type Props = {
   /**
    * Tickets to render.
    */
   tickets: ClientCacheModels.CachePerformance['stock']['tickets'];
+  /**
+   * Currency
+   */
+  currency: ClientGenericModels.CurrencyCode['code'];
   /**
    * Event id.
    */
@@ -37,6 +45,7 @@ export const TicketCardList = ({
   performance_id,
   tickets,
   handleSubmit,
+  currency,
 }: Props) => {
   return (
     <ul className="grid grid-cols-1 divide-y divide-gray-500">
@@ -47,6 +56,7 @@ export const TicketCardList = ({
           performance_id={performance_id}
           ticket={ticket}
           onSubmit={handleSubmit}
+          currency={currency}
         />
       ))}
     </ul>

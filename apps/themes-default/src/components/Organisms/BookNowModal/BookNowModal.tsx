@@ -18,7 +18,10 @@ import { AddonCardList } from '../AddonCardList/AddonCardList';
 import { Button } from '@/components/Atoms/Button/Button';
 
 // Models
-import { ClientCacheModels } from '@waoadb/contracts-client';
+import {
+  ClientCacheModels,
+  ClientGenericModels,
+} from '@waoadb/contracts-client';
 type Props = {
   /**
    * If the modal is open
@@ -36,6 +39,10 @@ type Props = {
    * Event Id
    */
   event_id: string;
+  /**
+   * Currency
+   */
+  currency: ClientGenericModels.CurrencyCode['code'];
 };
 
 /**
@@ -47,6 +54,7 @@ export const BookNowModal = ({
   onClose,
   performance_id,
   event_id,
+  currency,
 }: Props) => {
   // State
   const [performanceData, setPerformanceData] =
@@ -173,6 +181,7 @@ export const BookNowModal = ({
                   await addTicketToCart(payload, title);
                   callback();
                 }}
+                currency={currency}
               />
             </section>
             {/* Tickets */}
@@ -197,6 +206,7 @@ export const BookNowModal = ({
                       await addAddonToCart(payload, title);
                       callback();
                     }}
+                    currency={currency}
                   />
                 </section>
               </>

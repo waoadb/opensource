@@ -4206,10 +4206,10 @@
     "@typescript-eslint/types" "5.59.0"
     eslint-visitor-keys "^3.3.0"
 
-"@waoadb/contracts-client@^0.0.13":
-  version "0.0.13"
-  resolved "https://registry.yarnpkg.com/@waoadb/contracts-client/-/contracts-client-0.0.13.tgz#9ba4c3cf780cb7d50d7ac335f79d01484c1d7c55"
-  integrity sha512-U23KGDyiAE9pQoAgPXUzNMY+TPdmj7dhl8db5Te4mzy3+t2rEDlbTTqN8Sij5qYbYu6QV9Umko+A9k4+S2H1Mw==
+"@waoadb/contracts-client@^0.0.14":
+  version "0.0.14"
+  resolved "https://registry.yarnpkg.com/@waoadb/contracts-client/-/contracts-client-0.0.14.tgz#4da738b562b8332b2b608c50e72d7fb42db8d6c5"
+  integrity sha512-x3Y04Wjen44WRJ3A9kjPH5TYEJ+jkKyUtQg7/nFSU8WanDrrt+oGAwL3deNhuhPBaywSss2dFXWMiXGyWIuupQ==
 
 "@webassemblyjs/ast@1.11.5", "@webassemblyjs/ast@^1.11.5":
   version "1.11.5"

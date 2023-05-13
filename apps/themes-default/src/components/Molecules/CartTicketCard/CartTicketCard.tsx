@@ -1,18 +1,28 @@
 /* Dependencies */
 import { Formik } from 'formik';
 
+// Helpers
+import { formatCurrency } from '@waoadb/js-client-sdk';
+
 // Components
 import { Heading } from '@/components/Atoms/Heading/Heading';
 import { Paragraph } from '@/components/Atoms/Paragraph/Paragraph';
 import { Button } from '@/components/Atoms/Button/Button';
 
 // Models
-import { ClientCartModels } from '@waoadb/contracts-client';
+import {
+  ClientCartModels,
+  ClientGenericModels,
+} from '@waoadb/contracts-client';
 type Props = {
   /**
    * Ticket
    */
   ticket: ClientCartModels.CartTicket;
+  /**
+   * Currency
+   */
+  currency: ClientGenericModels.CurrencyCode['code'];
   /**
    * Cart entry id
    */
@@ -32,7 +42,12 @@ type Props = {
  * @param param props - Component props.
  * @returns
  */
-export const CartTicketCard = ({ ticket, entry_id, onSubmit }: Props) => {
+export const CartTicketCard = ({
+  ticket,
+  entry_id,
+  onSubmit,
+  currency,
+}: Props) => {
   return (
     <li className="w-full py-4">
       <Heading level="h3" style="h4" className="mb-2">
@@ -45,7 +60,8 @@ export const CartTicketCard = ({ ticket, entry_id, onSubmit }: Props) => {
 
       <Paragraph className="mt-1">
         <span aria-atomic={true} aria-live="polite">
-          <span className="sr-only">Price:</span>£{ticket.price.toFixed(2)}
+          <span className="sr-only">Price:</span>
+          {formatCurrency(ticket.price, currency)}
         </span>
       </Paragraph>
 
@@ -86,8 +102,9 @@ export const CartTicketCard = ({ ticket, entry_id, onSubmit }: Props) => {
                   variant="hollowAlert"
                   accessibleTitle={`Remove single ${
                     ticket.name
-                  } ticket, priced at £${ticket.price.toFixed(
-                    2
+                  } ticket, priced at ${formatCurrency(
+                    ticket.price,
+                    currency
                   )} from your cart.`}
                   disabled={!isValid || isSubmitting}
                 >

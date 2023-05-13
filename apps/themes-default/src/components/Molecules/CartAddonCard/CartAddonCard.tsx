@@ -3,6 +3,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 // Helpers
+import { formatCurrency } from '@waoadb/js-client-sdk';
 import { handleFieldError } from '@/helpers/handleFieldError/handleFieldError';
 
 // Components
@@ -21,12 +22,19 @@ const validationSchema = Yup.object().shape({
 });
 
 // Models
-import { ClientCartModels } from '@waoadb/contracts-client';
+import {
+  ClientCartModels,
+  ClientGenericModels,
+} from '@waoadb/contracts-client';
 type Props = {
   /**
    * Addon
    */
   addon: ClientCartModels.CartAddon;
+  /**
+   * Currency
+   */
+  currency: ClientGenericModels.CurrencyCode['code'];
   /**
    * Cart entry id
    */
@@ -46,7 +54,12 @@ type Props = {
  * @param props - Component props.
  * @returns
  */
-export const CartAddonCard = ({ addon, entry_id, onSubmit }: Props) => {
+export const CartAddonCard = ({
+  addon,
+  entry_id,
+  onSubmit,
+  currency,
+}: Props) => {
   return (
     <li className="w-full py-4">
       <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
@@ -78,7 +91,8 @@ export const CartAddonCard = ({ addon, entry_id, onSubmit }: Props) => {
 
             <Paragraph className="mt-1">
               <span aria-atomic={true} aria-live="polite">
-                <span className="sr-only">Price:</span>£{addon.price.toFixed(2)}
+                <span className="sr-only">Price:</span>
+                {formatCurrency(addon.price, currency)}
               </span>
             </Paragraph>
 
@@ -139,7 +153,10 @@ export const CartAddonCard = ({ addon, entry_id, onSubmit }: Props) => {
                       variant="hollowAlert"
                       accessibleTitle={`Remove single ${
                         addon.name
-                      }, priced at £${addon.price.toFixed(2)} from your cart.`}
+                      }, priced at ${formatCurrency(
+                        addon.price,
+                        currency
+                      )} from your cart.`}
                       disabled={!isValid || isSubmitting}
                     >
                       Remove

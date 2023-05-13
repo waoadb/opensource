@@ -59,6 +59,7 @@ export const CartEntries = () => {
                 removeTicketFromCart(payload, title);
                 callback();
               }}
+              currency={cart.currency}
             />
           </section>
 
@@ -76,6 +77,7 @@ export const CartEntries = () => {
                   removeAddonFromCart(payload, title);
                   callback();
                 }}
+                currency={cart.currency}
               />
             </section>
           )}

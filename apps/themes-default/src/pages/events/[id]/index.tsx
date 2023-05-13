@@ -212,7 +212,9 @@ const Page = ({ event, profile }: PageProps) => {
                   }
                 />
               </div>
-              <RefundPolicyCard refundPolicy={event.payments.refund_policy} />
+              <RefundPolicyCard
+                refundPolicy={event.commerce_settings.refund_policy}
+              />
             </aside>
             {/* / Side Bar */}
           </div>
@@ -279,6 +281,7 @@ const Page = ({ event, profile }: PageProps) => {
           onClose={() => setShowBookNowModal(false)}
           performance_id={selectedPerformanceId}
           event_id={event.event_id}
+          currency={profile.commerce_settings.currency}
         />
         {/* / Book Now Modal */}
       </Layout>
