@@ -60,7 +60,6 @@ export class CartModule {
    * Create a new cart.
    * @param payload - The data to be sent.
    * @param payload.cust_id? - The customer id to be associated with the cart.
-   * @param payload.expiry? - The expiry of the cart in seconds.
    */
   async createCart(
     payload: ClientCartModels.CreateCartRequest

@@ -94,7 +94,7 @@ export const useDifferentBreedCart = (
   const createCart = async (cust_id?: string) => {
     // Create a new cart.
     await differentBreedClient.cart
-      .createCart({ cust_id, expiry: 86400 })
+      .createCart({ cust_id })
       .then((response) => {
         if (response.success) {
           cartDispatch({ type: 'SET_CART', value: response.payload });

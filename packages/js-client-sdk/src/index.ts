@@ -11,18 +11,16 @@ import { VenuesModule } from './modules/Venues/Venues.module';
 import { CartModule } from './modules/Cart/Cart.module';
 
 // Models
-import {
-  ResponseError,
-  ResponseValidationError,
-} from '@waoadb/contracts-client';
+import { ClientGenericModels } from '@waoadb/contracts-client';
 
 type Props = {
   profileId: string;
   clientAPIKey: string;
 };
 
-type ErrorResponse = AxiosError<ResponseError>;
-type ErrorResponseValidation = AxiosError<ResponseValidationError>;
+type ErrorResponse = AxiosError<ClientGenericModels.ResponseError>;
+type ErrorResponseValidation =
+  AxiosError<ClientGenericModels.ResponseValidationError>;
 
 /**
  * Different Breed Client SDK
@@ -54,3 +52,6 @@ export class DifferentBreedClient {
 
 // Export types.
 export type { ErrorResponse, ErrorResponseValidation };
+
+// Export Helpers
+export * from './helpers/formatCurrency/formatCurrency';

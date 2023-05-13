@@ -6,7 +6,7 @@ import { CurrencyPoundIcon } from '@heroicons/react/24/outline';
 // Models
 import { ClientCacheModels } from '@waoadb/contracts-client';
 type Props = {
-  refundPolicy: ClientCacheModels.CacheEvent['payments']['refund_policy'];
+  refundPolicy: ClientCacheModels.CacheEvent['commerce_settings']['refund_policy'];
 };
 
 /**

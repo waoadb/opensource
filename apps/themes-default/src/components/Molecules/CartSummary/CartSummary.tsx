@@ -2,6 +2,7 @@
 import { useMemo } from 'react';
 
 // Helpers
+import { formatCurrency } from '@waoadb/js-client-sdk';
 import { formatDateRange } from '@/helpers/formatDateRange/formatDateRange';
 
 // Components
@@ -84,7 +85,7 @@ export const CartSummary = ({ cart, handleCheckoutClick }: Props) => {
                               style="small"
                               className="w-auto font-semibold"
                             >
-                              £{ticket.price.toFixed(2)}
+                              {formatCurrency(ticket.price, cart.currency)}
                             </Paragraph>
                           </li>
                         );
@@ -117,7 +118,7 @@ export const CartSummary = ({ cart, handleCheckoutClick }: Props) => {
                               style="small"
                               className="w-auto font-semibold"
                             >
-                              £{addon.price.toFixed(2)}
+                              {formatCurrency(addon.price, cart.currency)}
                             </Paragraph>
                           </li>
                         );
@@ -148,7 +149,7 @@ export const CartSummary = ({ cart, handleCheckoutClick }: Props) => {
                                 style="small"
                                 className="w-auto font-semibold"
                               >
-                                + £{fee.total.toFixed(2)}
+                                + {formatCurrency(fee.total, cart.currency)}
                               </Paragraph>
                             </div>
                             {fee.description && (
@@ -191,7 +192,8 @@ export const CartSummary = ({ cart, handleCheckoutClick }: Props) => {
                                 style="small"
                                 className="w-auto font-semibold"
                               >
-                                - £{discount.total.toFixed(2)}
+                                -{' '}
+                                {formatCurrency(discount.total, cart.currency)}
                               </Paragraph>
                             </div>
                             {discount.description && (
@@ -220,7 +222,7 @@ export const CartSummary = ({ cart, handleCheckoutClick }: Props) => {
         <Paragraph style="base" className="w-full flex flex-row flex-wrap">
           <span className="w-full max-w-[calc(100%-150px)]">Order Total</span>
           <span className="font-semibold ml-auto text-right">
-            £{cartTotal.toFixed(2)}
+            {formatCurrency(cartTotal, cart.currency)}
           </span>
         </Paragraph>
 
@@ -228,11 +230,13 @@ export const CartSummary = ({ cart, handleCheckoutClick }: Props) => {
           <Button
             accessibleTitle={
               cart.cust_id
-                ? `Continue to checkout with cart total of £${cartTotal.toFixed(
-                    2
+                ? `Continue to checkout with cart total of ${formatCurrency(
+                    cartTotal,
+                    cart.currency
                   )}`
-                : `Login to checkout with cart total of £${cartTotal.toFixed(
-                    2
+                : `Login to checkout with cart total of ${formatCurrency(
+                    cartTotal,
+                    cart.currency
                   )}`
             }
             variant="primary"

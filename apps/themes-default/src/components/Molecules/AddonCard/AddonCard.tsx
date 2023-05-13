@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import classNames from 'classnames';
 
 // Helpers
+import { formatCurrency } from '@waoadb/js-client-sdk';
 import { handleFieldError } from '@/helpers/handleFieldError/handleFieldError';
 
 // Components
@@ -16,13 +17,21 @@ import { Input } from '../Forms/Input/Input';
 import { Select } from '../Forms/Select/Select';
 
 // Models
-import { ClientCacheModels, ClientCartModels } from '@waoadb/contracts-client';
+import {
+  ClientCacheModels,
+  ClientCartModels,
+  ClientGenericModels,
+} from '@waoadb/contracts-client';
 
 type Props = {
   /**
    * Addon
    */
   addon: ClientCacheModels.CachePerformance['stock']['addons'][0];
+  /**
+   * Currency
+   */
+  currency: ClientGenericModels.CurrencyCode['code'];
   /**
    * Event id
    */
@@ -51,6 +60,7 @@ export const AddonCard = ({
   event_id,
   performance_id,
   onSubmit,
+  currency,
 }: Props) => {
   // State
   const [selectedVariant, setSelectedVariant] = useState(addon.variants[0]);
@@ -100,8 +110,8 @@ export const AddonCard = ({
 
             <Paragraph className="mt-1">
               <span aria-atomic={true} aria-live="polite">
-                <span className="sr-only">Price:</span>£
-                {selectedVariant.price.toFixed(2)}
+                <span className="sr-only">Price:</span>
+                {formatCurrency(selectedVariant.price, currency)}
               </span>
             </Paragraph>
 

@@ -8,18 +8,16 @@ import { CartModule } from './modules/Cart/Cart.module';
 import { CustomerModule } from './modules/Customer/Customer.module';
 
 // Models
-import {
-  ResponseError,
-  ResponseValidationError,
-} from '@waoadb/contracts-client';
+import { ClientGenericModels } from '@waoadb/contracts-client';
 
 type Props = {
   profileId: string;
   adminAPIKey: string;
 };
 
-type ErrorResponse = AxiosError<ResponseError>;
-type ErrorResponseValidation = AxiosError<ResponseValidationError>;
+type ErrorResponse = AxiosError<ClientGenericModels.ResponseError>;
+type ErrorResponseValidation =
+  AxiosError<ClientGenericModels.ResponseValidationError>;
 
 /**
  * Different Breed Admin SDK

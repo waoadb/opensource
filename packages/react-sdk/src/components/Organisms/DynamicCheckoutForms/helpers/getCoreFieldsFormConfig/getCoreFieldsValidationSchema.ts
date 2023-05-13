@@ -55,7 +55,7 @@ export const getCoreFieldsFormConfig = (
         address_line_3: '',
         city: '',
         postcode: '',
-        country: '',
+        country: 'GB',
       },
     }),
     ...(config.shipping_address_enabled && {
@@ -66,7 +66,7 @@ export const getCoreFieldsFormConfig = (
         address_line_3: '',
         city: '',
         postcode: '',
-        country: '',
+        country: 'GB',
       },
     }),
   };

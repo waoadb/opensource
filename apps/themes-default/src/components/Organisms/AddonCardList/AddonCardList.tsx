@@ -3,7 +3,11 @@
 import { AddonCard } from '@/components/Molecules/AddonCard/AddonCard';
 
 // Models
-import { ClientCacheModels, ClientCartModels } from '@waoadb/contracts-client';
+import {
+  ClientCacheModels,
+  ClientCartModels,
+  ClientGenericModels,
+} from '@waoadb/contracts-client';
 type Props = {
   /**
    * Addons to render.
@@ -17,6 +21,10 @@ type Props = {
    * Performance id.
    */
   performance_id: string;
+  /**
+   * Currency
+   */
+  currency: ClientGenericModels.CurrencyCode['code'];
   /**
    * Handle Submit
    */
@@ -37,6 +45,7 @@ export const AddonCardList = ({
   performance_id,
   addons,
   handleSubmit,
+  currency,
 }: Props) => {
   return (
     <ul className="grid grid-cols-1 divide-y divide-gray-500">
@@ -47,6 +56,7 @@ export const AddonCardList = ({
           performance_id={performance_id}
           addon={addon}
           onSubmit={handleSubmit}
+          currency={currency}
         />
       ))}
     </ul>

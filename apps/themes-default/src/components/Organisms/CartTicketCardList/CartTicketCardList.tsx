@@ -3,12 +3,19 @@
 import { CartTicketCard } from '@/components/Molecules/CartTicketCard/CartTicketCard';
 
 // Models
-import { ClientCartModels } from '@waoadb/contracts-client';
+import {
+  ClientCartModels,
+  ClientGenericModels,
+} from '@waoadb/contracts-client';
 type Props = {
   /**
    * Tickets to render.
    */
   tickets: ClientCartModels.CartTicket[];
+  /**
+   * Currency
+   */
+  currency: ClientGenericModels.CurrencyCode['code'];
   /**
    * Cart entry id.
    */
@@ -31,6 +38,7 @@ type Props = {
 export const CartTicketCardList = ({
   tickets,
   entry_id,
+  currency,
   handleSubmit,
 }: Props) => {
   return (
@@ -41,6 +49,7 @@ export const CartTicketCardList = ({
           entry_id={entry_id}
           ticket={ticket}
           onSubmit={handleSubmit}
+          currency={currency}
         />
       ))}
     </ul>
