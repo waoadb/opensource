@@ -89,7 +89,6 @@ export const AddonCard = ({
           <ImageAtom
             imageSrc={addon.picture?.url || ''}
             altText={addon.picture?.alt_text || ''}
-            blurhash={addon.picture?.blurhash}
             ratio="1:1"
             fit="object-cover"
             position="object-center"

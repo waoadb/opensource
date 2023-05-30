@@ -52,7 +52,6 @@ export const VenueBanner = ({ venue }: Props) => {
           <ImageAtom
             imageSrc={venue.picture.url}
             altText={venue.picture.alt_text}
-            blurhash={venue.picture.blurhash}
             fit="object-cover"
             ratio="1:1"
             restrictSize="card"
@@ -67,7 +66,6 @@ export const VenueBanner = ({ venue }: Props) => {
           <ImageAtom
             imageSrc={venue.picture.url}
             altText={venue.picture.alt_text}
-            blurhash={venue.picture.blurhash}
             fit="object-cover"
             ratio="16:9"
             restrictSize="card"

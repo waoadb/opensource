@@ -48,7 +48,6 @@ export const VenueCard = ({ as: El = 'li', venue, showDirections }: Props) => {
           <ImageAtom
             imageSrc={venue.picture.url}
             altText={venue.picture.alt_text || ''}
-            blurhash={venue.picture.blurhash}
             position="object-center"
             fit="object-cover"
             ratio="16:9"

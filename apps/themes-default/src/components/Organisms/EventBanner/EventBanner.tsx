@@ -55,7 +55,6 @@ export const EventBanner = ({ event }: Props) => {
           <ImageAtom
             imageSrc={event.customise.banner.url}
             altText={event.customise.banner.alt_text}
-            blurhash={event.customise.banner.blurhash}
             position="object-center"
             fit="object-cover"
             ratio="auto"
@@ -68,7 +67,6 @@ export const EventBanner = ({ event }: Props) => {
           <ImageAtom
             imageSrc={event.details.picture.url}
             altText={event.details.picture.alt_text}
-            blurhash={event.details.picture.blurhash}
             position="object-center"
             fit="object-cover"
             ratio="auto"

@@ -25,7 +25,6 @@ export const CircleImage = ({ profile: { image } }: Props) => {
       <ImageAtom
         imageSrc={image.url}
         altText={image.alt_text}
-        blurhash={image.blurhash}
         position="object-center"
         fit="object-cover"
         ratio="1:1"
