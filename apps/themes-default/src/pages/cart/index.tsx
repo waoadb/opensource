@@ -4,9 +4,6 @@ import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 
-// Services
-import { httpClient } from '@/services/httpClient/httpClient';
-
 // Helpers
 import { createCartCallbackUrls } from '@/helpers/createCartCallbackUrls/createCartCallbackUrls';
 
@@ -23,13 +20,9 @@ import { Placeholder } from '@/components/Molecules/Placeholder/Placeholder';
 import { ShoppingCartIcon } from '@heroicons/react/24/outline';
 import { CartSummary } from '@/components/Molecules/CartSummary/CartSummary';
 import { CartEntries } from '@/components/Organisms/CartEntries/CartEntries';
-import { CreateCustomerModal } from '@/components/Organisms/CreateCustomerModal/CreateCustomerModal';
 
 // Models
-import {
-  ClientCacheModels,
-  ClientCustomerModels,
-} from '@waoadb/contracts-client';
+import { ClientCacheModels } from '@waoadb/contracts-client';
 type PageProps = {
   profile: ClientCacheModels.CacheProfile;
 };
@@ -59,28 +52,6 @@ const Page = ({ profile }: PageProps) => {
     // Create checkout link
     retrieveCheckoutLink();
   }, [router, cart]);
-
-  const handleCustomerCreate = useCallback(
-    async (
-      payload: ClientCustomerModels.CreateCustomerRequest,
-      callback: Function
-    ) => {
-      // Create customer
-      try {
-        // Attach customer to cart
-        await httpClient.attachCustomer(cart_id!, payload);
-
-        // Fire callback
-        callback();
-        // Navigate to checkout
-        router.push('/checkout');
-      } catch (error) {
-        // Show error
-        console.error(error);
-      }
-    },
-    [cart_id, router]
-  );
 
   // Effects
   useEffect(() => {
@@ -159,14 +130,6 @@ const Page = ({ profile }: PageProps) => {
           </section>
         )}
         {/* / Cart */}
-
-        {/* Create Customer */}
-        <CreateCustomerModal
-          isOpen={showCreateCustomer}
-          onClose={() => setShowCreateCustomer(false)}
-          onSubmit={handleCustomerCreate}
-        />
-        {/* Create Customer */}
       </Layout>
       {/* / Main */}
     </>
