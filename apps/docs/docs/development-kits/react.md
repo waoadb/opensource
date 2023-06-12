@@ -86,7 +86,9 @@ import { useDifferentBreedCart } from '@waoadb/react-sdk';
 
 const Component = () => {
   // Reference hook.
-  const {} = useDifferentBreedCart(differentBreedClient);
+  const {} = useDifferentBreedCart(differentBreedClient, {
+    callbacks: { successUrl: '#', cancelUrl: '#' },
+  });
 
   return <></>;
 };
@@ -102,106 +104,23 @@ For the related types referenced below, We have a [client contracts](https://www
 
 **State**
 
-| Name           | Type                                  | Description                              | API Reference                             |
-| -------------- | ------------------------------------- | ---------------------------------------- | ----------------------------------------- | ----------------------- |
-| cart           | ClientCartModels.Cart                 | null                                     | The current cart.                         | [Cart Model]            |
-| cart_id        | string                                | null                                     | The current cart id.                      | [Cart Model]            |
-| itemCount      | number                                | The number of items in the current cart. | N/A                                       |
-| checkoutConfig | ClientCartModels.CheckoutConfigItem[] | null                                     | The checkout config to pass to the forms. | [Checkout Config Model] |
+| Name      | Type                  | Description                              | API Reference        |
+| --------- | --------------------- | ---------------------------------------- | -------------------- | ------------ |
+| cart      | ClientCartModels.Cart | null                                     | The current cart.    | [Cart Model] |
+| cart_id   | string                | null                                     | The current cart id. | [Cart Model] |
+| itemCount | number                | The number of items in the current cart. | N/A                  |
 
 **Methods**
 
-| Name                   | Params                                       | Description                                                                           | API Reference           |
-| ---------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------- | ----------------------- |
-| retrieveCart           | cust_id?                                     | Retrieves the current cart, If no cart is found, it creates a new one.                | [Link to API Reference] |
-| createCart             | cust_id?                                     | Creates a new cart with an optional customer attached.                                | [Link to API Reference] |
-| attachCustomerToCart   | cust_id                                      | Attaches a customer to the current cart.                                              | [Link to API Reference] |
-| validateCart           | ClientCartModels.ValidateCartRequest         | Sends the data returned from the DynamicCheckoutForms to be validated by the backend. | [Link to API Reference] |
-| deleteCart             | N/A                                          | Deletes the active cart.                                                              | [Link to API Reference] |
-| addTicketToCart        | ClientCartModels.AddTicketToCartRequest      | Add’s the desired ticket to the cart.                                                 | [Link to API Reference] |
-| removeTicketFromCart   | ClientCartModels.RemoveTicketFromCartRequest | Removes the desired ticket from the cart.                                             | [Link to API Reference] |
-| addAddonToCart         | ClientCartModels.AddAddonToCartRequest       | Add’s the desired addon to the cart.                                                  | [Link to API Reference] |
-| removeAddonFromCart    | ClientCartModels.RemoveAddonFromCartRequest  | Removes the desired addon from the cart.                                              | [Link to API Reference] |
-| retrieveCheckoutConfig | N/A                                          | Retrieves the checkout config that we should pass to the DynamicCheckoutForms.        | [Link to API Reference] |
-
-## Checkout Forms
-
-The `DynamicCheckoutForms` component, which is included in the React SDK, simplifies the process of collecting the data required by Different Breed ® during checkout. This component collects the necessary data through lightweight forms and formats it for validation and order completion in your backend.
-
-### Implementation
-
-To implement the forms, first retrieve items from the `useDifferentBreedCart` hook and call the `retrieveCheckoutConfig` method to get the form's configuration for rendering.
-
-You can submit the form from anywhere, such as from a summary section with a “Checkout" button. To achieve this, store the `ref` for the forms component and call the `triggerSubmit` method. This method validates the forms and runs the specified submit function if it is valid.
-
-Here is a simplified example. Note that the form is rendered only on the client side and is delayed until the configuration is present.
-
-```tsx
-/* Dependencies */
-import {
-  DynamicCheckoutForms,
-  DynamicCheckoutFormsImperativeMethods,
-  useDifferentBreedCart
-} from '@waoadb/react-sdk';
-
-// Styles
-import '@waoadb/react-sdk/build/index.css';
-
-/**
- * Page: Checkout
- * @param props - Page props.
- * @returns
- */
-const Page = () => {
-	// Hooks
-  const dynamicFormsRef = useRef<DynamicCheckoutFormsImperativeMethods>(null);
-
-  // State
-  const [renderForm, setRenderForm] = useState(false);
-
-  // Different Breed
-  const {
-    retrieveCheckoutConfig,
-    cartState: { cart, cart_id, checkoutConfig },
-  } = useDifferentBreedCart(differentBreedClient);
-
-  // Callbacks
-  const handleSubmit = useCallback(
-    async (payload: ClientCartModels.ValidateCartRequest) => {
-      try {
-        // Handle the date returned by the forms.
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    [cart_id, router]
-  );
-
-  // UseEffects
-  useEffect(() => {
-    if (cart) {
-      retrieveCheckoutConfig(cart.cart_id);
-      setRenderForm(true);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cart]);
-
-  return (
-		{renderForm && checkoutConfig && (
-		  <DynamicCheckoutForms
-		    cart={cart}
-		    checkoutConfig={checkoutConfig}
-		    onSubmit={handleSubmit}
-		    ref={dynamicFormsRef}
-			/>
-		)}
-
-    <button onClick={() => dynamicFormsRef.current?.triggerSubmit()}>
-      Submit
-    </button>
-  )
-}
-```
+| Name                 | Params                                       | Description                                                            | API Reference           |
+| -------------------- | -------------------------------------------- | ---------------------------------------------------------------------- | ----------------------- |
+| retrieveCart         | cust_id?                                     | Retrieves the current cart, If no cart is found, it creates a new one. | [Link to API Reference] |
+| createCart           | cust_id?, callbackUrls                       | Creates a new cart with callback urls set. attached.                   | [Link to API Reference] |
+| deleteCart           | N/A                                          | Deletes the active cart.                                               | [Link to API Reference] |
+| addTicketToCart      | ClientCartModels.AddTicketToCartRequest      | Add’s the desired ticket to the cart.                                  | [Link to API Reference] |
+| removeTicketFromCart | ClientCartModels.RemoveTicketFromCartRequest | Removes the desired ticket from the cart.                              | [Link to API Reference] |
+| addAddonToCart       | ClientCartModels.AddAddonToCartRequest       | Add’s the desired addon to the cart.                                   | [Link to API Reference] |
+| removeAddonFromCart  | ClientCartModels.RemoveAddonFromCartRequest  | Removes the desired addon from the cart.                               | [Link to API Reference] |
 
 ### Customise Styles
 

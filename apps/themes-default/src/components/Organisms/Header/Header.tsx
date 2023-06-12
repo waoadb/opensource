@@ -4,6 +4,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import classNames from 'classnames';
 
+// Helpers
+import { createCartCallbackUrls } from '@/helpers/createCartCallbackUrls/createCartCallbackUrls';
+
 // Different Breed
 import { differentBreedClient } from '@/services/differentBreedClient/differentBreedClient';
 import { useDifferentBreedCart } from '@waoadb/react-sdk';
@@ -37,7 +40,7 @@ export const Header = ({ toggleMenu, menuOpen, transparent }: Props) => {
   const {
     cartState: { itemCount },
     retrieveCart,
-  } = useDifferentBreedCart(differentBreedClient);
+  } = useDifferentBreedCart(differentBreedClient, createCartCallbackUrls());
 
   // State
   const [hasScrolled, setHasScrolled] = useState(false);
@@ -66,7 +69,7 @@ export const Header = ({ toggleMenu, menuOpen, transparent }: Props) => {
     scrollHandler();
 
     // Load the initial cart
-    retrieveCart(undefined);
+    retrieveCart();
 
     // Run Once Only
     // eslint-disable-next-line react-hooks/exhaustive-deps

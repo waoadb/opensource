@@ -19,11 +19,11 @@ type InitialState = {
    * The number of items in the cart.
    */
   itemCount: number;
+
   /**
-   * The Checkout Config.
-   * Contains all the information about the checkout forms for attendees.
+   * The Checkout Link.
    */
-  checkoutConfig: ClientCartModels.CheckoutConfigItem[] | null;
+  checkoutLink: ClientCartModels.RetrieveCheckoutLinkResponse['payload'] | null;
 };
 
 // Initial State
@@ -31,7 +31,7 @@ export const initialState: InitialState = {
   cart: null,
   cart_id: null,
   itemCount: 0,
-  checkoutConfig: null,
+  checkoutLink: null,
 };
 
 /**
@@ -39,11 +39,11 @@ export const initialState: InitialState = {
  */
 export type CartAction =
   | { type: 'SET_CART'; value: ClientCartModels.Cart }
-  | { type: 'REMOVE_CART' }
   | {
-      type: 'SET_CHECKOUT_CONFIG';
-      value: ClientCartModels.CheckoutConfigItem[] | null;
-    };
+      type: 'SET_CHECKOUT_LINK';
+      value: ClientCartModels.RetrieveCheckoutLinkResponse['payload'];
+    }
+  | { type: 'REMOVE_CART' };
 
 /**
  * Reducer
@@ -69,13 +69,18 @@ export const cartReducer = (
         }, 0),
       };
     }
+
+    case 'SET_CHECKOUT_LINK': {
+      return {
+        ...state,
+        checkoutLink: action.value,
+      };
+    }
+
     case 'REMOVE_CART': {
       return { ...initialState };
     }
 
-    case 'SET_CHECKOUT_CONFIG': {
-      return { ...state, checkoutConfig: action.value };
-    }
     default: {
       return state;
     }

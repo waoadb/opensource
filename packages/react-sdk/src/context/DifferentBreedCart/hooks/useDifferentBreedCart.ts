@@ -16,10 +16,12 @@ import { ClientCartModels } from '@waoadb/contracts-client';
  * Use Different Breed Cart.
  * Methods for interacting with and consuming the cart.
  * @param differentBreedClient - Different Breed Javascript Client.
+ * @param createCartPayload - Payload for creating a cart.
  * @returns
  */
 export const useDifferentBreedCart = (
-  differentBreedClient: DifferentBreedClient
+  differentBreedClient: DifferentBreedClient,
+  createCartPayload: ClientCartModels.CreateCartRequest
 ) => {
   // Get the cart context.
   const { cartState, cartDispatch } = useContext(DifferentBreedCartContext);
@@ -63,13 +65,13 @@ export const useDifferentBreedCart = (
    * Retrieves or creates a new cart.
    * @param cust_id? - Customer ID.
    */
-  const retrieveCart = async (cust_id?: string) => {
+  const retrieveCart = async () => {
     // Get the cart ID from local storage.
     const cartId = localStorage.getItem('cart_id');
 
     // Create a new cart.
     if (!cartId) {
-      createCart(cust_id);
+      createCart();
       return;
     }
 
@@ -83,55 +85,45 @@ export const useDifferentBreedCart = (
         // If the cart does not exist, remove the cart ID from local storage.
         localStorage.removeItem('cart_id');
         // Create a new cart.
-        createCart(cust_id);
+        createCart();
       });
   };
 
   /**
-   * Create a new cart.
-   * @param cust_id? - Customer ID.
+   * Retrieve checkout link
    */
-  const createCart = async (cust_id?: string) => {
-    // Create a new cart.
+  const retrieveCheckoutLink = async () => {
+    // Get the cart ID from local storage.
+    const cartId = localStorage.getItem('cart_id');
+
+    // Retrieve the checkout link.
     await differentBreedClient.cart
-      .createCart({ cust_id })
+      .retrieveCheckoutLink(cartId!)
       .then((response) => {
         if (response.success) {
-          cartDispatch({ type: 'SET_CART', value: response.payload });
+          cartDispatch({
+            type: 'SET_CHECKOUT_LINK',
+            value: response.payload,
+          });
         }
       })
       .catch((error: ErrorResponseValidation) => handleError(error));
   };
 
   /**
-   * Attach customer to cart.
-   * @param cust_id - Customer ID.
+   * Create a new cart.
+   * @param cust_id? - Customer ID.
    */
-  const attachCustomerToCart = async (cust_id: string) => {
-    // Add customer to cart.
+  const createCart = async () => {
+    // Create a new cart.
     await differentBreedClient.cart
-      .attachCustomer(cartState.cart_id!, { cust_id })
+      .createCart(createCartPayload)
       .then((response) => {
-        cartDispatch({ type: 'SET_CART', value: response.payload });
+        if (response.success) {
+          cartDispatch({ type: 'SET_CART', value: response.payload });
+        }
       })
       .catch((error: ErrorResponseValidation) => handleError(error));
-  };
-
-  /**
-   * Validate the cart.
-   * @param payload - The data to be sent.
-   */
-  const validateCart = async (
-    payload: ClientCartModels.ValidateCartRequest
-  ): Promise<boolean> => {
-    // Validate the cart.
-    const response = await differentBreedClient.cart.validateCart(
-      cartState.cart_id!,
-      payload
-    );
-
-    // Return the validation status.
-    return response.success || false;
   };
 
   /**
@@ -146,24 +138,6 @@ export const useDifferentBreedCart = (
 
     // Reset the cart state.
     cartDispatch({ type: 'REMOVE_CART' });
-  };
-
-  /**
-   * Retrieve Checkout config.
-   */
-  const retrieveCheckoutConfig = async () => {
-    cartDispatch({ type: 'SET_CHECKOUT_CONFIG', value: null });
-
-    // Retrieve the checkout config.
-    await differentBreedClient.cart.checkout
-      .retrieveCheckoutConfig(cartState.cart_id!)
-      .then((response) => {
-        cartDispatch({
-          type: 'SET_CHECKOUT_CONFIG',
-          value: response.payload,
-        });
-      })
-      .catch((error: ErrorResponseValidation) => handleError(error));
   };
 
   /**
@@ -269,14 +243,12 @@ export const useDifferentBreedCart = (
     cartDispatch,
     retrieveCart,
     createCart,
-    attachCustomerToCart,
-    validateCart,
     deleteCart,
     addTicketToCart,
     removeTicketFromCart,
     addAddonToCart,
     removeAddonFromCart,
-    retrieveCheckoutConfig,
+    retrieveCheckoutLink,
     notifications,
   };
 };
