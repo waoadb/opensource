@@ -1,11 +1,14 @@
 /* Dependencies */
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 
 // Services
 import { httpClient } from '@/services/httpClient/httpClient';
+
+// Helpers
+import { createCartCallbackUrls } from '@/helpers/createCartCallbackUrls/createCartCallbackUrls';
 
 // Different Breed
 import { differentBreedClient } from '@/services/differentBreedClient/differentBreedClient';
@@ -45,21 +48,16 @@ const Page = ({ profile }: PageProps) => {
 
   // Different Breed
   const {
-    cartState: { cart, cart_id },
-  } = useDifferentBreedCart(differentBreedClient);
+    cartState: { cart, cart_id, checkoutLink },
+    retrieveCheckoutLink,
+  } = useDifferentBreedCart(differentBreedClient, createCartCallbackUrls());
 
   // Callbacks
   const handleCheckoutClick = useCallback(() => {
     if (!cart) return null;
 
-    // If the customer is attached to the cart, go to checkout.
-    if (cart.cust_id) {
-      router.push('/checkout');
-    }
-    // If the customer is not attached to the cart, show the create customer form.
-    else {
-      setShowCreateCustomer(true);
-    }
+    // Create checkout link
+    retrieveCheckoutLink();
   }, [router, cart]);
 
   const handleCustomerCreate = useCallback(
@@ -83,6 +81,13 @@ const Page = ({ profile }: PageProps) => {
     },
     [cart_id, router]
   );
+
+  // Effects
+  useEffect(() => {
+    if (checkoutLink) {
+      window.location.href = checkoutLink.checkout_link;
+    }
+  }, [checkoutLink]);
 
   return (
     <>

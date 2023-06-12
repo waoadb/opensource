@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 
 // Helpers
 import { formatDateRange } from '@/helpers/formatDateRange/formatDateRange';
+import { createCartCallbackUrls } from '@/helpers/createCartCallbackUrls/createCartCallbackUrls';
 
 // Different Breed
 import { differentBreedClient } from '@/services/differentBreedClient/differentBreedClient';
@@ -63,8 +64,10 @@ export const BookNowModal = ({
   const [hasNoStock, setHasNoStock] = useState<boolean>(false);
 
   // Cart Provider
-  const { addTicketToCart, addAddonToCart } =
-    useDifferentBreedCart(differentBreedClient);
+  const { addTicketToCart, addAddonToCart } = useDifferentBreedCart(
+    differentBreedClient,
+    createCartCallbackUrls()
+  );
 
   // Memory
   const performanceDate = useMemo(() => {

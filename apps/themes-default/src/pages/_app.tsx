@@ -2,6 +2,9 @@
 import type { AppProps } from 'next/app';
 import { useEffect, useRef } from 'react';
 
+// Helpers
+import { createCartCallbackUrls } from '@/helpers/createCartCallbackUrls/createCartCallbackUrls';
+
 // Different Breed
 import { differentBreedClient } from '@/services/differentBreedClient/differentBreedClient';
 import {
@@ -33,7 +36,10 @@ function App({ Component, pageProps }: AppProps) {
   const toastRef = useRef<ToastImperativeMethods>(null);
 
   // Hooks
-  const { notifications } = useDifferentBreedCart(differentBreedClient);
+  const { notifications } = useDifferentBreedCart(
+    differentBreedClient,
+    createCartCallbackUrls()
+  );
 
   // Effects
   useEffect(() => {

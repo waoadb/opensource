@@ -1,7 +1,6 @@
 /* Dependencies */
 // Modules
 import { StockModule } from './modules/Stock/Stock.module';
-import { CheckoutModule } from './modules/Checkout/Checkout.module';
 
 // Services
 import { HttpClient } from '../../services/HttpClient.service';
@@ -23,7 +22,6 @@ type Props = {
 export class CartModule {
   // Modules
   public stock: StockModule;
-  public checkout: CheckoutModule;
   private httpClient: HttpClient;
 
   constructor({ httpClient }: Props) {
@@ -31,7 +29,6 @@ export class CartModule {
 
     // Initialize modules.
     this.stock = new StockModule({ httpClient: this.httpClient });
-    this.checkout = new CheckoutModule({ httpClient: this.httpClient });
   }
 
   /**
@@ -77,46 +74,17 @@ export class CartModule {
   }
 
   /**
-   * Attach a customer to a cart.
+   * Create a new checkout link.
    * @param cart_id - The cart id.
-   * @param payload - The data to be sent.
-   * @param payload.cust_id - The customer id to be associated with the cart.
    */
-  async attachCustomer(
-    cart_id: string,
-    payload: ClientCartModels.AttachCustomerRequest
-  ): Promise<ClientCartModels.AttachCustomerResponse> {
+  async retrieveCheckoutLink(
+    cart_id: string
+  ): Promise<ClientCartModels.RetrieveCheckoutLinkResponse> {
     return this.httpClient
-      .makePostRequest<ClientCartModels.AttachCustomerResponse>(
+      .makeGetRequest<ClientCartModels.RetrieveCheckoutLinkResponse>(
         'cart',
-        '/cart/attach-customer',
-        payload,
-        {
-          cart: cart_id,
-        }
-      )
-      .then((response) => response.data)
-      .catch((error) => {
-        throw error;
-      });
-  }
-
-  /**
-   * Validate a cart.
-   * @param cart_id - The cart id.
-   * @param payload - The data to be sent.
-   * @param payload.delivery - The delivery method's to be used for each cart entry.
-   * @param payload.attendees - The attendees to be used for each cart entry.
-   */
-  async validateCart(
-    cart_id: string,
-    payload: ClientCartModels.ValidateCartRequest
-  ): Promise<ClientCartModels.ValidateCartResponse> {
-    return this.httpClient
-      .makePostRequest<ClientCartModels.ValidateCartResponse>(
-        'cart',
-        '/cart/validate',
-        payload,
+        '/cart/checkout-link',
+        null,
         {
           cart: cart_id,
         }

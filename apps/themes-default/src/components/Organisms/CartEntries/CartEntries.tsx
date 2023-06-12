@@ -1,6 +1,7 @@
 /* Dependencies */
 // Helpers
 import { formatDateRange } from '@/helpers/formatDateRange/formatDateRange';
+import { createCartCallbackUrls } from '@/helpers/createCartCallbackUrls/createCartCallbackUrls';
 
 // Different Breed
 import { useDifferentBreedCart } from '@waoadb/react-sdk';
@@ -23,7 +24,7 @@ export const CartEntries = () => {
     removeAddonFromCart,
     removeTicketFromCart,
     cartState: { cart },
-  } = useDifferentBreedCart(differentBreedClient);
+  } = useDifferentBreedCart(differentBreedClient, createCartCallbackUrls());
 
   // Handle no cart
   if (!cart) return null;
