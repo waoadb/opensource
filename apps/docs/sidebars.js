@@ -61,6 +61,7 @@ const sidebars = {
       items: [
         'contribute/contributing',
         'contribute/code-of-conduct',
+        'contribute/agreement',
         'contribute/security',
       ],
     },
