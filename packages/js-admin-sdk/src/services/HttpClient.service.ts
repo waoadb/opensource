@@ -43,10 +43,10 @@ export class HttpClient {
   private getEndPoint(endPoint: EndPoint): string {
     switch (endPoint) {
       case 'cart': {
-        return 'https://ms-cart.differentbreed.events/api/v1';
+        return 'https://api.differentbreed.events/cart/api/v1';
       }
       case 'client': {
-        return 'https://ms-client.differentbreed.events/api/v1';
+        return 'https://api.differentbreed.events/client/api/v1';
       }
     }
   }

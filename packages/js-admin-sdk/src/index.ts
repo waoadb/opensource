@@ -5,7 +5,6 @@ import { HttpClient } from './services/HttpClient.service';
 
 // Modules
 import { CartModule } from './modules/Cart/Cart.module';
-import { CustomerModule } from './modules/Customer/Customer.module';
 
 // Models
 import { ClientGenericModels } from '@waoadb/contracts-client';
@@ -29,7 +28,6 @@ export class DifferentBreedAdmin {
 
   // Modules
   public cart: CartModule;
-  public customer: CustomerModule;
 
   constructor({ adminAPIKey, profileId }: Props) {
     // Create the http client.
@@ -37,7 +35,6 @@ export class DifferentBreedAdmin {
 
     // Initialize modules.
     this.cart = new CartModule({ httpClient: this.httpClient });
-    this.customer = new CustomerModule({ httpClient: this.httpClient });
   }
 }
 

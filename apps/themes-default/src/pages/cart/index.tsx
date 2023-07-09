@@ -36,9 +36,6 @@ const Page = ({ profile }: PageProps) => {
   // Hooks
   const router = useRouter();
 
-  // State
-  const [showCreateCustomer, setShowCreateCustomer] = useState(false);
-
   // Different Breed
   const {
     cartState: { cart, cart_id, checkoutLink },
